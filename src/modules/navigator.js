@@ -15,15 +15,15 @@ export const setCategory = id => ({ type: SET_CATEGORY, id });
 export const resetCategory = () => ({ type: RESET_CATEGORY });
 
 const initialState = [
-            {id: '회원 관리', icon: <PeopleIcon/>, active: true },
-            {id: '로고 설정', icon: <PersonAddIcon/>, active: false },
-            {id: 'Database', icon: <DnsRoundedIcon/>, active: false },
-            {id: 'Storage', icon: <PermMediaOutlinedIcon/>, active: false },
-            {id: 'Hosting', icon: <PublicIcon/>, active: false },
-            {id: 'Functions', icon: <SettingsEthernetIcon/>, active: false },
-            {id: 'Analytics', icon: <SettingsIcon/>, active: false },
-            {id: 'Performance', icon: <TimerIcon/>, active: false },
-            {id: 'Test Lab', icon: <PhonelinkSetupIcon/>, active: false },
+            {id: '회원 관리', icon: <PeopleIcon/>, active: true, path: "/" },
+            {id: '로고 설정', icon: <PersonAddIcon/>, active: false, path: "/setLogo" },
+            {id: 'Database', icon: <DnsRoundedIcon/>, active: false, path: "/" },
+            {id: 'Storage', icon: <PermMediaOutlinedIcon/>, active: false, path: "/" },
+            {id: 'Hosting', icon: <PublicIcon/>, active: false, path: "/" },
+            {id: 'Functions', icon: <SettingsEthernetIcon/>, active: false, path: "/" },
+            {id: 'Analytics', icon: <SettingsIcon/>, active: false, path: "/" },
+            {id: 'Performance', icon: <TimerIcon/>, active: false, path: "/" },
+            {id: 'Test Lab', icon: <PhonelinkSetupIcon/>, active: false, path: "/" },
 ];
 
 export default function navigator(state = initialState, action) {

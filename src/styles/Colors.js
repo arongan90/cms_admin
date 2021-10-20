@@ -9,11 +9,10 @@ const Colors = {
 
     // Point
     loginPoint: "#6E9ABC",
-    sideBarPoint: "#F5B3A8",
 
     // Material Color
     textFieldBlue: "#1976d2",
-    backgroundColor: "#eaeff1",
+    backgroundColor: "#EAEFF1",
     darkBlueColor: "#1b3a6a",
 
     // Text

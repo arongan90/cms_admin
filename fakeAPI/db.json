@@ -5,118 +5,143 @@
       "bizName": "어묵오뎅",
       "bizNumber": "172-13-31321",
       "ceoName": "임하늘",
+      "ceoPhone": "010-1111-1111",
       "type": "유니온",
-      "date": "2021.04.23"
+      "date": "2021.04.23",
+      "bizAddress": "서울 광진구 강변역로 53",
+      "bizDetailAddress": "101동 101호",
+      "managerName": "임하늘",
+      "bizTel": "02-1111-1111"
     },
     {
       "id": 2,
       "bizName": "캣벨컴퍼니(주)",
       "bizNumber": "354-01-46432",
       "ceoName": "이의석",
+      "ceoPhone": "010-2222-2222",
       "type": "게이트",
-      "date": "2021.09.07"
+      "date": "2021.09.07",
+      "bizAddress": "서울 성동구 뚝섬로1나길 5",
+      "bizDetailAddress": "702호",
+      "managerName": "이의석",
+      "bizTel": "02-2222-2222"
     },
     {
       "id": 3,
       "bizName": "카카오뱅크",
       "bizNumber": "110-20-45642",
       "ceoName": "박동한",
+      "ceoPhone": "010-3333-3333",
       "type": "밋업",
-      "date": "2021.06.08"
+      "date": "2021.06.08",
+      "bizAddress": "경기 수원시 영통구 광교호수공원로 45",
+      "bizDetailAddress": "303동 303호",
+      "managerName": "박동한",
+      "bizTel": "02-3333-3333"
     },
     {
       "id": 4,
-      "bizName": "어묵오뎅",
+      "bizName": "네이버(주)",
       "bizNumber": "172-13-31321",
-      "ceoName": "임하늘",
+      "ceoName": "네이버",
+      "ceoPhone": "010-4444-4444",
       "type": "유니온",
-      "date": "2021.04.23"
+      "date": "2021.04.23",
+      "bizAddress": "경기 성남시 분당구 서판교로 36",
+      "bizDetailAddress": "404동 404호",
+      "managerName": "네이버",
+      "bizTel": "02-4444-4444"
     },
     {
       "id": 5,
-      "bizName": "캣벨컴퍼니(주)",
+      "bizName": "현대중공업",
       "bizNumber": "354-01-46432",
-      "ceoName": "이의석",
+      "ceoName": "김현대",
+      "ceoPhone": "010-5555-5555",
       "type": "게이트",
-      "date": "2021.09.07"
+      "date": "2021.09.07",
+      "bizAddress": "울산 남구 사평로 223",
+      "bizDetailAddress": "505동 505호 현대중공업(주)",
+      "managerName": "네이버",
+      "bizTel": "02-5555-5555"
     },
     {
       "id": 6,
-      "bizName": "카카오뱅크",
+      "bizName": "삼성전자",
       "bizNumber": "110-20-45642",
-      "ceoName": "박동한",
+      "ceoName": "이재용",
       "type": "밋업",
       "date": "2021.06.08"
     },
     {
       "id": 7,
-      "bizName": "어묵오뎅",
+      "bizName": "PI첨단소재",
       "bizNumber": "172-13-31321",
-      "ceoName": "임하늘",
+      "ceoName": "김첨단",
       "type": "유니온",
       "date": "2021.04.23"
     },
     {
       "id": 8,
-      "bizName": "캣벨컴퍼니(주)",
+      "bizName": "LG전자",
       "bizNumber": "354-01-46432",
-      "ceoName": "이의석",
+      "ceoName": "구엘쥐",
       "type": "게이트",
       "date": "2021.09.07"
     },
     {
       "id": 9,
-      "bizName": "카카오뱅크",
+      "bizName": "기아자동차",
       "bizNumber": "110-20-45642",
-      "ceoName": "박동한",
+      "ceoName": "박기아",
       "type": "밋업",
       "date": "2021.06.08"
     },
     {
       "id": 10,
-      "bizName": "어묵오뎅",
+      "bizName": "벤츠",
       "bizNumber": "172-13-31321",
-      "ceoName": "임하늘",
+      "ceoName": "이벤츠",
       "type": "유니온",
       "date": "2021.04.23"
     },
     {
       "id": 11,
-      "bizName": "캣벨컴퍼니(주)",
+      "bizName": "애플",
       "bizNumber": "354-01-46432",
-      "ceoName": "이의석",
-      "type": "게이트",
+      "ceoName": "스티브잡스",
+      "type": "유니온",
       "date": "2021.09.07"
     },
     {
       "id": 12,
-      "bizName": "카카오뱅크",
+      "bizName": "SM엔터테인먼트",
       "bizNumber": "110-20-45642",
-      "ceoName": "박동한",
-      "type": "밋업",
+      "ceoName": "이수만",
+      "type": "유니온",
       "date": "2021.06.08"
     },
     {
       "id": 13,
-      "bizName": "어묵오뎅",
+      "bizName": "YG엔터테인먼트",
       "bizNumber": "172-13-31321",
-      "ceoName": "임하늘",
+      "ceoName": "양현석",
       "type": "유니온",
       "date": "2021.04.23"
     },
     {
       "id": 14,
-      "bizName": "캣벨컴퍼니(주)",
+      "bizName": "JYP",
       "bizNumber": "354-01-46432",
-      "ceoName": "이의석",
-      "type": "게이트",
+      "ceoName": "박진영",
+      "type": "밋업",
       "date": "2021.09.07"
     },
     {
       "id": 15,
-      "bizName": "카카오뱅크",
+      "bizName": "AOMG",
       "bizNumber": "110-20-45642",
-      "ceoName": "박동한",
+      "ceoName": "박재범",
       "type": "밋업",
       "date": "2021.06.08"
     }

@@ -16,7 +16,7 @@ const InputBox = styled.input`
   `}
 `;
 
-const Input = ({ name, width, height, value, margin, placeholder, readOnly, setOpenAddress, infoInputChange }) => {
+const Input = ({ name, width, height, value, margin, placeholder, readOnly, setOpenAddress, infoInputChange, type, onChange, onKeyPress }) => {
     return (
         <InputBox
             name={name}
@@ -27,15 +27,10 @@ const Input = ({ name, width, height, value, margin, placeholder, readOnly, setO
             placeholder={placeholder}
             readOnly={readOnly}
             onClick={() => setOpenAddress && setOpenAddress(true)}
-            onChange={e => {
-                console.info(e.target.name);
-                console.info(e.target.value);
-                if (infoInputChange) {
-                    infoInputChange(e);
-                }
-            }}
+            onChange={e => infoInputChange ? infoInputChange(e, type && type) : onChange(e)}
+            onKeyPress={e => (e.key === "Enter") && onKeyPress && onKeyPress()}
         />
     )
 }
 
-export default Input;
+export default React.memo(Input);

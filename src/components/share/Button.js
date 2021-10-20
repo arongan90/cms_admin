@@ -1,6 +1,6 @@
 import React from 'react';
 import { darken, lighten } from 'polished';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const CostumeButton = styled.button`
   width: ${({ width }) => width}px;
@@ -10,15 +10,21 @@ const CostumeButton = styled.button`
   color: ${({ fontColor }) => fontColor};
   margin: ${({ margin }) => margin};
   background: ${({ bgColor }) => bgColor};
-  border-radius: 5px;
+  border-radius: ${({ borderRadius }) => borderRadius ? borderRadius : '5px'};
   outline: none;
   
-  &:hover {
-    background: ${({bgColor}) => lighten(0.1 , bgColor)}
+  & + & {
+    border-width: 1px 1px 1px 0;
   }
-  &:active {
-    background: ${({bgColor}) => darken(0.1 , bgColor)}
-  }
+  
+  ${({ bgColor }) => bgColor && css`
+    &:hover {
+      background: ${({ bgColor }) => lighten(0.1 , bgColor)}
+    }
+    &:active {
+      background: ${({ bgColor }) => darken(0.1 , bgColor)}
+    }
+  `}
 `;
 
 const Button = ({
@@ -29,8 +35,11 @@ const Button = ({
                     fontColor,
                     margin,
                     bgColor,
+                    borderRadius,
                     title,
                     onClick,
+                    type,
+                    service,
                 }) => {
     return (
         <CostumeButton
@@ -40,8 +49,9 @@ const Button = ({
             border={border}
             fontColor={fontColor}
             margin={margin}
+            borderRadius={borderRadius}
             bgColor={bgColor}
-            onClick={onClick}
+            onClick={() => onClick((type && type), (service && service))}
         >
             {title}
         </CostumeButton>

@@ -1,14 +1,5 @@
 import React, {useState} from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
-import RefreshIcon from '@mui/icons-material/Refresh';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -16,6 +7,17 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
+import { makeStyles } from "@material-ui/core/styles";
+import colors from '../../styles/Colors';
+// import AppBar from '@mui/material/AppBar';
+// import Toolbar from '@mui/material/Toolbar';
+// import Grid from '@mui/material/Grid';
+// import Button from '@mui/material/Button';
+// import TextField from '@mui/material/TextField';
+// import Tooltip from '@mui/material/Tooltip';
+// import IconButton from '@mui/material/IconButton';
+// import SearchIcon from '@mui/icons-material/Search';
+// import RefreshIcon from '@mui/icons-material/Refresh';
 
 const columns = [
     {id: 'bizName', label: '회사명', minWidth: 170},
@@ -43,9 +45,19 @@ const columns = [
     },
 ];
 
-const TableContent = ({corpList}) => {
+const useStyles = makeStyles({
+    tableRow: {
+        cursor: "pointer",
+        "&:hover": {
+            backgroundColor: `${colors.lightSky} !important`,
+        }
+    },
+});
+
+const TableContent = ({ corpList, handleModalOpen }) => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
+    const classes = useStyles();
 
     const handleChangePage = (event, newPage) => setPage(newPage);
     const handleChangeRowsPerPage = (event) => {
@@ -76,7 +88,7 @@ const TableContent = ({corpList}) => {
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row) => {
                                     return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id} className={classes.tableRow} onClick={() => handleModalOpen(row.id)}>
                                             {columns.map((column) => {
                                                 const value = row[column.id];
                                                 return (

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Login from "./pages/Login";
-import Main from "./pages/Main";
+import Login from "./pages/login";
+import Main from "./pages/main";
+import SetLogo from "./pages/setLogo";
 
 const LoggedOutRoutes = () => (
     <Switch>
@@ -13,6 +14,7 @@ const LoggedOutRoutes = () => (
 const LoggedInRoutes = () => (
     <Switch>
         <Route path="/" component={Main} exact />
+        <Route path="/setLogo" component={SetLogo} />
     </Switch>
 )
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
@@ -14,16 +14,16 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import colors from '../../styles/Colors';
-import { isLogout } from "../../modules/auth";
-import { useDispatch } from "react-redux";
-import {toast} from "react-toastify";
-import {useHistory} from "react-router-dom";
+// import { isLogout } from "../../modules/auth";
+// import { useDispatch } from "react-redux";
+// import {toast} from "react-toastify";
+// import {useHistory} from "react-router-dom";
 
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
 const HeaderContent = (props) => {
-    const { onDrawerToggle, onLogout, handleTabMenu, tabMenu } = props;
+    const { onDrawerToggle, onLogout, handleTabMenu, tabMenu, title, tabList } = props;
 
     return (
         <React.Fragment>
@@ -86,7 +86,7 @@ const HeaderContent = (props) => {
                     <Grid container alignItems="center" spacing={1}>
                         <Grid item xs>
                             <Typography color="inherit" variant="h5" component="h1">
-                                회원 관리
+                                {title}
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -106,8 +106,10 @@ const HeaderContent = (props) => {
             </AppBar>
             <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
                 <Tabs value={tabMenu} textColor="inherit">
-                    <Tab onClick={() => handleTabMenu(0)} label="회원 목록" />
-                    <Tab onClick={() => handleTabMenu(1)} label="회원 추가" />
+                    {tabList[0] && <Tab onClick={() => handleTabMenu(0)} label={tabList[0]} /> }
+                    {tabList[1] && <Tab onClick={() => handleTabMenu(1)} label={tabList[1]} /> }
+                    {tabList[2] && <Tab onClick={() => handleTabMenu(2)} label={tabList[2]} /> }
+                    {tabList[3] && <Tab onClick={() => handleTabMenu(3)} label={tabList[3]} /> }
                 </Tabs>
             </AppBar>
         </React.Fragment>

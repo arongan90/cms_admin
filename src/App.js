@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useCallback} from "react";
 import GlobalStyles from "./styles/GlobalStyles";
-import colors from "./styles/Colors";
 import styled, { css } from "styled-components";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
