@@ -25,7 +25,7 @@ import { ko } from 'date-fns/locale';
 
 const SearchBox = styled.div`
   width: 100%;
-  padding-top: 10px;
+  padding: 5px 0;
   max-width: 1200px;
   margin: 30px auto;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
@@ -79,9 +79,10 @@ const Title = styled.div`
 const ModalWrapper = styled.div`
   max-width: 1200px;
   padding: 30px;
-  margin: 2% auto;
-  border-radius: 10px;
+  margin: 4% auto;
+  border-radius: 8px;
   background: ${colors.backgroundColor};
+  box-shadow: 0 5px 8px 1px ${colors.darkGrayColor};
 `;
 
 const MainPresentational = ({
@@ -114,12 +115,14 @@ const MainPresentational = ({
 
                                 unionService,
                                 handleUnionService,
-
+                                onLogoChange,
                                 // 모달 props
                                 modalVisible,
                                 handleModalOpen,
                                 handleModalClose,
                                 updateCorpData,
+
+                                onMemberRegister,
                             }) => {
     // 가입일, 만료일, 계약일
     return (
@@ -143,6 +146,35 @@ const MainPresentational = ({
                 ?
                 <Box component="main">
                     <SearchBox>
+                        <SearchLine>
+                            <LeftBox>
+                                <Title>검색어</Title>
+                                <Select
+                                    width={15}
+                                    onChange={handleSearchType}
+                                    searchType={searchType}
+                                    options={['회사명', '사업자 번호', '사업자명', '상품 타입']}
+                                />
+                                <Input
+                                    width={66}
+                                    value={searchText}
+                                    onChange={handleSearchText}
+                                    onKeyPress={handleSearch}
+                                    margin="0 10px 0 10px"
+                                    placeholder="검색할 회사의 정보를 입력해주세요."
+                                />
+                            </LeftBox>
+                            <RightBox>
+                                <Button variant="contained" sx={{mr: 1}} onClick={handleSearch}>
+                                    Search
+                                </Button>
+                                <Tooltip title="Reload" onClick={handleRefresh}>
+                                    <IconButton>
+                                        <RefreshIcon color="inherit" sx={{display: 'block'}}/>
+                                    </IconButton>
+                                </Tooltip>
+                            </RightBox>
+                        </SearchLine>
                         <SearchLine>
                             <LeftBox>
                                 <Title>기간 검색</Title>
@@ -255,35 +287,6 @@ const MainPresentational = ({
                                 </ButtonGroup>
                             </LeftBox>
                         </SearchLine>
-                        <SearchLine>
-                            <LeftBox>
-                                <Title>검색어</Title>
-                                <Select
-                                    width={15}
-                                    onChange={handleSearchType}
-                                    searchType={searchType}
-                                    options={['회사명', '사업자 번호', '사업자명', '상품 타입']}
-                                />
-                                <Input
-                                    width={74}
-                                    value={searchText}
-                                    onChange={handleSearchText}
-                                    onKeyPress={handleSearch}
-                                    margin="0 10px 0 10px"
-                                    placeholder="검색할 회사의 정보를 입력해주세요."
-                                />
-                            </LeftBox>
-                            <RightBox>
-                                <Button variant="contained" sx={{mr: 1}} onClick={handleSearch}>
-                                    Search
-                                </Button>
-                                <Tooltip title="Reload" onClick={handleRefresh}>
-                                    <IconButton>
-                                        <RefreshIcon color="inherit" sx={{display: 'block'}}/>
-                                    </IconButton>
-                                </Tooltip>
-                            </RightBox>
-                        </SearchLine>
                     </SearchBox>
 
                     <TableContent
@@ -306,6 +309,8 @@ const MainPresentational = ({
                     unionService={unionService}
                     handleUnionService={handleUnionService}
                     handleSetDate={handleSetDate}
+                    onLogoChange={onLogoChange}
+                    onMemberRegister={onMemberRegister}
                 />
             }
 
@@ -334,6 +339,8 @@ const MainPresentational = ({
                         unionService={unionService}
                         handleUnionService={handleUnionService}
                         handleSetDate={handleSetDate}
+                        onLogoChange={onLogoChange}
+                        onMemberRegister={onMemberRegister}
                     />
                 </ModalWrapper>
             </Modal>

@@ -14,6 +14,8 @@ import TextField from "@mui/material/TextField";
 import Button from "../share/Button";
 import DaumPostcode from "react-daum-postcode";
 import {Modal} from '@material-ui/core';
+import addImage from '../../images/addImage.svg';
+
 
 const Wrapper = styled.div`
   background: ${colors.backgroundColor};
@@ -22,9 +24,10 @@ const InputBox = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 30px auto;
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
-  background: ${colors.whiteColor};
+  position: relative;
   border-radius: 8px;
+  background: ${colors.whiteColor};
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 `;
 const InputLine = styled.div`
   padding: 10px 16px;
@@ -95,6 +98,46 @@ const AdditionalService = styled.div`
     width: 160px;
   }
 `;
+const LogoBox = styled.div`
+  width: 300px;
+  height: 111px;
+  border-radius: 0 8px 0 0;
+  border-left: 1px solid ${colors.borderColor};
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: ${colors.whiteColor};
+  
+  ${({ logoFile }) => !logoFile && css`
+    background-image: url(${addImage});
+    background-repeat: no-repeat;
+    background-position: 50% 30%;
+
+    &:after {
+      content: "로고 이미지 추가";
+      color: ${colors.grayColor};
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, 0%);
+    }
+  `}
+`;
+const FileInput = styled.input`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  cursor: pointer;
+`;
+const AppImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 
 const AddMember = ({
                        usedPeriod,
@@ -114,17 +157,27 @@ const AddMember = ({
                        updateCorpData,
                        modalVisible,
                        handleModalClose,
+                       onLogoChange,
+                       onMemberRegister,
                    }) => {
-    const {bizName, bizNum, bizAddress, bizDetailAddress, bizTel, ceoName, ceoPhone, managerName} = memberInfo;
+    const { bizName, bizNum, bizAddress, bizDetailAddress, bizTel, ceoName, ceoPhone, managerName, logoFile, previewUrl } = memberInfo;
     const {live, linkBinder, shopping, gate} = unionService;
 
     useEffect(() => {
         return setServiceType('');
     }, [setServiceType]);
 
+    useEffect(() => {
+        console.info('SRC ::: ', logoFile);
+    }, [logoFile]);
+
     return (
         <Wrapper>
             <InputBox>
+                <LogoBox logoFile={!!logoFile}>
+                    <FileInput type="file" accept="image/*" onChange={onLogoChange} />
+                    {logoFile && <AppImage src={previewUrl} alt="Logo" />}
+                </LogoBox>
                 <InputLine>
                     <Title>기업명</Title>
                     <Input
@@ -195,8 +248,8 @@ const AddMember = ({
                         width={30}
                         infoInputChange={infoInputChange}
                         value={ceoPhone}
-                        name="CEO_PHONE"
-                        type="PHONE"
+                        name="ceoPhone"
+                        type="CEO_PHONE"
                         placeholder="대표자의 휴대폰 번호를 입력해주세요."
                     />
                 </InputLine>
@@ -328,9 +381,9 @@ const AddMember = ({
                 <InputLine>
                     <Title>상품 타입</Title>
                     <RadioGroup row aria-label="type" name="row-radio-buttons-group">
-                        <FormControlLabel value="meet_up" control={<Radio/>} label="밋업" onChange={handleGoodsType}/>
-                        <FormControlLabel value="union" control={<Radio/>} label="유니온" onChange={handleGoodsType}/>
-                        <FormControlLabel value="gate" control={<Radio/>} label="게이트" onChange={handleGoodsType}/>
+                        <FormControlLabel value="meet_up" control={<Radio/>} label="밋업" onChange={handleGoodsType} />
+                        <FormControlLabel value="union" control={<Radio/>} label="유니온" onChange={handleGoodsType} />
+                        <FormControlLabel value="gate" control={<Radio/>} label="게이트" onChange={handleGoodsType} />
                     </RadioGroup>
                 </InputLine>
 
@@ -343,8 +396,13 @@ const AddMember = ({
                                 <AdditionalService>
                                     <FormControlLabel
                                         label="라이브방송"
-                                        control={<Checkbox name="live" value={live.isService}
-                                                           onChange={handleUnionService}/>}
+                                        control={
+                                            <Checkbox
+                                                name="live"
+                                                value={live.isService}
+                                                checked={live.isService}
+                                                onChange={handleUnionService}
+                                            />}
                                     />
                                     {live.isService && (
                                         <>
@@ -457,8 +515,13 @@ const AddMember = ({
                                 <AdditionalService>
                                     <FormControlLabel
                                         label="링크바인더"
-                                        control={<Checkbox name="linkBinder" value={linkBinder.isService}
-                                                           onChange={handleUnionService}/>}
+                                        control={
+                                            <Checkbox
+                                                name="linkBinder"
+                                                value={linkBinder.isService}
+                                                checked={linkBinder.isService}
+                                                onChange={handleUnionService}
+                                            />}
                                     />
                                     {linkBinder.isService && (
                                         <>
@@ -571,8 +634,13 @@ const AddMember = ({
                                 <AdditionalService>
                                     <FormControlLabel
                                         label="쇼핑몰"
-                                        control={<Checkbox name="shopping" value={shopping.isService}
-                                                           onChange={handleUnionService}/>}
+                                        control={
+                                            <Checkbox
+                                                name="shopping"
+                                                value={shopping.isService}
+                                                checked={shopping.isService}
+                                                onChange={handleUnionService}
+                                            />}
                                     />
                                     {shopping.isService && (
                                         <>
@@ -686,8 +754,13 @@ const AddMember = ({
                                     <AdditionalService>
                                         <FormControlLabel
                                             label="출입인증"
-                                            control={<Checkbox name="gate" value={gate.isService}
-                                                               onChange={handleUnionService}/>}
+                                            control={
+                                                <Checkbox
+                                                    name="gate"
+                                                    value={gate.isService}
+                                                    checked={gate.isService}
+                                                    onChange={handleUnionService}
+                                                />}
                                         />
                                         {gate.isService && (
                                             <>
@@ -804,7 +877,7 @@ const AddMember = ({
                 }
             </InputBox>
 
-            <ButtonGroup margin="80px auto 20px">
+            <ButtonGroup margin="50px auto 30px">
                 {!!modalVisible &&
                 <Button
                     width={120}
@@ -824,6 +897,7 @@ const AddMember = ({
                     fontColor={colors.whiteColor}
                     bgColor={colors.darkBlueColor}
                     title="등 록"
+                    onClick={onMemberRegister}
                 />
             </ButtonGroup>
         </Wrapper>

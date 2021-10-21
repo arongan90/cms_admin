@@ -56,19 +56,6 @@ const MainContainer = () => {
         },
     });
 
-    const handleUnionService = e => {
-        const { name, checked } = e.target;
-
-        console.info(name, checked);
-        setUnionService({
-            ...unionService,
-            [name]: {
-                ...unionService[name],
-                isService: checked
-            },
-        });
-    }
-
     const [searchDate, setSearchDate] = useState({
         start: null,
         finish: null,
@@ -86,7 +73,36 @@ const MainContainer = () => {
         ceoPhone: '',
         managerName: '',
         bizTel: '',
+        logoFile: null,
+        previewUrl: null,
     });
+
+    const onLogoChange = e => {
+        let reader = new FileReader();
+        let img = e.target.files[0];
+
+        reader.onload = () => {
+            setMemberInfo({
+                ...memberInfo,
+                logoFile: img,
+                previewUrl: reader.result
+            });
+        }
+        reader.readAsDataURL(img);
+    }
+
+    const handleUnionService = e => {
+        const { name, checked } = e.target;
+
+        setUnionService({
+            ...unionService,
+            [name]: {
+                ...unionService[name],
+                isService: checked
+            },
+        });
+    }
+
     const infoInputChange = (e, type) => {
         const {name, value} = e.target;
 
@@ -145,7 +161,21 @@ const MainContainer = () => {
         });
         setOpenAddress(false);
     }
-    const handleTabMenu = value => setTabMenu(value);
+    const handleTabMenu = value => {
+        setTabMenu(value);
+        setMemberInfo({
+            bizName: '',
+            bizNum: '',
+            bizAddress: '',
+            bizDetailAddress: '',
+            ceoName: '',
+            ceoPhone: '',
+            managerName: '',
+            bizTel: '',
+            logoFile: null,
+            previewUrl: null,
+        });
+    }
     const onLogout = () => {
         toast.info('정상적으로 로그아웃 되었습니다.');
         dispatch(isLogout());
@@ -170,11 +200,73 @@ const MainContainer = () => {
                     ...usedPeriod,
                     start: value,
                 });
+                setUnionService({
+                    ...unionService,
+                    live: {
+                        ...unionService.live,
+                        period: {
+                            ...unionService.live.period,
+                            start: value,
+                        }
+                    },
+                    linkBinder: {
+                        ...unionService.live,
+                        period: {
+                            ...unionService.linkBinder.period,
+                            start: value
+                        }
+                    },
+                    shopping: {
+                        ...unionService.live,
+                        period: {
+                            ...unionService.shopping.period,
+                            start: value,
+                        }
+                    },
+                    gate: {
+                        ...unionService.live,
+                        period: {
+                            ...unionService.gate.period,
+                            start: value,
+                        }
+                    }
+                });
                 break;
             case 'FINISH_USING':
                 setUsedPeriod({
                     ...usedPeriod,
                     finish: value,
+                });
+                setUnionService({
+                    ...unionService,
+                    live: {
+                        ...unionService.live,
+                        period: {
+                            ...unionService.live.period,
+                            finish: value,
+                        }
+                    },
+                    linkBinder: {
+                        ...unionService.live,
+                        period: {
+                            ...unionService.linkBinder.period,
+                            finish: value
+                        }
+                    },
+                    shopping: {
+                        ...unionService.live,
+                        period: {
+                            ...unionService.shopping.period,
+                            finish: value,
+                        }
+                    },
+                    gate: {
+                        ...unionService.live,
+                        period: {
+                            ...unionService.gate.period,
+                            finish: value,
+                        }
+                    }
                 });
                 break;
             case 'LIVE_START':
@@ -345,6 +437,36 @@ const MainContainer = () => {
                         start: new Date(),
                         finish: new Date(year, month + 6, oneDayAgo),
                     });
+                    setUnionService({
+                        live: {
+                            ...unionService.live,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 6, oneDayAgo),
+                            }
+                        },
+                        linkBinder: {
+                            ...unionService.linkBinder,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 6, oneDayAgo),
+                            }
+                        },
+                        shopping: {
+                            ...unionService.shopping,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 6, oneDayAgo),
+                            }
+                        },
+                        gate: {
+                            ...unionService.gate,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 6, oneDayAgo),
+                            }
+                        }
+                    });
                 }
                 break;
             case '12_MONTH':
@@ -363,6 +485,37 @@ const MainContainer = () => {
                     setUsedPeriod({
                         start: new Date(),
                         finish: new Date(year, month + 12, oneDayAgo),
+                    });
+                    setUnionService({
+                        ...unionService,
+                        live: {
+                            ...unionService.live,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 12, oneDayAgo),
+                            }
+                        },
+                        linkBinder: {
+                            ...unionService.linkBinder,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 12, oneDayAgo),
+                            }
+                        },
+                        shopping: {
+                            ...unionService.shopping,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 12, oneDayAgo),
+                            }
+                        },
+                        gate: {
+                            ...unionService.gate,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 12, oneDayAgo),
+                            }
+                        }
                     });
                 }
 
@@ -384,6 +537,37 @@ const MainContainer = () => {
                         start: new Date(),
                         finish: new Date(year, month + 18, oneDayAgo),
                     });
+                    setUnionService({
+                        ...unionService,
+                        live: {
+                            ...unionService.live,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 18, oneDayAgo),
+                            }
+                        },
+                        linkBinder: {
+                            ...unionService.linkBinder,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 18, oneDayAgo),
+                            }
+                        },
+                        shopping: {
+                            ...unionService.shopping,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 18, oneDayAgo),
+                            }
+                        },
+                        gate: {
+                            ...unionService.gate,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 18, oneDayAgo),
+                            }
+                        }
+                    });
                 }
 
                 break;
@@ -403,6 +587,37 @@ const MainContainer = () => {
                     setUsedPeriod({
                         start: new Date(),
                         finish: new Date(year, month + 24, oneDayAgo),
+                    });
+                    setUnionService({
+                        ...unionService,
+                        live: {
+                            ...unionService.live,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 24, oneDayAgo),
+                            }
+                        },
+                        linkBinder: {
+                            ...unionService.linkBinder,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 24, oneDayAgo),
+                            }
+                        },
+                        shopping: {
+                            ...unionService.shopping,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 24, oneDayAgo),
+                            }
+                        },
+                        gate: {
+                            ...unionService.gate,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 24, oneDayAgo),
+                            }
+                        }
                     });
                 }
 
@@ -424,6 +639,37 @@ const MainContainer = () => {
                         start: new Date(),
                         finish: new Date(year, month + 30, oneDayAgo),
                     });
+                    setUnionService({
+                        ...unionService,
+                        live: {
+                            ...unionService.live,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 30, oneDayAgo),
+                            }
+                        },
+                        linkBinder: {
+                            ...unionService.linkBinder,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 30, oneDayAgo),
+                            }
+                        },
+                        shopping: {
+                            ...unionService.shopping,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 30, oneDayAgo),
+                            }
+                        },
+                        gate: {
+                            ...unionService.gate,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 30, oneDayAgo),
+                            }
+                        }
+                    });
                 }
 
                 break;
@@ -443,6 +689,37 @@ const MainContainer = () => {
                     setUsedPeriod({
                         start: new Date(),
                         finish: new Date(year, month + 36, oneDayAgo),
+                    });
+                    setUnionService({
+                        ...unionService,
+                        live: {
+                            ...unionService.live,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 36, oneDayAgo),
+                            }
+                        },
+                        linkBinder: {
+                            ...unionService.linkBinder,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 36, oneDayAgo),
+                            }
+                        },
+                        shopping: {
+                            ...unionService.shopping,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 36, oneDayAgo),
+                            }
+                        },
+                        gate: {
+                            ...unionService.gate,
+                            period: {
+                                start: new Date(),
+                                finish: new Date(year, month + 36, oneDayAgo),
+                            }
+                        }
                     });
                 }
 
@@ -464,6 +741,37 @@ const MainContainer = () => {
                         start: null,
                         finish: null,
                     });
+                    setUnionService({
+                        ...unionService,
+                        live: {
+                            ...unionService.live,
+                            period: {
+                                start: null,
+                                finish: null,
+                            }
+                        },
+                        linkBinder: {
+                            ...unionService.linkBinder,
+                            period: {
+                                start: null,
+                                finish: null,
+                            }
+                        },
+                        shopping: {
+                            ...unionService.shopping,
+                            period: {
+                                start: null,
+                                finish: null,
+                            }
+                        },
+                        gate: {
+                            ...unionService.gate,
+                            period: {
+                                start: null,
+                                finish: null,
+                            }
+                        }
+                    });
                 }
 
                 break;
@@ -474,23 +782,46 @@ const MainContainer = () => {
 
     const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
     const handleSearchType = e => setSearchType(e.target.value);
-    const handleGoodsType = e => setServiceType(e.target.value);
     const handleSearchText = e => setSearchText(e.target.value);
+    const handleGoodsType = e => {
+        setServiceType(e.target.value);
+        setUnionService({
+            live: {
+                isService: false,
+                period: {
+                    start: null,
+                    finish: null,
+                },
 
-    const fetchData = async () => {
-        const res = await axios.get(`${serverProtocol}${serverURL}/corp_list`);
-        setCorpList(res.data);
-        setInitialData(res.data);
+            },
+            linkBinder: {
+                isService: false,
+                period: {
+                    start: null,
+                    finish: null,
+                },
+            },
+            shopping: {
+                isService: false,
+                period: {
+                    start: null,
+                    finish: null,
+                },
+            },
+            gate: {
+                isService: false,
+                period: {
+                    start: null,
+                    finish: null,
+                },
+            },
+        });
     }
 
     const handleSearch = () => {
-
         let year = searchDate.start && searchDate.start.getFullYear();
         let month = searchDate.start && searchDate.start.getMonth() + 1;
         let day = searchDate.start && searchDate.start.getDate();
-
-        console.info(year + '.' + month + '.' + day);
-        console.info(corpList);
 
         let result = [];
         if (searchText === '') {
@@ -502,9 +833,6 @@ const MainContainer = () => {
         else if (searchType === '사업자 번호') initialData.find(list => list.bizNum === searchText && result.push(list));
         else if (searchType === '사업자명') initialData.find(list => list.ceoName === searchText && result.push(list));
         else initialData.forEach(list => (list.type === searchText) && result.push(list));
-
-        console.info(result);
-        console.info(searchText);
 
         if (result.length > 0) {
             setCorpList(result);
@@ -538,24 +866,61 @@ const MainContainer = () => {
                     ceoPhone: data.ceoPhone,
                     managerName: data.managerName,
                     bizTel: data.bizTel,
+                    logoFile: data.logoFile,
+                    previewUrl: data.logoFile,
                 });
             }
         });
-
         setModalVisible(true);
+    }
+
+    const fetchData = async () => {
+        const res = await axios.get(`${serverProtocol}${serverURL}/corp_list`);
+        setCorpList(res.data);
+        setInitialData(res.data);
+    }
+
+    const onMemberRegister = () => {
+        let { bizName, bizNum, bizAddress, bizDetailAddress, ceoName, ceoPhone, managerName, bizTel } = memberInfo;
+
+        if (bizName === '') alert('기업명을 입력해주세요.');
+        else if (bizNum === '') alert('사업자 번호를 입력해주세요.');
+        else if (bizAddress === '' || bizDetailAddress === '') alert('사업장 주소를 입력해주세요.')
+        else if (ceoName === '') alert('대표자 이름을 입력해주세요.');
+        else if (ceoPhone === '') alert('대표자 휴대폰 번호를 입력해주세요.');
+        else if (managerName === '') alert('담당자 이름을 입력해주세요.');
+        else if (bizTel === '') alert('회사 전화번호를 입력해주세요.');
+        else if (!usedPeriod.start || !usedPeriod.finish) alert('상품 이용기간을 입력해주세요.');
+        else if (serviceType === '') alert('상품의 타입을 선택해주세요.');
+        else if (unionService.live.isService && (!unionService.live.period.start || !unionService.live.period.finish)) alert('라이브방송의 이용기간을 입력해주세요.');
+        else if (unionService.linkBinder.isService && (!unionService.linkBinder.period.start || !unionService.linkBinder.period.finish)) alert('링크바인더의 이용기간을 입력해주세요.');
+        else if (unionService.shopping.isService && (!unionService.shopping.period.start || !unionService.shopping.period.finish)) alert('쇼핑몰의 이용기간을 입력해주세요.');
+        else if (unionService.gate.isService && (!unionService.gate.period.start || !unionService.gate.period.finish)) alert('출입인증의 이용기간을 입력해주세요.');
+        else {
+            let params = {
+                bizName: bizName,
+                bizNum: bizNum,
+                bizAddress: bizAddress + bizDetailAddress,
+                ceoName: ceoName,
+                ceoPhone: ceoPhone,
+                managerName: managerName,
+                bizTel: bizTel,
+            }
+
+            alert('회원정보가 등록되었습니다.');
+            window.location.reload();
+            console.info('회원 정보 :', params);
+
+        }
     }
 
     useEffect(() => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.info('updateCorpData : ', updateCorpData);
-    }, [updateCorpData]);
-
-    useEffect(() => {
-        console.info('memberInfo : ', memberInfo);
-    }, [memberInfo]);
+    // useEffect(() => {
+    //     console.info('unionService : ', unionService);
+    // }, []);
 
     return (
         <MainPresentational
@@ -588,11 +953,14 @@ const MainContainer = () => {
 
             unionService={unionService}
             handleUnionService={handleUnionService}
+            onLogoChange={onLogoChange}
 
             modalVisible={modalVisible}
             handleModalOpen={handleModalOpen}
             handleModalClose={handleModalClose}
             updateCorpData={updateCorpData}
+
+            onMemberRegister={onMemberRegister}
         />
     )
 }
