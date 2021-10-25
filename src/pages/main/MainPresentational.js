@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from "styled-components";
+import React, { useEffect } from 'react';
+import styled, { css } from "styled-components";
 import colors from "../../styles/Colors";
 import HeaderContent from '../../components/share/HeaderContent';
 import TableContent from '../../components/share/TableContent';
@@ -8,16 +8,17 @@ import Input from '../../components/share/Input';
 import CostumeButton from "../../components/share/Button";
 import AddMember from "../../components/main/AddMember";
 import Box from '@mui/material/Box';
-import { Modal } from "@material-ui/core";
+import {Modal} from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import SearchIcon from '@mui/icons-material/Search';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { ko } from 'date-fns/locale';
+import {ko} from 'date-fns/locale';
 // import Grid from "@mui/material/Grid";
 // import SearchIcon from "@mui/icons-material/Search";
 // import AppBar from "@mui/material/AppBar";
@@ -25,7 +26,6 @@ import { ko } from 'date-fns/locale';
 
 const SearchBox = styled.div`
   width: 100%;
-  padding: 5px 0;
   max-width: 1200px;
   margin: 30px auto;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
@@ -34,42 +34,39 @@ const SearchBox = styled.div`
 `;
 const SearchLine = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 10px 16px;
-  border-bottom: 1px solid ${colors.borderColor};
-  
+  align-items: center;
+  justify-content: ${({justify}) => justify ? justify : 'flex-start'};
+  padding: 11px 16px;
+  border-bottom: 1px solid ${colors.shadowColor};
+
   &:last-child {
     border-bottom: none;
   }
-`;
-const LeftBox = styled.div`
-  width: ${({ width }) => width ? '88%' : '100%'};
-  display: flex;
-  align-items: center;
-  
+
   // Input Style
   .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
     height: 35px;
     padding: 0 10px;
   }
+
   .css-bkqowc-MuiInputBase-root-MuiOutlinedInput-root {
     border-radius: 0;
   }
+
   .css-aqhoke-MuiFormLabel-root-MuiInputLabel-root {
     top: -9px;
     font-size: 14px;
   }
-`;
-const RightBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  flex-wrap: nowrap;
+
+  .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 175px;
+  }
 `;
 const ButtonGroup = styled.div`
   margin-left: 10px;
 `;
 const Title = styled.div`
-  min-width: 80px;
+  min-width: 100px;
   font-size: 16px;
   font-weight: 600;
   color: ${colors.lightBlack};
@@ -78,11 +75,42 @@ const Title = styled.div`
 `;
 const ModalWrapper = styled.div`
   max-width: 1200px;
-  padding: 30px;
+  height: 90vh;
+  overflow-y: scroll;
+  padding: 0 30px;
   margin: 4% auto;
   border-radius: 8px;
   background: ${colors.backgroundColor};
   box-shadow: 0 5px 8px 1px ${colors.darkGrayColor};
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+const InputWrapper = styled.div`
+  width: 49%;
+  position: relative;
+  margin-left: 10px;
+`;
+const SearchViewBox = styled.div`
+  position: absolute;
+  z-index: 10;
+  top: 34px;
+  width: 100%;
+  border: 1px solid ${colors.borderColor};
+  background: ${colors.whiteColor};
+`;
+const SearchView = styled.div`
+  padding: 5px 10px;
+  cursor: pointer;
+  
+  ${({ active }) => active && css`
+    color: ${colors.activeBlue};
+  `}
+  
+  &:hover {
+    color: ${colors.activeBlue};
+  }
 `;
 
 const MainPresentational = ({
@@ -123,14 +151,26 @@ const MainPresentational = ({
                                 updateCorpData,
 
                                 onMemberRegister,
+
+                                // AutoComplete
+                                keyword,
+                                results,
+                                updateField,
+                                updateText,
+                                resultsArr,
                             }) => {
+
+    useEffect(() => {
+        console.info('corpList ', corpList);
+    }, [corpList])
+
     // 가입일, 만료일, 계약일
     return (
         <Box sx={{
             flex: 1,
             display: 'flex',
             flexDirection: 'column',
-            minHeight: '100vh',
+            height: '100vh',
             overflow: 'scroll',
             bgcolor: '#eaeff1'
         }}>
@@ -144,148 +184,171 @@ const MainPresentational = ({
             />
             {tabMenu === 0
                 ?
-                <Box component="main">
+                <Box component="main" sx={{paddingBottom: 1}}>
                     <SearchBox>
                         <SearchLine>
-                            <LeftBox>
-                                <Title>검색어</Title>
-                                <Select
-                                    width={15}
-                                    onChange={handleSearchType}
-                                    searchType={searchType}
-                                    options={['회사명', '사업자 번호', '사업자명', '상품 타입']}
-                                />
+                            <Title>키워드 검색</Title>
+                            <Select
+                                width={15}
+                                onChange={handleSearchType}
+                                searchType={searchType}
+                                options={['회사명', '사업자 번호', '사업자명', '상품 유형']}
+                            />
+                            <InputWrapper>
                                 <Input
-                                    width={66}
-                                    value={searchText}
+                                    width={100}
+                                    value={keyword || searchText}
                                     onChange={handleSearchText}
-                                    onKeyPress={handleSearch}
-                                    margin="0 10px 0 10px"
-                                    placeholder="검색할 회사의 정보를 입력해주세요."
+                                    onKeyUp={handleSearch}
+                                    placeholder={
+                                        (searchType === '회사명' && '검색할 회사의 이름을 입력해주세요.') ||
+                                        (searchType === '사업자 번호' && '검색할 회사의 사업자번호를 입력해주세요.') ||
+                                        (searchType === '사업자명' && '검색할 회사의 사업자명을 입력해주세요.') ||
+                                        (searchType === '상품 유형' && '검색할 상품의 유형을 입력해주세요.')
+                                    }
                                 />
-                            </LeftBox>
-                            <RightBox>
-                                <Button variant="contained" sx={{mr: 1}} onClick={handleSearch}>
-                                    Search
-                                </Button>
-                                <Tooltip title="Reload" onClick={handleRefresh}>
-                                    <IconButton>
-                                        <RefreshIcon color="inherit" sx={{display: 'block'}}/>
-                                    </IconButton>
-                                </Tooltip>
-                            </RightBox>
+                                {/*
+                                    {results['results'] && results['results'].length > 0 && (
+                                        <SearchViewBox id="autoCompleteBox">
+                                            {results['results'].length > 0 && results['results'].map(item => {
+                                                // console.info('아템 : ', item);
+                                                return (
+                                                    <SearchView active={item.active} key={item.id} onClick={() => {
+                                                        if (searchType === '회사명') updateText(item.bizName);
+                                                        else if (searchType === '사업자 번호') updateText(item.bizNum);
+                                                        else if (searchType === '사업자명') updateText(item.ceoName);
+                                                    }}>
+                                                        {searchType === '회사명' && item.bizName}
+                                                        {searchType === '사업자 번호' && item.bizNum}
+                                                        {searchType === '사업자명' && item.ceoName}
+                                                    </SearchView>
+                                                )
+                                            })}
+                                        </SearchViewBox>)}
+                                    */}
+                            </InputWrapper>
                         </SearchLine>
                         <SearchLine>
-                            <LeftBox>
-                                <Title>기간 검색</Title>
-                                <LocalizationProvider dateAdapter={AdapterDateFns} locale={ko}>
-                                    <DatePicker
-                                        label="시작일"
-                                        mask="____.__.__"
-                                        inputFormat="yyyy.MM.dd"
-                                        value={searchDate.start}
-                                        onChange={newValue => handleDateChange(newValue, 'START')}
-                                        renderInput={(params) => {
-                                            params.inputProps.placeholder = "yyyy.mm.dd";
-                                            return (<TextField { ...params } />
-                                            )}}
-                                    />
-                                </LocalizationProvider>
-                                &nbsp;~&nbsp;
-                                <LocalizationProvider dateAdapter={AdapterDateFns} locale={ko}>
-                                    <DatePicker
-                                        label="종료일"
-                                        mask="____.__.__"
-                                        inputFormat="yyyy.MM.dd"
-                                        value={searchDate.finish}
-                                        onChange={newValue => handleDateChange(newValue, 'FINISH')}
-                                        renderInput={(params) => {
-                                            params.inputProps.placeholder = "yyyy.mm.dd";
-                                            return (<TextField { ...params } />
-                                            )}}
-                                    />
-                                </LocalizationProvider>
+                            <Title>기간 검색</Title>
+                            <LocalizationProvider dateAdapter={AdapterDateFns} locale={ko}>
+                                <DatePicker
+                                    label="시작일"
+                                    mask="____.__.__"
+                                    inputFormat="yyyy.MM.dd"
+                                    value={searchDate.start}
+                                    onChange={newValue => handleDateChange(newValue, 'START')}
+                                    renderInput={(params) => {
+                                        params.inputProps.placeholder = "yyyy.mm.dd";
+                                        return (<TextField {...params} />
+                                        )
+                                    }}
+                                />
+                            </LocalizationProvider>
+                            &nbsp;~&nbsp;
+                            <LocalizationProvider dateAdapter={AdapterDateFns} locale={ko}>
+                                <DatePicker
+                                    label="종료일"
+                                    mask="____.__.__"
+                                    inputFormat="yyyy.MM.dd"
+                                    value={searchDate.finish}
+                                    onChange={newValue => handleDateChange(newValue, 'FINISH')}
+                                    renderInput={(params) => {
+                                        params.inputProps.placeholder = "yyyy.mm.dd";
+                                        return (<TextField {...params} />
+                                        )
+                                    }}
+                                />
+                            </LocalizationProvider>
 
-                                <ButtonGroup>
-                                    <CostumeButton
-                                        width={50}
-                                        height={35}
-                                        title="오늘"
-                                        type="TODAY"
-                                        borderRadius="none"
-                                        border={`1px solid ${colors.borderColor}`}
-                                        bgColor={colors.whiteColor}
-                                        onClick={handleSetDate}
-                                    >
-                                    </CostumeButton>
-                                    <CostumeButton
-                                        width={50}
-                                        height={35}
-                                        title="어제"
-                                        type="YESTERDAY"
-                                        borderRadius="none"
-                                        border={`1px solid ${colors.borderColor}`}
-                                        bgColor={colors.whiteColor}
-                                        onClick={handleSetDate}
-                                    >
-                                    </CostumeButton>
-                                    <CostumeButton
-                                        width={50}
-                                        height={35}
-                                        title="일주일"
-                                        type="WEEK"
-                                        borderRadius="none"
-                                        border={`1px solid ${colors.borderColor}`}
-                                        bgColor={colors.whiteColor}
-                                        onClick={handleSetDate}
-                                    >
-                                    </CostumeButton>
-                                    <CostumeButton
-                                        width={50}
-                                        height={35}
-                                        title="지난달"
-                                        type="LAST_MONTH"
-                                        borderRadius="none"
-                                        border={`1px solid ${colors.borderColor}`}
-                                        bgColor={colors.whiteColor}
-                                        onClick={handleSetDate}
-                                    >
-                                    </CostumeButton>
-                                    <CostumeButton
-                                        width={50}
-                                        height={35}
-                                        title="1개월"
-                                        type="ONE_MONTH"
-                                        borderRadius="none"
-                                        border={`1px solid ${colors.borderColor}`}
-                                        bgColor={colors.whiteColor}
-                                        onClick={handleSetDate}
-                                    >
-                                    </CostumeButton>
-                                    <CostumeButton
-                                        width={50}
-                                        height={35}
-                                        title="3개월"
-                                        type="THREE_MONTH"
-                                        borderRadius="none"
-                                        border={`1px solid ${colors.borderColor}`}
-                                        bgColor={colors.whiteColor}
-                                        onClick={handleSetDate}
-                                    >
-                                    </CostumeButton>
-                                    <CostumeButton
-                                        width={50}
-                                        height={35}
-                                        title="전체"
-                                        type="ALL"
-                                        borderRadius="none"
-                                        border={`1px solid ${colors.borderColor}`}
-                                        bgColor={colors.whiteColor}
-                                        onClick={handleSetDate}
-                                    >
-                                    </CostumeButton>
-                                </ButtonGroup>
-                            </LeftBox>
+                            <ButtonGroup>
+                                <CostumeButton
+                                    width={54}
+                                    height={35}
+                                    title="오늘"
+                                    type="TODAY"
+                                    borderRadius="none"
+                                    border={`1px solid ${colors.borderColor}`}
+                                    bgColor={colors.whiteColor}
+                                    onClick={handleSetDate}
+                                >
+                                </CostumeButton>
+                                <CostumeButton
+                                    width={54}
+                                    height={35}
+                                    title="어제"
+                                    type="YESTERDAY"
+                                    borderRadius="none"
+                                    border={`1px solid ${colors.borderColor}`}
+                                    bgColor={colors.whiteColor}
+                                    onClick={handleSetDate}
+                                >
+                                </CostumeButton>
+                                <CostumeButton
+                                    width={54}
+                                    height={35}
+                                    title="일주일"
+                                    type="WEEK"
+                                    borderRadius="none"
+                                    border={`1px solid ${colors.borderColor}`}
+                                    bgColor={colors.whiteColor}
+                                    onClick={handleSetDate}
+                                >
+                                </CostumeButton>
+                                <CostumeButton
+                                    width={54}
+                                    height={35}
+                                    title="지난달"
+                                    type="LAST_MONTH"
+                                    borderRadius="none"
+                                    border={`1px solid ${colors.borderColor}`}
+                                    bgColor={colors.whiteColor}
+                                    onClick={handleSetDate}
+                                >
+                                </CostumeButton>
+                                <CostumeButton
+                                    width={54}
+                                    height={35}
+                                    title="1개월"
+                                    type="ONE_MONTH"
+                                    borderRadius="none"
+                                    border={`1px solid ${colors.borderColor}`}
+                                    bgColor={colors.whiteColor}
+                                    onClick={handleSetDate}
+                                >
+                                </CostumeButton>
+                                <CostumeButton
+                                    width={54}
+                                    height={35}
+                                    title="3개월"
+                                    type="THREE_MONTH"
+                                    borderRadius="none"
+                                    border={`1px solid ${colors.borderColor}`}
+                                    bgColor={colors.whiteColor}
+                                    onClick={handleSetDate}
+                                >
+                                </CostumeButton>
+                                <CostumeButton
+                                    width={54}
+                                    height={35}
+                                    title="전체"
+                                    type="ALL"
+                                    borderRadius="none"
+                                    border={`1px solid ${colors.borderColor}`}
+                                    bgColor={colors.whiteColor}
+                                    onClick={handleSetDate}
+                                >
+                                </CostumeButton>
+                            </ButtonGroup>
+                        </SearchLine>
+                        <SearchLine justify="center">
+                            <Button variant="contained" sx={{mr: 3, fontSize: 16}} onClick={handleSearch}
+                                    startIcon={<SearchIcon sx={{color: colors.whiteColor}}/>}>
+                                검색
+                            </Button>
+                            <Button variant="outlined" sx={{fontSize: 16, fontWeight: 600}} onClick={handleRefresh}
+                                    startIcon={<RefreshIcon sx={{color: colors.activeBlue}}/>}>
+                                초기화
+                            </Button>
                         </SearchLine>
                     </SearchBox>
 

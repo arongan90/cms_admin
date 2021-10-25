@@ -9,6 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
 import { makeStyles } from "@material-ui/core/styles";
 import colors from '../../styles/Colors';
+import styled from 'styled-components';
 // import AppBar from '@mui/material/AppBar';
 // import Toolbar from '@mui/material/Toolbar';
 // import Grid from '@mui/material/Grid';
@@ -31,7 +32,7 @@ const columns = [
     },
     {
         id: 'type',
-        label: '상품 타입',
+        label: '상품 유형',
         minWidth: 170,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
@@ -54,6 +55,11 @@ const useStyles = makeStyles({
     },
 });
 
+const Wrapper = styled(Paper)`
+  max-width: 1200px;
+  margin: 30px auto 100px;
+`;
+
 const TableContent = ({ corpList, handleModalOpen }) => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -66,9 +72,9 @@ const TableContent = ({ corpList, handleModalOpen }) => {
     }
 
     return (
-        <Paper sx={{maxWidth: 1200, margin: 'auto', overflow: 'hidden'}}>
-            <Paper sx={{width: '100%', overflow: 'hidden'}}>
-                <TableContainer sx={{height: 590}}>
+        <Wrapper>
+            <Paper>
+                <TableContainer>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
@@ -76,7 +82,7 @@ const TableContent = ({ corpList, handleModalOpen }) => {
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
-                                        style={{minWidth: column.minWidth}}
+                                        style={{minWidth: column.minWidth, background: colors.theadBgColor, fontSize: 18, padding: '10px 16px'}}
                                     >
                                         {column.label}
                                     </TableCell>
@@ -84,7 +90,7 @@ const TableContent = ({ corpList, handleModalOpen }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {corpList && corpList
+                            {corpList.length > 0 ? corpList
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row) => {
                                     return (
@@ -92,7 +98,7 @@ const TableContent = ({ corpList, handleModalOpen }) => {
                                             {columns.map((column) => {
                                                 const value = row[column.id];
                                                 return (
-                                                    <TableCell key={column.id} align={column.align}>
+                                                    <TableCell key={column.id} align={column.align} style={{fontSize: 16}}>
                                                         {column.format && typeof value === 'number'
                                                             ? column.format(value)
                                                             : value}
@@ -101,7 +107,12 @@ const TableContent = ({ corpList, handleModalOpen }) => {
                                             })}
                                         </TableRow>
                                     );
-                                })}
+                                })
+                                :
+                                <TableRow>
+                                    <TableCell colSpan={5} style={{ textAlign: 'center', height: 100, lineHeight: 3, fontSize: 18 }}>일치하는 데이터가 없습니다</TableCell>
+                                </TableRow>
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -116,7 +127,7 @@ const TableContent = ({ corpList, handleModalOpen }) => {
                 />
             </Paper>
 
-        </Paper>
+        </Wrapper>
     );
 }
 

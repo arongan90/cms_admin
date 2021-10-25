@@ -16,7 +16,7 @@ const InputBox = styled.input`
   `}
 `;
 
-const Input = ({ name, width, height, value, margin, placeholder, readOnly, setOpenAddress, infoInputChange, type, onChange, onKeyPress }) => {
+const Input = ({ name, width, height, value, margin, placeholder, readOnly, setOpenAddress, infoInputChange, type, onChange, onKeyUp }) => {
     return (
         <InputBox
             name={name}
@@ -28,7 +28,7 @@ const Input = ({ name, width, height, value, margin, placeholder, readOnly, setO
             readOnly={readOnly}
             onClick={() => setOpenAddress && setOpenAddress(true)}
             onChange={e => infoInputChange ? infoInputChange(e, type && type) : onChange(e)}
-            onKeyPress={e => (e.key === "Enter") && onKeyPress && onKeyPress()}
+            onKeyUp={e => onKeyUp && onKeyUp(e)}
         />
     )
 }

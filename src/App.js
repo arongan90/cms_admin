@@ -163,6 +163,10 @@ const ComponentWrapper = styled.div`
     @media screen and (max-width: 600px) {
         padding-left: 0;
     }
+
+    div::-webkit-scrollbar {
+      display: none;
+    }
   `}
 `;
 

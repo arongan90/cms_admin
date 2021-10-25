@@ -46,13 +46,13 @@
       "id": 4,
       "bizName": "네이버(주)",
       "bizNumber": "172-13-31321",
-      "ceoName": "네이버",
+      "ceoName": "한성숙",
       "ceoPhone": "010-4444-4444",
       "type": "유니온",
       "date": "2021.04.23",
       "bizAddress": "경기 성남시 분당구 서판교로 36",
       "bizDetailAddress": "404동 404호",
-      "managerName": "네이버",
+      "managerName": "한성숙",
       "bizTel": "02-4444-4444",
       "logoFile": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20141007_198%2Foverflow0409_1412693264309duloB_JPEG%2Fnaver.jpg&type=sc960_832"
     },
@@ -60,13 +60,13 @@
       "id": 5,
       "bizName": "현대중공업",
       "bizNumber": "354-01-46432",
-      "ceoName": "김현대",
+      "ceoName": "정몽준",
       "ceoPhone": "010-5555-5555",
       "type": "게이트",
       "date": "2021.09.07",
       "bizAddress": "울산 남구 사평로 223",
       "bizDetailAddress": "505동 505호 현대중공업(주)",
-      "managerName": "현대중",
+      "managerName": "정몽준",
       "bizTel": "02-5555-5555",
       "logoFile": "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA5MDRfNzEg%2FMDAxNjMwNzE3OTU5NDAz.4ydlWbVSAW9U-UGcLqOjVIns3Te1PSdVL2QriIbNFp0g.QgqmryHkzcYGjC0pHMt2I9WNyjGkSSYNLomBTze3i4sg.JPEG.a9931084%2FScreenshot%25A3%25DF20210904%25A3%25AD101233%25A3%25DFSamsung_Internet.jpg&type=sc960_832"
     },
@@ -88,7 +88,7 @@
       "id": 7,
       "bizName": "PI첨단소재",
       "bizNumber": "172-13-31321",
-      "ceoName": "김PI",
+      "ceoName": "PI",
       "ceoPhone": "010-7777-7777",
       "type": "유니온",
       "date": "2021.04.23",
@@ -96,31 +96,49 @@
       "bizDetailAddress": "505동 505호 현대중공업(주)",
       "managerName": "현대중",
       "bizTel": "02-6666-6666",
-      "logoFile": ""
+      "logoFile": "https://blog.kakaocdn.net/dn/8AlGK/btq8DRIFnHs/C1fmoKxLV7N6nPaCcMOWpK/img.jpg"
     },
     {
       "id": 8,
       "bizName": "LG전자",
       "bizNumber": "354-01-46432",
       "ceoName": "구엘쥐",
+      "ceoPhone": "010-8888-8888",
       "type": "게이트",
-      "date": "2021.09.07"
+      "date": "2021.09.07",
+      "bizAddress": "경남 창원시 성산구",
+      "bizDetailAddress": "창원2공장 A2동",
+      "managerName": "구엘쥐",
+      "bizTel": "02-8888-8888",
+      "logoFile": "https://kfinews.kr/wp-content/uploads/2020/10/lg%EC%A0%84%EC%9E%90-%EB%A1%9C%EA%B3%A0-696x373.png"
     },
     {
       "id": 9,
       "bizName": "기아자동차",
       "bizNumber": "110-20-45642",
-      "ceoName": "박기아",
+      "ceoName": "KIA",
+      "ceoPhone": "010-9999-9999",
       "type": "밋업",
-      "date": "2021.06.08"
+      "date": "2021.06.08",
+      "bizAddress": "서울",
+      "bizDetailAddress": "서울",
+      "managerName": "구엘쥐",
+      "bizTel": "02-8888-8888",
+      "logoFile": "https://img.seoul.co.kr/img/upload/2021/01/06/SSI_20210106172031.jpg"
     },
     {
       "id": 10,
       "bizName": "벤츠",
       "bizNumber": "172-13-31321",
-      "ceoName": "이벤츠",
+      "ceoName": "Benz",
+      "ceoPhone": "010-1234-4567",
       "type": "유니온",
-      "date": "2021.04.23"
+      "date": "2021.04.23",
+      "bizAddress": "독일 슈투트가르트",
+      "bizDetailAddress": "메르세데스 벤츠",
+      "managerName": "Benz",
+      "bizTel": "02-8888-8888",
+      "logoFile": "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FN4M6V%2Fbtqw6paHnkf%2F4FGDKHlW9JOTpSmVk4EqnK%2Fimg.jpg"
     },
     {
       "id": 11,
@@ -159,6 +177,38 @@
       "bizName": "AOMG",
       "bizNumber": "110-20-45642",
       "ceoName": "박재범",
+      "type": "밋업",
+      "date": "2021.06.08"
+    },
+    {
+      "id": 16,
+      "bizName": "LG화학",
+      "bizNumber": "110-20-45642",
+      "ceoName": "구화확",
+      "type": "밋업",
+      "date": "2021.06.08"
+    },
+    {
+      "id": 17,
+      "bizName": "LG생활건강",
+      "bizNumber": "110-20-45642",
+      "ceoName": "구생건",
+      "type": "밋업",
+      "date": "2021.06.08"
+    },
+    {
+      "id": 18,
+      "bizName": "카카오",
+      "bizNumber": "110-20-15642",
+      "ceoName": "김범수",
+      "type": "유니온",
+      "date": "2021.06.08"
+    },
+    {
+      "id": 19,
+      "bizName": "카카오페이",
+      "bizNumber": "110-20-45442",
+      "ceoName": "류영준",
       "type": "밋업",
       "date": "2021.06.08"
     }

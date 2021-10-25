@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import MainPresentational from "./MainPresentational";
 import axios from "axios";
 import * as constants from "../../utils/constants";
-import { toast } from "react-toastify";
-import { isLogout } from "../../modules/auth";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { autoHyphenBizNumber, autoHyphenPhoneNumber } from "../../utils/common";
+import {toast} from "react-toastify";
+import {isLogout} from "../../modules/auth";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
+import {autoHyphenBizNumber, autoHyphenPhoneNumber} from "../../utils/common";
 
 const serverProtocol = constants.config.PROTOCOL;
 const serverURL = constants.config.URL;
@@ -92,7 +92,7 @@ const MainContainer = () => {
     }
 
     const handleUnionService = e => {
-        const { name, checked } = e.target;
+        const {name, checked} = e.target;
 
         setUnionService({
             ...unionService,
@@ -386,13 +386,13 @@ const MainContainer = () => {
                 break;
             case 'YESTERDAY':
                 setSearchDate({
-                    start: new Date(now.setDate(now.getDate() - 1 )),
+                    start: new Date(now.setDate(now.getDate() - 1)),
                     finish: new Date(),
                 });
                 break;
             case 'WEEK':
                 setSearchDate({
-                    start: new Date(now.setDate(now.getDate() - 7 )),
+                    start: new Date(now.setDate(now.getDate() - 7)),
                     finish: new Date(),
                 });
                 break;
@@ -404,13 +404,13 @@ const MainContainer = () => {
                 break;
             case 'ONE_MONTH':
                 setSearchDate({
-                    start: new Date(now.setMonth(now.getMonth() - 1 )),
+                    start: new Date(now.setMonth(now.getMonth() - 1)),
                     finish: new Date(),
                 });
                 break;
             case 'THREE_MONTH':
                 setSearchDate({
-                    start: new Date(now.setMonth(now.getMonth() - 3 )),
+                    start: new Date(now.setMonth(now.getMonth() - 3)),
                     finish: new Date(),
                 });
                 break;
@@ -782,64 +782,151 @@ const MainContainer = () => {
 
     const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
     const handleSearchType = e => setSearchType(e.target.value);
-    const handleSearchText = e => setSearchText(e.target.value);
     const handleGoodsType = e => {
         setServiceType(e.target.value);
-        setUnionService({
-            live: {
-                isService: false,
-                period: {
-                    start: null,
-                    finish: null,
-                },
+        if (!!usedPeriod.start) {
+            setUnionService({
+                live: {
+                    isService: false,
+                    period: {
+                        start: usedPeriod.start,
+                        finish: null,
+                    },
 
-            },
-            linkBinder: {
-                isService: false,
-                period: {
-                    start: null,
-                    finish: null,
                 },
-            },
-            shopping: {
-                isService: false,
-                period: {
-                    start: null,
-                    finish: null,
+                linkBinder: {
+                    isService: false,
+                    period: {
+                        start: usedPeriod.start,
+                        finish: null,
+                    },
                 },
-            },
-            gate: {
-                isService: false,
-                period: {
-                    start: null,
-                    finish: null,
+                shopping: {
+                    isService: false,
+                    period: {
+                        start: usedPeriod.start,
+                        finish: null,
+                    },
                 },
-            },
-        });
+                gate: {
+                    isService: false,
+                    period: {
+                        start: usedPeriod.start,
+                        finish: null,
+                    },
+                },
+            });
+        }
     }
 
-    const handleSearch = () => {
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const [keyword, setKeyword] = useState();
+    const [results, setResults] = useState([]);
+
+    const handleSearchText = e => {
+        const {value} = e.target;
+        updateField('keyword', value);
+        setSearchText(value);
+        if (value === '') setCorpList(initialData);
+    }
+
+    const updateField = (field, value, update = true) => {
+        if (update) onSearch(value);
+        if (field === 'keyword') setKeyword(value);
+        if (field === 'results') setResults(value);
+    }
+
+    const onSearch = text => {
+        let results;
+        if (searchType === '회사명') results = initialData.filter(data => true === matchName(data.bizName, text));
+        else if (searchType === '사업자 번호') results = initialData.filter(data => true === matchName(data.bizNum, text));
+        else if (searchType === '사업자명') results = initialData.filter(data => true === matchName(data.ceoName, text));
+
+        // results = results.map(res => ({
+        //     ...res,
+        //     active: false,
+        // }));
+        // setResults({results});
+        setCorpList(results);
+    }
+
+    const matchName = (name, keyword) => {
+        name = name.toLowerCase().substring(0, keyword.length);
+        if (keyword === '') return false;
+        else return name === keyword.toString().toLowerCase();
+    }
+
+    const updateText = text => {
+        updateField('keyword', text, false);
+        updateField('results', []);
+    }
+    let resultsArr = results['results'];
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // let idx = useRef(0);
+    // 회사 검색
+    const handleSearch = e => {
         let year = searchDate.start && searchDate.start.getFullYear();
         let month = searchDate.start && searchDate.start.getMonth() + 1;
         let day = searchDate.start && searchDate.start.getDate();
 
-        let result = [];
-        if (searchText === '') {
-            alert('검색할 회사의 정보를 입력해주세요.');
-            return;
+        if (e.key === 'Enter') {
+
+            console.info(' ??? ');
+
+            let result = [];
+
+            if (searchType === '회사명') initialData.find(list => list.bizName === searchText && result.push(list));
+            else if (searchType === '사업자 번호') initialData.find(list => list.bizNum === searchText && result.push(list));
+            else if (searchType === '사업자명') initialData.find(list => list.ceoName === searchText && result.push(list));
+            else initialData.forEach(list => (list.type === searchText) && result.push(list));
+
+            if (result.length > 0) {
+                setCorpList(result);
+                setSearchText('');
+            } else if (!searchText) {
+                alert('입력한 회사의 정보가 없습니다.');
+            }
         }
 
-        if (searchType === '회사명') initialData.find(list => list.bizName === searchText && result.push(list));
-        else if (searchType === '사업자 번호') initialData.find(list => list.bizNum === searchText && result.push(list));
-        else if (searchType === '사업자명') initialData.find(list => list.ceoName === searchText && result.push(list));
-        else initialData.forEach(list => (list.type === searchText) && result.push(list));
-
-        if (result.length > 0) {
-            setCorpList(result);
-            setSearchText('');
-        } else {
-            alert('입력한 회사의 정보가 없습니다.');
-        }
+        // if (e.key === 'ArrowDown') {
+        //     setResults({
+        //         ...results,
+        //         'results': results['results'].map((res, i) => idx.current === i ? { ...res, active: true } : { ...res, active: false }),
+        //     });
+        //     idx.current += 1;
+        //     if (idx.current >= (results['results'] && results['results'].length)) idx.current = 0;
+        // }
+        //
+        // if (e.key === 'ArrowUp') {
+        //     setResults({
+        //         ...results,
+        //         'results': results['results'].map((res, i) => idx.current === i ? { ...res, active: true } : { ...res, active: false }),
+        //     });
+        //     idx.current -= 1;
+        //     if (idx.current < 0) idx.current = results['results'] && results['results'].length - 1;
+        // }
+        // if (e.key === 'Enter') {
+        //     let text;
+        //     let result = [];
+        //
+        //     results['results'].find(data => data.active ? text = data.bizName : text);
+        //
+        //     if (searchType === '회사명') initialData.find(list => list.bizName === text && result.push(list));
+        //     else if (searchType === '사업자 번호') initialData.find(list => list.bizNum === text && result.push(list));
+        //     else if (searchType === '사업자명') initialData.find(list => list.ceoName === text && result.push(list));
+        //     else initialData.forEach(list => (list.type === searchText) && result.push(list));
+        //
+        //     if (result.length > 0) {
+        //         setCorpList(result);
+        //         setSearchText('');
+        //     } else if (!searchText || result.length < 1 ) {
+        //         alert('입력한 회사의 정보가 없습니다.');
+        //     }
+        // }
+        // if (e.key === 'Escape') setResults([]);
+        // if (idx.current >= (results['results'] && results['results'].length)) idx.current = 0;
+        // if (idx.current < 0) idx.current = 0;
     }
 
     const handleRefresh = () => {
@@ -881,7 +968,7 @@ const MainContainer = () => {
     }
 
     const onMemberRegister = () => {
-        let { bizName, bizNum, bizAddress, bizDetailAddress, ceoName, ceoPhone, managerName, bizTel } = memberInfo;
+        let {bizName, bizNum, bizAddress, bizDetailAddress, ceoName, ceoPhone, managerName, bizTel} = memberInfo;
 
         if (bizName === '') alert('기업명을 입력해주세요.');
         else if (bizNum === '') alert('사업자 번호를 입력해주세요.');
@@ -919,8 +1006,8 @@ const MainContainer = () => {
     }, []);
 
     // useEffect(() => {
-    //     console.info('unionService : ', unionService);
-    // }, []);
+    //     console.info('idx.current : ', idx.current);
+    // }, [idx.current]);
 
     return (
         <MainPresentational
@@ -961,6 +1048,14 @@ const MainContainer = () => {
             updateCorpData={updateCorpData}
 
             onMemberRegister={onMemberRegister}
+
+
+            // AutoComplete
+            keyword={keyword}
+            results={results}
+            updateField={updateField}
+            updateText={updateText}
+            resultsArr={resultsArr}
         />
     )
 }

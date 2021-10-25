@@ -12,18 +12,19 @@ const Colors = {
 
     // Material Color
     textFieldBlue: "#1976d2",
+    activeBlue: "#009be5",
     backgroundColor: "#EAEFF1",
     darkBlueColor: "#1b3a6a",
 
     // Text
     lightBlack: "#333333",
 
-
     // Border
     borderColor: "#CCCCCC",
 
     // Etc
     shadowColor: "#CFCFCF",
+    theadBgColor: "#E8E8E8",
 }
 
 export default Colors;

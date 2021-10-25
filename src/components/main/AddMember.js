@@ -34,7 +34,7 @@ const InputLine = styled.div`
   display: flex;
   align-items: ${({align}) => align ? align : 'center'};
   border-bottom: 1px solid ${colors.borderColor};
-
+  
   &:last-child {
     border-bottom: none;
   }
@@ -57,6 +57,10 @@ const InputLine = styled.div`
   // Radio Style
   .css-18irotk-MuiButtonBase-root-MuiRadio-root {
     color: ${colors.grayColor};
+  }
+
+  .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 175px;
   }
 `;
 const Title = styled.div`
@@ -100,13 +104,10 @@ const AdditionalService = styled.div`
 `;
 const LogoBox = styled.div`
   width: 300px;
-  height: 111px;
-  border-radius: 0 8px 0 0;
-  border-left: 1px solid ${colors.borderColor};
+  height: 100px;
+  border: 1px solid ${colors.borderColor};
   padding: 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: relative;
   background-color: ${colors.whiteColor};
   
   ${({ logoFile }) => !logoFile && css`
@@ -168,16 +169,12 @@ const AddMember = ({
     }, [setServiceType]);
 
     useEffect(() => {
-        console.info('SRC ::: ', logoFile);
-    }, [logoFile]);
+        console.info('usedPeriod ::: ', usedPeriod);
+    }, [usedPeriod]);
 
     return (
         <Wrapper>
             <InputBox>
-                <LogoBox logoFile={!!logoFile}>
-                    <FileInput type="file" accept="image/*" onChange={onLogoChange} />
-                    {logoFile && <AppImage src={previewUrl} alt="Logo" />}
-                </LogoBox>
                 <InputLine>
                     <Title>기업명</Title>
                     <Input
@@ -188,6 +185,13 @@ const AddMember = ({
                         type="BIZ_NAME"
                         placeholder="기업의 이름을 입력해주세요."
                     />
+                </InputLine>
+                <InputLine>
+                    <Title>로고 이미지</Title>
+                    <LogoBox logoFile={!!logoFile}>
+                        <FileInput type="file" accept="image/*" onChange={onLogoChange} />
+                        {logoFile && <AppImage src={previewUrl} alt="Logo" />}
+                    </LogoBox>
                 </InputLine>
                 <InputLine>
                     <Title>사업자 번호</Title>
@@ -298,7 +302,7 @@ const AddMember = ({
                     </LocalizationProvider>
                     <ButtonGroup margin="0 0 0 20px">
                         <Button
-                            width={52}
+                            width={55}
                             height={35}
                             title="6개월"
                             type="6_MONTH"
@@ -309,7 +313,7 @@ const AddMember = ({
                         >
                         </Button>
                         <Button
-                            width={52}
+                            width={55}
                             height={35}
                             title="12개월"
                             type="12_MONTH"
@@ -320,7 +324,7 @@ const AddMember = ({
                         >
                         </Button>
                         <Button
-                            width={52}
+                            width={55}
                             height={35}
                             title="18개월"
                             type="18_MONTH"
@@ -331,7 +335,7 @@ const AddMember = ({
                         >
                         </Button>
                         <Button
-                            width={52}
+                            width={55}
                             height={35}
                             title="24개월"
                             type="24_MONTH"
@@ -342,7 +346,7 @@ const AddMember = ({
                         >
                         </Button>
                         <Button
-                            width={52}
+                            width={55}
                             height={35}
                             title="30개월"
                             type="30_MONTH"
@@ -353,7 +357,7 @@ const AddMember = ({
                         >
                         </Button>
                         <Button
-                            width={52}
+                            width={55}
                             height={35}
                             title="36개월"
                             type="36_MONTH"
@@ -364,7 +368,7 @@ const AddMember = ({
                         >
                         </Button>
                         <Button
-                            width={52}
+                            width={55}
                             height={35}
                             title="초기화"
                             type="USED_PERIOD_RESET"
@@ -379,7 +383,7 @@ const AddMember = ({
 
 
                 <InputLine>
-                    <Title>상품 타입</Title>
+                    <Title>상품 유형</Title>
                     <RadioGroup row aria-label="type" name="row-radio-buttons-group">
                         <FormControlLabel value="meet_up" control={<Radio/>} label="밋업" onChange={handleGoodsType} />
                         <FormControlLabel value="union" control={<Radio/>} label="유니온" onChange={handleGoodsType} />
@@ -412,6 +416,7 @@ const AddMember = ({
                                                     value={live.period.start}
                                                     onChange={newValue => handleDateChange(newValue, 'LIVE_START')}
                                                     renderInput={(params) => <TextField {...params} />}
+                                                    disabled={!!usedPeriod.start}
                                                 />
                                             </LocalizationProvider>
                                             &nbsp;~&nbsp;
@@ -425,7 +430,7 @@ const AddMember = ({
                                             </LocalizationProvider>
                                             <ButtonGroup margin="0 0 0 20px">
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="6개월"
                                                     type="6_MONTH"
@@ -437,7 +442,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="12개월"
                                                     type="12_MONTH"
@@ -449,7 +454,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="18개월"
                                                     type="18_MONTH"
@@ -461,7 +466,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="24개월"
                                                     type="24_MONTH"
@@ -473,7 +478,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="30개월"
                                                     type="30_MONTH"
@@ -485,7 +490,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="36개월"
                                                     type="36_MONTH"
@@ -497,7 +502,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="초기화"
                                                     type="USED_PERIOD_RESET"
@@ -531,6 +536,7 @@ const AddMember = ({
                                                     value={linkBinder.period.start}
                                                     onChange={newValue => handleDateChange(newValue, 'LINK_BINDER_START')}
                                                     renderInput={(params) => <TextField {...params} />}
+                                                    disabled={!!usedPeriod.start}
                                                 />
                                             </LocalizationProvider>
                                             &nbsp;~&nbsp;
@@ -544,7 +550,7 @@ const AddMember = ({
                                             </LocalizationProvider>
                                             <ButtonGroup margin="0 0 0 20px">
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="6개월"
                                                     type="6_MONTH"
@@ -556,7 +562,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="12개월"
                                                     type="12_MONTH"
@@ -568,7 +574,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="18개월"
                                                     type="18_MONTH"
@@ -580,7 +586,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="24개월"
                                                     type="24_MONTH"
@@ -592,7 +598,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="30개월"
                                                     type="30_MONTH"
@@ -604,7 +610,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="36개월"
                                                     type="36_MONTH"
@@ -616,7 +622,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="초기화"
                                                     type="USED_PERIOD_RESET"
@@ -650,6 +656,7 @@ const AddMember = ({
                                                     value={shopping.period.start}
                                                     onChange={newValue => handleDateChange(newValue, 'SHOPPING_START')}
                                                     renderInput={(params) => <TextField {...params} />}
+                                                    disabled={!!usedPeriod.start}
                                                 />
                                             </LocalizationProvider>
                                             &nbsp;~&nbsp;
@@ -663,7 +670,7 @@ const AddMember = ({
                                             </LocalizationProvider>
                                             <ButtonGroup margin="0 0 0 20px">
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="6개월"
                                                     type="6_MONTH"
@@ -675,7 +682,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="12개월"
                                                     type="12_MONTH"
@@ -687,7 +694,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="18개월"
                                                     type="18_MONTH"
@@ -699,7 +706,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="24개월"
                                                     type="24_MONTH"
@@ -711,7 +718,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="30개월"
                                                     type="30_MONTH"
@@ -723,7 +730,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="36개월"
                                                     type="36_MONTH"
@@ -735,7 +742,7 @@ const AddMember = ({
                                                 >
                                                 </Button>
                                                 <Button
-                                                    width={52}
+                                                    width={55}
                                                     height={35}
                                                     title="초기화"
                                                     type="USED_PERIOD_RESET"
@@ -770,6 +777,7 @@ const AddMember = ({
                                                         value={gate.period.start}
                                                         onChange={newValue => handleDateChange(newValue, 'GATE_START')}
                                                         renderInput={(params) => <TextField {...params} />}
+                                                        disabled={!!usedPeriod.start}
                                                     />
                                                 </LocalizationProvider>
                                                 &nbsp;~&nbsp;
@@ -783,7 +791,7 @@ const AddMember = ({
                                                 </LocalizationProvider>
                                                 <ButtonGroup margin="0 0 0 20px">
                                                     <Button
-                                                        width={52}
+                                                        width={55}
                                                         height={35}
                                                         title="6개월"
                                                         type="6_MONTH"
@@ -795,7 +803,7 @@ const AddMember = ({
                                                     >
                                                     </Button>
                                                     <Button
-                                                        width={52}
+                                                        width={55}
                                                         height={35}
                                                         title="12개월"
                                                         type="12_MONTH"
@@ -807,7 +815,7 @@ const AddMember = ({
                                                     >
                                                     </Button>
                                                     <Button
-                                                        width={52}
+                                                        width={55}
                                                         height={35}
                                                         title="18개월"
                                                         type="18_MONTH"
@@ -819,7 +827,7 @@ const AddMember = ({
                                                     >
                                                     </Button>
                                                     <Button
-                                                        width={52}
+                                                        width={55}
                                                         height={35}
                                                         title="24개월"
                                                         type="24_MONTH"
@@ -831,7 +839,7 @@ const AddMember = ({
                                                     >
                                                     </Button>
                                                     <Button
-                                                        width={52}
+                                                        width={55}
                                                         height={35}
                                                         title="30개월"
                                                         type="30_MONTH"
@@ -843,7 +851,7 @@ const AddMember = ({
                                                     >
                                                     </Button>
                                                     <Button
-                                                        width={52}
+                                                        width={55}
                                                         height={35}
                                                         title="36개월"
                                                         type="36_MONTH"
@@ -855,7 +863,7 @@ const AddMember = ({
                                                     >
                                                     </Button>
                                                     <Button
-                                                        width={52}
+                                                        width={55}
                                                         height={35}
                                                         title="초기화"
                                                         type="USED_PERIOD_RESET"
@@ -896,7 +904,7 @@ const AddMember = ({
                     fontSize={18}
                     fontColor={colors.whiteColor}
                     bgColor={colors.darkBlueColor}
-                    title="등 록"
+                    title={modalVisible ? '저 장' : '등 록'}
                     onClick={onMemberRegister}
                 />
             </ButtonGroup>
