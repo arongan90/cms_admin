@@ -871,9 +871,6 @@ const MainContainer = () => {
         let day = searchDate.start && searchDate.start.getDate();
 
         if (e.key === 'Enter') {
-
-            console.info(' ??? ');
-
             let result = [];
 
             if (searchType === '회사명') initialData.find(list => list.bizName === searchText && result.push(list));
