@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import styled, { css } from "styled-components";
+import React, {useEffect} from 'react';
+import styled, {css} from "styled-components";
 import colors from "../../styles/Colors";
 import HeaderContent from '../../components/share/HeaderContent';
 import TableContent from '../../components/share/TableContent';
@@ -11,18 +11,18 @@ import Box from '@mui/material/Box';
 import {Modal} from "@material-ui/core";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import SearchIcon from '@mui/icons-material/Search';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import {ko} from 'date-fns/locale';
+import Autocomplete from '@mui/material/Autocomplete';
 // import Grid from "@mui/material/Grid";
 // import SearchIcon from "@mui/icons-material/Search";
 // import AppBar from "@mui/material/AppBar";
-
+// import Tooltip from "@mui/material/Tooltip";
+// import IconButton from "@mui/material/IconButton";
 
 const SearchBox = styled.div`
   width: 100%;
@@ -91,6 +91,20 @@ const InputWrapper = styled.div`
   width: 49%;
   position: relative;
   margin-left: 10px;
+
+  .css-1kalb4l-MuiInputBase-root-MuiOutlinedInput-root {
+    height: 35px;
+    border-radius: 0;
+  }
+
+  .css-aqhoke-MuiFormLabel-root-MuiInputLabel-root {
+    top: -8px;
+  }
+
+  .css-1kpdewa-MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input {
+    padding: 0;
+    height: 100%;
+  }
 `;
 const SearchViewBox = styled.div`
   position: absolute;
@@ -103,11 +117,10 @@ const SearchViewBox = styled.div`
 const SearchView = styled.div`
   padding: 5px 10px;
   cursor: pointer;
-  
-  ${({ active }) => active && css`
+
+  ${({active}) => active && css`
     color: ${colors.activeBlue};
   `}
-  
   &:hover {
     color: ${colors.activeBlue};
   }
@@ -160,9 +173,10 @@ const MainPresentational = ({
                                 resultsArr,
                             }) => {
 
-    useEffect(() => {
-        console.info('corpList ', corpList);
-    }, [corpList])
+    // useEffect(() => {
+    //     console.info('111111 resultsArr :', resultsArr);
+    //     console.info('222222 results[\'results\'] :', results['results'] && results['results']);
+    // }, [resultsArr, results])
 
     // 가입일, 만료일, 계약일
     return (
@@ -195,7 +209,32 @@ const MainPresentational = ({
                                 options={['회사명', '사업자 번호', '사업자명', '상품 유형']}
                             />
                             <InputWrapper>
-                                <Input
+                                <Autocomplete
+                                    autoComplete
+                                    autoSelect
+                                    value={searchText}
+                                    options={corpList}
+                                    onChange={(e, value) => handleSearchText(e, value)}
+                                    getOptionLabel={opt => {
+                                        return (
+                                            ((!!opt && searchType === '회사명') ? opt.bizName : '') ||
+                                            ((!!opt && searchType === '사업자 번호') ? opt.bizNumber : '') ||
+                                            ((!!opt && searchType === '사업자명') ? opt.ceoName : '') || ""
+                                        )
+                                    }}
+                                    renderInput={params => (
+                                        <TextField
+                                            {...params}
+                                            label={
+                                                (searchType === '회사명' && '검색할 회사의 이름을 입력해주세요.') ||
+                                                (searchType === '사업자 번호' && '검색할 회사의 사업자번호를 입력해주세요.') ||
+                                                (searchType === '사업자명' && '검색할 회사의 사업자명을 입력해주세요.') ||
+                                                (searchType === '상품 유형' && '검색할 상품의 유형을 입력해주세요.')
+                                            }
+                                        />
+                                    )}
+                                />
+                                {/*<Input
                                     width={100}
                                     value={keyword || searchText}
                                     onChange={handleSearchText}
@@ -207,25 +246,23 @@ const MainPresentational = ({
                                         (searchType === '상품 유형' && '검색할 상품의 유형을 입력해주세요.')
                                     }
                                 />
-                                {/*
-                                    {results['results'] && results['results'].length > 0 && (
-                                        <SearchViewBox id="autoCompleteBox">
-                                            {results['results'].length > 0 && results['results'].map(item => {
-                                                // console.info('아템 : ', item);
-                                                return (
-                                                    <SearchView active={item.active} key={item.id} onClick={() => {
-                                                        if (searchType === '회사명') updateText(item.bizName);
-                                                        else if (searchType === '사업자 번호') updateText(item.bizNum);
-                                                        else if (searchType === '사업자명') updateText(item.ceoName);
-                                                    }}>
-                                                        {searchType === '회사명' && item.bizName}
-                                                        {searchType === '사업자 번호' && item.bizNum}
-                                                        {searchType === '사업자명' && item.ceoName}
-                                                    </SearchView>
-                                                )
-                                            })}
-                                        </SearchViewBox>)}
-                                    */}
+                                {resultsArr && resultsArr.length > 0 && (
+                                    <SearchViewBox>
+                                        {resultsArr.length > 0 && resultsArr.map(item => {
+                                            // console.info('아템 : ', item);
+                                            return (
+                                                <SearchView active={item.active} key={item.id} onClick={() => {
+                                                    if (searchType === '회사명') updateText(item.bizName);
+                                                    else if (searchType === '사업자 번호') updateText(item.bizNum);
+                                                    else if (searchType === '사업자명') updateText(item.ceoName);
+                                                }}>
+                                                    {searchType === '회사명' && item.bizName}
+                                                    {searchType === '사업자 번호' && item.bizNum}
+                                                    {searchType === '사업자명' && item.ceoName}
+                                                </SearchView>
+                                            )
+                                        })}
+                                    </SearchViewBox>)}*/}
                             </InputWrapper>
                         </SearchLine>
                         <SearchLine>
@@ -376,8 +413,6 @@ const MainPresentational = ({
                     onMemberRegister={onMemberRegister}
                 />
             }
-
-
             <Modal
                 open={modalVisible}
                 onClose={handleModalClose}

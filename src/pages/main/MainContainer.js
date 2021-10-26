@@ -822,12 +822,13 @@ const MainContainer = () => {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     const [keyword, setKeyword] = useState();
     const [results, setResults] = useState([]);
+    let idx = useRef(0);
 
-    const handleSearchText = e => {
+    const handleSearchText = (e, newValue) => {
         const {value} = e.target;
-        updateField('keyword', value);
-        setSearchText(value);
-        if (value === '') setCorpList(initialData);
+        setSearchText(newValue);
+        // updateField('keyword', value);
+        // idx.current = 0;
     }
 
     const updateField = (field, value, update = true) => {
@@ -842,12 +843,11 @@ const MainContainer = () => {
         else if (searchType === '사업자 번호') results = initialData.filter(data => true === matchName(data.bizNum, text));
         else if (searchType === '사업자명') results = initialData.filter(data => true === matchName(data.ceoName, text));
 
-        // results = results.map(res => ({
-        //     ...res,
-        //     active: false,
-        // }));
-        // setResults({results});
-        setCorpList(results);
+        results = results.map(res => ({
+            ...res,
+            active: false,
+        }));
+        setResults({results});
     }
 
     const matchName = (name, keyword) => {
@@ -860,71 +860,82 @@ const MainContainer = () => {
         updateField('keyword', text, false);
         updateField('results', []);
     }
-    let resultsArr = results['results'];
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // let idx = useRef(0);
     // 회사 검색
     const handleSearch = e => {
         let year = searchDate.start && searchDate.start.getFullYear();
         let month = searchDate.start && searchDate.start.getMonth() + 1;
         let day = searchDate.start && searchDate.start.getDate();
 
-        if (e.key === 'Enter') {
-            let result = [];
-
-            if (searchType === '회사명') initialData.find(list => list.bizName === searchText && result.push(list));
-            else if (searchType === '사업자 번호') initialData.find(list => list.bizNum === searchText && result.push(list));
-            else if (searchType === '사업자명') initialData.find(list => list.ceoName === searchText && result.push(list));
-            else initialData.forEach(list => (list.type === searchText) && result.push(list));
-
-            if (result.length > 0) {
-                setCorpList(result);
-                setSearchText('');
-            } else if (!searchText) {
-                alert('입력한 회사의 정보가 없습니다.');
-            }
+        switch(e.key) {
+            case 'ArrowDown':
+                idx.current++;
+                console.info('down', idx.current);
+                // setResults({
+                //     ...results,
+                //     'results': !!results['results'] && results['results'].map((res, i) => idx.current === i ? { ...res, active: true } : { ...res, active: false }),
+                // });
+                // idx.current++;
+                // if (idx.current === (results['results'] && results['results'].length)) idx.current = 0;
+                break;
+            case 'ArrowUp':
+                idx.current--;
+                console.info(' up ', idx.current);
+                // --idx.current;
+                // if (idx.current < 0) idx.current = results['results'] && results['results'].length - 1;
+                // setResults({
+                //     ...results,
+                //     'results': !!results['results'] && results['results'].map((res, i) => idx.current === i ? { ...res, active: true } : { ...res, active: false }),
+                // });
+                break;
+            // case 'Enter':
+            //     let text;
+            //     let result = [];
+            //
+            //     results['results'].find(data => data.active ? text = data.bizName : text);
+            //
+            //     if (searchType === '회사명') initialData.find(list => list.bizName === text && result.push(list));
+            //     else if (searchType === '사업자 번호') initialData.find(list => list.bizNum === text && result.push(list));
+            //     else if (searchType === '사업자명') initialData.find(list => list.ceoName === text && result.push(list));
+            //     else initialData.forEach(list => (list.type === searchText) && result.push(list));
+            //
+            //     if (result.length > 0) {
+            //         setCorpList(result);
+            //         setSearchText('');
+            //     } else if (!searchText || result.length < 1 ) {
+            //         alert('입력한 회사의 정보가 없습니다.');
+            //     }
+            //     break;
+            // case 'Escape':
+            //     setResults([]);
+            //     break;
         }
 
-        // if (e.key === 'ArrowDown') {
-        //     setResults({
-        //         ...results,
-        //         'results': results['results'].map((res, i) => idx.current === i ? { ...res, active: true } : { ...res, active: false }),
-        //     });
-        //     idx.current += 1;
-        //     if (idx.current >= (results['results'] && results['results'].length)) idx.current = 0;
-        // }
-        //
-        // if (e.key === 'ArrowUp') {
-        //     setResults({
-        //         ...results,
-        //         'results': results['results'].map((res, i) => idx.current === i ? { ...res, active: true } : { ...res, active: false }),
-        //     });
-        //     idx.current -= 1;
-        //     if (idx.current < 0) idx.current = results['results'] && results['results'].length - 1;
-        // }
+        // if (idx.current >= (results['results'] && results['results'].length)) idx.current = 0;
+        // if (idx.current < 0) idx.current = 0;
+
         // if (e.key === 'Enter') {
-        //     let text;
         //     let result = [];
         //
-        //     results['results'].find(data => data.active ? text = data.bizName : text);
-        //
-        //     if (searchType === '회사명') initialData.find(list => list.bizName === text && result.push(list));
-        //     else if (searchType === '사업자 번호') initialData.find(list => list.bizNum === text && result.push(list));
-        //     else if (searchType === '사업자명') initialData.find(list => list.ceoName === text && result.push(list));
+        //     if (searchType === '회사명') initialData.find(list => list.bizName === searchText && result.push(list));
+        //     else if (searchType === '사업자 번호') initialData.find(list => list.bizNum === searchText && result.push(list));
+        //     else if (searchType === '사업자명') initialData.find(list => list.ceoName === searchText && result.push(list));
         //     else initialData.forEach(list => (list.type === searchText) && result.push(list));
         //
         //     if (result.length > 0) {
         //         setCorpList(result);
         //         setSearchText('');
-        //     } else if (!searchText || result.length < 1 ) {
+        //     } else if (!searchText) {
         //         alert('입력한 회사의 정보가 없습니다.');
         //     }
         // }
-        // if (e.key === 'Escape') setResults([]);
-        // if (idx.current >= (results['results'] && results['results'].length)) idx.current = 0;
-        // if (idx.current < 0) idx.current = 0;
     }
+    let resultsArr = results['results'];
+    useEffect(() => {
+        // console.info('idx.current : ', idx.current);
+        // console.info('results["results"] : ', results["results"]);
+        console.info('searchText : ', searchText);
+    }, [idx.current, results]);
 
     const handleRefresh = () => {
         setSearchDate({
@@ -1001,10 +1012,6 @@ const MainContainer = () => {
     useEffect(() => {
         fetchData();
     }, []);
-
-    // useEffect(() => {
-    //     console.info('idx.current : ', idx.current);
-    // }, [idx.current]);
 
     return (
         <MainPresentational

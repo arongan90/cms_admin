@@ -28,7 +28,7 @@ const Input = ({ name, width, height, value, margin, placeholder, readOnly, setO
             readOnly={readOnly}
             onClick={() => setOpenAddress && setOpenAddress(true)}
             onChange={e => infoInputChange ? infoInputChange(e, type && type) : onChange(e)}
-            onKeyUp={e => onKeyUp && onKeyUp(e)}
+            onKeyDown={e => onKeyUp && onKeyUp(e)}
         />
     )
 }

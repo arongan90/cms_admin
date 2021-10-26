@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import styled, {css} from 'styled-components';
 import colors from '../../styles/Colors';
 import Input from "../share/Input";
-import Select from "../share/Select";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
@@ -15,7 +14,7 @@ import Button from "../share/Button";
 import DaumPostcode from "react-daum-postcode";
 import {Modal} from '@material-ui/core';
 import addImage from '../../images/addImage.svg';
-
+// import Select from "../share/Select";
 
 const Wrapper = styled.div`
   background: ${colors.backgroundColor};
