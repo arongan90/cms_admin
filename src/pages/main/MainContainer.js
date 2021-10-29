@@ -17,11 +17,11 @@ const MainContainer = () => {
     const [tabMenu, setTabMenu] = useState(0);
     const [mobileOpen, setMobileOpen] = useState(false);
     const [openAddress, setOpenAddress] = useState(false);
-    const [initialData, setInitialData] = useState([]);
     const [corpList, setCorpList] = useState([]);
+    const [initialList, setInitialList] = useState([]);
     const [searchType, setSearchType] = useState('회사명');
-    const [serviceType, setServiceType] = useState('');
     const [searchText, setSearchText] = useState('');
+    const [serviceType, setServiceType] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [updateCorpData, setUpdateCorpData] = useState();
     const [unionService, setUnionService] = useState({
@@ -31,7 +31,6 @@ const MainContainer = () => {
                 start: null,
                 finish: null,
             },
-
         },
         linkBinder: {
             isService: false,
@@ -819,14 +818,26 @@ const MainContainer = () => {
         }
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // Custom AutoComplete
     const [keyword, setKeyword] = useState();
     const [results, setResults] = useState([]);
     let idx = useRef(0);
 
-    const handleSearchText = (e, newValue) => {
+    const handleSearchText = (e, result) => {
         const {value} = e.target;
-        setSearchText(newValue);
+        setSearchText(value);
+
+        switch (searchType) {
+            case '회사명':
+                setSearchText(!!result && result.bizName);
+                break;
+            case '사업자 번호':
+                setSearchText(!!result && result.bizNumber);
+                break;
+            case '사업자명':
+                setSearchText(!!result && result.ceoName);
+                break;
+        }
         // updateField('keyword', value);
         // idx.current = 0;
     }
@@ -836,12 +847,11 @@ const MainContainer = () => {
         if (field === 'keyword') setKeyword(value);
         if (field === 'results') setResults(value);
     }
-
     const onSearch = text => {
         let results;
-        if (searchType === '회사명') results = initialData.filter(data => true === matchName(data.bizName, text));
-        else if (searchType === '사업자 번호') results = initialData.filter(data => true === matchName(data.bizNum, text));
-        else if (searchType === '사업자명') results = initialData.filter(data => true === matchName(data.ceoName, text));
+        if (searchType === '회사명') results = initialList.filter(data => true === matchName(data.bizName, text));
+        else if (searchType === '사업자 번호') results = initialList.filter(data => true === matchName(data.bizNum, text));
+        else if (searchType === '사업자명') results = initialList.filter(data => true === matchName(data.ceoName, text));
 
         results = results.map(res => ({
             ...res,
@@ -849,93 +859,55 @@ const MainContainer = () => {
         }));
         setResults({results});
     }
-
     const matchName = (name, keyword) => {
         name = name.toLowerCase().substring(0, keyword.length);
         if (keyword === '') return false;
         else return name === keyword.toString().toLowerCase();
     }
-
     const updateText = text => {
         updateField('keyword', text, false);
         updateField('results', []);
     }
+    let resultsArr = results['results'];
+    ///////////////////////////////////////////////////
 
     // 회사 검색
-    const handleSearch = e => {
-        let year = searchDate.start && searchDate.start.getFullYear();
-        let month = searchDate.start && searchDate.start.getMonth() + 1;
-        let day = searchDate.start && searchDate.start.getDate();
+    const handleSearch = () => {
+        // let startYear = searchDate.start && searchDate.start.getFullYear();
+        // let startMonth = searchDate.start && searchDate.start.getMonth() + 1;
+        // let startDay = searchDate.start && searchDate.start.getDate();
+        // let finishYear = searchDate.finish && searchDate.finish.getFullYear();
+        // let finishMonth = searchDate.finish && searchDate.finish.getMonth() + 1;
+        // let finishDay = searchDate.finish && searchDate.finish.getDate();
+        // let startDate = Number(new Date(startYear, startMonth, startDay));
+        // let finishDate = Number(new Date(finishYear, finishMonth, finishDay));
+        let startDate = Number(new Date(searchDate.start && searchDate.start.getFullYear(), searchDate.start && searchDate.start.getMonth() + 1, searchDate.start && searchDate.start.getDate()));
+        let finishDate = Number(new Date(searchDate.finish && searchDate.finish.getFullYear(), searchDate.finish && searchDate.finish.getMonth() + 1, searchDate.finish && searchDate.finish.getDate()));
+        let result = [];
 
-        switch(e.key) {
-            case 'ArrowDown':
-                idx.current++;
-                console.info('down', idx.current);
-                // setResults({
-                //     ...results,
-                //     'results': !!results['results'] && results['results'].map((res, i) => idx.current === i ? { ...res, active: true } : { ...res, active: false }),
-                // });
-                // idx.current++;
-                // if (idx.current === (results['results'] && results['results'].length)) idx.current = 0;
-                break;
-            case 'ArrowUp':
-                idx.current--;
-                console.info(' up ', idx.current);
-                // --idx.current;
-                // if (idx.current < 0) idx.current = results['results'] && results['results'].length - 1;
-                // setResults({
-                //     ...results,
-                //     'results': !!results['results'] && results['results'].map((res, i) => idx.current === i ? { ...res, active: true } : { ...res, active: false }),
-                // });
-                break;
-            // case 'Enter':
-            //     let text;
-            //     let result = [];
-            //
-            //     results['results'].find(data => data.active ? text = data.bizName : text);
-            //
-            //     if (searchType === '회사명') initialData.find(list => list.bizName === text && result.push(list));
-            //     else if (searchType === '사업자 번호') initialData.find(list => list.bizNum === text && result.push(list));
-            //     else if (searchType === '사업자명') initialData.find(list => list.ceoName === text && result.push(list));
-            //     else initialData.forEach(list => (list.type === searchText) && result.push(list));
-            //
-            //     if (result.length > 0) {
-            //         setCorpList(result);
-            //         setSearchText('');
-            //     } else if (!searchText || result.length < 1 ) {
-            //         alert('입력한 회사의 정보가 없습니다.');
-            //     }
-            //     break;
-            // case 'Escape':
-            //     setResults([]);
-            //     break;
+        if (searchDate.start > 0 || searchDate.finish > 0) {
+            initialList.forEach(list => {
+                let dateArr = list.date.split('.');
+                let registerDate = new Date(dateArr[0], dateArr[1], dateArr[2]);
+
+                if (startDate <= registerDate && registerDate <= finishDate) {
+                    result.push(list);
+                }
+            });
+        } else {
+            if (searchType === '회사명') initialList.find(list => list.bizName === searchText && result.push(list));
+            else if (searchType === '사업자 번호') initialList.find(list => list.bizNum === searchText && result.push(list));
+            else if (searchType === '사업자명') initialList.find(list => list.ceoName === searchText && result.push(list));
+            else initialList.forEach(list => (list.type === searchText) && result.push(list));
         }
 
-        // if (idx.current >= (results['results'] && results['results'].length)) idx.current = 0;
-        // if (idx.current < 0) idx.current = 0;
-
-        // if (e.key === 'Enter') {
-        //     let result = [];
-        //
-        //     if (searchType === '회사명') initialData.find(list => list.bizName === searchText && result.push(list));
-        //     else if (searchType === '사업자 번호') initialData.find(list => list.bizNum === searchText && result.push(list));
-        //     else if (searchType === '사업자명') initialData.find(list => list.ceoName === searchText && result.push(list));
-        //     else initialData.forEach(list => (list.type === searchText) && result.push(list));
-        //
-        //     if (result.length > 0) {
-        //         setCorpList(result);
-        //         setSearchText('');
-        //     } else if (!searchText) {
-        //         alert('입력한 회사의 정보가 없습니다.');
-        //     }
-        // }
+        if (result.length > 0) {
+            setCorpList(result);
+            setSearchText('');
+        } else if (!searchText || result.length === 0) {
+            alert('입력한 회사의 정보가 없습니다.');
+        }
     }
-    let resultsArr = results['results'];
-    useEffect(() => {
-        // console.info('idx.current : ', idx.current);
-        // console.info('results["results"] : ', results["results"]);
-        console.info('searchText : ', searchText);
-    }, [idx.current, results]);
 
     const handleRefresh = () => {
         setSearchDate({
@@ -944,8 +916,12 @@ const MainContainer = () => {
         });
         setSearchType('회사명');
         setSearchText('');
-        setCorpList(initialData);
+        setCorpList(initialList);
     }
+
+    useEffect(() => {
+        console.info('searchText ::: ', searchText);
+    }, [searchText])
 
     const handleModalClose = () => setModalVisible(false);
     const handleModalOpen = id => {
@@ -972,7 +948,7 @@ const MainContainer = () => {
     const fetchData = async () => {
         const res = await axios.get(`${serverProtocol}${serverURL}/corp_list`);
         setCorpList(res.data);
-        setInitialData(res.data);
+        setInitialList(res.data);
     }
 
     const onMemberRegister = () => {
@@ -1005,7 +981,6 @@ const MainContainer = () => {
             alert('회원정보가 등록되었습니다.');
             window.location.reload();
             console.info('회원 정보 :', params);
-
         }
     }
 
@@ -1030,18 +1005,16 @@ const MainContainer = () => {
             searchType={searchType}
             handleSearchType={handleSearchType}
             searchText={searchText}
+            initialList={initialList}
             handleSearchText={handleSearchText}
-
             handleDrawerToggle={handleDrawerToggle}
             handleGoodsType={handleGoodsType}
             handleSetDate={handleSetDate}
             handleDateChange={handleDateChange}
             handleAddressComplete={handleAddressComplete}
             infoInputChange={infoInputChange}
-
             handleSearch={handleSearch}
             handleRefresh={handleRefresh}
-
             unionService={unionService}
             handleUnionService={handleUnionService}
             onLogoChange={onLogoChange}
@@ -1050,7 +1023,6 @@ const MainContainer = () => {
             handleModalOpen={handleModalOpen}
             handleModalClose={handleModalClose}
             updateCorpData={updateCorpData}
-
             onMemberRegister={onMemberRegister}
 
 

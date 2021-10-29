@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from "styled-components";
-import colors from "../../styles/Colors";
+import colors from "../../styles/colors";
 
 const InputBox = styled.input`
   width: ${({width}) => width}%;

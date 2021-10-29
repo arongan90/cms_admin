@@ -7,8 +7,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TablePagination from '@mui/material/TablePagination';
-import { makeStyles } from "@material-ui/core/styles";
-import colors from '../../styles/Colors';
+import {makeStyles} from "@material-ui/core/styles";
+import colors from '../../styles/colors';
 import styled from 'styled-components';
 // import AppBar from '@mui/material/AppBar';
 // import Toolbar from '@mui/material/Toolbar';
@@ -22,7 +22,7 @@ import styled from 'styled-components';
 
 const columns = [
     {id: 'bizName', label: '회사명', minWidth: 170},
-    {id: 'bizNumber', label: '사업자 번호', minWidth: 100,  align: 'right',},
+    {id: 'bizNumber', label: '사업자 번호', minWidth: 100, align: 'right',},
     {
         id: 'ceoName',
         label: '사업자명',
@@ -60,7 +60,7 @@ const Wrapper = styled(Paper)`
   margin: 30px auto 100px;
 `;
 
-const TableContent = ({ corpList, handleModalOpen }) => {
+const TableContent = ({corpList, handleModalOpen, findList}) => {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const classes = useStyles();
@@ -82,7 +82,12 @@ const TableContent = ({ corpList, handleModalOpen }) => {
                                     <TableCell
                                         key={column.id}
                                         align={column.align}
-                                        style={{minWidth: column.minWidth, background: colors.theadBgColor, fontSize: 18, padding: '10px 16px'}}
+                                        style={{
+                                            minWidth: column.minWidth,
+                                            background: colors.theadBgColor,
+                                            fontSize: 18,
+                                            padding: '10px 16px'
+                                        }}
                                     >
                                         {column.label}
                                     </TableCell>
@@ -90,15 +95,17 @@ const TableContent = ({ corpList, handleModalOpen }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {corpList.length > 0 ? corpList
+                            {corpList.length > 0 && corpList
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row) => {
                                     return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id} className={classes.tableRow} onClick={() => handleModalOpen(row.id)}>
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id}
+                                                  className={classes.tableRow} onClick={() => handleModalOpen(row.id)}>
                                             {columns.map((column) => {
                                                 const value = row[column.id];
                                                 return (
-                                                    <TableCell key={column.id} align={column.align} style={{fontSize: 16}}>
+                                                    <TableCell key={column.id} align={column.align}
+                                                               style={{fontSize: 16}}>
                                                         {column.format && typeof value === 'number'
                                                             ? column.format(value)
                                                             : value}
@@ -108,10 +115,6 @@ const TableContent = ({ corpList, handleModalOpen }) => {
                                         </TableRow>
                                     );
                                 })
-                                :
-                                <TableRow>
-                                    <TableCell colSpan={5} style={{ textAlign: 'center', height: 100, lineHeight: 3, fontSize: 18 }}>일치하는 데이터가 없습니다</TableCell>
-                                </TableRow>
                             }
                         </TableBody>
                     </Table>

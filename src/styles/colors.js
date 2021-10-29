@@ -1,4 +1,4 @@
-const Colors = {
+export default {
     // General
     whiteColor: "#fff",
     blackColor: "#000",
@@ -6,6 +6,7 @@ const Colors = {
     darkGrayColor: "#666666",
     deepWhiteColor: "#F7F9FB",
     lightSky: "#eaeff1",
+    deepNavyColor: "#101F33",
 
     // Point
     loginPoint: "#6E9ABC",
@@ -13,6 +14,7 @@ const Colors = {
     // Material Color
     textFieldBlue: "#1976d2",
     activeBlue: "#009be5",
+    hoverBlue: "#5DB2F6",
     backgroundColor: "#EAEFF1",
     darkBlueColor: "#1b3a6a",
 
@@ -27,4 +29,3 @@ const Colors = {
     theadBgColor: "#E8E8E8",
 }
 
-export default Colors;

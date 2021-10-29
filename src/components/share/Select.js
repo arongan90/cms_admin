@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import colors from "../../styles/Colors";
+import colors from "../../styles/colors";
 
 const SelectBox = styled.select`
   width: ${({width}) => width}%;

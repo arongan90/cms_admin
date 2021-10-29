@@ -13,7 +13,7 @@ import Tabs from '@mui/material/Tabs';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import colors from '../../styles/Colors';
+import colors from '../../styles/colors';
 // import { isLogout } from "../../modules/auth";
 // import { useDispatch } from "react-redux";
 // import {toast} from "react-toastify";

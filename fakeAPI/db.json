@@ -3,11 +3,11 @@
     {
       "id": 1,
       "bizName": "어묵오뎅",
-      "bizNumber": "172-13-31321",
+      "bizNumber": "172-13-31322",
       "ceoName": "임하늘",
       "ceoPhone": "010-1111-1111",
       "type": "유니온",
-      "date": "2021.04.23",
+      "date": "2021.10.26",
       "bizAddress": "서울 광진구 강변역로 53",
       "bizDetailAddress": "101동 101호",
       "managerName": "임하늘",
@@ -17,11 +17,11 @@
     {
       "id": 2,
       "bizName": "캣벨컴퍼니(주)",
-      "bizNumber": "354-01-46432",
+      "bizNumber": "354-01-46436",
       "ceoName": "이의석",
       "ceoPhone": "010-2222-2222",
       "type": "게이트",
-      "date": "2021.09.07",
+      "date": "2021.10.25",
       "bizAddress": "서울 성동구 뚝섬로1나길 5",
       "bizDetailAddress": "702호",
       "managerName": "이의석",
@@ -31,11 +31,11 @@
     {
       "id": 3,
       "bizName": "카카오뱅크",
-      "bizNumber": "110-20-45642",
+      "bizNumber": "110-20-15643",
       "ceoName": "박동한",
       "ceoPhone": "010-3333-3333",
       "type": "밋업",
-      "date": "2021.06.08",
+      "date": "2021.10.25",
       "bizAddress": "경기 수원시 영통구 광교호수공원로 45",
       "bizDetailAddress": "303동 303호",
       "managerName": "박동한",
@@ -45,11 +45,11 @@
     {
       "id": 4,
       "bizName": "네이버(주)",
-      "bizNumber": "172-13-31321",
+      "bizNumber": "172-13-31323",
       "ceoName": "한성숙",
       "ceoPhone": "010-4444-4444",
       "type": "유니온",
-      "date": "2021.04.23",
+      "date": "2021.10.20",
       "bizAddress": "경기 성남시 분당구 서판교로 36",
       "bizDetailAddress": "404동 404호",
       "managerName": "한성숙",
@@ -59,7 +59,7 @@
     {
       "id": 5,
       "bizName": "현대중공업",
-      "bizNumber": "354-01-46432",
+      "bizNumber": "354-01-46434",
       "ceoName": "정몽준",
       "ceoPhone": "010-5555-5555",
       "type": "게이트",
@@ -73,11 +73,11 @@
     {
       "id": 6,
       "bizName": "삼성전자",
-      "bizNumber": "110-20-45642",
+      "bizNumber": "110-20-12643",
       "ceoName": "이재용",
       "ceoPhone": "010-6666-6666",
       "type": "밋업",
-      "date": "2021.06.08",
+      "date": "2021.10.19",
       "bizAddress": "울산 남구 사평로 223",
       "bizDetailAddress": "505동 505호 현대중공업(주)",
       "managerName": "현대중",
@@ -87,11 +87,11 @@
     {
       "id": 7,
       "bizName": "PI첨단소재",
-      "bizNumber": "172-13-31321",
+      "bizNumber": "172-13-31324",
       "ceoName": "PI",
       "ceoPhone": "010-7777-7777",
       "type": "유니온",
-      "date": "2021.04.23",
+      "date": "2021.09.23",
       "bizAddress": "울산 남구 사평로 223",
       "bizDetailAddress": "505동 505호 현대중공업(주)",
       "managerName": "현대중",
@@ -101,7 +101,7 @@
     {
       "id": 8,
       "bizName": "LG전자",
-      "bizNumber": "354-01-46432",
+      "bizNumber": "354-01-46433",
       "ceoName": "구엘쥐",
       "ceoPhone": "010-8888-8888",
       "type": "게이트",
@@ -115,11 +115,11 @@
     {
       "id": 9,
       "bizName": "기아자동차",
-      "bizNumber": "110-20-45642",
+      "bizNumber": "110-20-12640",
       "ceoName": "KIA",
       "ceoPhone": "010-9999-9999",
       "type": "밋업",
-      "date": "2021.06.08",
+      "date": "2021.08.21",
       "bizAddress": "서울",
       "bizDetailAddress": "서울",
       "managerName": "구엘쥐",
@@ -129,11 +129,11 @@
     {
       "id": 10,
       "bizName": "벤츠",
-      "bizNumber": "172-13-31321",
+      "bizNumber": "172-13-31325",
       "ceoName": "Benz",
       "ceoPhone": "010-1234-4567",
       "type": "유니온",
-      "date": "2021.04.23",
+      "date": "2020.12.23",
       "bizAddress": "독일 슈투트가르트",
       "bizDetailAddress": "메르세데스 벤츠",
       "managerName": "Benz",
@@ -143,74 +143,74 @@
     {
       "id": 11,
       "bizName": "애플",
-      "bizNumber": "354-01-46432",
+      "bizNumber": "354-01-46431",
       "ceoName": "스티브잡스",
       "type": "유니온",
-      "date": "2021.09.07"
+      "date": "2021.10.07"
     },
     {
       "id": 12,
       "bizName": "SM엔터테인먼트",
-      "bizNumber": "110-20-45642",
+      "bizNumber": "110-20-41142",
       "ceoName": "이수만",
       "type": "유니온",
-      "date": "2021.06.08"
+      "date": "2020.12.12"
     },
     {
       "id": 13,
       "bizName": "YG엔터테인먼트",
-      "bizNumber": "172-13-31321",
+      "bizNumber": "172-13-31326",
       "ceoName": "양현석",
       "type": "유니온",
-      "date": "2021.04.23"
+      "date": "2019.04.23"
     },
     {
       "id": 14,
       "bizName": "JYP",
-      "bizNumber": "354-01-46432",
+      "bizNumber": "354-01-46032",
       "ceoName": "박진영",
       "type": "밋업",
-      "date": "2021.09.07"
+      "date": "2018.09.07"
     },
     {
       "id": 15,
       "bizName": "AOMG",
-      "bizNumber": "110-20-45642",
+      "bizNumber": "110-20-45641",
       "ceoName": "박재범",
       "type": "밋업",
-      "date": "2021.06.08"
+      "date": "2017.05.05"
     },
     {
       "id": 16,
       "bizName": "LG화학",
-      "bizNumber": "110-20-45642",
-      "ceoName": "구화확",
+      "bizNumber": "110-20-15642",
+      "ceoName": "LG화확",
       "type": "밋업",
-      "date": "2021.06.08"
+      "date": "2017.05.15"
     },
     {
       "id": 17,
       "bizName": "LG생활건강",
-      "bizNumber": "110-20-45642",
+      "bizNumber": "110-20-41642",
       "ceoName": "구생건",
       "type": "밋업",
-      "date": "2021.06.08"
+      "date": "2020.06.08"
     },
     {
       "id": 18,
       "bizName": "카카오",
-      "bizNumber": "110-20-15642",
+      "bizNumber": "120-20-15642",
       "ceoName": "김범수",
       "type": "유니온",
-      "date": "2021.06.08"
+      "date": "2020.06.09"
     },
     {
       "id": 19,
       "bizName": "카카오페이",
-      "bizNumber": "110-20-45442",
+      "bizNumber": "310-20-45442",
       "ceoName": "류영준",
       "type": "밋업",
-      "date": "2021.06.08"
+      "date": "2021.10.25"
     }
   ]
 }

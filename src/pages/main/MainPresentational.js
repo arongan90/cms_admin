@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styled, {css} from "styled-components";
-import colors from "../../styles/Colors";
+import colors from "../../styles/colors";
 import HeaderContent from '../../components/share/HeaderContent';
 import TableContent from '../../components/share/TableContent';
 import Select from '../../components/share/Select';
@@ -142,6 +142,7 @@ const MainPresentational = ({
                                 searchType,
                                 handleSearchType,
                                 searchText,
+                                initialList,
                                 handleSearchText,
 
                                 handleDrawerToggle,
@@ -150,10 +151,8 @@ const MainPresentational = ({
                                 handleDateChange,
                                 handleAddressComplete,
                                 infoInputChange,
-
                                 handleSearch,
                                 handleRefresh,
-
                                 unionService,
                                 handleUnionService,
                                 onLogoChange,
@@ -162,9 +161,7 @@ const MainPresentational = ({
                                 handleModalOpen,
                                 handleModalClose,
                                 updateCorpData,
-
                                 onMemberRegister,
-
                                 // AutoComplete
                                 keyword,
                                 results,
@@ -172,12 +169,6 @@ const MainPresentational = ({
                                 updateText,
                                 resultsArr,
                             }) => {
-
-    // useEffect(() => {
-    //     console.info('111111 resultsArr :', resultsArr);
-    //     console.info('222222 results[\'results\'] :', results['results'] && results['results']);
-    // }, [resultsArr, results])
-
     // 가입일, 만료일, 계약일
     return (
         <Box sx={{
@@ -212,14 +203,15 @@ const MainPresentational = ({
                                 <Autocomplete
                                     autoComplete
                                     autoSelect
-                                    value={searchText}
-                                    options={corpList}
-                                    onChange={(e, value) => handleSearchText(e, value)}
+                                    inputValue={searchText}
+                                    options={initialList}
+                                    onChange={(e, result) => handleSearchText(e, result)}
+                                    onKeyUp={e => e.key === "Enter" && handleSearch(e)}
                                     getOptionLabel={opt => {
                                         return (
                                             ((!!opt && searchType === '회사명') ? opt.bizName : '') ||
                                             ((!!opt && searchType === '사업자 번호') ? opt.bizNumber : '') ||
-                                            ((!!opt && searchType === '사업자명') ? opt.ceoName : '') || ""
+                                            ((!!opt && searchType === '사업자명') ? opt.ceoName : '') || ''
                                         )
                                     }}
                                     renderInput={params => (
@@ -234,35 +226,6 @@ const MainPresentational = ({
                                         />
                                     )}
                                 />
-                                {/*<Input
-                                    width={100}
-                                    value={keyword || searchText}
-                                    onChange={handleSearchText}
-                                    onKeyUp={handleSearch}
-                                    placeholder={
-                                        (searchType === '회사명' && '검색할 회사의 이름을 입력해주세요.') ||
-                                        (searchType === '사업자 번호' && '검색할 회사의 사업자번호를 입력해주세요.') ||
-                                        (searchType === '사업자명' && '검색할 회사의 사업자명을 입력해주세요.') ||
-                                        (searchType === '상품 유형' && '검색할 상품의 유형을 입력해주세요.')
-                                    }
-                                />
-                                {resultsArr && resultsArr.length > 0 && (
-                                    <SearchViewBox>
-                                        {resultsArr.length > 0 && resultsArr.map(item => {
-                                            // console.info('아템 : ', item);
-                                            return (
-                                                <SearchView active={item.active} key={item.id} onClick={() => {
-                                                    if (searchType === '회사명') updateText(item.bizName);
-                                                    else if (searchType === '사업자 번호') updateText(item.bizNum);
-                                                    else if (searchType === '사업자명') updateText(item.ceoName);
-                                                }}>
-                                                    {searchType === '회사명' && item.bizName}
-                                                    {searchType === '사업자 번호' && item.bizNum}
-                                                    {searchType === '사업자명' && item.ceoName}
-                                                </SearchView>
-                                            )
-                                        })}
-                                    </SearchViewBox>)}*/}
                             </InputWrapper>
                         </SearchLine>
                         <SearchLine>

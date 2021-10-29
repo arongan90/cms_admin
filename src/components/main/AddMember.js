@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styled, {css} from 'styled-components';
-import colors from '../../styles/Colors';
+import colors from '../../styles/colors';
 import Input from "../share/Input";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';

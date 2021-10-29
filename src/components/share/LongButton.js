@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import colors from "../../styles/Colors";
+import colors from "../../styles/colors";
 import { darken, lighten } from "polished";
 
 const Button = styled.button`

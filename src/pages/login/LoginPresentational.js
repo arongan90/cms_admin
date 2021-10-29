@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import colors from "../../styles/Colors.js";
+import colors from "../../styles/colors.js";
 import TextField from '@mui/material/TextField';
 import unionLogo from "../../images/union_logo.svg";
 import LongButton from "../../components/share/LongButton";
