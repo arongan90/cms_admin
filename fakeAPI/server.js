@@ -13,4 +13,3 @@ let port = process.env.PORT || 4001;
 server.listen(port, () => {
     console.info(`JSON Server is running, port(${port})`);
 });
-

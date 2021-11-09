@@ -168,6 +168,8 @@ const ComponentWrapper = styled.div`
       display: none;
     }
   `}
+  overflow: scroll;
+  min-height: 100vh;
 `;
 
 function App() {
@@ -183,11 +185,10 @@ function App() {
     const previousLoading = useCallback(async () => {
         try {
             const token = await localStorage.getItem("token");
-
             if (!!token) {
                 dispatch(setToken(token));
                 setIsLoggedIn(token);
-                history.push('/');
+                history.push(history.location.pathname);
             } else {
                 history.push('/login');
             }

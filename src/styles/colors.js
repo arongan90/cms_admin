@@ -4,12 +4,14 @@ export default {
     blackColor: "#000",
     grayColor: "#888888",
     darkGrayColor: "#666666",
+    deepDarkGrayColor: "#555555",
     deepWhiteColor: "#F7F9FB",
     lightSky: "#eaeff1",
     deepNavyColor: "#101F33",
 
     // Point
     loginPoint: "#6E9ABC",
+    activePink: "#f81f54",
 
     // Material Color
     textFieldBlue: "#1976d2",
@@ -17,6 +19,7 @@ export default {
     hoverBlue: "#5DB2F6",
     backgroundColor: "#EAEFF1",
     darkBlueColor: "#1b3a6a",
+    ultraLightGray: "#EEEEEE",
 
     // Text
     lightBlack: "#333333",

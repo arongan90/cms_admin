@@ -1,66 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styled from "styled-components";
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
-import Link from '@mui/material/Link';
-import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import colors from '../../styles/colors';
-// import { isLogout } from "../../modules/auth";
-// import { useDispatch } from "react-redux";
-// import {toast} from "react-toastify";
-// import {useHistory} from "react-router-dom";
+import { Modal } from "@material-ui/core";
+import MyInfo from "./MyInfo";
+import {toast} from "react-toastify";
+import {isLogout} from "../../modules/auth";
+import {useDispatch} from "react-redux";
+import {useHistory} from "react-router-dom";
 
-
-const lightColor = 'rgba(255, 255, 255, 0.7)';
+const Text = styled.span`
+  font-weight: 600;
+  cursor: pointer;
+  
+  &:hover {
+    font-weight: 700;
+  }
+`;
 
 const HeaderContent = (props) => {
-    const { onDrawerToggle, onLogout, handleTabMenu, tabMenu, title, tabList } = props;
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { handleTabMenu, tabMenu, title, tabList } = props;
+    const lightColor = 'rgba(255, 255, 255, 0.7)';
+    const [infoOpen, setInfoOpen] = useState(false);
+
+    const handleInfoOpen = () => setInfoOpen(true);
+    const handleInfoClose = () => setInfoOpen(false);
+
+    const onLogout = () => {
+        toast.info('정상적으로 로그아웃 되었습니다.');
+        dispatch(isLogout());
+        history.push(`/`);
+    }
 
     return (
-        <React.Fragment>
+        <>
             <AppBar color="primary" position="sticky" elevation={0}>
                 <Toolbar>
                     <Grid container spacing={1} alignItems="center">
-                        <Grid sx={{ display: { sm: 'none', xs: 'block' } }} item>
-                            <IconButton
-                                color="inherit"
-                                aria-label="open drawer"
-                                onClick={onDrawerToggle}
-                                edge="start"
-                            >
-                                <MenuIcon />
-                            </IconButton>
-                        </Grid>
                         <Grid item xs />
-                        <Grid item>
-                            <Link
-                                href="http://172.16.1.192:3000/"
-                                variant="body2"
-                                sx={{
-                                    textDecoration: 'none',
-                                    fontSize: 16,
-                                    fontWeight: 500,
-                                    color: colors.whiteColor,
-                                    '&:hover': {
-                                        color: 'common.white',
-                                    },
-                                }}
-                                rel="noopener noreferrer"
-                                target="_blank"
-                            >
-                                Union HomePage
-                            </Link>
+                        <Grid
+                            item
+                            onClick={handleInfoOpen}
+                        >
+                            <Text>관리자 정보</Text>
                         </Grid>
-
                         <Grid item>
                             <Button
                                 sx={{ borderColor: lightColor, fontWeight: 600, marginLeft: 2 }}
@@ -106,18 +101,26 @@ const HeaderContent = (props) => {
             </AppBar>
             <AppBar component="div" position="static" elevation={0} sx={{ zIndex: 0 }}>
                 <Tabs value={tabMenu} textColor="inherit">
-                    {tabList[0] && <Tab onClick={() => handleTabMenu(0)} label={tabList[0]} /> }
-                    {tabList[1] && <Tab onClick={() => handleTabMenu(1)} label={tabList[1]} /> }
-                    {tabList[2] && <Tab onClick={() => handleTabMenu(2)} label={tabList[2]} /> }
-                    {tabList[3] && <Tab onClick={() => handleTabMenu(3)} label={tabList[3]} /> }
+                    {tabList.map((tab, index) => (
+                        <Tab key={tab} onClick={() => handleTabMenu(index)} label={tabList[index]} />
+                    ))}
                 </Tabs>
             </AppBar>
-        </React.Fragment>
+
+            <Modal
+                open={infoOpen}
+                onClose={handleInfoClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+            >
+                <>
+                    <MyInfo
+                        handleInfoClose={handleInfoClose}
+                    />
+                </>
+            </Modal>
+        </>
     );
 }
-
-HeaderContent.propTypes = {
-    onDrawerToggle: PropTypes.func.isRequired,
-};
 
 export default HeaderContent;

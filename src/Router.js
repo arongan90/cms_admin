@@ -27,18 +27,24 @@ import PriceNotice from "./pages/setting/PriceNotice/PriceNoticeContainer";
 import NewsLetter from "./pages/mailing/NewsLetter/NewsLetterContainer";
 import Subscriber from "./pages/mailing/Subscriber/SubscriberContainer";
 import Mailing from "./pages/mailing/Mail";
+import Member from "./pages/member";
+import MemberUpdate from "./pages/memberUpdate";
+import MemberDetail from "./pages/memberDetail";
 
 const LoggedOutRoutes = () => (
     <Switch>
         <Route path="/" component={Login} exact />
         <Route path="/login" component={Login} />
     </Switch>
-)
+);
 
 const LoggedInRoutes = () => (
     <Switch>
         <Route path="/" component={Main} exact />
         <Route path="/admin" component={Admin} />
+        <Route path="/member" component={Member} />
+        <Route path="/memberUpdate/:memberId" component={MemberUpdate} />
+        <Route path="/memberDetail/:memberId" component={MemberDetail} />
         <Route path="/ico" component={ICO} />
         <Route path="/coinInfo" component={CoinInfo} />
         <Route path="/category" component={Category} />
@@ -64,7 +70,8 @@ const LoggedInRoutes = () => (
         <Route path="/subscriber" component={Subscriber} />
         <Route path="/mailing" component={Mailing} />
     </Switch>
-)
+);
+
 
 const Router = ({ isLoggedIn }) => {
     return (

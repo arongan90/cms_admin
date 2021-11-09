@@ -7,13 +7,10 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    //padding-top: 94px;
-    //padding-left: 280px;
     font-size: 16px;
     font-family: 'Noto Sans KR', sans-serif;
     width: 100%;
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
     box-sizing: border-box;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -27,5 +24,21 @@ export default createGlobalStyle`
   }
   button {
     cursor: pointer;
+  }
+  table {
+    padding: 0;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 0;
+    background: inherit;
+    border: none;
+    vertical-align: middle;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
   }
 `;

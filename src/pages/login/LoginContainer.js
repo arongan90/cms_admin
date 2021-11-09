@@ -8,6 +8,7 @@ import {useHistory} from "react-router-dom";
 const LoginContainer = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const [errorMsg, setErrorMsg] = useState("");
     const [loginInputs, setLoginInputs] = useState({
        userId: '',
        password: '',
@@ -40,6 +41,7 @@ const LoginContainer = () => {
             loginInputs={loginInputs}
             onInputsChange={onInputsChange}
             onSubmit={onSubmit}
+            errorMsg={errorMsg}
         />
     )
 }

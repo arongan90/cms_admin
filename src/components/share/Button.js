@@ -6,18 +6,19 @@ const CostumeButton = styled.button`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   font-size: ${({ fontSize }) => fontSize}px;
+  font-weight: ${({ fontWeight }) => fontWeight};
   border: ${({ border }) => border ? border : 'none'};
   color: ${({ fontColor }) => fontColor};
   margin: ${({ margin }) => margin};
-  background: ${({ bgColor }) => bgColor};
   border-radius: ${({ borderRadius }) => borderRadius ? borderRadius : '5px'};
   outline: none;
   
-  & + & {
-    border-width: 1px 1px 1px 0;
-  }
+  //& + & {
+  //  border-width: 1px 1px 1px 0;
+  //}
   
   ${({ bgColor }) => bgColor && css`
+    background: ${({ bgColor }) => bgColor};
     &:hover {
       background: ${({ bgColor }) => lighten(0.1 , bgColor)}
     }
@@ -33,6 +34,7 @@ const Button = ({
                     fontSize,
                     border,
                     fontColor,
+                    fontWeight,
                     margin,
                     bgColor,
                     borderRadius,
@@ -46,8 +48,9 @@ const Button = ({
             width={width}
             height={height}
             fontSize={fontSize}
-            border={border}
+            fontWeight={fontWeight}
             fontColor={fontColor}
+            border={border}
             margin={margin}
             borderRadius={borderRadius}
             bgColor={bgColor}
