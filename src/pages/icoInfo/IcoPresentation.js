@@ -48,7 +48,7 @@ const ListLengthSelectBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px 0 30px; 
+  padding: 15px 20px 0 30px;
 `;
 const SelectBox = styled.div`
   color: ${colors.blackColor};
@@ -80,7 +80,7 @@ const ProgressBox = styled.div`
 const IcoPresentation = ({
                              tabMenu,
                              handleTabMenu,
-                             coinName,
+                             searchCoinName,
                              onCoinNameChange,
                              currentPage,
                              rowsPerPage,
@@ -88,6 +88,10 @@ const IcoPresentation = ({
                              handleChangeRowsPerPage,
                              icoTableColumns,
                              icoList,
+                             // ICO 추가
+                             addIcoState,
+                             onIcoChange,
+                             onDateChange,
                          }) => {
     const history = useHistory();
     const [alignment, setAlignment] = React.useState('all');
@@ -117,7 +121,7 @@ const IcoPresentation = ({
                     <SearchForm>
                         <Title>코인명</Title>
                         <InputBox
-                            value={coinName}
+                            value={searchCoinName}
                             onChange={onCoinNameChange}
                             placeholder="검색할 코인명을 입력해주세요."
                         />
@@ -184,14 +188,14 @@ const IcoPresentation = ({
                                                         tabIndex={-1}
                                                         key={list.id}
                                                         onClick={() => console.info('뷰 페이지로 이동. ')}
-                                                        style={{ cursor: 'pointer' }}
+                                                        style={{cursor: 'pointer'}}
                                                     >
                                                         {icoTableColumns.map((column) => {
                                                             const value = list[column.id];
                                                             return (
                                                                 <TableCell key={column.id} align={column.align}>
                                                                     {column.id === 'ai_recommend'
-                                                                        ? <StarGraph value={value} />
+                                                                        ? <StarGraph value={value}/>
                                                                         : column.format && typeof value === 'number' || typeof value === 'object'
                                                                             ? column.format(value)
                                                                             : value
@@ -215,9 +219,11 @@ const IcoPresentation = ({
                         </Paper>
                     </IcoListBox>
                 </Wrapper>
-            :
+                :
                 <ColumnTable
-
+                    addIcoState={addIcoState}
+                    onIcoChange={onIcoChange}
+                    onDateChange={onDateChange}
                 />
             }
         </Box>
