@@ -56,7 +56,7 @@ const SubTitle = styled.div`
   color: ${colors.darkGrayColor};
 `;
 
-const LoginPresentational = ({
+const LoginPresentation = ({
                                  loginInputs,
                                  onInputsChange,
                                  onSubmit,
@@ -102,4 +102,4 @@ const LoginPresentational = ({
     )
 }
 
-export default LoginPresentational;
+export default LoginPresentation;

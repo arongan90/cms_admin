@@ -150,6 +150,10 @@ const ListLengthSelectBox = styled.div`
   font-size: 16px;
   font-weight: bold;
 `;
+const PagingBox = styled.div`
+  width: 500px;
+  margin: 80px auto 20px;
+`;
 
 const MemberPresentational = ({
                                   tabMenu,
@@ -342,17 +346,20 @@ const MemberPresentational = ({
                                                     })}
                                                 </TableRow>
                                             );
+
                                         })}
                                 </TableBody>
                             </Table>
                         </TableContainer>
 
-                        <Paging
-                            currentPage={currentPage}
-                            totalItemsCount={memberData && memberData.length}
-                            onChange={handleChangePage}
-                            rowsPerPage={rowsPerPage}
-                        />
+                        <PagingBox>
+                            <Paging
+                                currentPage={currentPage}
+                                totalItemsCount={memberData && memberData.length}
+                                onChange={handleChangePage}
+                                rowsPerPage={rowsPerPage}
+                            />
+                        </PagingBox>
                     </Paper>
                 </MemberListBox>
             </Wrapper>

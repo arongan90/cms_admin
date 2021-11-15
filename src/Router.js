@@ -4,6 +4,8 @@ import Login from "./pages/login";
 import Main from "./pages/main";
 import Admin from "./pages/admin";
 import ICO from "./pages/icoInfo";
+import IcoDetail from "./pages/icoInfoDetail";
+import IcoUpdate from "./pages/icoInfoUpdate";
 import CoinInfo from "./pages/cryptocurrency/CoinInfo";
 import Category from "./pages/cryptocurrency/Category";
 import Tag from "./pages/cryptocurrency/Tag";
@@ -46,6 +48,8 @@ const LoggedInRoutes = () => (
         <Route path="/memberUpdate/:memberId" component={MemberUpdate} />
         <Route path="/memberDetail/:memberId" component={MemberDetail} />
         <Route path="/ico" component={ICO} />
+        <Route path="/icoDetail/:icoId" component={IcoDetail} />
+        <Route path="/icoUpdate/:icoId" component={IcoUpdate} />
         <Route path="/coinInfo" component={CoinInfo} />
         <Route path="/category" component={Category} />
         <Route path="/tag" component={Tag} />

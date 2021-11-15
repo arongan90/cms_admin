@@ -1,61 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import IcoPresentation from "./IcoPresentation";
-import axios from "axios";
-import * as constants from "../../utils/constants";
+import React, {useState} from 'react';
+import IcoInfoUpdatePresentation from "./IcoInfoUpdatePresentation";
 
-const serverProtocol = constants.config.PROTOCOL;
-const serverURL = constants.config.URL;
-
-const icoTableColumns = [
-    { id: 'ai_recommend', label: 'AI추천', width: 80, align: 'center',  },
-    { id: 'coinName', label: '코인', width: 150, align: 'center',  },
-    { id: 'price', label: '가격(₩)', width: 100, align: 'center', }, // format: (value) => value.toLocaleString('ko-KR')
-    { id: 'type', label: '유형', width: 50, align: 'center', }, // format: (value) => value.toLocaleString('ko-KR'),
-    { id: 'start_date', label: '시작일', width: 150, align: 'right', format: (value) => value.toLocaleString('ko-KR') },
-    { id: 'finish_date', label: '종료일', width: 150, align: 'right', format: (value) => value.toLocaleDateString('ko-KR', { year: '2-digit', month: 'numeric', day: 'numeric', }).slice(0, -1) },
-    { id: 'period', label: '마감까지', width: 80, align: 'right', },
-    { id: 'goal', label: '목표(₩)', width: 100, align: 'right', },
-];
-
-const IcoContainer = () => {
-    const [tabMenu, setTabMenu] = useState(0);
-    const [icoList, setIcoList] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [searchCoinName, setSearchCoinName] = useState('');
-    const [chipState, setChipState] = useState({
-        approval: [],
-        community: [],
-        tag: [],
-        relatedNews: []
-    });
-
-    const handleTabMenu = value => setTabMenu(value);
-    const onCoinNameChange = e => setSearchCoinName(e.target.value);
-
-    const handleChangePage = page => {
-        let indexOfLast = page * rowsPerPage;
-        let indexOfFirst = indexOfLast - rowsPerPage;
-
-        setCurrentPage(page);
-        setIcoList(icoList.slice(indexOfFirst, indexOfLast));
-    }
-
-    const handleChangeRowsPerPage = e => {
-        setRowsPerPage(+e.target.value);
-        setIcoList(icoList.slice(0, e.target.value));
-    };
-
-    const fetchData = async () => {
-        try {
-            const response = await axios.get(`${serverProtocol}${serverURL}/icoList`);
-            setIcoList(response.data);
-        } catch (e) {
-            throw new Error(e);
-        }
-    }
-
-    // ICO 추가
+const IcoInfoUpdateContainer = () => {
     const [addIcoState, setAddIcoState] = useState({
         coinImage: '',
         coinName: '',
@@ -87,6 +33,12 @@ const IcoContainer = () => {
         tag: '',
         summary: '',
         relatedNews: '관련 뉴스를 선택해주세요.',
+    });
+    const [chipState, setChipState] = useState({
+        approval: [],
+        community: [],
+        tag: [],
+        relatedNews: []
     });
 
     // DatePicker 달력 onChange
@@ -155,10 +107,10 @@ const IcoContainer = () => {
             case "COMMUNITY":
                 setAddIcoState({
                     ...addIcoState,
-                   community: {
+                    community: {
                         ...addIcoState.community,
                         [name]: value,
-                   }
+                    }
                 });
                 break;
         }
@@ -225,25 +177,8 @@ const IcoContainer = () => {
     const onSave = () => {
         console.info('저장');
     }
-
-    useEffect(() => {
-        fetchData();
-    }, []);
-
     return (
-        <IcoPresentation
-            tabMenu={tabMenu}
-            handleTabMenu={handleTabMenu}
-            searchCoinName={searchCoinName}
-            onCoinNameChange={onCoinNameChange}
-            currentPage={currentPage}
-            rowsPerPage={rowsPerPage}
-            handleChangePage={handleChangePage}
-            handleChangeRowsPerPage={handleChangeRowsPerPage}
-            icoTableColumns={icoTableColumns}
-            icoList={icoList}
-
-            // ICO 추가
+        <IcoInfoUpdatePresentation
             addIcoState={addIcoState}
             onIcoChange={onIcoChange}
             onDateChange={onDateChange}
@@ -256,4 +191,4 @@ const IcoContainer = () => {
     )
 }
 
-export default IcoContainer;
+export default IcoInfoUpdateContainer;

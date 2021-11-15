@@ -667,43 +667,247 @@
   "icoList": [
     {
       "id": 1,
-      "coin": "PolkaPlay",
+      "coinName": "PolkaPlay",
       "ai_recommend": 80,
       "price": 197,
       "type": "IDO",
       "start_date": "2021-07-29",
       "finish_date": "2021-08-04",
-      "goal": 34332400
+      "goal": 34332400,
+      "monetaryUnit": "FAN",
+      "category": "DeFi",
+      "initialPrice": 1.10,
+      "branch": "Platform",
+      "platform": "ERC20",
+      "state": "schedule",
+      "hardCap": 56500000,
+      "softCap": 35240000,
+      "sellToken": 970000,
+      "webSite": "www.bitcoin.com",
+      "approval": ["ETH", "USDT"],
+      "whitePaper": "FILE.pdf",
+      "community":  ["coincodex.com", "fanadise.medium.com", "twitter.com"],
+      "recruitmentAmount": 468795000,
+      "tag": ["Mineable", "PoW", "SHA-256"],
+      "summary": "Fanadise is an exclusive content platform created for internet influencers to monetize their social presence and",
+      "relatedNews": ["뉴스1", "뉴스2", "뉴스3", "뉴스4", "뉴스5"],
+      "interestedMember": [
+        {
+          "id": 1,
+          "name": "스탠"
+        },
+        {
+          "id": 2,
+          "name": "스카이"
+        }
+      ],
+      "icoNotification": [
+        {
+          "id": 1,
+          "name": "에드가"
+        },
+        {
+          "id": 2,
+          "name": "스카이"
+        },
+        {
+          "id": 3,
+          "name": "스티브"
+        },
+        {
+          "id": 4,
+          "name": "제임스"
+        },
+        {
+          "id": 5,
+          "name": "에릭"
+        }
+      ]
     },
     {
       "id": 2,
-      "coin": "Cardence.io",
+      "coinName": "Cardence.io",
       "ai_recommend": 80,
       "price": 46,
       "type": "ICO",
       "start_date": "2021-07-20",
       "finish_date": "2021-08-20",
-      "goal": 34332400
+      "goal": 34332400,
+      "monetaryUnit": "FAN",
+      "category": "NFT",
+      "initialPrice": 1.10,
+      "branch": "Platform",
+      "platform": "ERC20",
+      "state": "schedule",
+      "hardCap": 56500000,
+      "softCap": 35240000,
+      "sellToken": 970000,
+      "webSite": "www.bitcoin.com",
+      "approval": ["ETH", "USDT"],
+      "whitePaper": "FILE.pdf",
+      "community":  ["coincodex.com", "fanadise.medium.com", "twitter.com"],
+      "recruitmentAmount": 468795000,
+      "tag": ["Mineable", "PoW", "SHA-256"],
+      "summary": "Fanadise is an exclusive content platform created for internet influencers to monetize their social presence and",
+      "relatedNews": ["뉴스1", "뉴스2", "뉴스3"],
+      "interestedMember": [
+        {
+          "id": 1,
+          "name": "스탠"
+        },
+        {
+          "id": 2,
+          "name": "스카이"
+        }
+      ],
+      "icoNotification": [
+        {
+          "id": 1,
+          "name": "에드가"
+        },
+        {
+          "id": 2,
+          "name": "스카이"
+        },
+        {
+          "id": 3,
+          "name": "스티브"
+        },
+        {
+          "id": 4,
+          "name": "제임스"
+        },
+        {
+          "id": 5,
+          "name": "에릭"
+        }
+      ]
     },
     {
       "id": 3,
-      "coin": "Cardence.io",
+      "coinName": "Cardence.io",
       "ai_recommend": 60,
       "price": 46,
       "type": "IEO",
       "start_date": "2021-07-20",
       "finish_date": "2021-08-20",
-      "goal": 115200000
+      "goal": 115200000,
+      "monetaryUnit": "FAN",
+      "category": "NFT",
+      "initialPrice": 1.10,
+      "branch": "Platform",
+      "platform": "ERC20",
+      "state": "schedule",
+      "hardCap": 56500000,
+      "softCap": 35240000,
+      "sellToken": 970000,
+      "webSite": "www.bitcoin.com",
+      "approval": ["ETH"],
+      "whitePaper": "FILE.pdf",
+      "community":  ["coincodex.com", "fanadise.medium.com", "twitter.com"],
+      "recruitmentAmount": 468795000,
+      "tag": ["Mineable", "PoW", "SHA-256"],
+      "summary": "Fanadise is an exclusive content platform created for internet influencers to monetize their social presence and",
+      "relatedNews": ["뉴스1", "뉴스2", "뉴스3", "뉴스4"],
+      "interestedMember": [
+        {
+          "id": 1,
+          "name": "스탠"
+        },
+        {
+          "id": 2,
+          "name": "스카이"
+        }
+      ],
+      "icoNotification": [
+        {
+          "id": 1,
+          "name": "에드가"
+        },
+        {
+          "id": 2,
+          "name": "스카이"
+        },
+        {
+          "id": 3,
+          "name": "스티브"
+        },
+        {
+          "id": 4,
+          "name": "제임스"
+        },
+        {
+          "id": 5,
+          "name": "에릭"
+        }
+      ]
     }
     ,{
       "id": 4,
-      "coin": "PolkaPlay",
+      "coinName": "PolkaPlay",
       "ai_recommend": 40,
       "price": 197,
       "type": "IDO",
       "start_date": "2021-07-29",
       "finish_date": "2021-08-04",
-      "goal": 456720000
+      "goal": 456720000,
+      "monetaryUnit": "FAN",
+      "category": "NFT",
+      "initialPrice": 1.10,
+      "branch": "Platform",
+      "platform": "ERC20",
+      "state": "schedule",
+      "hardCap": 56500000,
+      "softCap": 35240000,
+      "sellToken": 970000,
+      "webSite": "www.bitcoin.com",
+      "approval": ["ETH", "USDT", "BNB", "USDC"],
+      "whitePaper": "FILE.pdf",
+      "community":  ["coincodex.com", "fanadise.medium.com", "twitter.com"],
+      "recruitmentAmount": 468795000,
+      "tag": ["Mineable", "PoW", "SHA-256"],
+      "summary": "Fanadise is an exclusive content platform created for internet influencers to monetize their social presence and",
+      "relatedNews": ["뉴스1"],
+      "interestedMember": [
+        {
+          "id": 1,
+          "name": "스탠"
+        },
+        {
+          "id": 2,
+          "name": "스카이"
+        }
+      ],
+      "icoNotification": [
+        {
+          "id": 1,
+          "name": "에드가"
+        },
+        {
+          "id": 2,
+          "name": "스카이"
+        },
+        {
+          "id": 3,
+          "name": "스티브"
+        },
+        {
+          "id": 4,
+          "name": "제임스"
+        },
+        {
+          "id": 5,
+          "name": "에릭"
+        },
+        {
+          "id": 6,
+          "name": "톰"
+        },
+        {
+          "id": 7,
+          "name": "빈센트"
+        }
+      ]
     }
   ]
 

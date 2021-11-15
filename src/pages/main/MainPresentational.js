@@ -36,6 +36,7 @@ const MainPresentational = ({
     return (
         <Box sx={{
             bgcolor: '#eaeff1',
+            minHeight: '100vh',
             paddingBottom: 15
         }}>
             <HeaderContent

@@ -2,16 +2,12 @@ import React from 'react';
 import styled from "styled-components";
 import Pagination from "react-js-pagination";
 import colors from "../../styles/colors";
-import { lighten } from "polished";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import LastPageIcon from '@mui/icons-material/LastPage';
 
 const Wrapper = styled.div`
-  width: 500px;
-  margin: 80px auto 20px;
-
   ul {
     display: flex;
     justify-content: center;

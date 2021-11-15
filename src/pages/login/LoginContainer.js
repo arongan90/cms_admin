@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LoginPresentational from "./LoginPresentational";
+import LoginPresentation from "./LoginPresentation";
 import { useDispatch } from "react-redux";
 import { isLogin } from "../../modules/auth";
 import {useHistory} from "react-router-dom";
@@ -37,7 +37,7 @@ const LoginContainer = () => {
     }
 
     return (
-        <LoginPresentational
+        <LoginPresentation
             loginInputs={loginInputs}
             onInputsChange={onInputsChange}
             onSubmit={onSubmit}

@@ -12,8 +12,6 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import UseStatusTable from "../../components/feature/Member/UseStatusTable";
-import CollapsibleTable from "../../components/feature/Member/CollapsibleTable";
-
 
 const Wrapper = styled.div`
   padding: 20px;

@@ -54,7 +54,8 @@ const Button = ({
             margin={margin}
             borderRadius={borderRadius}
             bgColor={bgColor}
-            onClick={() => onClick((type && type), (service && service))}
+            // onClick={() => onClick((type && type), (service && service))}
+            onClick={onClick}
         >
             {title}
         </CostumeButton>

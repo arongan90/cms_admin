@@ -76,6 +76,14 @@ const ProgressBox = styled.div`
     padding: 11px 18px;
   }
 `;
+const ButtonGroup = styled.div`
+  text-align: right;
+  margin: 50px 0 200px;
+`;
+const PagingBox = styled.div`
+  width: 500px;
+  margin: 80px auto 20px;
+`;
 
 const IcoPresentation = ({
                              tabMenu,
@@ -92,6 +100,11 @@ const IcoPresentation = ({
                              addIcoState,
                              onIcoChange,
                              onDateChange,
+                             handleAddChips,
+                             handleDeleteChips,
+                             chipState,
+                             onCancel,
+                             onSave
                          }) => {
     const history = useHistory();
     const [alignment, setAlignment] = React.useState('all');
@@ -187,7 +200,7 @@ const IcoPresentation = ({
                                                         hover
                                                         tabIndex={-1}
                                                         key={list.id}
-                                                        onClick={() => console.info('뷰 페이지로 이동. ')}
+                                                        onClick={() => history.push(`icoDetail/${list.id}`)}
                                                         style={{cursor: 'pointer'}}
                                                     >
                                                         {icoTableColumns.map((column) => {
@@ -210,21 +223,49 @@ const IcoPresentation = ({
                                 </Table>
                             </TableContainer>
 
-                            <Paging
-                                currentPage={currentPage}
-                                totalItemsCount={icoList && icoList.length}
-                                onChange={handleChangePage}
-                                rowsPerPage={rowsPerPage}
-                            />
+                            <PagingBox>
+                                <Paging
+                                    currentPage={currentPage}
+                                    totalItemsCount={icoList && icoList.length}
+                                    onChange={handleChangePage}
+                                    rowsPerPage={rowsPerPage}
+                                />
+                            </PagingBox>
                         </Paper>
                     </IcoListBox>
                 </Wrapper>
                 :
-                <ColumnTable
-                    addIcoState={addIcoState}
-                    onIcoChange={onIcoChange}
-                    onDateChange={onDateChange}
-                />
+                <Wrapper>
+                    <ColumnTable
+                        addIcoState={addIcoState}
+                        onIcoChange={onIcoChange}
+                        onDateChange={onDateChange}
+                        handleAddChips={handleAddChips}
+                        handleDeleteChips={handleDeleteChips}
+                        chipState={chipState}
+                    />
+                    <ButtonGroup>
+                        <Button
+                            width={120}
+                            height={48}
+                            border={`1px solid ${colors.activeBlue}`}
+                            fontColor={colors.activeBlue}
+                            fontSize={20}
+                            title="취소"
+                            onClick={onCancel}
+                        />
+                        <Button
+                            width={120}
+                            height={50}
+                            bgColor={colors.activeBlue}
+                            fontColor={colors.whiteColor}
+                            fontSize={20}
+                            margin="0 0 0 20px"
+                            title="저장"
+                            onClick={onSave}
+                        />
+                    </ButtonGroup>
+                </Wrapper>
             }
         </Box>
     )
