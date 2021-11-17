@@ -1,9 +1,9 @@
 import React from 'react';
-import CoinInfoPresentation from "../CoinInfo/CoinInfoPresentation";
+import CategoryPresentation from "./CategoryPresentation";
 
 const CategoryContainer = () => {
     return (
-        <CoinInfoPresentation />
+        <CategoryPresentation />
     )
 }
 

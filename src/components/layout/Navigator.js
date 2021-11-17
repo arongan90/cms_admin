@@ -5,13 +5,13 @@ import List from '@mui/material/List';
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import HomeIcon from '@mui/icons-material/Home';
-import {useDispatch, useSelector, shallowEqual} from "react-redux";
-import {Link, useHistory} from "react-router-dom";
-import styled, {css} from "styled-components";
+import { useHistory } from "react-router-dom";
+import styled, { css } from "styled-components";
 import colors from "../../styles/colors";
+// import ListItemIcon from '@mui/material/ListItemIcon';
+// import HomeIcon from '@mui/icons-material/Home';
+// import {useDispatch, useSelector, shallowEqual} from "react-redux";
 
 const item = {
     py: '2px',
@@ -86,7 +86,7 @@ export default function Navigator(props) {
     const history = useHistory();
 
     const onRouteClick = useCallback(link => {
-        const replace = link.replace("/", "");
+        // const replace = link.replace("/", "");
 
         history.push(link);
         setIsClicked(!isClicked);
@@ -94,7 +94,7 @@ export default function Navigator(props) {
 
     useEffect(() => {
         setCurrentPath(history.location.pathname);
-    }, [history.location.pathname, isClicked]);
+    }, [history, history.location.pathname, isClicked]);
 
 
     return (

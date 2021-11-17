@@ -36,7 +36,9 @@ const Table = styled.table`
 `;
 const Td = styled.td`
   width: 40%;
+  max-width: 200px;
   min-height: 55px;
+  white-space: nowrap;
   padding: 12px 16px;
   vertical-align: ${({verticalAlign}) => verticalAlign ? verticalAlign : 'baseline'};
   border-bottom: 1px solid ${colors.borderColor};
@@ -92,7 +94,7 @@ const ContentsTop = styled.div`
 const ContentsBody = styled.div`
   width: ${({ width }) => width}%;
   min-height: 50px;
-
+  padding: ${({ padding }) => padding};
   & + & {
     margin-left: 30px;
   }
@@ -133,8 +135,14 @@ const MiniTableCell = styled.div`
     text-align: center;
   }
 `;
+const ListBox = styled.div`
+  height: ${({ height }) => height}px;
+  color: ${({ fontColor }) => fontColor};
+  font-size: ${({ fontSize }) => fontSize}px;
+  font-weight: ${({ fontWeight }) => fontWeight};
+`;
 
-const IcoInfoDetailPresentation = ({
+const IcoDetailPresentation = ({
                                        tabMenu,
                                        handleTabMenu,
                                        goBack,
@@ -272,7 +280,7 @@ const IcoInfoDetailPresentation = ({
                             <Td>
                                 {icoDetail.approval.map((list, index) => {
                                     return (
-                                        <div key={index}> {list} </div>
+                                        <ListBox key={index}> {list} </ListBox>
                                     )
                                 })}
                             </Td>
@@ -284,7 +292,7 @@ const IcoInfoDetailPresentation = ({
                             </Td>
                             <Td>커뮤니티</Td>
                             <Td>
-                                {icoDetail.community.map(list => <> {list} </>)}
+                                {icoDetail.community.map((list, index) => <div key={index}>{list.url}</div>)}
                             </Td>
                         </tr>
                         <tr>
@@ -294,7 +302,7 @@ const IcoInfoDetailPresentation = ({
                             </Td>
                             <Td>태그</Td>
                             <Td>
-                                {icoDetail.tag}
+                                {icoDetail.tag.map((list, index) => <ListBox key={index}>{list}</ListBox>)}
                             </Td>
                         </tr>
                         <tr>
@@ -306,7 +314,7 @@ const IcoInfoDetailPresentation = ({
                         <tr>
                             <Td>관련 뉴스</Td>
                             <Td colSpan={3}>
-                                {icoDetail.relatedNews.map(list => <> {list} </>)}
+                                {icoDetail.relatedNews.map((list, index) => <ListBox key={index}> {list} </ListBox>)}
                             </Td>
                         </tr>
                         </tbody>
@@ -377,10 +385,18 @@ const IcoInfoDetailPresentation = ({
                         </tr>
                         <tr>
                             <Td colSpan={2} bgColor={colors.whiteColor}>
-                                <ContentsBody>
-                                    {recruitmentAmountChips && recruitmentAmountChips.map((list, i) => {
+                                <ContentsBody padding="0 20px">
+                                    {recruitmentAmountChips && recruitmentAmountChips.map((list, index) => {
                                         return (
-                                            <div key={i}>{list}</div>
+                                            <ListBox
+                                                height={30}
+                                                fontColor={colors.lightBlack}
+                                                fontWeight={400}
+                                                fontSize={16}
+                                                key={index}
+                                            >
+                                                {list}
+                                            </ListBox>
                                         )
                                     })}
                                 </ContentsBody>
@@ -388,7 +404,7 @@ const IcoInfoDetailPresentation = ({
                         </tr>
                         <tr>
                             <Td>분석</Td>
-                            <Td></Td>
+                            <Td> </Td>
                         </tr>
                         <tr>
                             <Td colSpan={2} bgColor={colors.whiteColor}>
@@ -451,4 +467,4 @@ const IcoInfoDetailPresentation = ({
     )
 }
 
-export default IcoInfoDetailPresentation;
+export default IcoDetailPresentation;

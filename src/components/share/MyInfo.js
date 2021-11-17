@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import colors from "../../styles/colors";
 import Button from "./Button";
-import UpdateAdmin from "../feature/Admin/UpdateAdmin";
-import {Modal} from "@material-ui/core";
 import ChangePwdModal from "./ChangePwdModal";
+// import UpdateAdmin from "../feature/Admin/UpdateAdmin";
+// import {Modal} from "@material-ui/core";
 
 const Wrapper = styled.div`
   max-width: 800px;

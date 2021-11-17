@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -18,6 +17,7 @@ import {toast} from "react-toastify";
 import {isLogout} from "../../modules/auth";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
+// import PropTypes from 'prop-types';
 
 const Text = styled.span`
   font-weight: 600;

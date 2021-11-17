@@ -38,9 +38,9 @@ const ChangePwdModal = ({ open, onClose }) => {
                         title="취소"
                         fontSize={16}
                         fontWeight={600}
-                        fontColor={colors.activePink}
+                        fontColor={colors.activeRed}
                         bgColor={colors.whiteColor}
-                        border={`1px solid ${colors.activePink}`}
+                        border={`1px solid ${colors.activeRed}`}
                         onClick={onClose} />
                     <Button
                         width={100}

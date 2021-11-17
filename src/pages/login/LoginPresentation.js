@@ -43,7 +43,7 @@ const ErrorText = styled.span`
   font-weight: bold;
   font-size: 18px;
   line-height: 2.5;
-  color: ${colors.activePink};
+  color: ${colors.activeRed};
 `;
 const ErrorMsgBox = styled.div`
   height: 35px;

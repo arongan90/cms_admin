@@ -62,10 +62,10 @@ const MainPresentational = ({
                             <ActiveText fontWeight={700} fontColor={colors.activeBlue}>79</ActiveText>
                         </TableCell>
                         <TableCell>
-                            <ActiveText fontWeight={700} fontColor={colors.activePink}>5</ActiveText> 건
+                            <ActiveText fontWeight={700} fontColor={colors.activeRed}>5</ActiveText> 건
                         </TableCell>
                         <TableCell>
-                            <ActiveText fontWeight={700} fontColor={colors.activePink}>2</ActiveText> 건
+                            <ActiveText fontWeight={700} fontColor={colors.activeRed}>2</ActiveText> 건
                         </TableCell>
                     </tr>
                     <tr>

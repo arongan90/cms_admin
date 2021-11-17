@@ -161,7 +161,7 @@ const AppImage = styled.img`
   `};
 `;
 
-const ColumnTable = ({
+const CryptocurrencyColumnTable = ({
                          addIcoState,
                          onIcoChange,
                          onDateChange,
@@ -239,8 +239,14 @@ const ColumnTable = ({
                     </Td>
                 </tr>
                 <tr>
-                    <Td>초기 토큰가격</Td>
+                    <Td>가격</Td>
                     <Td>
+                        <Input
+                            name="monetaryUnit"
+                            value={addIcoState.monetaryUnit}
+                            onChange={e => onIcoChange(e, "MONETARY_UNIT")}
+                            placeholder="FAN"
+                        />
                         <Select
                             name="initialPrice"
                             value={addIcoState.initialPrice}
@@ -614,4 +620,4 @@ const ColumnTable = ({
     )
 }
 
-export default ColumnTable;
+export default CryptocurrencyColumnTable;

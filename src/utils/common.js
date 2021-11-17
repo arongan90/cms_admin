@@ -32,3 +32,17 @@ export const autoHyphenBizNumber = number => {
 
     return number;
 }
+
+// 숫자만 입력
+export const inputOnlyNumber = value => {
+    return value.replace(/[^0-9]/g,'');
+}
+
+// 소숫점 반환 및 천단위 콤마
+export const numberAddComma = number => {
+    if (number > 1) {
+        return number.toLocaleString();
+    } else {
+        return parseFloat(number).toFixed(10);
+    }
+}

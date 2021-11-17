@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useHistory} from "react-router-dom";
 import axios from "axios";
-import IcoInfoDetailPresentation from "./IcoInfoDetailPresentation";
+import IcoDetailPresentation from "./IcoDetailPresentation";
 import * as constants from "../../utils/constants";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -9,7 +9,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 const serverProtocol = constants.config.PROTOCOL;
 const serverURL = constants.config.URL;
 
-const IcoInfoDetailContainer = ({
+const IcoDetailContainer = ({
                                     match,
                                 }) => {
     const {icoId} = match.params;
@@ -31,7 +31,7 @@ const IcoInfoDetailContainer = ({
         console.info(value, type);
         setRecruitmentAmount({
             ...recruitmentAmount,
-            [type]: value
+            [type]: type === "amount" ? value.replace(/[^0-9]/g,'') : value,
         });
     }
     // 모집된 금액 추가 버튼 클릭 함수
@@ -43,6 +43,10 @@ const IcoInfoDetailContainer = ({
         }
         let chips = recruitmentAmountChips.concat(`${date.toLocaleString("ko-KR")} : ${parseInt(amount).toLocaleString("ko-KR")}`);
         setRecruitmentAmountChips(chips);
+        setRecruitmentAmount({
+            date: new Date(),
+            amount: '',
+        });
     }
 
     // ICO 알림 페이징 처리
@@ -90,7 +94,7 @@ const IcoInfoDetailContainer = ({
     return (
         <>
             {!!icoDetail ?
-                <IcoInfoDetailPresentation
+                <IcoDetailPresentation
                     tabMenu={tabMenu}
                     handleTabMenu={handleTabMenu}
                     goBack={goBack}
@@ -128,4 +132,4 @@ const IcoInfoDetailContainer = ({
     )
 }
 
-export default IcoInfoDetailContainer;
+export default IcoDetailContainer;

@@ -5,44 +5,16 @@ import HeaderContent from "../../components/share/HeaderContent";
 import colors from "../../styles/colors";
 import Button from "../../components/share/Button";
 import Paper from "@mui/material/Paper";
-import TableContainer from "@mui/material/TableContainer";
-import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
-import TableBody from "@mui/material/TableBody";
 import Paging from "../../components/share/Paging";
 import {useHistory} from "react-router-dom";
-import StarGraph from "../../components/feature/IcoInfo/StarGraph";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import ColumnTable from "../../components/feature/IcoInfo/ColumnTable";
+import IcoInfoColumnTable from "../../components/feature/IcoInfo/IcoInfoColumnTable";
+import SearchForm from "../../components/share/SearchForm";
+import ListTable from "../../components/share/Table/ListTable";
 
 const Wrapper = styled.div`
   padding: 20px;
-`;
-const SearchForm = styled.div`
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  border: 1px solid ${colors.borderColor};
-  border-radius: 8px;
-  margin: 30px 0;
-  background: ${colors.whiteColor};
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
-`;
-const Title = styled.div`
-  font-size: 20px;
-  color: ${colors.lightBlack};
-  margin-right: 50px;
-`;
-const InputBox = styled.input`
-  width: 35%;
-  height: 45px;
-  padding: 0 10px;
-  border-radius: 5px;
-  border: 1px solid ${colors.borderColor};
-  margin-right: 10px;
 `;
 const ListLengthSelectBox = styled.div`
   display: flex;
@@ -76,13 +48,13 @@ const ProgressBox = styled.div`
     padding: 11px 18px;
   }
 `;
-const ButtonGroup = styled.div`
-  text-align: right;
-  margin: 50px 0 200px;
-`;
 const PagingBox = styled.div`
   width: 500px;
   margin: 80px auto 20px;
+`;
+const ButtonGroup = styled.div`
+  text-align: right;
+  margin: 50px 0 200px;
 `;
 
 const IcoPresentation = ({
@@ -131,23 +103,10 @@ const IcoPresentation = ({
             />
             {tabMenu === 0 ?
                 <Wrapper>
-                    <SearchForm>
-                        <Title>코인명</Title>
-                        <InputBox
-                            value={searchCoinName}
-                            onChange={onCoinNameChange}
-                            placeholder="검색할 코인명을 입력해주세요."
-                        />
-                        <Button
-                            width={100}
-                            height={45}
-                            title="찾기"
-                            bgColor={colors.activeBlue}
-                            fontColor={colors.whiteColor}
-                            fontSize={18}
-                            fontWeight={600}
-                        />
-                    </SearchForm>
+                    <SearchForm
+                        value={searchCoinName}
+                        onChange={onCoinNameChange}
+                    />
 
                     <IcoListBox>
                         <Paper sx={{width: '100%', paddingBottom: 5, border: `1px solid ${colors.borderColor}`}}>
@@ -167,62 +126,17 @@ const IcoPresentation = ({
                                 </ProgressBox>
                                 <SelectBox>
                                     페이지 당 :
-                                    <Select width={60} onChange={handleChangeRowsPerPage} margin="20px 10px">
+                                    <Select width={70} onChange={handleChangeRowsPerPage} margin="20px 10px">
                                         <option value={5}>5</option>
                                         <option value={10}>10</option>
                                         <option value={20}>20</option>
                                     </Select>
                                 </SelectBox>
                             </ListLengthSelectBox>
-                            <TableContainer>
-                                <Table stickyHeader aria-label="sticky table">
-                                    <TableHead>
-                                        <TableRow>
-                                            {icoTableColumns && icoTableColumns.map((column) => (
-                                                <TableCell
-                                                    key={column.id}
-                                                    align={column.align}
-                                                    style={{
-                                                        width: column.width,
-                                                        border: column.border,
-                                                    }}
-                                                >
-                                                    {column.label}
-                                                </TableCell>
-                                            ))}
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {icoList && icoList
-                                            .map(list => {
-                                                return (
-                                                    <TableRow
-                                                        hover
-                                                        tabIndex={-1}
-                                                        key={list.id}
-                                                        onClick={() => history.push(`icoDetail/${list.id}`)}
-                                                        style={{cursor: 'pointer'}}
-                                                    >
-                                                        {icoTableColumns.map((column) => {
-                                                            const value = list[column.id];
-                                                            return (
-                                                                <TableCell key={column.id} align={column.align}>
-                                                                    {column.id === 'ai_recommend'
-                                                                        ? <StarGraph value={value}/>
-                                                                        : column.format && typeof value === 'number' || typeof value === 'object'
-                                                                            ? column.format(value)
-                                                                            : value
-                                                                    }
-                                                                </TableCell>
-                                                            );
-                                                        })}
-                                                    </TableRow>
-                                                );
-                                            })}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-
+                            <ListTable
+                                tableHeadColumns={icoTableColumns}
+                                icoList={icoList}
+                            />
                             <PagingBox>
                                 <Paging
                                     currentPage={currentPage}
@@ -236,7 +150,7 @@ const IcoPresentation = ({
                 </Wrapper>
                 :
                 <Wrapper>
-                    <ColumnTable
+                    <IcoInfoColumnTable
                         addIcoState={addIcoState}
                         onIcoChange={onIcoChange}
                         onDateChange={onDateChange}

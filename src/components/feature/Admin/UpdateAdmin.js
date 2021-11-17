@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
 import colors from "../../../styles/colors.js";
-import AddAdmin from "./AddAdmin";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
@@ -9,13 +8,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import IosSwitch from "../../share/IosSwitch";
 import Button from "../../share/Button";
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import ChangePwdModal from "../../share/ChangePwdModal";
+// import TextField from '@mui/material/TextField';
+// import Dialog from '@mui/material/Dialog';
+// import DialogActions from '@mui/material/DialogActions';
+// import DialogContent from '@mui/material/DialogContent';
+// import DialogContentText from '@mui/material/DialogContentText';
+// import DialogTitle from '@mui/material/DialogTitle';
+// import AddAdmin from "./AddAdmin";
 
 const Wrapper = styled.div`
   width: 1000px;
@@ -266,9 +266,9 @@ const UpdateAdmin = ({
                     title="삭 제"
                     fontSize={16}
                     fontWeight={600}
-                    fontColor={colors.activePink}
+                    fontColor={colors.activeRed}
                     bgColor={colors.whiteColor}
-                    border={`1px solid ${colors.activePink}`}
+                    border={`1px solid ${colors.activeRed}`}
                     onClick={handleMemberDelete}
                 />
                 <Button

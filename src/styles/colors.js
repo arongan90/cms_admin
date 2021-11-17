@@ -11,7 +11,9 @@ export default {
 
     // Point
     loginPoint: "#6E9ABC",
-    activePink: "#f81f54",
+    activeRed: "#f81f54",
+    activeDeepRed: "#de0a11",
+    activeGreen: "#02ac04",
 
     // Material Color
     textFieldBlue: "#1976d2",

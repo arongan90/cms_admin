@@ -41,4 +41,7 @@ export default createGlobalStyle`
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
+  div {
+    white-space: nowrap;
+  }
 `;
