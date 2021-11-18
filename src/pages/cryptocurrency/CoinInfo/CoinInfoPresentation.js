@@ -9,6 +9,7 @@ import Paging from "../../../components/share/Paging";
 import ListTable from "../../../components/share/Table/ListTable";
 import IcoInfoColumnTable from "../../../components/feature/IcoInfo/IcoInfoColumnTable";
 import Button from "../../../components/share/Button";
+import CryptocurrencyColumnTable from "../../../components/feature/Cryptocurrency/CryptocurrencyColumnTable";
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -52,6 +53,7 @@ const ButtonGroup = styled.div`
 const CoinInfoPresentation = ({
                                   tabMenu,
                                   handleTabMenu,
+
                                   coinInfoColumns,
                                   coinList,
                                   searchCoinName,
@@ -63,6 +65,12 @@ const CoinInfoPresentation = ({
                                   handleChangeRowsPerPage,
                                   onCancel,
                                   onSave,
+
+                                  addCoinState,
+                                  onCoinChange,
+                                  chipState,
+                                  handleAddChips,
+                                  handleDeleteChips,
                               }) => {
     return (
         <Box sx={{
@@ -126,6 +134,13 @@ const CoinInfoPresentation = ({
                 :
                 <Wrapper>
 
+                    <CryptocurrencyColumnTable
+                        addCoinState={addCoinState}
+                        onCoinChange={onCoinChange}
+                        chipState={chipState}
+                        handleAddChips={handleAddChips}
+                        handleDeleteChips={handleDeleteChips}
+                    />
                     <ButtonGroup>
                         <Button
                             width={120}

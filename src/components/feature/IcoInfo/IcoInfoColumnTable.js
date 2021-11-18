@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styled, { css } from "styled-components";
+import styled, {css} from "styled-components";
 import colors from "../../../styles/colors";
 import Button from "../../share/Button";
 import ToggleButton from "@mui/material/ToggleButton";
@@ -56,12 +56,18 @@ const Td = styled.td`
     border-radius: 5px;
   }
 `;
-const Input = styled.input`
-  width: ${({width}) => width ? width : 200}px;
-  padding: 5px 10px;
+const InputBox = styled.div`
+  width: ${({width}) => width ? width : 250}px;
   height: 35px;
+  display: inline-block;
   border: 1px solid ${colors.borderColor};
   border-radius: 5px;
+  padding: 0 10px;
+`;
+const Input = styled.input`
+  width: 90%;
+  height: 100%;
+  border: none;
 `;
 const Textarea = styled.textarea`
   width: 70%;
@@ -130,13 +136,12 @@ const Select = styled.select`
 `;
 const RowBox = styled.div`
   margin: ${({margin}) => margin ? margin : '5px 0 0'};
-  
-  ${({ flex }) => flex && css`
+
+  ${({flex}) => flex && css`
     display: flex;
     align-items: center;
     margin: 0;
   `}
-  
   .css-c9qyo9-MuiButtonBase-root-MuiChip-root {
     background-color: ${colors.textFieldBlue};
     color: ${colors.whiteColor};
@@ -147,28 +152,29 @@ const CustomChip = styled(Chip)`
     margin-top: 5px;
     margin-left: 5px;
   }
+
   & + & {
     margin-left: 5px;
     margin-top: 5px;
   }
 `;
 const AppImage = styled.img`
-  ${({ width }) => width && css`
+  ${({width}) => width && css`
     width: ${width};
   `};
-  ${({ height }) => height && css`
+  ${({height}) => height && css`
     height: ${height};
   `};
 `;
 
 const IcoInfoColumnTable = ({
-                         addIcoState,
-                         onIcoChange,
-                         onDateChange,
-                         handleAddChips,
-                         handleDeleteChips,
-                         chipState,
-                     }) => {
+                                addIcoState,
+                                onIcoChange,
+                                onDateChange,
+                                handleAddChips,
+                                handleDeleteChips,
+                                chipState,
+                            }) => {
     const [alignment, setAlignment] = useState('link');
     const handleChange = (event, newAlignment) => {
         if (!newAlignment) return;
@@ -184,31 +190,35 @@ const IcoInfoColumnTable = ({
                     <Td>
                         <RowBox flex>
                             <ImageInputLabel>
-                                <FileInput type="file" accept="image/*" onChange={e => onIcoChange(e, "COIN_IMAGE")} />
+                                <FileInput type="file" accept="image/*" onChange={e => onIcoChange(e, "COIN_IMAGE")}/>
                                 {addIcoState.coinImage &&
-                                    <PreviewBox>
-                                        <AppImage width="100%" height="100%" src={addIcoState.coinImage}/>
-                                    </PreviewBox>
+                                <PreviewBox>
+                                    <AppImage width="100%" height="100%" src={addIcoState.coinImage}/>
+                                </PreviewBox>
                                 }
-                                <AppImage width="60%" height="60%" src={uploadImage} />
+                                <AppImage width="60%" height="60%" src={uploadImage}/>
                                 ICON
                             </ImageInputLabel>
-                            <Input
-                                name="coinName"
-                                value={addIcoState.coinName}
-                                onChange={e => onIcoChange(e, "COIN_NAME")}
-                                placeholder="Fanadise"
-                            />
+                            <InputBox>
+                                <Input
+                                    name="coinName"
+                                    value={addIcoState.coinName}
+                                    onChange={e => onIcoChange(e, "COIN_NAME")}
+                                    placeholder="Fanadise"
+                                />
+                            </InputBox>
                         </RowBox>
                     </Td>
                     <Td>화폐단위</Td>
                     <Td>
-                        <Input
-                            name="monetaryUnit"
-                            value={addIcoState.monetaryUnit}
-                            onChange={e => onIcoChange(e, "MONETARY_UNIT")}
-                            placeholder="FAN"
-                        />
+                        <InputBox>
+                            <Input
+                                name="monetaryUnit"
+                                value={addIcoState.monetaryUnit}
+                                onChange={e => onIcoChange(e, "MONETARY_UNIT")}
+                                placeholder="FAN"
+                            />
+                        </InputBox>
                     </Td>
                 </tr>
                 <tr>
@@ -267,12 +277,14 @@ const IcoInfoColumnTable = ({
                 <tr>
                     <Td>플랫폼</Td>
                     <Td>
-                        <Input
-                            name="platform"
-                            value={addIcoState.platform}
-                            onChange={e => onIcoChange(e, "PLATFORM")}
-                            placeholder="ERC20"
-                        />
+                        <InputBox>
+                            <Input
+                                name="platform"
+                                value={addIcoState.platform}
+                                onChange={e => onIcoChange(e, "PLATFORM")}
+                                placeholder="ERC20"
+                            />
+                        </InputBox>
                     </Td>
                     <Td>상태</Td>
                     <Td>
@@ -328,11 +340,14 @@ const IcoInfoColumnTable = ({
                 <tr>
                     <Td>하드캡</Td>
                     <Td>
-                        <Input
-                            name="hardCap"
-                            value={addIcoState.hardCap}
-                            onChange={e => onIcoChange(e, "HARD_CAP")}
-                        />&nbsp;
+                        <InputBox>
+                            <Input
+                                name="hardCap"
+                                value={addIcoState.hardCap}
+                                onChange={e => onIcoChange(e, "HARD_CAP")}
+                            />
+                        </InputBox>
+                        &nbsp;&nbsp;
                         <Select
                             width={70}
                             name="hardCapMonetaryUnit"
@@ -347,11 +362,14 @@ const IcoInfoColumnTable = ({
                     </Td>
                     <Td>소프트캡</Td>
                     <Td>
-                        <Input
-                            name="softCap"
-                            value={addIcoState.softCap}
-                            onChange={e => onIcoChange(e, "SOFT_CAP")}
-                        />&nbsp;
+                        <InputBox>
+                            <Input
+                                name="softCap"
+                                value={addIcoState.softCap}
+                                onChange={e => onIcoChange(e, "SOFT_CAP")}
+                            />
+                        </InputBox>
+                        &nbsp;&nbsp;
                         <Select
                             width={70}
                             name="softCapMonetaryUnit"
@@ -368,11 +386,14 @@ const IcoInfoColumnTable = ({
                 <tr>
                     <Td>목표</Td>
                     <Td>
-                        <Input
-                            name="goal"
-                            value={addIcoState.goal}
-                            onChange={e => onIcoChange(e, "GOAL")}
-                        />&nbsp;
+                        <InputBox>
+                            <Input
+                                name="goal"
+                                value={addIcoState.goal}
+                                onChange={e => onIcoChange(e, "GOAL")}
+                            />
+                        </InputBox>
+                        &nbsp;&nbsp;
                         {/*
                                     목표 단위 재설정
                                 */}
@@ -388,11 +409,14 @@ const IcoInfoColumnTable = ({
                     </Td>
                     <Td>판매용 토큰</Td>
                     <Td>
-                        <Input
-                            name="sellToken"
-                            value={addIcoState.sellToken}
-                            onChange={e => onIcoChange(e, "SELL_TOKEN")}
-                        />&nbsp;
+                        <InputBox>
+                            <Input
+                                name="sellToken"
+                                value={addIcoState.sellToken}
+                                onChange={e => onIcoChange(e, "SELL_TOKEN")}
+                            />
+                        </InputBox>
+                        &nbsp;&nbsp;
                         {/*
                                     판매용 토큰 단위 재설정
                                 */}
@@ -410,13 +434,16 @@ const IcoInfoColumnTable = ({
                 <tr>
                     <Td>웹사이트</Td>
                     <Td>
-                        <Input
-                            width={285}
-                            name="webSite"
-                            value={addIcoState.webSite}
-                            onChange={e => onIcoChange(e, "WEB_SITE")}
-                            placeholder="웹사이트의 URL 주소를 입력해주세요."
-                        />
+                        <InputBox
+                            width={300}
+                        >
+                            <Input
+                                name="webSite"
+                                value={addIcoState.webSite}
+                                onChange={e => onIcoChange(e, "WEB_SITE")}
+                                placeholder="웹사이트의 URL 주소를 입력해주세요."
+                            />
+                        </InputBox>
                     </Td>
                     <Td>승인</Td>
                     <Td>
@@ -469,11 +496,13 @@ const IcoInfoColumnTable = ({
                         </ToggleButtonGroup>
                         <RowBox margin="15px 0 0 0 ">
                             {alignment === 'link' &&
-                            <Input
-                                value={addIcoState.whitePaper.link}
-                                onChange={e => onIcoChange(e, "WHITE_PAPER_LINK")}
-                                placeholder="링크를 입력해주세요."
-                            />
+                                <InputBox>
+                                    <Input
+                                        value={addIcoState.whitePaper.link}
+                                        onChange={e => onIcoChange(e, "WHITE_PAPER_LINK")}
+                                        placeholder="링크를 입력해주세요."
+                                    />
+                                </InputBox>
                             }
                             {alignment === 'file' &&
                             <FileInputLabel>
@@ -491,20 +520,24 @@ const IcoInfoColumnTable = ({
                     <Td rowSpan={2} verticalAlign="top">커뮤니티</Td>
                     <Td rowSpan={2} verticalAlign="top">
                         <RowBox>
-                            <Input
-                                name="title"
-                                value={addIcoState.community.title}
-                                onChange={e => onIcoChange(e, "COMMUNITY")}
-                                placeholder="명칭을 입력해주세요."
-                            />
+                            <InputBox>
+                                <Input
+                                    name="title"
+                                    value={addIcoState.community.title}
+                                    onChange={e => onIcoChange(e, "COMMUNITY")}
+                                    placeholder="명칭을 입력해주세요."
+                                />
+                            </InputBox>
                         </RowBox>
                         <RowBox>
-                            <Input
-                                name="url"
-                                value={addIcoState.community.url}
-                                onChange={e => onIcoChange(e, "COMMUNITY")}
-                                placeholder="URL 주소를 입력해주세요."
-                            />
+                            <InputBox>
+                                <Input
+                                    name="url"
+                                    value={addIcoState.community.url}
+                                    onChange={e => onIcoChange(e, "COMMUNITY")}
+                                    placeholder="URL 주소를 입력해주세요."
+                                />
+                            </InputBox>
                             <Button
                                 width={35}
                                 height={35}
@@ -532,12 +565,14 @@ const IcoInfoColumnTable = ({
                     <Td>태그</Td>
                     <Td>
                         <RowBox>
-                            <Input
-                                name="tag"
-                                value={addIcoState.tag}
-                                onChange={e => onIcoChange(e, "TAG")}
-                                placeholder="태그를 추가해주세요."
-                            />
+                            <InputBox>
+                                <Input
+                                    name="tag"
+                                    value={addIcoState.tag}
+                                    onChange={e => onIcoChange(e, "TAG")}
+                                    placeholder="태그를 추가해주세요."
+                                />
+                            </InputBox>
                             <Button
                                 width={35}
                                 height={35}

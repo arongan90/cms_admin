@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styled, { css } from "styled-components";
+import styled, {css} from "styled-components";
 import colors from "../../../styles/colors";
 import Button from "../../share/Button";
 import ToggleButton from "@mui/material/ToggleButton";
@@ -56,12 +56,20 @@ const Td = styled.td`
     border-radius: 5px;
   }
 `;
-const Input = styled.input`
-  width: ${({width}) => width ? width : 200}px;
-  padding: 5px 10px;
+const InputBox = styled.div`
+  width: ${({width}) => width ? width : 250}px;
   height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
   border: 1px solid ${colors.borderColor};
   border-radius: 5px;
+  padding: 0 10px;
+`;
+const Input = styled.input`
+  width: 90%;
+  height: 100%;
+  border: none;
 `;
 const Textarea = styled.textarea`
   width: 70%;
@@ -130,13 +138,12 @@ const Select = styled.select`
 `;
 const RowBox = styled.div`
   margin: ${({margin}) => margin ? margin : '5px 0 0'};
-  
-  ${({ flex }) => flex && css`
+
+  ${({flex}) => flex && css`
     display: flex;
     align-items: center;
     margin: 0;
   `}
-  
   .css-c9qyo9-MuiButtonBase-root-MuiChip-root {
     background-color: ${colors.textFieldBlue};
     color: ${colors.whiteColor};
@@ -147,28 +154,28 @@ const CustomChip = styled(Chip)`
     margin-top: 5px;
     margin-left: 5px;
   }
+
   & + & {
     margin-left: 5px;
     margin-top: 5px;
   }
 `;
 const AppImage = styled.img`
-  ${({ width }) => width && css`
+  ${({width}) => width && css`
     width: ${width};
   `};
-  ${({ height }) => height && css`
+  ${({height}) => height && css`
     height: ${height};
   `};
 `;
 
 const CryptocurrencyColumnTable = ({
-                         addIcoState,
-                         onIcoChange,
-                         onDateChange,
-                         handleAddChips,
-                         handleDeleteChips,
-                         chipState,
-                     }) => {
+                                       addCoinState,
+                                       onCoinChange,
+                                       handleAddChips,
+                                       handleDeleteChips,
+                                       chipState,
+                                   }) => {
     const [alignment, setAlignment] = useState('link');
     const handleChange = (event, newAlignment) => {
         if (!newAlignment) return;
@@ -184,31 +191,35 @@ const CryptocurrencyColumnTable = ({
                     <Td>
                         <RowBox flex>
                             <ImageInputLabel>
-                                <FileInput type="file" accept="image/*" onChange={e => onIcoChange(e, "COIN_IMAGE")} />
-                                {addIcoState.coinImage &&
-                                    <PreviewBox>
-                                        <AppImage width="100%" height="100%" src={addIcoState.coinImage}/>
-                                    </PreviewBox>
+                                <FileInput type="file" accept="image/*" onChange={e => onCoinChange(e, "COIN_IMAGE")}/>
+                                {addCoinState.coinImage &&
+                                <PreviewBox>
+                                    <AppImage width="100%" height="100%" src={addCoinState.coinImage}/>
+                                </PreviewBox>
                                 }
-                                <AppImage width="60%" height="60%" src={uploadImage} />
+                                <AppImage width="60%" height="60%" src={uploadImage}/>
                                 ICON
                             </ImageInputLabel>
-                            <Input
-                                name="coinName"
-                                value={addIcoState.coinName}
-                                onChange={e => onIcoChange(e, "COIN_NAME")}
-                                placeholder="Fanadise"
-                            />
+                            <InputBox>
+                                <Input
+                                    name="coinName"
+                                    value={addCoinState.coinName}
+                                    onChange={e => onCoinChange(e, "COIN_NAME")}
+                                    placeholder="Bitcoin"
+                                />
+                            </InputBox>
                         </RowBox>
                     </Td>
                     <Td>화폐단위</Td>
                     <Td>
-                        <Input
-                            name="monetaryUnit"
-                            value={addIcoState.monetaryUnit}
-                            onChange={e => onIcoChange(e, "MONETARY_UNIT")}
-                            placeholder="FAN"
-                        />
+                        <InputBox>
+                            <Input
+                                name="monetaryUnit"
+                                value={addCoinState.monetaryUnit}
+                                onChange={e => onCoinChange(e, "MONETARY_UNIT")}
+                                placeholder="BTC"
+                            />
+                        </InputBox>
                     </Td>
                 </tr>
                 <tr>
@@ -216,8 +227,8 @@ const CryptocurrencyColumnTable = ({
                     <Td>
                         <Select
                             name="category"
-                            value={addIcoState.category}
-                            onChange={e => onIcoChange(e, "CATEGORY")}
+                            value={addCoinState.category}
+                            onChange={e => onCoinChange(e, "CATEGORY")}
                         >
                             <option disabled hidden>Stablecoins</option>
                             <option value="general">일반</option>
@@ -229,8 +240,8 @@ const CryptocurrencyColumnTable = ({
                     <Td>
                         <Select
                             name="type"
-                            value={addIcoState.type}
-                            onChange={e => onIcoChange(e, "TYPE")}
+                            value={addCoinState.type}
+                            onChange={e => onCoinChange(e, "TYPE")}
                         >
                             <option value="">일반</option>
                             <option value="">DeFi</option>
@@ -241,28 +252,32 @@ const CryptocurrencyColumnTable = ({
                 <tr>
                     <Td>가격</Td>
                     <Td>
-                        <Input
-                            name="monetaryUnit"
-                            value={addIcoState.monetaryUnit}
-                            onChange={e => onIcoChange(e, "MONETARY_UNIT")}
-                            placeholder="FAN"
-                        />
+                        <InputBox>
+                            <Input
+                                name="price"
+                                value={addCoinState.price}
+                                onChange={e => onCoinChange(e, "PRICE")}
+                                placeholder="FAN"
+                            />
+                        </InputBox>
+                        &nbsp;&nbsp;
                         <Select
-                            name="initialPrice"
-                            value={addIcoState.initialPrice}
-                            onChange={e => onIcoChange(e, "INITIAL_PRICE")}
+                            width={80}
+                            name="priceUnit"
+                            value={addCoinState.priceUnit}
+                            onChange={e => onCoinChange(e, "PRICE_UNIT")}
                         >
-                            <option value="0.10">0.10</option>
-                            <option value="0.11">0.11</option>
-                            <option value="0.12">0.12</option>
+                            <option value="KRW">KRW</option>
+                            <option value="BTN">BTN</option>
+                            <option value="ETH">ETH</option>
                         </Select>
                     </Td>
                     <Td>분야</Td>
                     <Td>
                         <Select
                             name="branch"
-                            value={addIcoState.branch}
-                            onChange={e => onIcoChange(e, "BRANCH")}
+                            value={addCoinState.branch}
+                            onChange={e => onCoinChange(e, "BRANCH")}
                         >
                             <option disabled hidden>Platform</option>
                             <option value="setting">설정 > 암호화폐 범주에 따라 선택하게끔...</option>
@@ -273,171 +288,136 @@ const CryptocurrencyColumnTable = ({
                 <tr>
                     <Td>플랫폼</Td>
                     <Td>
-                        <Input
-                            name="platform"
-                            value={addIcoState.platform}
-                            onChange={e => onIcoChange(e, "PLATFORM")}
-                            placeholder="ERC20"
-                        />
-                    </Td>
-                    <Td>상태</Td>
-                    <Td>
-                        <Select
-                            name="state"
-                            value={addIcoState.state}
-                            onChange={e => onIcoChange(e, "STATE")}
-                        >
-                            <option value="onGoing">진행 중</option>
-                            <option value="schedule">예정</option>
-                            <option value="deadline">마감</option>
-                            <option value="undetermined">미정</option>
-                            <option value="delay">지연</option>
-                        </Select>
-                    </Td>
-                </tr>
-                <tr>
-                    <Td>시작일</Td>
-                    <Td>
-                        <LocalizationProvider dateAdapter={AdapterDateFns} locale={ko}>
-                            <DatePicker
-                                label="시작일"
-                                mask="____.__.__"
-                                inputFormat="yyyy.MM.dd"
-                                value={addIcoState.startDate}
-                                onChange={newValue => onDateChange(newValue, "startDate")}
-                                renderInput={(params) => {
-                                    params.inputProps.placeholder = "yyyy.mm.dd";
-                                    return (<TextField {...params} />
-                                    )
-                                }}
+                        <InputBox>
+                            <Input
+                                name="platform"
+                                value={addCoinState.platform}
+                                onChange={e => onCoinChange(e, "PLATFORM")}
+                                placeholder="ERC20"
                             />
-                        </LocalizationProvider>
+                        </InputBox>
                     </Td>
-                    <Td>종료일</Td>
+                    <Td>발행량</Td>
                     <Td>
-                        <LocalizationProvider dateAdapter={AdapterDateFns} locale={ko}>
-                            <DatePicker
-                                label="종료일"
-                                mask="____.__.__"
-                                inputFormat="yyyy.MM.dd"
-                                value={addIcoState.finishDate}
-                                onChange={newValue => onDateChange(newValue, "finishDate")}
-                                renderInput={(params) => {
-                                    params.inputProps.placeholder = "yyyy.mm.dd";
-                                    return (<TextField {...params} />
-                                    )
-                                }}
+                        <InputBox>
+                            <Input
+                                name="issueVolume"
+                                value={addCoinState.platform}
+                                onChange={e => onCoinChange(e, "ISSUE_VOLUME")}
                             />
-                        </LocalizationProvider>
+                            %
+                        </InputBox>
                     </Td>
                 </tr>
                 <tr>
-                    <Td>하드캡</Td>
+                    <Td>시가 총액</Td>
                     <Td>
-                        <Input
-                            name="hardCap"
-                            value={addIcoState.hardCap}
-                            onChange={e => onIcoChange(e, "HARD_CAP")}
-                        />&nbsp;
-                        <Select
-                            width={70}
-                            name="hardCapMonetaryUnit"
-                            value={addIcoState.hardCapMonetaryUnit}
-                            onChange={e => onIcoChange(e, "HARD_CAP_MONETARY_UNIT")}
-                        >
-                            <option value="S">S</option>
-                            <option value="€">€</option>
-                            <option value="BTC">BTC</option>
-                            <option value="ETH">ETH</option>
-                        </Select>
-                    </Td>
-                    <Td>소프트캡</Td>
-                    <Td>
-                        <Input
-                            name="softCap"
-                            value={addIcoState.softCap}
-                            onChange={e => onIcoChange(e, "SOFT_CAP")}
-                        />&nbsp;
-                        <Select
-                            width={70}
-                            name="softCapMonetaryUnit"
-                            value={addIcoState.softCapMonetaryUnit}
-                            onChange={e => onIcoChange(e, "SOFT_CAP_MONETARY_UNIT")}
-                        >
-                            <option value="S">S</option>
-                            <option value="€">€</option>
-                            <option value="BTC">BTC</option>
-                            <option value="ETH">ETH</option>
-                        </Select>
-                    </Td>
-                </tr>
-                <tr>
-                    <Td>목표</Td>
-                    <Td>
-                        <Input
-                            name="goal"
-                            value={addIcoState.goal}
-                            onChange={e => onIcoChange(e, "GOAL")}
-                        />&nbsp;
-                        {/*
-                                    목표 단위 재설정
-                                */}
+                        <InputBox>
+                            <Input
+                                name="capitalization"
+                                value={addCoinState.capitalization}
+                                onChange={e => onCoinChange(e, "CAPITALIZATION")}
+                            />
+                        </InputBox>
+                        &nbsp;&nbsp;
                         <Select
                             width={80}
-                            name="goalUnit"
-                            value={addIcoState.softCapMonetaryUnit}
-                            onChange={e => onIcoChange(e, "GOAL_UNIT")}
+                            name="capitalizationUnit"
+                            value={addCoinState.capitalizationUnit}
+                            onChange={e => onCoinChange(e, "CAPITALIZATION_UNIT")}
                         >
-                            <option value="USD">USD</option>
+                            <option value="KRW">KRW</option>
+                            <option value="BTN">BTN</option>
                             <option value="ETH">ETH</option>
                         </Select>
                     </Td>
-                    <Td>판매용 토큰</Td>
+                    <Td>유통량</Td>
                     <Td>
-                        <Input
-                            name="sellToken"
-                            value={addIcoState.sellToken}
-                            onChange={e => onIcoChange(e, "SELL_TOKEN")}
-                        />&nbsp;
-                        {/*
-                                    판매용 토큰 단위 재설정
-                                */}
-                        <Select
-                            width={80}
-                            name="sellTokenUnit"
-                            value={addIcoState.softCapMonetaryUnit}
-                            onChange={e => onIcoChange(e, "SELL_TOKEN_UNIT")}
-                        >
-                            <option value="CRDN">CRDN</option>
-                            ㄹ
-                        </Select>
+                        <InputBox>
+                            <Input
+                                name="distribution"
+                                value={addCoinState.distribution}
+                                onChange={e => onCoinChange(e, "DISTRIBUTION")}
+                            />
+                        </InputBox>
                     </Td>
                 </tr>
                 <tr>
-                    <Td>웹사이트</Td>
+                    <Td>24시간 거래대금</Td>
                     <Td>
-                        <Input
-                            width={285}
-                            name="webSite"
-                            value={addIcoState.webSite}
-                            onChange={e => onIcoChange(e, "WEB_SITE")}
-                            placeholder="웹사이트의 URL 주소를 입력해주세요."
-                        />
+                        <InputBox>
+                            <Input
+                                name="transactionPrice_24"
+                                value={addCoinState.transactionPrice_24}
+                                onChange={e => onCoinChange(e, "TRANSACTION_PRICE_24")}
+                            />
+                        </InputBox>&nbsp;&nbsp;
+                        <Select
+                            width={80}
+                            name="transactionPriceUnit"
+                            value={addCoinState.transactionPriceUnit}
+                            onChange={e => onCoinChange(e, "TRANSACTION_PRICE_UNIT")}
+                        >
+                            <option value="KRW">KRW</option>
+                            <option value="BTN">BTN</option>
+                            <option value="ETH">ETH</option>
+                        </Select>
                     </Td>
-                    <Td>승인</Td>
+                    <Td>총 공급량</Td>
+                    <Td>
+                        <InputBox>
+                            <Input
+                                name="totalSupply"
+                                value={addCoinState.totalSupply}
+                                onChange={e => onCoinChange(e, "TOTAL_SUPPLY")}
+                            />
+                        </InputBox>
+                    </Td>
+                </tr>
+                <tr>
+                    <Td>가치 완전 희석</Td>
+                    <Td>
+                        <InputBox>
+                            <Input
+                                name="fullyDilutedShares"
+                                value={addCoinState.fullyDilutedShares}
+                                onChange={e => onCoinChange(e, "FULLY_DILUTED_SHARES")}
+                            />
+                        </InputBox>
+                        &nbsp;&nbsp;
+                        <Select
+                            width={80}
+                            name="fullyDilutedSharesUnit"
+                            value={addCoinState.fullyDilutedSharesUnit}
+                            onChange={e => onCoinChange(e, "FULLY_DILUTED_SHARES_UNIT")}
+                        >
+                            <option value="KRW">KRW</option>
+                            <option value="BTN">BTN</option>
+                            <option value="ETH">ETH</option>
+                        </Select>
+                    </Td>
+                    <Td>최대 공급량</Td>
+                    <Td>
+                        <InputBox>
+                            <Input
+                                name="maxSupply"
+                                value={addCoinState.maxSupply}
+                                onChange={e => onCoinChange(e, "MAX_SUPPLY")}
+                            />
+                        </InputBox>
+                    </Td>
+                </tr>
+                <tr>
+                    <Td>익스플로러</Td>
                     <Td>
                         <RowBox margin="0">
-                            <Select
-                                width={120}
-                                name="approval"
-                                value={addIcoState.approval}
-                                onChange={e => onIcoChange(e, "APPROVAL")}
-                            >
-                                <option value="ETH">ETH</option>
-                                <option value="USDT">USDT</option>
-                                <option value="BNB">BNB</option>
-                                <option value="USDC">USDC</option>
-                            </Select>
+                            <InputBox>
+                                <Input
+                                    name="explorer"
+                                    value={addCoinState.explorer}
+                                    onChange={e => onCoinChange(e, "EXPLORER")}
+                                />
+                            </InputBox>
                             <Button
                                 width={35}
                                 height={35}
@@ -446,19 +426,56 @@ const CryptocurrencyColumnTable = ({
                                 fontColor={colors.activeBlue}
                                 margin="0 0 0 10px"
                                 title="+"
-                                onClick={() => handleAddChips("approval")}
+                                onClick={() => handleAddChips("explorer")}
                             />
                         </RowBox>
                         <RowBox margin="5px 0 0 -5px">
-                            {!!chipState && chipState.approval.map(item => (
+                            {!!chipState && chipState.explorer.map(item => (
                                 <CustomChip
                                     key={item}
                                     label={item}
                                     deleteIcon={<AppImage src={chipDelete}/>}
-                                    onDelete={() => handleDeleteChips(item, "approval")}
+                                    onDelete={() => handleDeleteChips(item, "explorer")}
                                 />
                             ))}
                         </RowBox>
+                    </Td>
+                    <Td>지갑</Td>
+                    <Td>
+                        <InputBox>
+                            <Input
+                                width={285}
+                                name="wallet"
+                                value={addCoinState.wallet}
+                                onChange={e => onCoinChange(e, "WALLET")}
+                            />
+                        </InputBox>
+                    </Td>
+                </tr>
+                <tr>
+                    <Td>웹사이트</Td>
+                    <Td>
+                        <InputBox>
+                            <Input
+                                width={285}
+                                name="webSite"
+                                value={addCoinState.webSite}
+                                onChange={e => onCoinChange(e, "WEB_SITE")}
+                                placeholder="웹사이트의 URL 주소를 입력해주세요."
+                            />
+                        </InputBox>
+                    </Td>
+                    <Td>소스코드</Td>
+                    <Td>
+                        <InputBox>
+                            <Input
+                                width={285}
+                                name="sourceCode"
+                                value={addCoinState.sourceCode}
+                                onChange={e => onCoinChange(e, "SOURCE_CODE")}
+                                placeholder="https://github.com/bitcoin"
+                            />
+                        </InputBox>
                     </Td>
                 </tr>
                 <tr>
@@ -475,11 +492,13 @@ const CryptocurrencyColumnTable = ({
                         </ToggleButtonGroup>
                         <RowBox margin="15px 0 0 0 ">
                             {alignment === 'link' &&
-                            <Input
-                                value={addIcoState.whitePaper.link}
-                                onChange={e => onIcoChange(e, "WHITE_PAPER_LINK")}
-                                placeholder="링크를 입력해주세요."
-                            />
+                            <InputBox>
+                                <Input
+                                    value={addCoinState.whitePaper.link}
+                                    onChange={e => onCoinChange(e, "WHITE_PAPER_LINK")}
+                                    placeholder="링크를 입력해주세요."
+                                />
+                            </InputBox>
                             }
                             {alignment === 'file' &&
                             <FileInputLabel>
@@ -487,7 +506,7 @@ const CryptocurrencyColumnTable = ({
                                     type="file"
                                     accept="*"
                                     name="whitePaper"
-                                    onChange={e => onIcoChange(e, "WHITE_PAPER_FILE")}
+                                    onChange={e => onCoinChange(e, "WHITE_PAPER_FILE")}
                                 />
                                 파일찾기
                             </FileInputLabel>
@@ -497,20 +516,24 @@ const CryptocurrencyColumnTable = ({
                     <Td rowSpan={2} verticalAlign="top">커뮤니티</Td>
                     <Td rowSpan={2} verticalAlign="top">
                         <RowBox>
-                            <Input
-                                name="title"
-                                value={addIcoState.community.title}
-                                onChange={e => onIcoChange(e, "COMMUNITY")}
-                                placeholder="명칭을 입력해주세요."
-                            />
+                            <InputBox>
+                                <Input
+                                    name="title"
+                                    value={addCoinState.community.title}
+                                    onChange={e => onCoinChange(e, "COMMUNITY")}
+                                    placeholder="명칭을 입력해주세요."
+                                />
+                            </InputBox>
                         </RowBox>
                         <RowBox>
-                            <Input
-                                name="url"
-                                value={addIcoState.community.url}
-                                onChange={e => onIcoChange(e, "COMMUNITY")}
-                                placeholder="URL 주소를 입력해주세요."
-                            />
+                            <InputBox>
+                                <Input
+                                    name="url"
+                                    value={addCoinState.community.url}
+                                    onChange={e => onCoinChange(e, "COMMUNITY")}
+                                    placeholder="URL 주소를 입력해주세요."
+                                />
+                            </InputBox>
                             <Button
                                 width={35}
                                 height={35}
@@ -538,12 +561,14 @@ const CryptocurrencyColumnTable = ({
                     <Td>태그</Td>
                     <Td>
                         <RowBox>
-                            <Input
-                                name="tag"
-                                value={addIcoState.tag}
-                                onChange={e => onIcoChange(e, "TAG")}
-                                placeholder="태그를 추가해주세요."
-                            />
+                            <InputBox>
+                                <Input
+                                    name="tag"
+                                    value={addCoinState.tag}
+                                    onChange={e => onCoinChange(e, "TAG")}
+                                    placeholder="태그를 추가해주세요."
+                                />
+                            </InputBox>
                             <Button
                                 width={35}
                                 height={35}
@@ -572,48 +597,12 @@ const CryptocurrencyColumnTable = ({
                     <Td colSpan={3}>
                         <Textarea
                             name="summary"
-                            value={addIcoState.summary}
-                            onChange={e => onIcoChange(e, "SUMMARY")}
+                            value={addCoinState.summary}
+                            onChange={e => onCoinChange(e, "SUMMARY")}
                         />
                     </Td>
                 </tr>
-                <tr>
-                    <Td>관련 뉴스</Td>
-                    <Td colSpan={3}>
-                        <RowBox>
-                            <Select
-                                width={700}
-                                name="relatedNews"
-                                value={addIcoState.relatedNews}
-                                onChange={e => onIcoChange(e, "RELATED_NEWS")}
-                            >
-                                <option disabled hidden>관련 뉴스를 선택해주세요.</option>
-                                <option value="뉴스 1">뉴스 1</option>
-                                <option value="뉴스 2">뉴스 2</option>
-                            </Select>
-                            <Button
-                                width={35}
-                                height={35}
-                                title="+"
-                                border={`1px solid ${colors.activeBlue}`}
-                                fontColor={colors.activeBlue}
-                                bgColor={colors.whiteColor}
-                                margin="0 0 0 10px"
-                                onClick={() => handleAddChips("relatedNews")}
-                            />
-                        </RowBox>
-                        <RowBox margin="5px 0 0 -5px">
-                            {!!chipState && chipState.relatedNews.map((item) => (
-                                <CustomChip
-                                    key={item}
-                                    label={item}
-                                    deleteIcon={<AppImage src={chipDelete}/>}
-                                    onDelete={() => handleDeleteChips(item, "relatedNews")}
-                                />
-                            ))}
-                        </RowBox>
-                    </Td>
-                </tr>
+
                 </tbody>
             </Table>
         </TableBox>

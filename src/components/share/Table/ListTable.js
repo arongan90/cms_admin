@@ -85,6 +85,7 @@ const ListTable = ({
                                 </TableRow>
                             );
                         })}
+
                     {props.coinList && props.coinList
                         .map(list => {
                             return (
@@ -92,6 +93,7 @@ const ListTable = ({
                                     hover
                                     tabIndex={-1}
                                     key={list.id}
+                                    onClick={() => history.push(`/coinInfoDetail/${list.id}`)}
                                     style={{cursor: 'pointer'}}
                                 >
                                     {tableHeadColumns.map((column) => {
@@ -113,7 +115,7 @@ const ListTable = ({
                                                     </Text>
                                                 </RowBox>
                                                 }
-                                                {column.id === '24_prediction' &&
+                                                {column.id === 'prediction_24' &&
                                                     <InfoBox>
                                                         <RowBox textAlign="left" margin="0 10px 0 0">
                                                             <Text>시세</Text>

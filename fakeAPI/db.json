@@ -1017,18 +1017,38 @@
   ],
   "coinList": [
     {
+      "id": 1,
       "ranking": 1,
       "coinName": "Bitcoin",
-      "currentPrice": 38856252.01,
-      "24_transaction": {
-          "total_price": 27236155252934,
-          "price": 701910
+      "monetaryUnit": "BTC",
+      "category": "Stablecoins",
+      "type": "DeFi",
+      "price": 48256333.23,
+      "branch": "Platform",
+      "platform": "ERC20",
+      "issueVolume": 0.0625,
+      "capitalization": 84356252934,
+      "distribution": 18772606,
+      "transactionPrice_24": {
+        "total_price": 27155252934,
+        "price": 701910
       },
-      "24_prediction": {
+      "totalSupply": 21000000,
+      "fullyDilutedShares": 1013095937133000,
+      "maxSupply": 21000000,
+      "explorer": ["Blockchair", "Btc", "Tokenview"],
+      "wallet": ["Crypoto.com - Defi Wallet", "Ledger", "Trezor", "Electrum"],
+      "webSite": "bitcoin.org",
+      "community": ["https://www.reddit.com/r/Bitcoin/", "https://twitter.com/bitcoin", "https://www.facebook.com/bitcoins/"],
+      "whitePaper": "FILE.pdf",
+      "summary": "Fanadise is an exclusive content platform created for internet influencers to monetize their social presence and bring interactions with followers to a whole new level.",
+      "currentPrice": 38856252.01,
+      "prediction_24": {
         "marketPrice": 2455082.73,
         "transactionVolume": 27236155252934,
         "coin": 749780
       },
+      "tag": ["tag1", "tag2", "tag3"],
       "chart": [
         60201, 60253, 60177, 64323, 66456, 63341, 62314, 65234,
         65234, 61234, 62234, 63234, 62201, 61253, 59177, 58323,
@@ -1054,14 +1074,37 @@
       ]
     },
     {
+      "id": 2,
       "ranking": 2,
       "coinName": "Ethereum",
+      "monetaryUnit": "BTC",
+      "category": "Stablecoins",
+      "type": "DeFi",
+      "price": 48256333.23,
+      "branch": "Platform",
+      "platform": "ERC20",
+      "issueVolume": 0.0625,
+      "capitalization": 84356252934,
+      "distribution": 18772606,
+      "transactionPrice_24": {
+        "total_price": 27155252934,
+        "price": 701910
+      },
+      "totalSupply": 21000000,
+      "fullyDilutedShares": 1013095937133000,
+      "maxSupply": 21000000,
+      "explorer": ["Blockchair", "Btc", "Tokenview"],
+      "wallet": ["Crypoto.com - Defi Wallet", "Ledger", "Trezor", "Electrum"],
+      "webSite": "bitcoin.org",
+      "community": ["https://www.reddit.com/r/Bitcoin/", "https://twitter.com/bitcoin", "https://www.facebook.com/bitcoins/"],
+      "whitePaper": "FILE.pdf",
+      "summary": "Fanadise is an exclusive content platform created for internet influencers to monetize their social presence and bring interactions with followers to a whole new level.",
       "currentPrice": 2453855.81,
-      "24_transaction": {
+      "transactionPrice_24": {
         "total_price": 27236155252934,
         "price": 701910
       },
-      "24_prediction": {
+      "prediction_24": {
         "marketPrice": 2455082.73,
         "transactionVolume": 27236155252934,
         "coin": 7223600
@@ -1091,14 +1134,37 @@
       ]
     },
     {
+      "id": 3,
       "ranking": 3,
       "coinName": "Alfa Romeo Racing ORLEN Fan Token",
+      "monetaryUnit": "BTC",
+      "category": "Stablecoins",
+      "type": "DeFi",
+      "price": 48256333.23,
+      "branch": "Platform",
+      "platform": "ERC20",
+      "issueVolume": 0.0625,
+      "capitalization": 84356252934,
+      "distribution": 18772606,
+      "transactionPrice_24": {
+        "total_price": 27155252934,
+        "price": 701910
+      },
+      "totalSupply": 21000000,
+      "fullyDilutedShares": 1013095937133000,
+      "maxSupply": 21000000,
+      "explorer": ["Blockchair", "Btc", "Tokenview"],
+      "wallet": ["Crypoto.com - Defi Wallet", "Ledger", "Trezor", "Electrum"],
+      "webSite": "bitcoin.org",
+      "community": ["https://www.reddit.com/r/Bitcoin/", "https://twitter.com/bitcoin", "https://www.facebook.com/bitcoins/"],
+      "whitePaper": "FILE.pdf",
+      "summary": "Fanadise is an exclusive content platform created for internet influencers to monetize their social presence and bring interactions with followers to a whole new level.",
       "currentPrice": 0.0000001784,
-      "24_transaction": {
+      "transactionPrice_24": {
         "total_price": 17842741497580,
         "price": 701910
       },
-      "24_prediction": {
+      "prediction_24": {
         "marketPrice": 0.0000001647,
         "transactionVolume": 17896269722072,
         "coin": 7249699

@@ -1,7 +1,7 @@
 import React from 'react';
-import HeaderContent from "../../components/share/HeaderContent";
-import Button from "../../components/share/Button";
-import colors from "../../styles/colors";
+import HeaderContent from "../../../components/share/HeaderContent";
+import Button from "../../../components/share/Button";
+import colors from "../../../styles/colors";
 import Box from "@mui/material/Box";
 import styled, {css} from "styled-components";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
@@ -9,7 +9,7 @@ import {ko} from "date-fns/locale";
 import DatePicker from "@mui/lab/DatePicker";
 import TextField from "@mui/material/TextField";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import Paging from "../../components/share/Paging";
+import Paging from "../../../components/share/Paging";
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -92,25 +92,26 @@ const ContentsTop = styled.div`
   align-items: center;
 `;
 const ContentsBody = styled.div`
-  width: ${({ width }) => width}%;
+  width: ${({width}) => width}%;
   min-height: 50px;
-  padding: ${({ padding }) => padding};
+  padding: ${({padding}) => padding};
+
   & + & {
     margin-left: 30px;
   }
 `;
 const TableText = styled.div`
   font-size: 18px;
-  background-color: ${({ bgColor }) => bgColor};
+  background-color: ${({bgColor}) => bgColor};
   border-radius: 5px 5px 0 0;
-  
-  ${({ border }) => border && css`
+
+  ${({border}) => border && css`
     border: ${border}
   `};
-  ${({ padding }) => padding && css`
+  ${({padding}) => padding && css`
     padding: ${padding}
   `};
-  ${({ margin }) => margin && css`
+  ${({margin}) => margin && css`
     margin: ${margin}
   `};
 `;
@@ -128,37 +129,42 @@ const MiniTableRow = styled.div`
   border-bottom: 1px solid ${colors.borderColor};
 `;
 const MiniTableCell = styled.div`
-  width: ${({ width }) => width}%;
+  width: ${({width}) => width}%;
   padding: 10px;
-  
+
   &:first-child {
     text-align: center;
   }
 `;
 const ListBox = styled.div`
-  height: ${({ height }) => height}px;
-  color: ${({ fontColor }) => fontColor};
-  font-size: ${({ fontSize }) => fontSize}px;
-  font-weight: ${({ fontWeight }) => fontWeight};
+  height: ${({height}) => height}px;
+  color: ${({fontColor}) => fontColor};
+  font-size: ${({fontSize}) => fontSize}px;
+  font-weight: ${({fontWeight}) => fontWeight};
 `;
 
-const IcoDetailPresentation = ({
-                                       tabMenu,
-                                       handleTabMenu,
-                                       goBack,
-                                       goIcoUpdate,
-                                       icoDetail,
-                                       recruitmentAmount,
-                                       handleRecruitmentAmount,
-                                       handleAddRecruitmentAmount,
-                                       recruitmentAmountChips,
-                                       icoNotificationData,
-                                       icoCurrentPage,
-                                       handleIcoNotificationPage,
-                                       interestMemberData,
-                                       interestMemberPage,
-                                       handleInterestMemberPage,
-                                   }) => {
+const CoinInfoDetailPresentation = ({
+                                        tabMenu,
+                                        handleTabMenu,
+                                        coinDetail,
+                                        goBack,
+                                        goIcoUpdate,
+
+                                        recruitmentAmount,
+                                        handleRecruitmentAmount,
+                                        handleAddRecruitmentAmount,
+                                        recruitmentAmountChips,
+                                        icoNotificationData,
+                                        icoCurrentPage,
+                                        handleIcoNotificationPage,
+                                        interestMemberData,
+                                        interestMemberPage,
+                                        handleInterestMemberPage,
+                                    }) => {
+
+    React.useEffect(() => {
+        console.info('프레젠테이션 ', coinDetail);
+    }, [coinDetail]);
 
     return (
         <Box sx={{
@@ -168,8 +174,8 @@ const IcoDetailPresentation = ({
             <HeaderContent
                 tabMenu={tabMenu}
                 handleTabMenu={handleTabMenu}
-                title="ICO 정보"
-                tabList={["ICO 정보"]}
+                title="코인 정보"
+                tabList={["코인 정보"]}
             />
             <Wrapper>
                 <ButtonGroup>
@@ -200,81 +206,85 @@ const IcoDetailPresentation = ({
                         <tr>
                             <Td>코인명</Td>
                             <Td>
-                                {icoDetail.coinName}
+                                {coinDetail.coinName}
                             </Td>
                             <Td>화폐단위</Td>
                             <Td>
-                                {icoDetail.monetaryUnit}
+                                {coinDetail.monetaryUnit}
                             </Td>
                         </tr>
                         <tr>
                             <Td>카테고리</Td>
                             <Td>
-                                {icoDetail.category}
+                                {coinDetail.category}
                             </Td>
                             <Td>구분</Td>
                             <Td>
-                                {icoDetail.type}
+                                {coinDetail.type}
                             </Td>
                         </tr>
                         <tr>
-                            <Td>초기 토큰가격</Td>
+                            <Td>가격</Td>
                             <Td>
-                                {icoDetail.initialPrice}
+                                {coinDetail.price}
                             </Td>
                             <Td>분야</Td>
                             <Td>
-                                {icoDetail.branch}
+                                {coinDetail.branch}
                             </Td>
                         </tr>
                         <tr>
                             <Td>플랫폼</Td>
                             <Td>
-                                {icoDetail.platform}
+                                {coinDetail.platform}
                             </Td>
-                            <Td>상태</Td>
+                            <Td>발행량</Td>
                             <Td>
-                                {icoDetail.state}
-                            </Td>
-                        </tr>
-                        <tr>
-                            <Td>시작일</Td>
-                            <Td>
-                                {icoDetail.start_date}
-                            </Td>
-                            <Td>종료일</Td>
-                            <Td>
-                                {icoDetail.finish_date}
+                                {coinDetail.issueVolume}
                             </Td>
                         </tr>
                         <tr>
-                            <Td>하드캡(₩)</Td>
+                            <Td>시가 총액</Td>
                             <Td>
-                                {icoDetail.hardCap.toLocaleString("ko-KR")}
+                                {coinDetail.capitalization}
                             </Td>
-                            <Td>소프트캡(₩)</Td>
+                            <Td>유통량</Td>
                             <Td>
-                                {icoDetail.softCap.toLocaleString("ko-KR")}
-                            </Td>
-                        </tr>
-                        <tr>
-                            <Td>목표(₩)</Td>
-                            <Td>
-                                {icoDetail.goal.toLocaleString("ko-KR")}
-                            </Td>
-                            <Td>판매용 토큰</Td>
-                            <Td>
-                                {icoDetail.sellToken.toLocaleString("ko-KR")}
+                                {coinDetail.distribution}
                             </Td>
                         </tr>
                         <tr>
-                            <Td>모집된 금액(₩)</Td>
+                            <Td>24시간 거래대금</Td>
                             <Td>
-                                {icoDetail.recruitmentAmount.toLocaleString("ko-KR")}
+                                {coinDetail.transactionPrice_24.total_price}
                             </Td>
-                            <Td>승인</Td>
+                            <Td>총 공급량</Td>
                             <Td>
-                                {icoDetail.approval.map((list, index) => {
+                                {coinDetail.totalSupply}
+                            </Td>
+                        </tr>
+                        <tr>
+                            <Td>가치 완전 희석</Td>
+                            <Td>
+                                {coinDetail.fullyDilutedShares}
+                            </Td>
+                            <Td>최대 공급량</Td>
+                            <Td>
+                                {coinDetail.maxSupply}
+                            </Td>
+                        </tr>
+                        <tr>
+                            <Td>익스 플로러</Td>
+                            <Td>
+                                {coinDetail.explorer.map((list, index) => {
+                                    return (
+                                        <ListBox key={index}> {list} </ListBox>
+                                    )
+                                })}
+                            </Td>
+                            <Td>지갑</Td>
+                            <Td>
+                                {coinDetail.wallet.map((list, index) => {
                                     return (
                                         <ListBox key={index}> {list} </ListBox>
                                     )
@@ -284,40 +294,41 @@ const IcoDetailPresentation = ({
                         <tr>
                             <Td>웹사이트</Td>
                             <Td>
-                                {icoDetail.webSite}
+                                {coinDetail.webSite}
                             </Td>
-                            <Td>커뮤니티</Td>
+                            <Td>소스코드</Td>
                             <Td>
-                                {icoDetail.community.map((list, index) => <div key={index}>{list.url}</div>)}
+                                {coinDetail.sourceCode}
                             </Td>
                         </tr>
                         <tr>
                             <Td>백서</Td>
                             <Td>
-                                {icoDetail.whitePaper}
+                                {coinDetail.whitePaper}
                             </Td>
+                            <Td rowSpan={2}>커뮤니티</Td>
+                            <Td rowSpan={2}>
+                                {coinDetail.community.map((list, index) => <div key={index}>{list}</div>)}
+                            </Td>
+                        </tr>
+                        <tr>
                             <Td>태그</Td>
                             <Td>
-                                {icoDetail.tag.map((list, index) => <ListBox key={index}>{list}</ListBox>)}
+                                {coinDetail.tag.map((list, index) => <ListBox key={index}>{list}</ListBox>)}
                             </Td>
                         </tr>
                         <tr>
                             <Td verticalAlign="top">개요</Td>
                             <Td colSpan={3}>
-                                {icoDetail.summary}
+                                {coinDetail.summary}
                             </Td>
                         </tr>
-                        <tr>
-                            <Td>관련 뉴스</Td>
-                            <Td colSpan={3}>
-                                {icoDetail.relatedNews.map((list, index) => <ListBox key={index}> {list} </ListBox>)}
-                            </Td>
-                        </tr>
+
                         </tbody>
                     </Table>
                 </TableBox>
 
-                <TableBox>
+                {/*<TableBox>
                     <Table>
                         <tbody>
                         <tr>
@@ -423,7 +434,7 @@ const IcoDetailPresentation = ({
                                         </MiniTable>
                                         <Paging
                                             currentPage={interestMemberPage}
-                                            totalItemsCount={icoDetail.interestedMember && icoDetail.interestedMember.length}
+                                            totalItemsCount={coinDetail.interestedMember && coinDetail.interestedMember.length}
                                             onChange={handleInterestMemberPage}
                                             rowsPerPage={5}
                                         />
@@ -446,7 +457,7 @@ const IcoDetailPresentation = ({
                                         </MiniTable>
                                         <Paging
                                             currentPage={icoCurrentPage}
-                                            totalItemsCount={icoDetail.icoNotification && icoDetail.icoNotification.length}
+                                            totalItemsCount={coinDetail.icoNotification && coinDetail.icoNotification.length}
                                             onChange={handleIcoNotificationPage}
                                             rowsPerPage={5}
                                         />
@@ -456,11 +467,11 @@ const IcoDetailPresentation = ({
                         </tr>
                         </tbody>
                     </Table>
-                </TableBox>
+                </TableBox>*/}
 
             </Wrapper>
         </Box>
     )
 }
 
-export default IcoDetailPresentation;
+export default CoinInfoDetailPresentation;

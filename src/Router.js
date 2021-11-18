@@ -7,6 +7,7 @@ import ICO from "./pages/ico";
 import IcoDetail from "./pages/icoDetail";
 import IcoUpdate from "./pages/icoUpdate";
 import CoinInfo from "./pages/cryptocurrency/CoinInfo";
+import CoinInfoDetail from "./pages/cryptocurrency/CoinInfoDetail";
 import Category from "./pages/cryptocurrency/Category";
 import Tag from "./pages/cryptocurrency/Tag";
 import Nft from "./pages/cryptocurrency/NFTCollection";
@@ -51,6 +52,7 @@ const LoggedInRoutes = () => (
         <Route path="/icoDetail/:icoId" component={IcoDetail} />
         <Route path="/icoUpdate/:icoId" component={IcoUpdate} />
         <Route path="/coinInfo" component={CoinInfo} />
+        <Route path="/coinInfoDetail/:coinId" component={CoinInfoDetail} />
         <Route path="/category" component={Category} />
         <Route path="/tag" component={Tag} />
         <Route path="/nft" component={Nft} />

@@ -57,7 +57,7 @@ const IcoContainer = () => {
 
     // ICO 추가
     const [addIcoState, setAddIcoState] = useState({
-        coinImage: '',
+        coinImage: null,
         coinName: '',
         monetaryUnit: '',
         category: 'Stablecoins',

@@ -2,16 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {useHistory} from "react-router-dom";
 import axios from "axios";
 import IcoDetailPresentation from "./IcoDetailPresentation";
-import * as constants from "../../utils/constants";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
+import * as constants from "../../utils/constants";
 
 const serverProtocol = constants.config.PROTOCOL;
 const serverURL = constants.config.URL;
 
-const IcoDetailContainer = ({
-                                    match,
-                                }) => {
+const IcoDetailContainer = ({ match }) => {
     const {icoId} = match.params;
     const history = useHistory();
     const [tabMenu, setTabMenu] = useState(0);
@@ -126,7 +124,6 @@ const IcoDetailContainer = ({
                 }}>
                     <CircularProgress/>
                 </Box>
-
             }
         </>
     )
