@@ -8,9 +8,12 @@ import IcoDetail from "./pages/icoDetail";
 import IcoUpdate from "./pages/icoUpdate";
 import CoinInfo from "./pages/cryptocurrency/CoinInfo";
 import CoinInfoDetail from "./pages/cryptocurrency/CoinInfoDetail";
+import CoinInfoUpdate from "./pages/cryptocurrency/CoinInfoUpdate";
 import Category from "./pages/cryptocurrency/Category";
+import CategoryDetail from "./pages/cryptocurrency/CategoryDetail";
 import Tag from "./pages/cryptocurrency/Tag";
 import Nft from "./pages/cryptocurrency/NFTCollection";
+import NftDetail from "./pages/cryptocurrency/NFTCollectionDetail";
 import RelatedNews from "./pages/cryptocurrency/RelatedNews";
 import Trade from "./pages/trade";
 import CryptocurrencyAPI from "./pages/goods/CryptocurrencyAPI";
@@ -53,9 +56,12 @@ const LoggedInRoutes = () => (
         <Route path="/icoUpdate/:icoId" component={IcoUpdate} />
         <Route path="/coinInfo" component={CoinInfo} />
         <Route path="/coinInfoDetail/:coinId" component={CoinInfoDetail} />
+        <Route path="/coinUpdate/:coinId" component={CoinInfoUpdate} />
         <Route path="/category" component={Category} />
+        <Route path="/categoryDetail/:categoryId" component={CategoryDetail} />
         <Route path="/tag" component={Tag} />
         <Route path="/nft" component={Nft} />
+        <Route path="/nftDetail/:nftId" component={NftDetail} />
         <Route path="/relatedNews" component={RelatedNews} />
         <Route path="/trade" component={Trade} />
         <Route path="/api" component={CryptocurrencyAPI} />

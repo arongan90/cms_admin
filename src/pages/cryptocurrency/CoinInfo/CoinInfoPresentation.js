@@ -7,7 +7,7 @@ import SearchForm from "../../../components/share/SearchForm";
 import Paper from "@mui/material/Paper";
 import Paging from "../../../components/share/Paging";
 import ListTable from "../../../components/share/Table/ListTable";
-import IcoInfoColumnTable from "../../../components/feature/IcoInfo/IcoInfoColumnTable";
+import ContentBox from "../../../components/share/ContentBox";
 import Button from "../../../components/share/Button";
 import CryptocurrencyColumnTable from "../../../components/feature/Cryptocurrency/CryptocurrencyColumnTable";
 
@@ -73,14 +73,7 @@ const CoinInfoPresentation = ({
                                   handleDeleteChips,
                               }) => {
     return (
-        <Box sx={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            height: '100vh',
-            overflow: 'scroll',
-            bgcolor: '#eaeff1'
-        }}>
+        <ContentBox>
             <HeaderContent
                 tabMenu={tabMenu}
                 handleTabMenu={handleTabMenu}
@@ -135,7 +128,7 @@ const CoinInfoPresentation = ({
                 <Wrapper>
 
                     <CryptocurrencyColumnTable
-                        addCoinState={addCoinState}
+                        coinState={addCoinState}
                         onCoinChange={onCoinChange}
                         chipState={chipState}
                         handleAddChips={handleAddChips}
@@ -165,7 +158,7 @@ const CoinInfoPresentation = ({
                 </Wrapper>
             }
 
-        </Box>
+        </ContentBox>
     )
 }
 

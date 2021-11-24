@@ -121,22 +121,22 @@ const MemberDetailPresentational = ({
                 <ButtonGroup>
                     <Button
                         title="이전"
-                        width={60}
-                        height={40}
+                        width={70}
+                        height={46}
                         border={`1px solid ${colors.activeBlue}`}
                         fontColor={colors.activeBlue}
                         bgColor={colors.whiteColor}
-                        fontSize={16}
+                        fontSize={18}
                         onClick={goBack}
                     />
                     <Button
                         title="회원정보 수정"
-                        width={140}
-                        height={40}
+                        width={150}
+                        height={46}
                         fontColor={colors.whiteColor}
                         bgColor={colors.activeBlue}
-                        fontSize={16}
-                        onClick={() => goMemberUpdate()}
+                        fontSize={18}
+                        onClick={goMemberUpdate}
                     />
                 </ButtonGroup>
                 <InfoTable>

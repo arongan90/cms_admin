@@ -19,6 +19,7 @@ import TableRow from '@mui/material/TableRow';
 import Paging from "../../components/share/Paging";
 import {useHistory} from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
+import ContentBox from "../../components/share/ContentBox";
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -35,6 +36,7 @@ const MemberListBox = styled.div`
   margin: 0 auto;
   border-radius: 8px;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+
   a {
     color: inherit;
   }
@@ -167,6 +169,9 @@ const MemberPresentational = ({
                                   rowsPerPage,
                                   handleChangePage,
                                   handleChangeRowsPerPage,
+                                  searchInput,
+                                  onSearchChange,
+                                  onDateChange
                               }) => {
 
     const history = useHistory();
@@ -174,10 +179,7 @@ const MemberPresentational = ({
     if (!memberData) return null;
 
     return (
-        <Box sx={{
-            bgcolor: '#eaeff1',
-            paddingBottom: 15
-        }}>
+        <ContentBox>
             <HeaderContent
                 tabMenu={tabMenu}
                 handleTabMenu={handleTabMenu}
@@ -185,15 +187,17 @@ const MemberPresentational = ({
                 tabList={["회원 목록"]}
             />
 
-            {loading && <Box sx={{display: 'flex'}} style={{
-                position: 'absolute',
-                width: '100vw',
-                height: '100vh',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <CircularProgress/>
-            </Box>}
+            {loading && (
+                <Box sx={{display: 'flex'}} style={{
+                    position: 'absolute',
+                    width: '100vw',
+                    height: '100vh',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <CircularProgress/>
+                </Box>
+            )}
 
             <Wrapper>
                 <SearchForm>
@@ -207,8 +211,8 @@ const MemberPresentational = ({
                                         label="시작일"
                                         mask="____.__.__"
                                         inputFormat="yyyy.MM.dd"
-                                        // value={}
-                                        // onChange={}
+                                        value={searchInput.startDate}
+                                        onChange={value => onDateChange(value, "startDate")}
                                         renderInput={(params) => {
                                             params.inputProps.placeholder = "yyyy.mm.dd";
                                             return (<TextField {...params} />
@@ -222,8 +226,8 @@ const MemberPresentational = ({
                                         label="종료일"
                                         mask="____.__.__"
                                         inputFormat="yyyy.MM.dd"
-                                        // value={}
-                                        // onChange={}
+                                        value={searchInput.finishDate}
+                                        onChange={value => onDateChange(value, "finishDate")}
                                         renderInput={(params) => {
                                             params.inputProps.placeholder = "yyyy.mm.dd";
                                             return (<TextField {...params} />
@@ -235,8 +239,11 @@ const MemberPresentational = ({
                             <Td>이메일 주소</Td>
                             <Td>
                                 <Input
+                                    name="email"
                                     fullWidth
                                     placeholder="이메일 주소를 입력해주세요."
+                                    value={searchInput.email}
+                                    onChange={onSearchChange}
                                 />
                             </Td>
                         </tr>
@@ -244,18 +251,25 @@ const MemberPresentational = ({
                             <Td>이름</Td>
                             <Td>
                                 <Input
+                                    name="name"
                                     fullWidth
                                     placeholder="아름을 입력해주세요."
+                                    value={searchInput.name}
+                                    onChange={onSearchChange}
                                 />
                             </Td>
                             <Td>가입방식</Td>
                             <Td>
-                                <Select>
-                                    <option>전체</option>
-                                    <option>이메일</option>
-                                    <option>카카오</option>
-                                    <option>페이스북</option>
-                                    <option>구글</option>
+                                <Select
+                                    name="joinType"
+                                    onChange={onSearchChange}
+                                    value={searchInput.joinType}
+                                >
+                                    <option value="all">전체</option>
+                                    <option value="email">이메일</option>
+                                    <option value="kakao">카카오</option>
+                                    <option value="facebook">페이스북</option>
+                                    <option value="google">구글</option>
                                 </Select>
                             </Td>
                         </tr>
@@ -264,19 +278,33 @@ const MemberPresentational = ({
                             <Td>
                                 <PortfolioBox>
                                     <NumberInputBox>
-                                        <NumberInput type="number"/>
+                                        <NumberInput
+                                            type="number"
+                                            name="portfolioAssetsFinish"
+                                            value={searchInput.portfolioAssetsFinish}
+                                            onChange={onSearchChange}
+                                        />
                                         만원
                                     </NumberInputBox>
                                     &nbsp;~&nbsp;
                                     <NumberInputBox>
-                                        <NumberInput type="number"/>
+                                        <NumberInput
+                                            type="number"
+                                            name="portfolioAssetsFinish"
+                                            value={searchInput.portfolioAssetsFinish}
+                                            onChange={onSearchChange}
+                                        />
                                         만원
                                     </NumberInputBox>
                                 </PortfolioBox>
                             </Td>
                             <Td>14세 미만</Td>
                             <Td>
-                                <Select>
+                                <Select
+                                    name="age14"
+                                    value={searchInput.age14}
+                                    onChange={onSearchChange}
+                                >
                                     <option value="up">14 이상</option>
                                     <option value="down">14 미만</option>
                                 </Select>
@@ -317,7 +345,7 @@ const MemberPresentational = ({
                                                 style={{
                                                     width: column.width,
                                                     border: column.border,
-                                                }}d
+                                                }}
                                             >
                                                 {column.label}
                                             </TableCell>
@@ -363,7 +391,7 @@ const MemberPresentational = ({
                     </Paper>
                 </MemberListBox>
             </Wrapper>
-        </Box>
+        </ContentBox>
     )
 }
 

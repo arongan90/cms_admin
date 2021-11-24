@@ -14,10 +14,41 @@ const CoinInfoDetailContainer = ({match}) => {
     const {coinId} = match.params;
     const [tabMenu, setTabMenu] = useState(0);
     const [coinDetail, setCoinDetail] = useState(null);
+    const [pastExchange, setPastExchange] = useState({
+        date: new Date(),
+        amount: '',
+    });
+    const [pastExchangeChips, setPastExchangeChips] = useState([]);
+    const [pastExchangePage, setPastExchangePage] = useState(1);
 
     const handleTabMenu = value => setTabMenu(value);
     const goBack = () => history.push('/coinInfo');
 
+    const handlePastExchange = (value, type) => {
+        setPastExchange({
+            ...pastExchange,
+            [type]: value,
+        });
+    }
+    const handleAddExchangeChips = () => {
+        let newArr = pastExchangeChips.concat(pastExchange)
+        setPastExchangeChips(newArr);
+        setPastExchange({
+            date: new Date(),
+            amount: '',
+        });
+    }
+    //
+    const handleDeleteExchangeChips = item => {
+        if (window.confirm('삭제 하시겠습니까?')) {
+            setPastExchangeChips(pastExchangeChips.filter(chip => chip !== item));
+        }
+    }
+    const handlePastExchangePage = value => setPastExchangePage(value);
+
+    const goCoinUpdate = () => {
+        history.push(`/coinUpdate/${coinId}`);
+    }
 
     const fetchData = async () => {
         try {
@@ -45,7 +76,14 @@ const CoinInfoDetailContainer = ({match}) => {
                         coinDetail={coinDetail}
                         goBack={goBack}
 
-                        // goIcoUpdate={goIcoUpdate}
+                        goCoinUpdate={goCoinUpdate}
+                        pastExchange={pastExchange}
+                        handlePastExchange={handlePastExchange}
+                        pastExchangeChips={pastExchangeChips}
+                        handleAddExchangeChips={handleAddExchangeChips}
+                        handleDeleteExchangeChips={handleDeleteExchangeChips}
+                        pastExchangePage={pastExchangePage}
+                        handlePastExchangePage={handlePastExchangePage}
 
                         // recruitmentAmount={recruitmentAmount}
                         // handleRecruitmentAmount={handleRecruitmentAmount}

@@ -4,14 +4,9 @@ import colors from "../../../styles/colors";
 import Button from "../../share/Button";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import TextField from "@mui/material/TextField";
-import DatePicker from '@mui/lab/DatePicker';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import {ko} from 'date-fns/locale';
-import Chip from '@mui/material/Chip';
 import chipDelete from "../../../images/chipDelete.svg";
 import uploadImage from "../../../images/UploadImage.svg";
+import CustomChip from "../../share/CustomChip";
 
 const TableBox = styled.div`
   border-radius: 8px;
@@ -137,10 +132,13 @@ const Select = styled.select`
   cursor: pointer;
 `;
 const RowBox = styled.div`
+  max-width: 500px;
   margin: ${({margin}) => margin ? margin : '5px 0 0'};
-
+  white-space: initial;
+  
   ${({flex}) => flex && css`
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     margin: 0;
   `}
@@ -149,17 +147,7 @@ const RowBox = styled.div`
     color: ${colors.whiteColor};
   }
 `;
-const CustomChip = styled(Chip)`
-  &:first-child {
-    margin-top: 5px;
-    margin-left: 5px;
-  }
 
-  & + & {
-    margin-left: 5px;
-    margin-top: 5px;
-  }
-`;
 const AppImage = styled.img`
   ${({width}) => width && css`
     width: ${width};
@@ -170,7 +158,7 @@ const AppImage = styled.img`
 `;
 
 const CryptocurrencyColumnTable = ({
-                                       addCoinState,
+                                       coinState,
                                        onCoinChange,
                                        handleAddChips,
                                        handleDeleteChips,
@@ -192,9 +180,9 @@ const CryptocurrencyColumnTable = ({
                         <RowBox flex>
                             <ImageInputLabel>
                                 <FileInput type="file" accept="image/*" onChange={e => onCoinChange(e, "COIN_IMAGE")}/>
-                                {addCoinState.coinImage &&
+                                {coinState.coinImage &&
                                 <PreviewBox>
-                                    <AppImage width="100%" height="100%" src={addCoinState.coinImage}/>
+                                    <AppImage width="100%" height="100%" src={coinState.coinImage}/>
                                 </PreviewBox>
                                 }
                                 <AppImage width="60%" height="60%" src={uploadImage}/>
@@ -203,7 +191,7 @@ const CryptocurrencyColumnTable = ({
                             <InputBox>
                                 <Input
                                     name="coinName"
-                                    value={addCoinState.coinName}
+                                    value={coinState.coinName}
                                     onChange={e => onCoinChange(e, "COIN_NAME")}
                                     placeholder="Bitcoin"
                                 />
@@ -215,7 +203,7 @@ const CryptocurrencyColumnTable = ({
                         <InputBox>
                             <Input
                                 name="monetaryUnit"
-                                value={addCoinState.monetaryUnit}
+                                value={coinState.monetaryUnit}
                                 onChange={e => onCoinChange(e, "MONETARY_UNIT")}
                                 placeholder="BTC"
                             />
@@ -227,7 +215,7 @@ const CryptocurrencyColumnTable = ({
                     <Td>
                         <Select
                             name="category"
-                            value={addCoinState.category}
+                            value={coinState.category}
                             onChange={e => onCoinChange(e, "CATEGORY")}
                         >
                             <option disabled hidden>Stablecoins</option>
@@ -240,7 +228,7 @@ const CryptocurrencyColumnTable = ({
                     <Td>
                         <Select
                             name="type"
-                            value={addCoinState.type}
+                            value={coinState.type}
                             onChange={e => onCoinChange(e, "TYPE")}
                         >
                             <option value="">일반</option>
@@ -255,7 +243,7 @@ const CryptocurrencyColumnTable = ({
                         <InputBox>
                             <Input
                                 name="price"
-                                value={addCoinState.price}
+                                value={coinState.price}
                                 onChange={e => onCoinChange(e, "PRICE")}
                                 placeholder="FAN"
                             />
@@ -264,7 +252,7 @@ const CryptocurrencyColumnTable = ({
                         <Select
                             width={80}
                             name="priceUnit"
-                            value={addCoinState.priceUnit}
+                            value={coinState.priceUnit}
                             onChange={e => onCoinChange(e, "PRICE_UNIT")}
                         >
                             <option value="KRW">KRW</option>
@@ -276,7 +264,7 @@ const CryptocurrencyColumnTable = ({
                     <Td>
                         <Select
                             name="branch"
-                            value={addCoinState.branch}
+                            value={coinState.branch}
                             onChange={e => onCoinChange(e, "BRANCH")}
                         >
                             <option disabled hidden>Platform</option>
@@ -291,7 +279,7 @@ const CryptocurrencyColumnTable = ({
                         <InputBox>
                             <Input
                                 name="platform"
-                                value={addCoinState.platform}
+                                value={coinState.platform}
                                 onChange={e => onCoinChange(e, "PLATFORM")}
                                 placeholder="ERC20"
                             />
@@ -302,7 +290,7 @@ const CryptocurrencyColumnTable = ({
                         <InputBox>
                             <Input
                                 name="issueVolume"
-                                value={addCoinState.platform}
+                                value={coinState.platform}
                                 onChange={e => onCoinChange(e, "ISSUE_VOLUME")}
                             />
                             %
@@ -314,17 +302,17 @@ const CryptocurrencyColumnTable = ({
                     <Td>
                         <InputBox>
                             <Input
-                                name="capitalization"
-                                value={addCoinState.capitalization}
-                                onChange={e => onCoinChange(e, "CAPITALIZATION")}
+                                name="marketCap"
+                                value={coinState.marketCap}
+                                onChange={e => onCoinChange(e, "MARKET_CAP")}
                             />
                         </InputBox>
                         &nbsp;&nbsp;
                         <Select
                             width={80}
-                            name="capitalizationUnit"
-                            value={addCoinState.capitalizationUnit}
-                            onChange={e => onCoinChange(e, "CAPITALIZATION_UNIT")}
+                            name="marketCapUnit"
+                            value={coinState.marketCapUnit}
+                            onChange={e => onCoinChange(e, "MARKET_CAP_UNIT")}
                         >
                             <option value="KRW">KRW</option>
                             <option value="BTN">BTN</option>
@@ -336,7 +324,7 @@ const CryptocurrencyColumnTable = ({
                         <InputBox>
                             <Input
                                 name="distribution"
-                                value={addCoinState.distribution}
+                                value={coinState.distribution}
                                 onChange={e => onCoinChange(e, "DISTRIBUTION")}
                             />
                         </InputBox>
@@ -348,14 +336,14 @@ const CryptocurrencyColumnTable = ({
                         <InputBox>
                             <Input
                                 name="transactionPrice_24"
-                                value={addCoinState.transactionPrice_24}
+                                value={coinState.transactionPrice_24}
                                 onChange={e => onCoinChange(e, "TRANSACTION_PRICE_24")}
                             />
                         </InputBox>&nbsp;&nbsp;
                         <Select
                             width={80}
                             name="transactionPriceUnit"
-                            value={addCoinState.transactionPriceUnit}
+                            value={coinState.transactionPriceUnit}
                             onChange={e => onCoinChange(e, "TRANSACTION_PRICE_UNIT")}
                         >
                             <option value="KRW">KRW</option>
@@ -368,7 +356,7 @@ const CryptocurrencyColumnTable = ({
                         <InputBox>
                             <Input
                                 name="totalSupply"
-                                value={addCoinState.totalSupply}
+                                value={coinState.totalSupply}
                                 onChange={e => onCoinChange(e, "TOTAL_SUPPLY")}
                             />
                         </InputBox>
@@ -380,7 +368,7 @@ const CryptocurrencyColumnTable = ({
                         <InputBox>
                             <Input
                                 name="fullyDilutedShares"
-                                value={addCoinState.fullyDilutedShares}
+                                value={coinState.fullyDilutedShares}
                                 onChange={e => onCoinChange(e, "FULLY_DILUTED_SHARES")}
                             />
                         </InputBox>
@@ -388,7 +376,7 @@ const CryptocurrencyColumnTable = ({
                         <Select
                             width={80}
                             name="fullyDilutedSharesUnit"
-                            value={addCoinState.fullyDilutedSharesUnit}
+                            value={coinState.fullyDilutedSharesUnit}
                             onChange={e => onCoinChange(e, "FULLY_DILUTED_SHARES_UNIT")}
                         >
                             <option value="KRW">KRW</option>
@@ -401,20 +389,20 @@ const CryptocurrencyColumnTable = ({
                         <InputBox>
                             <Input
                                 name="maxSupply"
-                                value={addCoinState.maxSupply}
+                                value={coinState.maxSupply}
                                 onChange={e => onCoinChange(e, "MAX_SUPPLY")}
                             />
                         </InputBox>
                     </Td>
                 </tr>
                 <tr>
-                    <Td>익스플로러</Td>
+                    <Td verticalAlign="top">익스플로러</Td>
                     <Td>
                         <RowBox margin="0">
                             <InputBox>
                                 <Input
                                     name="explorer"
-                                    value={addCoinState.explorer}
+                                    value={coinState.explorer}
                                     onChange={e => onCoinChange(e, "EXPLORER")}
                                 />
                             </InputBox>
@@ -433,23 +421,45 @@ const CryptocurrencyColumnTable = ({
                             {!!chipState && chipState.explorer.map(item => (
                                 <CustomChip
                                     key={item}
-                                    label={item}
-                                    deleteIcon={<AppImage src={chipDelete}/>}
-                                    onDelete={() => handleDeleteChips(item, "explorer")}
+                                    item={item}
+                                    onDelete={handleDeleteChips}
+                                    type="explorer"
                                 />
                             ))}
                         </RowBox>
                     </Td>
-                    <Td>지갑</Td>
+                    <Td verticalAlign="top">지갑</Td>
                     <Td>
-                        <InputBox>
-                            <Input
-                                width={285}
-                                name="wallet"
-                                value={addCoinState.wallet}
-                                onChange={e => onCoinChange(e, "WALLET")}
+                        <RowBox>
+                            <InputBox>
+                                <Input
+                                    width={285}
+                                    name="wallet"
+                                    value={coinState.wallet}
+                                    onChange={e => onCoinChange(e, "WALLET")}
+                                />
+                            </InputBox>
+                            <Button
+                                width={35}
+                                height={35}
+                                border={`1px solid ${colors.activeBlue}`}
+                                bgColor={colors.whiteColor}
+                                fontColor={colors.activeBlue}
+                                margin="0 0 0 10px"
+                                title="+"
+                                onClick={() => handleAddChips("wallet")}
                             />
-                        </InputBox>
+                        </RowBox>
+                        <RowBox margin="5px 0 0 -5px">
+                            {!!chipState && chipState.wallet.map((item) => (
+                                <CustomChip
+                                    key={item}
+                                    item={item}
+                                    onDelete={handleDeleteChips}
+                                    type="wallet"
+                                />
+                            ))}
+                        </RowBox>
                     </Td>
                 </tr>
                 <tr>
@@ -459,7 +469,7 @@ const CryptocurrencyColumnTable = ({
                             <Input
                                 width={285}
                                 name="webSite"
-                                value={addCoinState.webSite}
+                                value={coinState.webSite}
                                 onChange={e => onCoinChange(e, "WEB_SITE")}
                                 placeholder="웹사이트의 URL 주소를 입력해주세요."
                             />
@@ -471,7 +481,7 @@ const CryptocurrencyColumnTable = ({
                             <Input
                                 width={285}
                                 name="sourceCode"
-                                value={addCoinState.sourceCode}
+                                value={coinState.sourceCode}
                                 onChange={e => onCoinChange(e, "SOURCE_CODE")}
                                 placeholder="https://github.com/bitcoin"
                             />
@@ -494,7 +504,7 @@ const CryptocurrencyColumnTable = ({
                             {alignment === 'link' &&
                             <InputBox>
                                 <Input
-                                    value={addCoinState.whitePaper.link}
+                                    value={coinState.whitePaper.link}
                                     onChange={e => onCoinChange(e, "WHITE_PAPER_LINK")}
                                     placeholder="링크를 입력해주세요."
                                 />
@@ -519,7 +529,7 @@ const CryptocurrencyColumnTable = ({
                             <InputBox>
                                 <Input
                                     name="title"
-                                    value={addCoinState.community.title}
+                                    value={coinState.community.title}
                                     onChange={e => onCoinChange(e, "COMMUNITY")}
                                     placeholder="명칭을 입력해주세요."
                                 />
@@ -529,7 +539,7 @@ const CryptocurrencyColumnTable = ({
                             <InputBox>
                                 <Input
                                     name="url"
-                                    value={addCoinState.community.url}
+                                    value={coinState.community.url}
                                     onChange={e => onCoinChange(e, "COMMUNITY")}
                                     placeholder="URL 주소를 입력해주세요."
                                 />
@@ -549,9 +559,10 @@ const CryptocurrencyColumnTable = ({
                             {!!chipState && chipState.community.map((item) => (
                                 <CustomChip
                                     key={item}
-                                    label={item}
+                                    item={item}
                                     deleteIcon={<AppImage src={chipDelete}/>}
-                                    onDelete={() => handleDeleteChips(item, "community")}
+                                    onDelete={handleDeleteChips}
+                                    type="community"
                                 />
                             ))}
                         </RowBox>
@@ -564,7 +575,7 @@ const CryptocurrencyColumnTable = ({
                             <InputBox>
                                 <Input
                                     name="tag"
-                                    value={addCoinState.tag}
+                                    value={coinState.tag}
                                     onChange={e => onCoinChange(e, "TAG")}
                                     placeholder="태그를 추가해주세요."
                                 />
@@ -584,9 +595,9 @@ const CryptocurrencyColumnTable = ({
                             {!!chipState && chipState.tag.map((item) => (
                                 <CustomChip
                                     key={item}
-                                    label={item}
-                                    deleteIcon={<AppImage src={chipDelete}/>}
-                                    onDelete={() => handleDeleteChips(item, "tag")}
+                                    item={item}
+                                    onDelete={handleDeleteChips}
+                                    type="tag"
                                 />
                             ))}
                         </RowBox>
@@ -597,7 +608,7 @@ const CryptocurrencyColumnTable = ({
                     <Td colSpan={3}>
                         <Textarea
                             name="summary"
-                            value={addCoinState.summary}
+                            value={coinState.summary}
                             onChange={e => onCoinChange(e, "SUMMARY")}
                         />
                     </Td>

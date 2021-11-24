@@ -8,6 +8,7 @@ export default {
     deepWhiteColor: "#F7F9FB",
     lightSky: "#eaeff1",
     deepNavyColor: "#101F33",
+    defaultBgColor: "#eaeff1",
 
     // Point
     loginPoint: "#6E9ABC",

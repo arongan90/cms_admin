@@ -7,9 +7,7 @@ import * as constants from "../../utils/constants";
 const serverProtocol = constants.config.PROTOCOL;
 const serverUrl = constants.config.URL;
 
-const IcoUpdateContainer = ({
-                                match,
-                                }) => {
+const IcoUpdateContainer = ({ match }) => {
     const history = useHistory();
     const {icoId} = match.params;
 
@@ -205,8 +203,6 @@ const IcoUpdateContainer = ({
     const fetchData = async () => {
         try {
             const { data } = await axios.get(`${serverProtocol}${serverUrl}/icoList/${icoId}`);
-
-            console.info(data);
 
             setUpdateIcoState({
                 coinImage: '',

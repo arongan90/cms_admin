@@ -128,7 +128,7 @@ export default function Navigator(props) {
                     />
                     <VisibleWrapper
                         active={currentPath === "/coinInfo" || currentPath === "/category" || currentPath === "/tag" || currentPath === "/nft" || currentPath === "/relatedNews"}
-                        length={5}>
+                        length={4}>
                         <SideTabMenu
                             title="코인 정보"
                             active={currentPath === "/coinInfo"}
@@ -139,11 +139,11 @@ export default function Navigator(props) {
                             active={currentPath === "/category"}
                             onClick={() => onRouteClick("/category")}
                         />
-                        <SideTabMenu
+                        {/*<SideTabMenu
                             title="태그"
                             active={currentPath === "/tag"}
                             onClick={() => onRouteClick("/tag")}
-                        />
+                        />*/}
                         <SideTabMenu
                             title="NFT 콜렉션"
                             active={currentPath === "/nft"}

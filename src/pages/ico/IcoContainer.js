@@ -98,10 +98,11 @@ const IcoContainer = () => {
     const onIcoChange = (e, type) => {
         const { name, value } = e.target;
 
-        let file = e.target.files[0] && e.target.files[0];
+        let file;
         let reader = new FileReader();
         switch(type) {
             case "COIN_IMAGE":
+                file = e.target.files[0];
                 reader.onload = () => {
                     setAddIcoState({
                         ...addIcoState,
@@ -144,6 +145,7 @@ const IcoContainer = () => {
                 });
                 break;
             case "WHITE_PAPER_FILE":
+                file = e.target.files[0];
                 setAddIcoState({
                     ...addIcoState,
                     whitePaper: {

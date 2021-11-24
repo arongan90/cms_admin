@@ -6,7 +6,7 @@
 /*/
 const prod = {
     PROTOCOL: 'http://',
-    URL: 'union.dev.catbellcompany.com:5050',
+    URL: '172.16.1.192:4001',
 };// */
 
 const dev = {

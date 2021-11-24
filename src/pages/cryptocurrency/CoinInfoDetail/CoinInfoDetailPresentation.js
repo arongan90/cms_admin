@@ -9,7 +9,9 @@ import {ko} from "date-fns/locale";
 import DatePicker from "@mui/lab/DatePicker";
 import TextField from "@mui/material/TextField";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import CancelIcon from '@mui/icons-material/Cancel';
 import Paging from "../../../components/share/Paging";
+import {numberAddComma} from "../../../utils/common";
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -19,7 +21,7 @@ const ButtonGroup = styled.div`
   padding: 0 10px;
   display: flex;
   justify-content: space-between;
-  margin: 20px 0 50px;
+  margin: 20px 20px 40px;
 `;
 const TableBox = styled.div`
   border-radius: 8px;
@@ -119,22 +121,12 @@ const MiniTable = styled.div`
   width: 100%;
   height: 243px;
   margin-bottom: 20px;
-  border: 1px solid ${colors.borderColor};
-  border-radius: 0 0 5px 5px;
-  box-shadow: 0 5px 8px -1px ${colors.shadowColor};
-`;
-const MiniTableRow = styled.div`
-  width: 100%;
-  display: flex;
-  border-bottom: 1px solid ${colors.borderColor};
 `;
 const MiniTableCell = styled.div`
   width: ${({width}) => width}%;
+  display: flex;
+  align-items: flex-start;
   padding: 10px;
-
-  &:first-child {
-    text-align: center;
-  }
 `;
 const ListBox = styled.div`
   height: ${({height}) => height}px;
@@ -142,30 +134,35 @@ const ListBox = styled.div`
   font-size: ${({fontSize}) => fontSize}px;
   font-weight: ${({fontWeight}) => fontWeight};
 `;
+const Text = styled.span`
+  font-size: ${({ fontSize }) => fontSize}px;
+  font-weight: ${({ fontWeight }) => fontWeight};
+  color: ${({ fontColor }) => fontColor};
+  margin-right: 20px;
+  
+  ${({ cursor }) => cursor && css`
+    cursor: pointer;
+  `}
+`;
+const DeleteButton = styled.div`
+
+`;
 
 const CoinInfoDetailPresentation = ({
                                         tabMenu,
                                         handleTabMenu,
                                         coinDetail,
                                         goBack,
-                                        goIcoUpdate,
+                                        goCoinUpdate,
 
-                                        recruitmentAmount,
-                                        handleRecruitmentAmount,
-                                        handleAddRecruitmentAmount,
-                                        recruitmentAmountChips,
-                                        icoNotificationData,
-                                        icoCurrentPage,
-                                        handleIcoNotificationPage,
-                                        interestMemberData,
-                                        interestMemberPage,
-                                        handleInterestMemberPage,
+                                        pastExchange,
+                                        handlePastExchange,
+                                        pastExchangeChips,
+                                        handleAddExchangeChips,
+                                        handleDeleteExchangeChips,
+                                        pastExchangePage,
+                                        handlePastExchangePage
                                     }) => {
-
-    React.useEffect(() => {
-        console.info('프레젠테이션 ', coinDetail);
-    }, [coinDetail]);
-
     return (
         <Box sx={{
             bgcolor: '#eaeff1',
@@ -181,22 +178,22 @@ const CoinInfoDetailPresentation = ({
                 <ButtonGroup>
                     <Button
                         title="이전"
-                        width={60}
-                        height={40}
+                        width={70}
+                        height={46}
                         border={`1px solid ${colors.activeBlue}`}
                         fontColor={colors.activeBlue}
                         bgColor={colors.whiteColor}
-                        fontSize={16}
+                        fontSize={18}
                         onClick={goBack}
                     />
                     <Button
-                        title="ICO 수정"
-                        width={140}
-                        height={40}
+                        title="코인 수정"
+                        width={150}
+                        height={46}
                         fontColor={colors.whiteColor}
                         bgColor={colors.activeBlue}
-                        fontSize={16}
-                        onClick={() => goIcoUpdate()}
+                        fontSize={18}
+                        onClick={goCoinUpdate}
                     />
                 </ButtonGroup>
 
@@ -246,7 +243,7 @@ const CoinInfoDetailPresentation = ({
                         <tr>
                             <Td>시가 총액</Td>
                             <Td>
-                                {coinDetail.capitalization}
+                                {coinDetail.marketCap}
                             </Td>
                             <Td>유통량</Td>
                             <Td>
@@ -328,27 +325,10 @@ const CoinInfoDetailPresentation = ({
                     </Table>
                 </TableBox>
 
-                {/*<TableBox>
+                <TableBox>
                     <Table>
                         <tbody>
-                        <tr>
-                            <Td>모집된 금액</Td>
-                            <Td>
-                                <Input
-                                    type="number"
-                                />
-                                <Button
-                                    margin="0 0 0 10px"
-                                    title="적용"
-                                    width={60}
-                                    height={35}
-                                    fontColor={colors.whiteColor}
-                                    fontWeight={600}
-                                    fontSize={16}
-                                    bgColor={colors.activeBlue}
-                                />
-                            </Td>
-                        </tr>
+                        <tr><Td colSpan={2}>과거 거래량 데이터</Td></tr>
                         <tr>
                             <Td colSpan={2} bgColor={colors.whiteColor}>
                                 <TableContentsBox>
@@ -359,8 +339,8 @@ const CoinInfoDetailPresentation = ({
                                                 label="시작일"
                                                 mask="____.__.__"
                                                 inputFormat="yyyy.MM.dd"
-                                                value={recruitmentAmount.date}
-                                                onChange={newValue => handleRecruitmentAmount(newValue, "date")}
+                                                value={pastExchange.date}
+                                                onChange={newValue => handlePastExchange(newValue, "date")}
                                                 renderInput={(params) => {
                                                     params.inputProps.placeholder = "yyyy.mm.dd";
                                                     return (<TextField {...params} />
@@ -371,8 +351,8 @@ const CoinInfoDetailPresentation = ({
                                         <TableText margin="0 20px 0 40px">금액 : </TableText>
                                         <Input
                                             width={250}
-                                            value={recruitmentAmount.amount}
-                                            onChange={e => handleRecruitmentAmount(e.target.value, "amount")}
+                                            value={pastExchange.amount}
+                                            onChange={e => handlePastExchange(e.target.value, "amount")}
                                         />
                                         <Button
                                             margin="0 0 0 10px"
@@ -384,7 +364,7 @@ const CoinInfoDetailPresentation = ({
                                             fontSize={16}
                                             bgColor={colors.whiteColor}
                                             border={`1px solid ${colors.activeBlue}`}
-                                            onClick={handleAddRecruitmentAmount}
+                                            onClick={handleAddExchangeChips}
                                         />
                                     </ContentsTop>
                                 </TableContentsBox>
@@ -393,19 +373,28 @@ const CoinInfoDetailPresentation = ({
                         <tr>
                             <Td colSpan={2} bgColor={colors.whiteColor}>
                                 <ContentsBody padding="0 20px">
-                                    {recruitmentAmountChips && recruitmentAmountChips.map((list, index) => {
-                                        return (
-                                            <ListBox
-                                                height={30}
-                                                fontColor={colors.lightBlack}
-                                                fontWeight={400}
-                                                fontSize={16}
-                                                key={index}
-                                            >
-                                                {list}
-                                            </ListBox>
-                                        )
-                                    })}
+                                    <MiniTable>
+                                        {pastExchangeChips && pastExchangeChips.map((list, index) => {
+                                            return (
+                                                <MiniTableCell
+                                                    width={100}
+                                                    key={index}
+                                                >
+                                                    <Text>{list.date.toLocaleDateString("ko-KR")} </Text>
+                                                    <Text>{numberAddComma(parseInt(list.amount))} USD</Text>
+                                                    <Text fontColor={colors.activeRed} cursor="pointer" onClick={() => handleDeleteExchangeChips(list)}>
+                                                        <CancelIcon />
+                                                    </Text>
+                                                </MiniTableCell>
+                                            )
+                                        })}
+                                    </MiniTable>
+                                    <Paging
+                                        currentPage={pastExchangePage}
+                                        totalItemsCount={pastExchangeChips && pastExchangeChips.length}
+                                        onChange={handlePastExchangePage}
+                                        rowsPerPage={5}
+                                    />
                                 </ContentsBody>
                             </Td>
                         </tr>
@@ -413,61 +402,9 @@ const CoinInfoDetailPresentation = ({
                             <Td>분석</Td>
                             <Td> </Td>
                         </tr>
-                        <tr>
-                            <Td colSpan={2} bgColor={colors.whiteColor}>
-                                <TableContentsBox>
-                                    <ContentsBody width={20}>
-                                        <TableText
-                                            padding="15px 10px"
-                                            bgColor={colors.ultraLightGray}
-                                            border={`1px solid ${colors.borderColor}`}
-                                        >관심 회원</TableText>
-                                        <MiniTable>
-                                            {interestMemberData.map(list => {
-                                                return (
-                                                    <MiniTableRow key={list.id}>
-                                                        <MiniTableCell width={10}>{list.id}</MiniTableCell>
-                                                        <MiniTableCell width={90}>{list.name}</MiniTableCell>
-                                                    </MiniTableRow>
-                                                )
-                                            })}
-                                        </MiniTable>
-                                        <Paging
-                                            currentPage={interestMemberPage}
-                                            totalItemsCount={coinDetail.interestedMember && coinDetail.interestedMember.length}
-                                            onChange={handleInterestMemberPage}
-                                            rowsPerPage={5}
-                                        />
-                                    </ContentsBody>
-                                    <ContentsBody width={20}>
-                                        <TableText
-                                            padding="15px 10px"
-                                            bgColor={colors.ultraLightGray}
-                                            border={`1px solid ${colors.borderColor}`}
-                                        >ICO 알림</TableText>
-                                        <MiniTable>
-                                            {icoNotificationData.map(list => {
-                                                return (
-                                                    <MiniTableRow key={list.id}>
-                                                        <MiniTableCell>{list.id}</MiniTableCell>
-                                                        <MiniTableCell>{list.name}</MiniTableCell>
-                                                    </MiniTableRow>
-                                                )
-                                            })}
-                                        </MiniTable>
-                                        <Paging
-                                            currentPage={icoCurrentPage}
-                                            totalItemsCount={coinDetail.icoNotification && coinDetail.icoNotification.length}
-                                            onChange={handleIcoNotificationPage}
-                                            rowsPerPage={5}
-                                        />
-                                    </ContentsBody>
-                                </TableContentsBox>
-                            </Td>
-                        </tr>
                         </tbody>
                     </Table>
-                </TableBox>*/}
+                </TableBox>
 
             </Wrapper>
         </Box>

@@ -1,3 +1,10 @@
+// COIN IMAGE
+import bitCoin from "../images/coinIcon/bitcoin.png";
+import ethereum from "../images/coinIcon/ethereum.png";
+import binanceCoin from "../images/coinIcon/binanceCoin.png";
+import tether from "../images/coinIcon/tether.png";
+import solana from "../images/coinIcon/solana.png";
+
 // 휴대폰 번호 자동 Hyphen 추가
 export const autoHyphenPhoneNumber = phoneNumber => {
     return phoneNumber.replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/, "$1-$2-$3").replace("--", "-");
@@ -46,3 +53,28 @@ export const numberAddComma = number => {
         return parseFloat(number).toFixed(10);
     }
 }
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+// 코인 이미지 반환
+export const returnCoinImage = coinName => {
+    switch(coinName) {
+        case 'Bitcoin':
+            return bitCoin;
+        case 'Ethereum':
+            return ethereum;
+        case 'Binance Coin':
+            return binanceCoin;
+        case 'Tether':
+            return tether;
+        case 'Solana':
+            return solana
+        default:
+            return '';
+    }
+}
+///////////////////////////////////////////////////////////////////////
+
+

@@ -6,18 +6,30 @@ export const SET_TOKEN = "SET_TOKEN";
 
 export const isLogin = loginInfo => async dispatch => {
     try {
-        const res = await axios.post('https://reqres.in/api/login', {
-            email: loginInfo.userId,
-            password: loginInfo.password
-        });
 
-        if (res.status === 200) {
-            dispatch({type: IS_LOGIN, payload: res.data.token });
-            localStorage.setItem("token", res.data.token);
+        if (loginInfo.userId === "admin" && loginInfo.password === "admin123") {
+            dispatch({type: IS_LOGIN, payload: "cms_admin_token_example" });
+            localStorage.setItem("token", "cms_admin_token_example");
             setTimeout(() => {
                 window.location.reload();
-            }, [1000]);
+            }, [500]);
+        } else {
+            window.alert("비밀번호가 일치하지 않습니다.");
         }
+
+        // const res = await axios.post('https://reqres.in/api/login', {
+        //     email: loginInfo.userId,
+        //     password: loginInfo.password
+        // });
+        //
+        // if (res.status === 200) {
+        //     dispatch({type: IS_LOGIN, payload: res.data.token });
+        //     localStorage.setItem("token", res.data.token);
+        //     setTimeout(() => {
+        //         window.location.reload();
+        //     }, [500]);
+        // }
+
     } catch(e) {
         throw new Error(e);
     }
@@ -27,7 +39,7 @@ export const isLogout = () => dispatch => {
     localStorage.removeItem("token");
     setTimeout(() => {
         window.location.reload();
-    }, [1000]);
+    }, [500]);
 }
 export const setToken = token => dispatch => dispatch({ type: SET_TOKEN, payload: token });
 

@@ -1,25 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import CoinInfoPresentation from "./CoinInfoPresentation";
+import React, {useEffect, useState} from 'react';
+import {useHistory} from "react-router-dom";
+import CoinInfoUpdatePresentation from "./CoinInfoUpdatePresentation";
 import axios from "axios";
 import * as constants from "../../../utils/constants";
 
 const serverProtocol = constants.config.PROTOCOL;
-const serverURL = constants.config.URL;
+const serverUrl = constants.config.URL;
 
-const coinInfoColumns = [
-    { id: 'ranking', label: '순위', width: 10, align: 'center'  },
-    { id: 'coinName', label: '코인', width: 150, align: 'left'  },
-    { id: 'currentPrice', label: '현재가(₩)', width: 80, align: 'right' },
-    { id: 'chart', label: '시세 차트', width: 100, align: 'center' },
-    { id: 'transactionPrice_24', label: '24시간 거래량', width: 100, align: 'center' },
-    { id: 'prediction_24', label: '24시간 예측', width: 100, align: 'center' },
-];
+const CoinInfoUpdateContainer = ({ match }) => {
+    const history = useHistory();
+    const {coinId} = match.params;
 
-const CoinInfoContainer = () => {
     const [tabMenu, setTabMenu] = useState(0);
-    const [coinList, setCoinList] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
     const [chipState, setChipState] = useState({
         explorer: [],
         wallet: [],
@@ -27,8 +19,8 @@ const CoinInfoContainer = () => {
         tag: [],
     });
 
-    // 코인 추가
-    const [addCoinState, setAddCoinState] = useState({
+    // 코인 수정
+    const [updateCoinState, setUpdateCoinState] = useState({
         coinImage: null,
         coinName: '',
         monetaryUnit: '',
@@ -64,18 +56,16 @@ const CoinInfoContainer = () => {
         summary: '',
     });
     const handleTabMenu = value => setTabMenu(value);
-    const handleChangePage = page => {
-        let indexOfLast = page * rowsPerPage;
-        let indexOfFirst = indexOfLast - rowsPerPage;
+    const onDelete = () => {
 
-        setCurrentPage(page);
-        setCoinList(coinList.slice(indexOfFirst, indexOfLast));
+    }
+    const goBack = () => {
+
+    }
+    const onSave = () => {
+
     }
 
-    const handleChangeRowsPerPage = e => {
-        setRowsPerPage(+e.target.value);
-        setCoinList(coinList.slice(0, e.target.value));
-    };
 
     const onCoinChange = (e, type) => {
         const { name, value } = e.target;
@@ -86,8 +76,8 @@ const CoinInfoContainer = () => {
             case "COIN_IMAGE":
                 file = e.target.files[0];
                 reader.onload = () => {
-                    setAddCoinState({
-                        ...addCoinState,
+                    setUpdateCoinState({
+                        ...updateCoinState,
                         coinImage: reader.result
                     });
                 }
@@ -117,35 +107,35 @@ const CoinInfoContainer = () => {
             case "SOURCE_CODE":
             case "TAG":
             case "SUMMARY":
-                setAddCoinState({
-                    ...addCoinState,
+                setUpdateCoinState({
+                    ...updateCoinState,
                     [name]: value,
                 });
                 break;
             case "WHITE_PAPER_LINK":
-                setAddCoinState({
-                    ...addCoinState,
+                setUpdateCoinState({
+                    ...updateCoinState,
                     whitePaper: {
-                        ...addCoinState.whitePaper,
+                        ...updateCoinState.whitePaper,
                         link: value,
                     }
                 });
                 break;
             case "WHITE_PAPER_FILE":
                 file = e.target.files[0];
-                setAddCoinState({
-                    ...addCoinState,
+                setUpdateCoinState({
+                    ...updateCoinState,
                     whitePaper: {
-                        ...addCoinState.whitePaper,
+                        ...updateCoinState.whitePaper,
                         file: file,
                     }
                 });
                 break;
             case "COMMUNITY":
-                setAddCoinState({
-                    ...addCoinState,
+                setUpdateCoinState({
+                    ...updateCoinState,
                     community: {
-                        ...addCoinState.community,
+                        ...updateCoinState.community,
                         [name]: value,
                     }
                 });
@@ -153,43 +143,90 @@ const CoinInfoContainer = () => {
         }
     }
 
-    useEffect(() => {
-        console.info(addCoinState)
-    }, [addCoinState]);
+    const fetchData = async () => {
+        try {
+            const { data } = await axios.get(`${serverProtocol}${serverUrl}/coinList/${coinId}`);
+
+            setUpdateCoinState({
+                coinImage: null,
+                coinName: data.coinName,
+                monetaryUnit: data.monetaryUnit,
+                category: 'Stablecoins',
+                type: 'general',
+                price: data.price,
+                priceUnit: 'KRW',
+                branch: data.branch,
+                platform: data.platform,
+                issueVolume: data.issueVolume,
+                marketCap: data.marketCap,
+                marketCapUnit: 'KRW',
+                distribution: data.distribution,
+                transactionPrice_24: data.transactionPrice_24.price,
+                transactionPriceUnit: 'KRW',
+                totalSupply: data.totalSupply,
+                fullyDilutedShares: data.fullyDilutedShares,
+                fullyDilutedSharesUnit: 'KRW',
+                maxSupply: data.maxSupply,
+                explorer: '',
+                wallet: '',
+                webSite: data.webSite,
+                sourceCode: data.sourceCode,
+                whitePaper: {
+                    link: data.whitePaper,
+                    file: null,
+                },
+                community: {
+                    title: '',
+                    url: '',
+                },
+                tag: '',
+                summary: data.summary,
+            });
+            setChipState({
+                explorer: data.explorer,
+                wallet: data.wallet,
+                community: data.community,
+                tag: data.tag,
+            });
+
+        } catch(e) {
+            throw new Error(e);
+        }
+    }
 
     // Chip 추가
     const handleAddChips = type => {
         if (type === "community") {
-            if (addCoinState[type].title === "" || addCoinState[type].title === "") {
+            if (updateCoinState[type].title === "" || updateCoinState[type].title === "") {
                 alert('커뮤니티 명칭 및 URL을 입력해주세요.');
                 return;
             }
-            if (!!chipState[type].find(chip => chip === addCoinState[type].url)) {
-                alert(`이미 ${addCoinState[type].url} 을/를 추가하셨습니다.`);
+            if (!!chipState[type].find(chip => chip === updateCoinState[type].url)) {
+                alert(`이미 ${updateCoinState[type].url} 을/를 추가하셨습니다.`);
                 return;
             }
-            setChipState({
+            setUpdateCoinState({
                 ...chipState,
-                [type]: [...chipState[type], addCoinState[type].url]
+                [type]: [...chipState[type], updateCoinState[type].url]
             });
-            setAddCoinState({
-                ...addCoinState,
+            setUpdateCoinState({
+                ...updateCoinState,
                 community: {
                     title: '',
                     url: '',
                 }
             });
         } else {
-            if (!!chipState[type].find(chip => chip === addCoinState[type])) {
-                alert(`이미 ${addCoinState[type]} 을/를 추가하셨습니다.`);
+            if (!!chipState[type].find(chip => chip === updateCoinState[type])) {
+                alert(`이미 ${updateCoinState[type]} 을/를 추가하셨습니다.`);
                 return;
             }
             setChipState({
                 ...chipState,
-                [type]: [...chipState[type], addCoinState[type]]
+                [type]: [...chipState[type], updateCoinState[type]]
             });
-            setAddCoinState({
-                ...addCoinState,
+            setUpdateCoinState({
+                ...updateCoinState,
                 [type]: '',
             });
         }
@@ -203,38 +240,29 @@ const CoinInfoContainer = () => {
         });
     }
 
-    const fetchData = async () => {
-        try {
-            const response = await axios.get(`${serverProtocol}${serverURL}/coinList`);
-
-            setCoinList(response.data);
-        } catch (e) {
-            throw new Error(e);
-        }
-    }
+    // useEffect(() => {
+    //     console.info('chipState', chipState);
+    // }, [chipState]);
 
     useEffect(() => {
         fetchData();
     }, []);
 
     return (
-        <CoinInfoPresentation
+        <CoinInfoUpdatePresentation
             tabMenu={tabMenu}
             handleTabMenu={handleTabMenu}
-            coinInfoColumns={coinInfoColumns}
-            coinList={coinList}
-            currentPage={currentPage}
-            handleChangePage={handleChangePage}
-            handleChangeRowsPerPage={handleChangeRowsPerPage}
-            rowsPerPage={rowsPerPage}
 
-            addCoinState={addCoinState}
+            updateCoinState={updateCoinState}
             onCoinChange={onCoinChange}
             chipState={chipState}
             handleAddChips={handleAddChips}
             handleDeleteChips={handleDeleteChips}
+            onDelete={onDelete}
+            goBack={goBack}
+            onSave={onSave}
         />
     )
 }
 
-export default CoinInfoContainer;
+export default CoinInfoUpdateContainer;

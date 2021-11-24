@@ -9,9 +9,9 @@ import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import {ko} from 'date-fns/locale';
-import Chip from '@mui/material/Chip';
 import chipDelete from "../../../images/chipDelete.svg";
 import uploadImage from "../../../images/UploadImage.svg";
+import CustomChip from "../../share/CustomChip";
 
 const TableBox = styled.div`
   border-radius: 8px;
@@ -147,17 +147,7 @@ const RowBox = styled.div`
     color: ${colors.whiteColor};
   }
 `;
-const CustomChip = styled(Chip)`
-  &:first-child {
-    margin-top: 5px;
-    margin-left: 5px;
-  }
 
-  & + & {
-    margin-left: 5px;
-    margin-top: 5px;
-  }
-`;
 const AppImage = styled.img`
   ${({width}) => width && css`
     width: ${width};
@@ -471,12 +461,13 @@ const IcoInfoColumnTable = ({
                             />
                         </RowBox>
                         <RowBox margin="5px 0 0 -5px">
-                            {!!chipState && chipState.approval.map(item => (
+                            {!!chipState && chipState.approval.map((item, index) => (
                                 <CustomChip
-                                    key={item}
-                                    label={item}
+                                    key={index}
+                                    item={item}
                                     deleteIcon={<AppImage src={chipDelete}/>}
-                                    onDelete={() => handleDeleteChips(item, "approval")}
+                                    onDelete={handleDeleteChips}
+                                    type="approval"
                                 />
                             ))}
                         </RowBox>
@@ -496,13 +487,13 @@ const IcoInfoColumnTable = ({
                         </ToggleButtonGroup>
                         <RowBox margin="15px 0 0 0 ">
                             {alignment === 'link' &&
-                                <InputBox>
-                                    <Input
-                                        value={addIcoState.whitePaper.link}
-                                        onChange={e => onIcoChange(e, "WHITE_PAPER_LINK")}
-                                        placeholder="링크를 입력해주세요."
-                                    />
-                                </InputBox>
+                            <InputBox>
+                                <Input
+                                    value={addIcoState.whitePaper.link}
+                                    onChange={e => onIcoChange(e, "WHITE_PAPER_LINK")}
+                                    placeholder="링크를 입력해주세요."
+                                />
+                            </InputBox>
                             }
                             {alignment === 'file' &&
                             <FileInputLabel>
@@ -550,14 +541,17 @@ const IcoInfoColumnTable = ({
                             />
                         </RowBox>
                         <RowBox margin="5px 0 0 -5px">
-                            {!!chipState && chipState.community.map((item) => (
-                                <CustomChip
-                                    key={item}
-                                    label={item}
-                                    deleteIcon={<AppImage src={chipDelete}/>}
-                                    onDelete={() => handleDeleteChips(item, "community")}
-                                />
-                            ))}
+                            {!!chipState && chipState.community.map((item, index) => {
+                                return (
+                                    <CustomChip
+                                        key={index}
+                                        item={item}
+                                        onDelete={handleDeleteChips}
+                                        type="community"
+                                    />
+                                )
+                            })
+                            }
                         </RowBox>
                     </Td>
                 </tr>
@@ -585,12 +579,13 @@ const IcoInfoColumnTable = ({
                             />
                         </RowBox>
                         <RowBox margin="5px 0 0 -5px">
-                            {!!chipState && chipState.tag.map((item) => (
+                            {!!chipState && chipState.tag.map((item, index) => (
                                 <CustomChip
-                                    key={item}
-                                    label={item}
+                                    key={index}
+                                    item={item}
                                     deleteIcon={<AppImage src={chipDelete}/>}
-                                    onDelete={() => handleDeleteChips(item, "tag")}
+                                    onDelete={handleDeleteChips}
+                                    type="tag"
                                 />
                             ))}
                         </RowBox>

@@ -82,6 +82,7 @@ const LoginPresentation = ({
                     name="password"
                     value={loginInputs.password}
                     onChange={onInputsChange}
+                    onKeyUp={e => e.key === "Enter" && onSubmit()}
                 />
                 <ErrorMsgBox>
                     {errorMsg && (<ErrorText>&#8252; {errorMsg}</ErrorText>)}

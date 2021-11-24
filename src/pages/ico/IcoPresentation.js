@@ -12,6 +12,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import IcoInfoColumnTable from "../../components/feature/IcoInfo/IcoInfoColumnTable";
 import SearchForm from "../../components/share/SearchForm";
 import ListTable from "../../components/share/Table/ListTable";
+import ContentBox from "../../components/share/ContentBox"
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -87,14 +88,7 @@ const IcoPresentation = ({
     };
 
     return (
-        <Box sx={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            height: '100vh',
-            overflow: 'scroll',
-            bgcolor: '#eaeff1'
-        }}>
+        <ContentBox>
             <HeaderContent
                 tabMenu={tabMenu}
                 handleTabMenu={handleTabMenu}
@@ -181,7 +175,7 @@ const IcoPresentation = ({
                     </ButtonGroup>
                 </Wrapper>
             }
-        </Box>
+        </ContentBox>
     )
 }
 
