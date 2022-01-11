@@ -96,6 +96,7 @@ export default function Navigator(props) {
         setCurrentPath(history.location.pathname);
     }, [history, history.location.pathname, isClicked]);
 
+    console.info(currentPath.split('/')[1]);
 
     return (
         <Drawer variant="permanent" {...other}>
@@ -119,7 +120,7 @@ export default function Navigator(props) {
                     />
                     <SideTitle
                         title="ICO 정보"
-                        active={currentPath === "/ico"}
+                        active={currentPath === "/ico" || currentPath.split('/')[1] === "icoDetail"}
                         onClick={() => onRouteClick("/ico")}
                     />
                     <SideTitle
@@ -127,11 +128,11 @@ export default function Navigator(props) {
                         onClick={() => onRouteClick("/coinInfo")}
                     />
                     <VisibleWrapper
-                        active={currentPath === "/coinInfo" || currentPath === "/category" || currentPath === "/tag" || currentPath === "/nft" || currentPath === "/relatedNews"}
+                        active={currentPath === "/coinInfo" || currentPath.split('/')[1] === "coinInfoDetail" || currentPath === "/category" || currentPath === "/tag" || currentPath === "/nft" || currentPath === "/relatedNews"}
                         length={4}>
                         <SideTabMenu
                             title="코인 정보"
-                            active={currentPath === "/coinInfo"}
+                            active={currentPath === "/coinInfo" || currentPath.split('/')[1] === "coinInfoDetail"}
                             onClick={() => onRouteClick("/coinInfo")}
                         />
                         <SideTabMenu
@@ -157,7 +158,7 @@ export default function Navigator(props) {
                     </VisibleWrapper>
                     <SideTitle
                         title="거래소"
-                        active={currentPath === "/trade"}
+                        active={currentPath === "/trade" || currentPath.split('/')[1] === "tradeDetail"}
                         onClick={() => onRouteClick("/trade")}
                     />
                     <SideTitle

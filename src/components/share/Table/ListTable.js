@@ -2,9 +2,9 @@ import React from 'react';
 import styled, {css} from "styled-components";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
+import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-import TableBody from "@mui/material/TableBody";
 import StarGraph from "../../feature/IcoInfo/StarGraph";
 import TableContainer from "@mui/material/TableContainer";
 import {useHistory} from "react-router-dom";
@@ -23,16 +23,16 @@ const TableWrapper = styled(TableContainer)`
   }
 `;
 const InfoBox = styled.div`
-  width:  ${({width}) => width ? width : '100%'};
-  margin: ${({ margin }) => margin ? margin : '0 auto'};
+  width: ${({width}) => width ? width : '100%'};
+  margin: ${({margin}) => margin ? margin : '0 auto'};
   display: flex;
-  justify-content: ${({ justifyContent }) => justifyContent ? justifyContent : 'center'};
-  align-items: ${({ alignItems }) => alignItems ? alignItems : 'flex-start'};
+  justify-content: ${({justifyContent}) => justifyContent ? justifyContent : 'center'};
+  align-items: ${({alignItems}) => alignItems ? alignItems : 'flex-start'};
 `;
 const RowBox = styled.div`
   text-align: ${({textAlign}) => textAlign ? textAlign : 'center'};
   margin: ${({margin}) => margin ? margin : '0 auto'};
-  
+
   ${({width}) => width && css`
     width: ${({width}) => width};
   `}
@@ -120,7 +120,6 @@ const ListTable = ({
                                 </TableRow>
                             );
                         })}
-
                     {/* 코인 정보 */}
                     {(props.coinList || props.categoryLists) && (props.coinList || props.categoryLists)
                         .map(list => {
@@ -203,11 +202,13 @@ const ListTable = ({
                                                 {column.id === 'marketShare' && value + ' %'}
                                                 {column.id === 'topCoin' &&
                                                 value.map(coin => (
-                                                    <RowBox key={coin.id} display="flex" width="280px" margin="3px auto">
+                                                    <RowBox key={coin.id} display="flex" width="280px"
+                                                            margin="3px auto">
                                                         <Text width="30px" height="30px" margin="0">
                                                             <AppImage src={returnCoinImage(coin.coinName)}/>
                                                         </Text>
-                                                        <Text margin="0 0 0 20px" textAlign="left">{coin.coinName}</Text>
+                                                        <Text margin="0 0 0 20px"
+                                                              textAlign="left">{coin.coinName}</Text>
                                                         <Text margin="0 0 0 20px">{coin.monetaryUnit}</Text>
                                                     </RowBox>
                                                 ))
@@ -280,12 +281,14 @@ const ListTable = ({
                                                 {column.id === 'content' && (
                                                     <InfoBox margin="0" justifyContent="flex-start" alignItems="center">
                                                         <Text width="150px" margin="0">
-                                                            <AppImage src={list.image} />
+                                                            <AppImage src={list.image}/>
                                                         </Text>
                                                         <RowBox textAlign="left" margin="0 40px">
-                                                            <Text fontSize={18} fontColor={colors.blackColor}>{list.title}</Text>
+                                                            <Text fontSize={18}
+                                                                  fontColor={colors.blackColor}>{list.title}</Text>
                                                             <Text margin="5px 0 10px">{list.content}</Text>
-                                                            <Text fontColor={colors.textFieldBlue} onClick={() => window.open(list.url, '_blank')}>{list.url}</Text>
+                                                            <Text fontColor={colors.textFieldBlue}
+                                                                  onClick={() => window.open(list.url, '_blank')}>{list.url}</Text>
                                                         </RowBox>
                                                     </InfoBox>
                                                 )}

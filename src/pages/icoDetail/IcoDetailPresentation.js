@@ -48,8 +48,7 @@ const Td = styled.td`
   `}
   &:first-child,
   &:nth-child(3) {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
     width: 10%;
     border-right: 1px solid ${colors.borderColor};
     background-color: ${colors.ultraLightGray};

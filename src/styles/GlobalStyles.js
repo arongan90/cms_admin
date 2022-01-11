@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import colors from "./colors";
 
 export default createGlobalStyle`
   ${reset};
@@ -43,5 +44,16 @@ export default createGlobalStyle`
   }
   div {
     white-space: nowrap;
+  }
+  
+  .MuiTableCell-root {
+    padding: 8px 16px !important;
+    font-size: 14px !important;
+  }
+  .MuiTableCell-head {
+    font-weight: 600 !important;
+  }
+  .MuiTableCell-body {
+    color: ${colors.lightBlack} !important;
   }
 `;

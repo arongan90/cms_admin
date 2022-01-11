@@ -7,6 +7,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import chipDelete from "../../../images/chipDelete.svg";
 import uploadImage from "../../../images/UploadImage.svg";
 import CustomChip from "../../share/CustomChip";
+import IconImageUpload from "../../share/IconImageUpload";
 
 const TableBox = styled.div`
   border-radius: 8px;
@@ -90,31 +91,6 @@ const FileInputLabel = styled.label`
   font-weight: bold;
   cursor: pointer;
 `;
-const PreviewBox = styled.div`
-  width: 35px;
-  height: 35px;
-  border-radius: 5px;
-  overflow: hidden;
-  position: absolute;
-  z-index: 1;
-  top: -1px;
-`;
-const ImageInputLabel = styled.label`
-  width: 35px;
-  height: 35px;
-  margin-right: 10px;
-  border-radius: 5px;
-  position: relative;
-  border: 1px solid ${colors.borderColor};
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 10px;
-  padding-top: 2px;
-  color: ${colors.grayColor};
-  cursor: pointer;
-`;
 const FileInput = styled.input`
   width: 100%;
   height: 100%;
@@ -178,16 +154,10 @@ const CryptocurrencyColumnTable = ({
                     <Td>코인명</Td>
                     <Td>
                         <RowBox flex>
-                            <ImageInputLabel>
-                                <FileInput type="file" accept="image/*" onChange={e => onCoinChange(e, "COIN_IMAGE")}/>
-                                {coinState.coinImage &&
-                                <PreviewBox>
-                                    <AppImage width="100%" height="100%" src={coinState.coinImage}/>
-                                </PreviewBox>
-                                }
-                                <AppImage width="60%" height="60%" src={uploadImage}/>
-                                ICON
-                            </ImageInputLabel>
+                            <IconImageUpload
+                                onChange={e => onCoinChange(e, "COIN_IMAGE")}
+                                state={coinState}
+                            />
                             <InputBox>
                                 <Input
                                     name="coinName"

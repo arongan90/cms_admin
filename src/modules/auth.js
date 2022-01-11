@@ -12,7 +12,7 @@ export const isLogin = loginInfo => async dispatch => {
             localStorage.setItem("token", "cms_admin_token_example");
             setTimeout(() => {
                 window.location.reload();
-            }, [500]);
+            }, 500);
         } else {
             window.alert("비밀번호가 일치하지 않습니다.");
         }

@@ -158,7 +158,7 @@ theme = {
 
 const ComponentWrapper = styled.div`
   ${({ isLoggedIn }) => isLoggedIn && css `
-    padding-left: 256px;
+    padding-left: 230px;
     
     @media screen and (max-width: 600px) {
         padding-left: 0;
@@ -173,7 +173,7 @@ const ComponentWrapper = styled.div`
 `;
 
 function App() {
-    const drawerWidth = 256;
+    const drawerWidth = 230;
     const dispatch = useDispatch();
     const history = useHistory();
     const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));

@@ -21,6 +21,7 @@ const Wrapper = styled.div`
     justify-content: center; 
     align-items: center;
     border: 1px solid ${colors.borderColor};
+    background-color: ${colors.whiteColor};
     
     a {
       color: ${colors.textFieldBlue};

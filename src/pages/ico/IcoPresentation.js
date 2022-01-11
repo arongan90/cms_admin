@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from "styled-components";
-import Box from '@mui/material/Box';
 import HeaderContent from "../../components/share/HeaderContent";
 import colors from "../../styles/colors";
 import Button from "../../components/share/Button";

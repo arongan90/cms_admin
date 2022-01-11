@@ -10,7 +10,7 @@ const CostumeButton = styled.button`
   border: ${({ border }) => border ? border : 'none'};
   color: ${({ fontColor }) => fontColor};
   margin: ${({ margin }) => margin};
-  border-radius: ${({ borderRadius }) => borderRadius ? borderRadius : '5px'};
+  border-radius: ${({ borderRadius }) => borderRadius ? borderRadius : '4px'};
   outline: none;
   
   //& + & {

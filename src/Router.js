@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import Login from "./pages/login";
 import Main from "./pages/main";
 import Admin from "./pages/admin";
@@ -16,6 +16,7 @@ import Nft from "./pages/cryptocurrency/NFTCollection";
 import NftDetail from "./pages/cryptocurrency/NFTCollectionDetail";
 import RelatedNews from "./pages/cryptocurrency/RelatedNews";
 import Trade from "./pages/trade";
+import TradeDetail from "./pages/tradeDetail";
 import CryptocurrencyAPI from "./pages/goods/CryptocurrencyAPI";
 import Calculation from "./pages/goods/Calculation";
 import RecentNews from "./pages/serviceCenter/RecentNews";
@@ -39,56 +40,57 @@ import MemberDetail from "./pages/memberDetail";
 
 const LoggedOutRoutes = () => (
     <Switch>
-        <Route path="/" component={Login} exact />
-        <Route path="/login" component={Login} />
+        <Route path="/" component={Login} exact/>
+        <Route path="/login" component={Login}/>
     </Switch>
 );
 
 const LoggedInRoutes = () => (
     <Switch>
-        <Route path="/" component={Main} exact />
-        <Route path="/admin" component={Admin} />
-        <Route path="/member" component={Member} />
-        <Route path="/memberUpdate/:memberId" component={MemberUpdate} />
-        <Route path="/memberDetail/:memberId" component={MemberDetail} />
-        <Route path="/ico" component={ICO} />
-        <Route path="/icoDetail/:icoId" component={IcoDetail} />
-        <Route path="/icoUpdate/:icoId" component={IcoUpdate} />
-        <Route path="/coinInfo" component={CoinInfo} />
-        <Route path="/coinInfoDetail/:coinId" component={CoinInfoDetail} />
-        <Route path="/coinUpdate/:coinId" component={CoinInfoUpdate} />
-        <Route path="/category" component={Category} />
-        <Route path="/categoryDetail/:categoryId" component={CategoryDetail} />
-        <Route path="/tag" component={Tag} />
-        <Route path="/nft" component={Nft} />
-        <Route path="/nftDetail/:nftId" component={NftDetail} />
-        <Route path="/relatedNews" component={RelatedNews} />
-        <Route path="/trade" component={Trade} />
-        <Route path="/api" component={CryptocurrencyAPI} />
-        <Route path="/calculation" component={Calculation} />
-        <Route path="/recentNews" component={RecentNews} />
-        <Route path="/service" component={Service} />
-        <Route path="/term" component={Term} />
-        <Route path="/privacy" component={Privacy} />
-        <Route path="/escapeClause" component={EscapeClause} />
-        <Route path="/cookie" component={Cookie} />
-        <Route path="/qna" component={Qna} />
-        <Route path="/errorReport" component={ErrorReport} />
-        <Route path="/icoSubmit" component={IcoSubmit} />
-        <Route path="/language" component={Language} />
-        <Route path="/currency" component={Currency} />
-        <Route path="/priceNotice" component={PriceNotice} />
-        <Route path="/newsLetter" component={NewsLetter} />
-        <Route path="/subscriber" component={Subscriber} />
-        <Route path="/mailing" component={Mailing} />
+        <Route path="/" component={Main} exact/>
+        <Route path="/admin" component={Admin}/>
+        <Route path="/member" component={Member}/>
+        <Route path="/memberUpdate/:memberId" component={MemberUpdate}/>
+        <Route path="/memberDetail/:memberId" component={MemberDetail}/>
+        <Route path="/ico" component={ICO}/>
+        <Route path="/icoDetail/:icoId" component={IcoDetail}/>
+        <Route path="/icoUpdate/:icoId" component={IcoUpdate}/>
+        <Route path="/coinInfo" component={CoinInfo}/>
+        <Route path="/coinInfoDetail/:coinId" component={CoinInfoDetail}/>
+        <Route path="/coinUpdate/:coinId" component={CoinInfoUpdate}/>
+        <Route path="/category" component={Category}/>
+        <Route path="/categoryDetail/:categoryId" component={CategoryDetail}/>
+        <Route path="/tag" component={Tag}/>
+        <Route path="/nft" component={Nft}/>
+        <Route path="/nftDetail/:nftId" component={NftDetail}/>
+        <Route path="/relatedNews" component={RelatedNews}/>
+        <Route path="/trade" component={Trade}/>
+        <Route path="/tradeDetail/:tradeId" component={TradeDetail}/>
+        <Route path="/api" component={CryptocurrencyAPI}/>
+        <Route path="/calculation" component={Calculation}/>
+        <Route path="/recentNews" component={RecentNews}/>
+        <Route path="/service" component={Service}/>
+        <Route path="/term" component={Term}/>
+        <Route path="/privacy" component={Privacy}/>
+        <Route path="/escapeClause" component={EscapeClause}/>
+        <Route path="/cookie" component={Cookie}/>
+        <Route path="/qna" component={Qna}/>
+        <Route path="/errorReport" component={ErrorReport}/>
+        <Route path="/icoSubmit" component={IcoSubmit}/>
+        <Route path="/language" component={Language}/>
+        <Route path="/currency" component={Currency}/>
+        <Route path="/priceNotice" component={PriceNotice}/>
+        <Route path="/newsLetter" component={NewsLetter}/>
+        <Route path="/subscriber" component={Subscriber}/>
+        <Route path="/mailing" component={Mailing}/>
     </Switch>
 );
 
 
-const Router = ({ isLoggedIn }) => {
+const Router = ({isLoggedIn}) => {
     return (
         <>
-            {isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}
+            {isLoggedIn ? <LoggedInRoutes/> : <LoggedOutRoutes/>}
         </>
     )
 }

@@ -10,7 +10,8 @@ const ContentBox = ({ children }) => {
             flexDirection: 'column',
             height: '100vh',
             overflow: 'scroll',
-            bgcolor: colors.defaultBgColor
+            bgcolor: colors.defaultBgColor,
+            // maxWidth: '1920px'
         }}>
             {children}
         </Box>

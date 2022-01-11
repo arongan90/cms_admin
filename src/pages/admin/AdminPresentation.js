@@ -124,7 +124,6 @@ const AdminPresentation = ({
                     <AddAdmin/>
                 }
             </Wrapper>
-
                 <Modal
                     open={updateModalOpen}
                     onClose={handleUpdateModalClose}
