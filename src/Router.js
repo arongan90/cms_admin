@@ -18,6 +18,7 @@ import RelatedNews from "./pages/cryptocurrency/RelatedNews";
 import Trade from "./pages/trade";
 import TradeDetail from "./pages/tradeDetail";
 import CryptocurrencyAPI from "./pages/goods/CryptocurrencyAPI";
+import CryptocurrencyAPIUpdate from "./pages/goods/CryptocurrencyAPIUpdate";
 import Calculation from "./pages/goods/Calculation";
 import RecentNews from "./pages/serviceCenter/RecentNews";
 import Service from "./pages/serviceCenter/Service";
@@ -67,6 +68,7 @@ const LoggedInRoutes = () => (
         <Route path="/trade" component={Trade}/>
         <Route path="/tradeDetail/:tradeId" component={TradeDetail}/>
         <Route path="/api" component={CryptocurrencyAPI}/>
+        <Route path="/apiUpdate" component={CryptocurrencyAPIUpdate}/>
         <Route path="/calculation" component={Calculation}/>
         <Route path="/recentNews" component={RecentNews}/>
         <Route path="/service" component={Service}/>

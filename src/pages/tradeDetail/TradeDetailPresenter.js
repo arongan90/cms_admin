@@ -12,10 +12,11 @@ import {ko} from "date-fns/locale";
 import DatePicker from "@mui/lab/DatePicker";
 import TextField from "@mui/material/TextField";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import krFlag from "../../images/nationalFlag/kr.svg";
 
 const Wrapper = styled.div`
   max-width: 1550px;
@@ -66,17 +67,27 @@ const Td = styled.td`
     border-left: 1px solid ${colors.borderColor};
   }
 `;
+const ImageBox = styled.div`
+  width: ${({ width }) => width ? width : 24}px;
+  height: ${({ height }) => height ? height : 24}px;
+  margin: ${({ margin }) => margin ? margin : "0 10px 0 0"}px;
+`;
 const AppImage = styled.img`
-  width: 30px;
-  height: 30px;
-  margin-right: 15px;
+  width: 24px;
+  height: 24px;
 `;
 const RowBox = styled.div`
+  ${({width}) => width && css`
+    width: ${width};
+  `}
   display: flex;
   align-items: ${({align}) => align ? align : "center"};
   justify-content: ${({justifyContent}) => justifyContent ? justifyContent : "center"};
   ${({flexDirection}) => flexDirection && css`
     flex-direction: ${flexDirection};
+  `}
+  ${({padding}) => padding && css`
+    padding: ${padding};
   `}
 `;
 const LinkText = styled.span`
@@ -87,12 +98,15 @@ const LinkText = styled.span`
   }
 `;
 const MiniTable = styled.table`
-  width: 100%;
+  width: ${({ width }) => width ? width : '100%'};
   border: 1px solid ${colors.borderColor};
   border-radius: 0 0 5px 5px;
   box-shadow: 0 5px 8px -1px ${colors.shadowColor};
 
   td {
+    ${({ width }) => width && css`
+      width: ${width};
+    `}
     white-space: nowrap;
     padding: 12px 16px;
     border-bottom: 1px solid ${colors.borderColor};
@@ -107,15 +121,27 @@ const MiniTable = styled.table`
   tbody tr td {
     text-align: center;
   }
+  
+  tbody td:last-child {
+    text-align: right;
+  }
 
   // DatePicker Style
+  .css-ocs8jh-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input,
   .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
-    height: 35px;
+    height: 35px !important;
     padding: 0 10px;
   }
 
+  .css-h33d2j-MuiInputBase-root-MuiOutlinedInput-root,
   .css-bkqowc-MuiInputBase-root-MuiOutlinedInput-root {
     border-radius: 4px;
+  }
+
+  // Material Select
+  .css-ocs8jh-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
+    display: flex;
+    align-items: center;
   }
 `;
 const Text = styled.div`
@@ -123,6 +149,7 @@ const Text = styled.div`
   color: ${({fontColor}) => fontColor ? fontColor : colors.blackColor};
   font-weight: ${({fontWeight}) => fontWeight ? fontWeight : 500};
   margin: ${({margin}) => margin ? margin : "0 10px 0 0"};
+  cursor: ${({cursor}) => cursor ? cursor : "default"};
 `;
 const InputBox = styled.div`
   width: ${({width}) => width ? width : 200}px;
@@ -144,7 +171,7 @@ const StyledSelect = styled.select`
 `;
 const PagingBox = styled.div`
   width: 500px;
-  margin: 50px auto 20px;
+  margin: 50px auto 80px;
 `;
 
 const TradeDetailPresenter = ({
@@ -155,6 +182,9 @@ const TradeDetailPresenter = ({
 
                                   tradeVisit,
                                   onTradeVisitChange,
+                                  handleDeleteTradeVisit,
+                                  handleDeleteCoin,
+                                  handleDeleteCurrency,
                               }) => {
     return (
         <Box sx={{
@@ -200,7 +230,9 @@ const TradeDetailPresenter = ({
                             </Td>
                             <Td>
                                 <RowBox justifyContent="flex-start">
-                                    <AppImage src={bitcoinImage}/>
+                                    <ImageBox>
+                                        <AppImage src={bitcoinImage}/>
+                                    </ImageBox>
                                     {"Binance"}
                                 </RowBox>
                             </Td>
@@ -274,7 +306,7 @@ const TradeDetailPresenter = ({
                     <MiniTable>
                         <thead>
                         <tr>
-                            <td colSpan={4}>
+                            <td colSpan={3}>
                                 거래량, 방문
                             </td>
                         </tr>
@@ -300,63 +332,69 @@ const TradeDetailPresenter = ({
                                 </RowBox>
                             </td>
                             <td>
-                                <RowBox>
-                                    <Text>거래량</Text>
-                                    <InputBox width={300}>
-                                        <Input
-                                            value={tradeVisit.volume}
-                                            onChange={e => onTradeVisitChange(e.target.value, "volume")}
-                                            width={70}
+                                <RowBox justifyContent="space-around">
+                                    <RowBox>
+                                        <Text>거래량</Text>
+                                        <InputBox width={250}>
+                                            <Input
+                                                value={tradeVisit.volume}
+                                                onChange={e => onTradeVisitChange(e.target.value, "volume")}
+                                                width={70}
+                                            />
+                                            <StyledSelect
+                                                value={tradeVisit.unit}
+                                                onChange={e => onTradeVisitChange(e.target.value, "unit")}
+                                            >
+                                                <option value="USD">USD</option>
+                                            </StyledSelect>
+                                        </InputBox>
+                                    </RowBox>
+                                    <RowBox>
+                                        <Text>방문</Text>
+                                        <InputBox>
+                                            <Input
+                                                value={tradeVisit.visit}
+                                                onChange={e => onTradeVisitChange(e.target.value, "visit")}
+                                            />
+                                        </InputBox>
+                                        <Button
+                                            title="+"
+                                            margin="0 0 0 10px"
+                                            width={35}
+                                            height={35}
+                                            bgColor={colors.whiteColor}
+                                            fontColor={colors.activeBlue}
+                                            border={`1px solid ${colors.activeBlue}`}
                                         />
-                                        <StyledSelect
-                                            value={tradeVisit.unit}
-                                            onChange={e => onTradeVisitChange(e.target.value, "unit")}
-                                        >
-                                            <option value="USD">USD</option>
-                                        </StyledSelect>
-                                    </InputBox>
+                                        <Button
+                                            title="엑셀 업로드"
+                                            margin="0 0 0 10px"
+                                            width={100}
+                                            height={35}
+                                            bgColor={colors.whiteColor}
+                                            fontColor={colors.activeBlue}
+                                            border={`1px solid ${colors.activeBlue}`}
+                                        />
+                                    </RowBox>
                                 </RowBox>
                             </td>
-                            <td>
-                                <RowBox>
-                                    <Text>방문</Text>
-                                    <InputBox>
-                                        <Input
-                                            value={tradeVisit.visit}
-                                            onChange={e => onTradeVisitChange(e.target.value, "visit")}
-                                        />
-                                    </InputBox>
-                                    <Button
-                                        title="+"
-                                        margin="0 0 0 10px"
-                                        width={35}
-                                        height={35}
-                                        bgColor={colors.whiteColor}
-                                        fontColor={colors.activeBlue}
-                                        border={`1px solid ${colors.activeBlue}`}
-                                    />
-                                    <Button
-                                        title="엑셀 업로드"
-                                        margin="0 0 0 10px"
-                                        width={100}
-                                        height={35}
-                                        bgColor={colors.whiteColor}
-                                        fontColor={colors.activeBlue}
-                                        border={`1px solid ${colors.activeBlue}`}
-                                    />
-                                </RowBox>
-                            </td>
+                            <td/>
                         </tr>
                         </thead>
 
                         <tbody>
                         <tr>
-                            <td colSpan={3}>
+                            <td colSpan={2}>
                                 <RowBox justifyContent="space-around">
                                     <Text>2022.08.22</Text>
                                     <Text>24,262 USD</Text>
                                     <Text>274</Text>
                                 </RowBox>
+                            </td>
+                            <td>
+                                <Text cursor="pointer" onClick={() => handleDeleteTradeVisit()}>
+                                    <HighlightOffIcon/>
+                                </Text>
                             </td>
                         </tr>
                         </tbody>
@@ -372,97 +410,53 @@ const TradeDetailPresenter = ({
                     <MiniTable>
                         <thead>
                         <tr>
-                            <td colSpan={4}>
+                            <td colSpan={3}>
                                 코인
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <RowBox>
-                                    <Text>날짜</Text>
-                                    <LocalizationProvider dateAdapter={AdapterDateFns} locale={ko}>
-                                        <DatePicker
-                                            label="시작일"
-                                            mask="____.__.__"
-                                            inputFormat="yyyy.MM.dd"
-                                            value={tradeVisit.date}
-                                            name="date"
-                                            onChange={newValue => onTradeVisitChange(newValue, "date")}
-                                            renderInput={(params) => {
-                                                params.inputProps.placeholder = "yyyy.mm.dd";
-                                                return (<TextField {...params} />
-                                                )
-                                            }}
-                                        />
-                                    </LocalizationProvider>
-                                </RowBox>
+                            <td width={120}>
+                                <RowBox>코인 종류</RowBox>
                             </td>
-                            <td>
-                                <RowBox>
-                                    <Text>코인 종류</Text>
-
-                                    <FormControl sx={{m: 1, minWidth: 120}}>
-                                        <InputLabel id="demo-simple-select-helper-label">Age</InputLabel>
-                                        <Select
-                                            labelId="demo-simple-select-helper-label"
-                                            id="demo-simple-select-helper"
-                                            // value={tradeVisit.unit}
-                                            // onChange={() => onTradeVisitChange()}
-                                        >
-                                            <MenuItem value="">
-                                                <em>None</em>
-                                            </MenuItem>
-                                            <MenuItem value={10}>
+                            <td colSpan={2}>
+                                <FormControl sx={{m: 1, minWidth: 250}}>
+                                    <Select
+                                        value={tradeVisit.coin}
+                                        onChange={e => onTradeVisitChange(e.target.value, "coin")}
+                                    >
+                                        <MenuItem value="bitcoin">
+                                            <ImageBox>
                                                 <AppImage src={bitcoinImage}/>
-                                                <Text>Bitcoin</Text>
-                                            </MenuItem>
-                                            <MenuItem value={20}>Twenty</MenuItem>
-                                            <MenuItem value={30}>Thirty</MenuItem>
-                                        </Select>
-                                    </FormControl>
+                                            </ImageBox>
+                                            <Text>Bitcoin</Text>
+                                        </MenuItem>
+                                        <MenuItem value="ethereum">Ethereum</MenuItem>
+                                        <MenuItem value="tether">Tether</MenuItem>
+                                        <MenuItem value="BNB">BNB</MenuItem>
 
-                                </RowBox>
-                            </td>
-                            <td>
-                                <RowBox>
-                                    <Text>방문</Text>
-                                    <InputBox>
-                                        <Input
-                                            value={tradeVisit.visit}
-                                            onChange={e => onTradeVisitChange(e.target.value, "visit")}
-                                        />
-                                    </InputBox>
-                                    <Button
-                                        title="+"
-                                        margin="0 0 0 10px"
-                                        width={35}
-                                        height={35}
-                                        bgColor={colors.whiteColor}
-                                        fontColor={colors.activeBlue}
-                                        border={`1px solid ${colors.activeBlue}`}
-                                    />
-                                    <Button
-                                        title="엑셀 업로드"
-                                        margin="0 0 0 10px"
-                                        width={100}
-                                        height={35}
-                                        bgColor={colors.whiteColor}
-                                        fontColor={colors.activeBlue}
-                                        border={`1px solid ${colors.activeBlue}`}
-                                    />
-                                </RowBox>
+                                    </Select>
+                                </FormControl>
                             </td>
                         </tr>
                         </thead>
 
                         <tbody>
                         <tr>
-                            <td colSpan={3}>
-                                <RowBox justifyContent="space-around">
-                                    <Text>2022.08.22</Text>
-                                    <Text>24,262 USD</Text>
-                                    <Text>274</Text>
+                            <td>
+                                {1}
+                            </td>
+                            <td>
+                                <RowBox padding="0 20px" justifyContent="flex-start">
+                                    <ImageBox>
+                                        <AppImage src={bitcoinImage}/>
+                                    </ImageBox>
+                                    <Text>Bitcoin</Text>
                                 </RowBox>
+                            </td>
+                            <td>
+                                <Text cursor="pointer" onClick={() => handleDeleteCoin()}>
+                                    <HighlightOffIcon/>
+                                </Text>
                             </td>
                         </tr>
                         </tbody>
@@ -473,6 +467,68 @@ const TradeDetailPresenter = ({
                     <Paging/>
                 </PagingBox>
 
+                {/* 지원화폐 */}
+                <TableBox>
+                    <MiniTable>
+                        <thead>
+                        <tr>
+                            <td colSpan={3}>
+                                지원화폐
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width={120}>
+                                <RowBox>화폐 종류</RowBox>
+                            </td>
+                            <td colSpan={2}>
+                                <FormControl sx={{m: 1, minWidth: 250}}>
+                                    <Select
+                                        value={tradeVisit.currency}
+                                        onChange={e => onTradeVisitChange(e.target.value, "currency")}
+                                    >
+                                        <MenuItem value="KRW">
+                                            <ImageBox width={24} height={24}>
+                                                <AppImage src={krFlag} />
+                                            </ImageBox>
+                                            <Text>South Korea Won</Text>
+                                            <Text margin="0 0 0 20px" fontColor={colors.darkGrayColor}>KRW ₩</Text>
+                                        </MenuItem>
+                                        <MenuItem value="ethereum">Ethereum</MenuItem>
+                                        <MenuItem value="tether">Tether</MenuItem>
+                                        <MenuItem value="BNB">BNB</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </td>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td>
+                                {1}
+                            </td>
+                            <td>
+                                <RowBox padding="0 20px" justifyContent="flex-start">
+                                    <ImageBox width={24} height={24}>
+                                        <AppImage src={krFlag} />
+                                    </ImageBox>
+                                    <Text>South Korea Won</Text>
+                                    <Text margin="0 0 0 20px" fontColor={colors.darkGrayColor}>KRW ₩</Text>
+                                </RowBox>
+                            </td>
+                            <td>
+                                <Text cursor="pointer" onClick={() => handleDeleteCurrency()}>
+                                    <HighlightOffIcon/>
+                                </Text>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </MiniTable>
+                </TableBox>
+
+                <PagingBox>
+                    <Paging/>
+                </PagingBox>
             </Wrapper>
         </Box>
     )

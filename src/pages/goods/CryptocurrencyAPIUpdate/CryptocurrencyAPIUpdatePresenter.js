@@ -6,10 +6,10 @@ import colors from "../../../styles/colors";
 import Button from "../../../components/share/Button";
 
 const Wrapper = styled.div`
-  padding: 20px;
+  padding: 40px 20px;
 `;
 const ButtonGroup = styled.div`
-  margin: 20px 20px 40px;
+  margin: 20px 20px 150px;
   text-align: right;
 `;
 const Content = styled.div`
@@ -29,40 +29,50 @@ const Title = styled.div`
   background-color: ${colors.theadBgColor};
 `;
 
-const CryptocurrencyApiPresentation = ({
-                                           tabMenu,
-                                           handleTabMenu,
-                                           onAiUpdate
-                                       }) => {
+const CryptocurrencyAPIUpdatePresenter = ({
+                                              tabMenu,
+                                              handleTabMenu,
+                                          }) => {
     return (
         <ContentBox>
             <HeaderContent
                 tabMenu={tabMenu}
                 handleTabMenu={handleTabMenu}
                 title="암호화폐 API"
-                tabList={["암호화폐 API 목록"]}
+                tabList={["암호화폐 API 수정"]}
             />
             <Wrapper>
-                <ButtonGroup>
-                    <Button
-                        width={120}
-                        height={38}
-                        title="수정"
-                        fontColor={colors.whiteColor}
-                        bgColor={colors.darkBlueColor}
-                        fontSize={18}
-                        fontWeight={600}
-                        onClick={onAiUpdate}
-                    />
-                </ButtonGroup>
                 <Content>
                     <Title>
-                        내용
+                        에디터
                     </Title>
                 </Content>
             </Wrapper>
+            <ButtonGroup>
+                <Button
+                    width={120}
+                    height={46}
+                    title="취소"
+                    fontColor={colors.darkBlueColor}
+                    bgColor={colors.whiteColor}
+                    border={`1px solid ${colors.darkBlueColor}`}
+                    fontSize={18}
+                    fontWeight={600}
+
+                />
+                <Button
+                    width={120}
+                    height={46}
+                    title="저장"
+                    fontColor={colors.whiteColor}
+                    bgColor={colors.darkBlueColor}
+                    fontSize={18}
+                    fontWeight={600}
+                    margin="0 0 0 20px"
+                />
+            </ButtonGroup>
         </ContentBox>
     )
 }
 
-export default CryptocurrencyApiPresentation;
+export default CryptocurrencyAPIUpdatePresenter;

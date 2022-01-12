@@ -117,6 +117,7 @@ const TradePresentation = ({
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
+                                                {/*  data.map  */}
                                                 <TradeTableRow
                                                     // 순위
                                                     // 거래소

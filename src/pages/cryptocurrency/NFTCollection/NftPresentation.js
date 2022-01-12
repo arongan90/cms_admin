@@ -115,12 +115,12 @@ const NftPresentation = ({
                     <>
                         <ButtonGroup>
                             <Button
-                                width={150}
-                                height={52}
+                                width={120}
+                                height={38}
                                 title="콜렉션 추가"
-                                bgColor={colors.activeBlue}
+                                bgColor={colors.deepNavyColor}
                                 fontColor={colors.whiteColor}
-                                fontSize={18}
+                                fontSize={16}
                                 fontWeight={600}
                                 onClick={() => handleTabMenu(1)}
                             />

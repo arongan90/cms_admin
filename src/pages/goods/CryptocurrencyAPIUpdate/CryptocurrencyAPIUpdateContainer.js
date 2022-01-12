@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import RecentNewsPresentation from "./RecentNewsPresentation";
+import CryptocurrencyAPIUpdatePresenter from "./CryptocurrencyAPIUpdatePresenter";
 
-const RecentNewsContainer = () => {
+const CryptocurrencyAPIUpdateContainer = () => {
     const [tabMenu, setTabMenu] = useState(0);
 
     const handleTabMenu = value => setTabMenu(value);
 
     return (
-        <RecentNewsPresentation
+        <CryptocurrencyAPIUpdatePresenter
             tabMenu={tabMenu}
             handleTabMenu={handleTabMenu}
         />
     )
 }
 
-export default RecentNewsContainer;
+export default CryptocurrencyAPIUpdateContainer;
