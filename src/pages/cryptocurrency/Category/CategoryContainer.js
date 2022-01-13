@@ -31,8 +31,6 @@ const CategoryContainer = () => {
 
     const inputChange = e => setCategoryInputs(e.target.value);
     const onAddCategory = () => {
-        console.info('카테고리 추가');
-
         setCategoryInputs('');
         setAddCategoryOpen(false);
     }
@@ -41,6 +39,10 @@ const CategoryContainer = () => {
         try {
             const response = await axios.get(`${serverProtocol}${serverURL}/coinList`);
             setCategoryList(response.data);
+
+
+            console.info('response', response);
+
         } catch (e) {
             throw new Error(e);
         }
@@ -52,6 +54,7 @@ const CategoryContainer = () => {
 
     useEffect(() => {
         fetchData();
+
     }, []);
 
     return (

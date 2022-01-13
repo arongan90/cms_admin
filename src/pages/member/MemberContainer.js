@@ -85,6 +85,9 @@ const MemberContainer = () => {
         let indexOfLast = page * rowsPerPage;
         let indexOfFirst = indexOfLast - rowsPerPage;
 
+        console.info('newsData : ', memberData);
+
+
         setCurrentPage(page);
         setMemberList(memberData.slice(indexOfFirst, indexOfLast));
     }
@@ -128,8 +131,8 @@ const MemberContainer = () => {
     }, []);
 
     useEffect(() => {
-        console.info('searchInput', searchInput)
-    }, [searchInput]);
+        console.info('memberList', memberList)
+    }, [memberList]);
 
     return (
         <MemberPresentational
