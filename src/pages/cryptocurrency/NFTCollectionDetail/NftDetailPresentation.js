@@ -221,6 +221,7 @@ const NftDetailPresentation = ({
                                     fontSize={18}
                                     fontWeight={600}
                                     fontColor={colors.activeRed}
+                                    bgColor={colors.whiteColor}
                                     border={`1px solid ${colors.activeRed}`}
                                     onClick={handleNftDelete}
                                 />
@@ -233,6 +234,7 @@ const NftDetailPresentation = ({
                                     fontSize={18}
                                     fontWeight={600}
                                     fontColor={colors.activeBlue}
+                                    bgColor={colors.whiteColor}
                                     border={`1px solid ${colors.activeBlue}`}
                                     onClick={handleCancel}
                                 />

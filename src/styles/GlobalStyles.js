@@ -56,4 +56,8 @@ export default createGlobalStyle`
   .MuiTableCell-body {
     color: ${colors.lightBlack} !important;
   }
+  
+  em {
+    font-style: italic;
+  }
 `;

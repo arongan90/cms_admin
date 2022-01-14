@@ -34,7 +34,7 @@ const TradeTableRow = ({
     const history = useHistory();
 
     return (
-        <Row id={id}>
+        <Row id={id} onClick={() => history.push(`/recentNewsDetail/${id}`)}>
             <Text fontColor={colors.blackColor} fontWeight={600} margin="5px 0 10px">
                 {title}
             </Text>
