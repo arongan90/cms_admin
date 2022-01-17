@@ -186,13 +186,18 @@ export default function Navigator(props) {
                         onClick={() => onRouteClick("/recentNews")}
                     />
                     <VisibleWrapper
-                        active={currentPath === "/recentNews" || currentPath === "/service" || currentPath === "/term" || currentPath === "/privacy" || currentPath === "/escapeClause" || currentPath === "/cookie"}
+                        active={currentPath === "/recentNews" || currentPath === "/faq" || currentPath === "/service" || currentPath === "/term" || currentPath === "/privacy" || currentPath === "/escapeClause" || currentPath === "/cookie" || currentPath.split('/')[1] === "recentNewsDetail" || currentPath.split('/')[1] === "faqUpdate"}
                         length={6}
                     >
                         <SideTabMenu
                             title="최근 소식"
-                            active={currentPath === "/recentNews"}
+                            active={currentPath === "/recentNews" || currentPath.split('/')[1] === "recentNewsDetail"}
                             onClick={() => onRouteClick("/recentNews")}
+                        />
+                        <SideTabMenu
+                            title="FAQ"
+                            active={currentPath === "/faq" || currentPath.split('/')[1] === "faqUpdate"}
+                            onClick={() => onRouteClick("/faq")}
                         />
                         <SideTabMenu
                             title="서비스 소개"

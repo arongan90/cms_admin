@@ -60,4 +60,9 @@ export default createGlobalStyle`
   em {
     font-style: italic;
   }
+  
+  textarea {
+    outline: none;
+    font-family: inherit;
+  }
 `;

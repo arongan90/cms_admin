@@ -7,7 +7,7 @@ import colors from "../../styles/colors";
 const MyBlock = styled.div`
   .editor {
     height: 500px !important;
-    padding: 5px !important;
+    padding: 5px 10px !important;
     border: 1px solid ${colors.borderColor};
   }
   

@@ -22,6 +22,8 @@ import CryptocurrencyAPIUpdate from "./pages/goods/CryptocurrencyAPIUpdate";
 import Calculation from "./pages/goods/Calculation";
 import RecentNews from "./pages/serviceCenter/RecentNews";
 import RecentNewsDetail from "./pages/serviceCenter/RecentNewsDetail";
+import Faq from "./pages/serviceCenter/Faq";
+import FaqUpdate from "./pages/serviceCenter/FaqUpdate";
 import Service from "./pages/serviceCenter/Service";
 import Term from "./pages/serviceCenter/Term";
 import Privacy from "./pages/serviceCenter/Privacy";
@@ -74,6 +76,8 @@ const LoggedInRoutes = () => (
         <Route path="/recentNews" component={RecentNews}/>
         <Route path="/recentNewsDetail/:newsId" component={RecentNewsDetail}/>
         <Route path="/service" component={Service}/>
+        <Route path="/faq" component={Faq} />
+        <Route path="/faqUpdate/:faqId" component={FaqUpdate} />
         <Route path="/term" component={Term}/>
         <Route path="/privacy" component={Privacy}/>
         <Route path="/escapeClause" component={EscapeClause}/>

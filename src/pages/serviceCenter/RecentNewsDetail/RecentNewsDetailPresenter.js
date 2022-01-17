@@ -49,7 +49,8 @@ const RecentNewsDetailPresenter = ({
                                        editorState,
                                        onEditorStateChange,
                                        editorToHtml,
-                                       onDeleteNews
+                                       onDeleteNews,
+                                       onSaveNews
                                    }) => {
 
     return (
@@ -134,7 +135,7 @@ const RecentNewsDetailPresenter = ({
                                             fontSize={16}
                                             fontWeight={600}
                                             margin="0 0 0 15px"
-                                            // onClick={}
+                                            onClick={onSaveNews}
                                         />
                                     </Box>
                                 </ButtonGroup>

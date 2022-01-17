@@ -58,7 +58,6 @@ const RecentNewsDetailContainer = ({ match }) => {
         fetchNewsDetail();
     }, []);
 
-
     return (
         <RecentNewsDetailPresenter
             tabMenu={tabMenu}
