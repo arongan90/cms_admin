@@ -33,6 +33,7 @@ const ButtonGroup = styled.div`
   }
 `;
 const TableBox = styled.div`
+  min-height: calc(100vh - 300px);
   border: 1px solid ${colors.borderColor};
   background-color: ${colors.whiteColor};
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);

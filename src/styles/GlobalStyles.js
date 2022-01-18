@@ -65,4 +65,11 @@ export default createGlobalStyle`
     outline: none;
     font-family: inherit;
   }
+  
+  p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
 `;

@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import RecentNewsDetailPresenter from "./RecentNewsDetailPresenter";
 import SendRequest from "../../../utils/SendRequest";
-import * as constants from "../../../utils/constants";
 import {convertToRaw, EditorState} from "draft-js";
 import draftToHtml from "draftjs-to-html";
+import * as constants from "../../../utils/constants";
 
 const serverProtocol = constants.config.PROTOCOL;
 const serverURL = constants.config.URL;
@@ -15,11 +15,11 @@ const RecentNewsDetailContainer = ({ match }) => {
     const [update, setUpdate] = useState(false);
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-    // 에디터 상태 onChange
-    const onEditorStateChange = useCallback(editorState => setEditorState(editorState), []);
     // Header Tab 매뉴
     const handleTabMenu = useCallback(value => setTabMenu(value), []);
 
+    // 에디터 상태 onChange
+    const onEditorStateChange = useCallback(editorState => setEditorState(editorState), []);
     // 에디터 인코딩
     const editorToHtml = draftToHtml(convertToRaw(editorState && editorState.getCurrentContent()));
 

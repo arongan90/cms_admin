@@ -2,17 +2,18 @@ import React from 'react';
 import {Editor} from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import styled from 'styled-components';
-import colors from "../../styles/colors";
 
 const MyBlock = styled.div`
   .editor {
     height: 500px !important;
     padding: 5px 10px !important;
-    border: 1px solid ${colors.borderColor};
   }
   
   .DraftEditor-editorContainer, .DraftEditor-root, .public-DraftEditor-content {
     height: auto;  
+  }
+  .public-DraftStyleDefault-block {
+    margin: 0;
   }
 `;
 

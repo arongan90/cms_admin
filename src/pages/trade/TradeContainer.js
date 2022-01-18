@@ -63,7 +63,7 @@ const TradeContainer = () => {
     }
 
     // 헤더 탑 Menu 바
-    const handleTabMenu = value => setTabMenu(value);
+    const handleTabMenu = useCallback(value => setTabMenu(value), []);
 
 
     useEffect(() => {
