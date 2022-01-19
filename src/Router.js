@@ -30,6 +30,7 @@ import Privacy from "./pages/serviceCenter/Privacy";
 import EscapeClause from "./pages/serviceCenter/EscapeClause";
 import Cookie from "./pages/serviceCenter/Cookie";
 import Qna from "./pages/InquiryReport/Qna";
+import QnaDetail from "./pages/InquiryReport/QnaDetail";
 import ErrorReport from "./pages/InquiryReport/ErrorReport";
 import IcoSubmit from "./pages/InquiryReport/IcoSubmit";
 import Language from "./pages/setting/Language/LanguageContainer";
@@ -83,6 +84,7 @@ const LoggedInRoutes = () => (
         <Route path="/escapeClause" component={EscapeClause}/>
         <Route path="/cookie" component={Cookie}/>
         <Route path="/qna" component={Qna}/>
+        <Route path="/qnaDetail/:qnaId" component={QnaDetail}/>
         <Route path="/errorReport" component={ErrorReport}/>
         <Route path="/icoSubmit" component={IcoSubmit}/>
         <Route path="/language" component={Language}/>

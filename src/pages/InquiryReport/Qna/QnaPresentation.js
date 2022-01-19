@@ -5,11 +5,11 @@ import HeaderContent from "../../../components/share/HeaderContent";
 import colors from "../../../styles/colors";
 import Table from "@mui/material/Table";
 import {TableBody, TableCell, TableHead, TableRow} from "@mui/material";
-import TradeTableRow from "../../../components/feature/Trade/TradeTableRow";
 import QnaTableRow from "../../../components/feature/InquiryReport/QnaTableRow";
+import Paging from "../../../components/share/Paging";
 
 const Wrapper = styled.div`
-  padding: 40px 20px 20px;
+  padding: 20px 20px;
   max-width: 1550px;
   min-height: calc(100vh - 144px);
 `;
@@ -20,6 +20,8 @@ const SelectBox = styled.div`
 const Select = styled.select`
   width: 200px;
   height: 40px;
+  padding: 0 10px;
+  cursor: pointer;
   border: 1px solid ${colors.borderColor};
 `;
 const TableBox = styled.div`
@@ -36,6 +38,13 @@ const TableBox = styled.div`
   th:nth-child(2) {
     width: 600px;
     text-align: left;
+  }
+`;
+const PagingBox = styled.div`
+  width: 500px;
+  margin: 80px auto 20px;
+  li {
+    background-color: ${colors.whiteColor};
   }
 `;
 
@@ -79,6 +88,11 @@ const QnaPresentation = ({
                         </TableBody>
                     </Table>
                 </TableBox>
+                <PagingBox>
+                    <Paging
+
+                    />
+                </PagingBox>
             </Wrapper>
         </ContentBox>
     )

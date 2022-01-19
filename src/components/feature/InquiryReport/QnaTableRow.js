@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, {css} from "styled-components";
+import styled from "styled-components";
 import {useHistory} from "react-router-dom";
 import colors from "../../../styles/colors";
 import TableRow from "@mui/material/TableRow";
@@ -34,8 +34,7 @@ const QnaTableRow = ({
     const history = useHistory();
 
     return (
-        //  onClick={() => history.push(`/qna/${id}`)}
-        <Row>
+        <Row onClick={() => history.push(`/qnaDetail/${id}`)}>
             <Cell>
                 {id}
             </Cell>

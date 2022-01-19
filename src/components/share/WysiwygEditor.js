@@ -5,27 +5,26 @@ import styled from 'styled-components';
 
 const MyBlock = styled.div`
   .editor {
-    height: 500px !important;
+    height: ${({height}) => height ? height : 500}px !important;
     padding: 5px 10px !important;
   }
-  
+
   .DraftEditor-editorContainer, .DraftEditor-root, .public-DraftEditor-content {
-    height: auto;  
+    height: auto;
   }
+
   .public-DraftStyleDefault-block {
     margin: 0;
   }
 `;
 
-
-
 const WysiwygEditor = ({
+                           height,
                            editorState,
                            onEditorStateChange,
                        }) => {
-
     return (
-        <MyBlock>
+        <MyBlock height={height}>
             <Editor
                 // 에디터와 툴바 모두에 적용되는 클래스
                 wrapperClassName="wrapper-class"

@@ -57,7 +57,7 @@ const TradePresentation = ({
                                onAddTrade,
                            }) => {
 
-    const [alignment, setAlignment] = React.useState('spot');
+    const [alignment, setAlignment] = useState('spot');
 
 
     const handleChange = (e, newValue) => {

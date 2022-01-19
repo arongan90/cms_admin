@@ -230,12 +230,12 @@ export default function Navigator(props) {
                         onClick={() => onRouteClick("/qna")}
                     />
                     <VisibleWrapper
-                        active={currentPath === "/qna" || currentPath === "/errorReport" || currentPath === "/icoSubmit"}
+                        active={currentPath === "/qna" || currentPath.split('/')[1] === "qnaDetail" || currentPath === "/errorReport" || currentPath === "/icoSubmit"}
                         length={3}
                     >
                         <SideTabMenu
                             title="온라인 문의"
-                            active={currentPath === "/qna"}
+                            active={currentPath === "/qna" || currentPath.split('/')[1] === "qnaDetail"}
                             onClick={() => onRouteClick("/qna")}
                         />
                         <SideTabMenu
