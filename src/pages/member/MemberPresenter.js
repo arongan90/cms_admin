@@ -157,7 +157,7 @@ const PagingBox = styled.div`
   margin: 80px auto 20px;
 `;
 
-const MemberPresentational = ({
+const MemberPresenter = ({
                                   tabMenu,
                                   handleTabMenu,
                                   memberTableColumns,
@@ -395,4 +395,4 @@ const MemberPresentational = ({
     )
 }
 
-export default MemberPresentational;
+export default MemberPresenter;

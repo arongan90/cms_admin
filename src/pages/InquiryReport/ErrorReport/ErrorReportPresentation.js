@@ -10,7 +10,6 @@ import ErrorReportTableRow from "../../../components/feature/InquiryReport/Error
 
 const Wrapper = styled.div`
   max-width: 1550px;
-  min-height: calc(100vh - 144px);
   padding: 20px 20px;
 `;
 const SelectBox = styled.div`
@@ -26,7 +25,7 @@ const Select = styled.select`
 `;
 const TableBox = styled.div`
   min-height: calc(100vh - 300px);
-  margin: 20px 0;
+  margin: 20px 0 0;
   border: 1px solid ${colors.borderColor};
   background-color: ${colors.whiteColor};
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
@@ -36,13 +35,20 @@ const TableBox = styled.div`
     background-color: ${colors.ultraLightGray};
   }
   th:nth-child(2) {
-    width: 600px;
+    width: 400px;
     text-align: left;
+  }
+  th:last-child,
+  td:last-child {
+    width: 250px;
+    text-align: left !important;
+  }
+  th:last-child {
+    padding-left: 24px !important;
   }
 `;
 const PagingBox = styled.div`
-  width: 500px;
-  margin: 80px auto 20px;
+  margin: 50px auto 100px;
   li {
     background-color: ${colors.whiteColor};
   }
@@ -51,6 +57,14 @@ const PagingBox = styled.div`
 const ErrorReportPresentation = ({
                                      tabMenu,
                                      handleTabMenu,
+
+                                     currentPage,
+                                     rowsPerPage,
+                                     handleChangePage,
+
+                                     handleDoneError,
+                                     date,
+                                     checked,
                                  }) => {
     return (
         <ContentBox>
@@ -83,14 +97,19 @@ const ErrorReportPresentation = ({
                         <TableBody>
                             {/* data.map */}
                             <ErrorReportTableRow
-
+                                handleDoneError={handleDoneError}
+                                date={date}
+                                checked={checked}
                             />
                         </TableBody>
                     </Table>
                 </TableBox>
                 <PagingBox>
                     <Paging
-
+                        currentPage={currentPage}
+                        totalItemsCount={10}
+                        onChange={handleChangePage}
+                        rowsPerPage={rowsPerPage}
                     />
                 </PagingBox>
             </Wrapper>

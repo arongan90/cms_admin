@@ -230,7 +230,7 @@ export default function Navigator(props) {
                         onClick={() => onRouteClick("/qna")}
                     />
                     <VisibleWrapper
-                        active={currentPath === "/qna" || currentPath.split('/')[1] === "qnaDetail" || currentPath === "/errorReport" || currentPath === "/icoSubmit"}
+                        active={currentPath === "/qna" || currentPath.split('/')[1] === "qnaDetail" || currentPath === "/errorReport" || currentPath === "/icoSubmit" || currentPath.split('/')[1] === "icoSubmitDetail"}
                         length={3}
                     >
                         <SideTabMenu
@@ -245,7 +245,7 @@ export default function Navigator(props) {
                         />
                         <SideTabMenu
                             title="ICO 제출"
-                            active={currentPath === "/icoSubmit"}
+                            active={currentPath === "/icoSubmit" || currentPath.split('/')[1] === "icoSubmitDetail"}
                             onClick={() => onRouteClick("/icoSubmit")}
                         />
                     </VisibleWrapper>

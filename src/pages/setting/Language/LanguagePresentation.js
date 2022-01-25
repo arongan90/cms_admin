@@ -1,10 +1,122 @@
 import React from 'react';
+import ContentBox from "../../../components/share/ContentBox";
+import HeaderContent from "../../../components/share/HeaderContent";
+import styled from "styled-components";
+import colors from "../../../styles/colors";
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import EditIcon from '@mui/icons-material/Edit';
+import Button from "../../../components/share/Button";
 
-const LanguagePresentation = () => {
+const Wrapper = styled.div`
+  padding: 20px;
+  max-width: 1550px;
+`;
+const LanguageBox = styled.div`
+  border-top: 2px solid ${colors.grayColor};
+  border-bottom: 1px solid ${colors.grayColor};                        
+  background-color: ${colors.whiteColor};
+`;
+const Top = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid ${colors.borderColor};
+`;
+const Text = styled.div`
+  color: ${({ fontColor }) => fontColor ? fontColor : colors.lightBlack};
+  font-weight: ${({ fontWeight }) => fontWeight ? fontWeight : 500};
+  font-size: ${({ fontSize }) => fontSize ? fontSize : 18}px;
+  cursor: ${({ cursor }) => cursor ? cursor : "initial"};
+`;
+const InputBox = styled.div`
+  width: ${({ width }) => width ? width: 180}px;
+  height: 35px;
+  padding: 0 10px;
+  margin: ${({ margin }) => margin ? margin : 0};
+  border: 1px solid ${colors.borderColor};
+`;
+const Input = styled.input`
+  width: 100%;
+  height: 100%;
+  border: none;
+`;
+const SelectBox = styled.select`
+  width: 180px;
+  height: 35px;
+  margin: 0 60px 0 20px;
+  padding: 0 10px;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid ${colors.borderColor};
+`;
+const Row = styled.div`
+  display: flex;
+`;
+const Cell = styled.div`
+  padding: 20px;
+  flex-grow: 1;
+  text-align: center;
+`;
+
+const LanguagePresentation = ({
+                                  tabMenu,
+                                  handleTabMenu,
+                              }) => {
     return (
-        <>
-            언어 설정
-        </>
+        <ContentBox>
+            <HeaderContent
+                tabMenu={tabMenu}
+                handleTabMenu={handleTabMenu}
+                title="언어 설정"
+                tabList={["언어 설정"]}
+            />
+
+            <Wrapper>
+                <LanguageBox>
+                    <Top>
+                        <Text>언어</Text>
+                        <SelectBox>
+                            <option>한국어</option>
+                            <option>영어</option>
+                            <option>일본어</option>
+                        </SelectBox>
+                        <Text>언어 표기</Text>
+                        <InputBox margin="0 0 0 20px">
+                            <Input />
+                        </InputBox>
+                        <Button
+                            width={35}
+                            height={35}
+                            border={`1px solid ${colors.activeBlue}`}
+                            bgColor={colors.whiteColor}
+                            fontColor={colors.activeBlue}
+                            margin="0 0 0 10px"
+                            title="+"
+                        />
+                    </Top>
+
+                    <Row>
+                        <Cell>
+                            <Text>한국어</Text>
+                        </Cell>
+                        <Cell>
+                            <Text>한국어</Text>
+                        </Cell>
+                        <Cell>
+                            <Text cursor="pointer">
+                                <EditIcon />
+                            </Text>
+                        </Cell>
+                        <Cell>
+                            <Text cursor="pointer">
+                                <HighlightOffIcon />
+                            </Text>
+                        </Cell>
+                    </Row>
+
+                </LanguageBox>
+            </Wrapper>
+        </ContentBox>
     )
 }
 

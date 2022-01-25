@@ -39,7 +39,7 @@ export const isLogout = () => dispatch => {
     localStorage.removeItem("token");
     setTimeout(() => {
         window.location.reload();
-    }, [500]);
+    }, 500);
 }
 export const setToken = token => dispatch => dispatch({ type: SET_TOKEN, payload: token });
 

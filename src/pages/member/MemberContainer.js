@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useReducer} from 'react';
-import MemberPresentational from "./MemberPresentational";
+import MemberPresenter from "./MemberPresenter";
 import axios from "axios";
 import * as constants from "../../utils/constants";
 
@@ -85,9 +85,6 @@ const MemberContainer = () => {
         let indexOfLast = page * rowsPerPage;
         let indexOfFirst = indexOfLast - rowsPerPage;
 
-        console.info('newsData : ', memberData);
-
-
         setCurrentPage(page);
         setMemberList(memberData.slice(indexOfFirst, indexOfLast));
     }
@@ -135,7 +132,7 @@ const MemberContainer = () => {
     }, [memberList]);
 
     return (
-        <MemberPresentational
+        <MemberPresenter
             tabMenu={tabMenu}
             handleTabMenu={handleTabMenu}
             memberTableColumns={memberTableColumns}

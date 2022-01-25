@@ -28,10 +28,15 @@ const Text = styled.span`
   }
 `;
 
-const HeaderContent = (props) => {
+const HeaderContent = ({
+                           handleTabMenu = () => null,
+                           tabMenu,
+                           title,
+                           tabList
+                       }) => {
+
     const dispatch = useDispatch();
     const history = useHistory();
-    const { handleTabMenu, tabMenu, title, tabList } = props;
     const lightColor = 'rgba(255, 255, 255, 0.7)';
     const [infoOpen, setInfoOpen] = useState(false);
 

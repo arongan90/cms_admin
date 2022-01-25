@@ -33,6 +33,7 @@ import Qna from "./pages/InquiryReport/Qna";
 import QnaDetail from "./pages/InquiryReport/QnaDetail";
 import ErrorReport from "./pages/InquiryReport/ErrorReport";
 import IcoSubmit from "./pages/InquiryReport/IcoSubmit";
+import IcoSubmitDetail from "./pages/InquiryReport/IcoSubmitDetail";
 import Language from "./pages/setting/Language/LanguageContainer";
 import Currency from "./pages/setting/Currency/CurrencyContainer";
 import PriceNotice from "./pages/setting/PriceNotice/PriceNoticeContainer";
@@ -87,6 +88,7 @@ const LoggedInRoutes = () => (
         <Route path="/qnaDetail/:qnaId" component={QnaDetail}/>
         <Route path="/errorReport" component={ErrorReport}/>
         <Route path="/icoSubmit" component={IcoSubmit}/>
+        <Route path="/icoSubmitDetail/:icoId" component={IcoSubmitDetail}/>
         <Route path="/language" component={Language}/>
         <Route path="/currency" component={Currency}/>
         <Route path="/priceNotice" component={PriceNotice}/>

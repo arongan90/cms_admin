@@ -51,6 +51,9 @@ const PagingBox = styled.div`
 const QnaPresentation = ({
                              tabMenu,
                              handleTabMenu,
+                             currentPage,
+                             rowsPerPage,
+                             handleChangePage,
                          }) => {
     return (
         <ContentBox>
@@ -90,7 +93,10 @@ const QnaPresentation = ({
                 </TableBox>
                 <PagingBox>
                     <Paging
-
+                        currentPage={currentPage}
+                        totalItemsCount={10}
+                        onChange={handleChangePage}
+                        rowsPerPage={rowsPerPage}
                     />
                 </PagingBox>
             </Wrapper>
