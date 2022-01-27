@@ -5,7 +5,7 @@ import Button from "../../share/Button";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import chipDelete from "../../../images/chipDelete.svg";
-import uploadImage from "../../../images/UploadImage.svg";
+// import uploadImage from "../../../images/UploadImage.svg";
 import CustomChip from "../../share/CustomChip";
 import IconImageUpload from "../../share/IconImageUpload";
 

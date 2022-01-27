@@ -6,6 +6,8 @@ import colors from "../../../styles/colors";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import EditIcon from '@mui/icons-material/Edit';
 import Button from "../../../components/share/Button";
+import {Modal} from "@material-ui/core";
+import UpdateModal from "../../../components/share/UpdateModal";
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -19,7 +21,7 @@ const LanguageBox = styled.div`
 const Top = styled.div`
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 20px 100px;
   border-bottom: 1px solid ${colors.borderColor};
 `;
 const Text = styled.div`
@@ -27,6 +29,11 @@ const Text = styled.div`
   font-weight: ${({ fontWeight }) => fontWeight ? fontWeight : 500};
   font-size: ${({ fontSize }) => fontSize ? fontSize : 18}px;
   cursor: ${({ cursor }) => cursor ? cursor : "initial"};
+  margin: ${({ margin }) => margin ? margin : 0};
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const InputBox = styled.div`
   width: ${({ width }) => width ? width: 180}px;
@@ -43,7 +50,7 @@ const Input = styled.input`
 const SelectBox = styled.select`
   width: 180px;
   height: 35px;
-  margin: 0 60px 0 20px;
+  margin: 0 95px 0 20px;
   padding: 0 10px;
   cursor: pointer;
   outline: none;
@@ -54,20 +61,27 @@ const Row = styled.div`
 `;
 const Cell = styled.div`
   padding: 20px;
-  flex-grow: 1;
+  flex-grow: ${({ flexGrow }) => flexGrow ? flexGrow : 1};
   text-align: center;
 `;
 
 const LanguagePresentation = ({
                                   tabMenu,
                                   handleTabMenu,
+
+                                  updateOpen,
+                                  handleUpdateOpen,
+                                  handleUpdateClose,
+
+                                  onUpdateLanguage,
+                                  onDeleteLanguage,
                               }) => {
     return (
         <ContentBox>
             <HeaderContent
                 tabMenu={tabMenu}
                 handleTabMenu={handleTabMenu}
-                title="언어 설정"
+                title="언어"
                 tabList={["언어 설정"]}
             />
 
@@ -96,19 +110,21 @@ const LanguagePresentation = ({
                     </Top>
 
                     <Row>
-                        <Cell>
+                        <Cell flexGrow={2}>
+                            <Text>한국어</Text>
+                        </Cell>
+                        <Cell flexGrow={2}>
                             <Text>한국어</Text>
                         </Cell>
                         <Cell>
-                            <Text>한국어</Text>
-                        </Cell>
-                        <Cell>
-                            <Text cursor="pointer">
+                            <Text cursor="pointer" fontColor={colors.darkBlueColor} onClick={handleUpdateOpen}>
+                                수정
                                 <EditIcon />
                             </Text>
                         </Cell>
                         <Cell>
-                            <Text cursor="pointer">
+                            <Text cursor="pointer" fontColor={colors.activeRed} onClick={onDeleteLanguage}>
+                                삭제
                                 <HighlightOffIcon />
                             </Text>
                         </Cell>
@@ -116,6 +132,20 @@ const LanguagePresentation = ({
 
                 </LanguageBox>
             </Wrapper>
+
+            <Modal
+                open={updateOpen}
+                onClose={handleUpdateClose}
+                style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+            >
+                <>
+                    <UpdateModal
+                        title="언어"
+                        onClose={handleUpdateClose}
+                        onUpdateLanguage={onUpdateLanguage}
+                    />
+                </>
+            </Modal>
         </ContentBox>
     )
 }
