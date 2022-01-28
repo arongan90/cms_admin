@@ -11,12 +11,15 @@ import uploadImage from "../../../images/UploadImage.svg";
 import Button from "../../../components/share/Button";
 import EditIcon from '@mui/icons-material/Edit';
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import {Modal} from "@material-ui/core";
+import UpdateModal from "../../../components/share/UpdateModal";
 
 const Wrapper = styled.div`
   padding: 20px;
   max-width: 1550px;
 `;
 const CurrencyBox = styled.div`
+  min-height: calc(100vh - 300px);
   border-top: 2px solid ${colors.grayColor};
   border-bottom: 1px solid ${colors.grayColor};
   background-color: ${colors.whiteColor};
@@ -25,7 +28,7 @@ const Top = styled.div`
   display: flex;
   align-items: center;
   padding: 20px 50px;
-  border-bottom: 1px solid ${colors.borderColor};
+  border-bottom: 1px solid ${colors.grayColor};
 
   // Material Select
   .css-574lq2-MuiFormControl-root {
@@ -44,11 +47,14 @@ const Top = styled.div`
   }
 `;
 const Text = styled.div`
+  width: ${({ width }) => width ? width : "auto"};
   color: ${({ fontColor }) => fontColor ? fontColor : colors.lightBlack};
   font-weight: ${({ fontWeight }) => fontWeight ? fontWeight : 500};
   font-size: ${({ fontSize }) => fontSize ? fontSize : 18}px;
   cursor: ${({ cursor }) => cursor ? cursor : "initial"};
   margin: ${({ margin }) => margin ? margin : 0};
+  display: flex;
+  align-items: center;
 `;
 const InputBox = styled.div`
   width: ${({ width }) => width ? width: 100}px;
@@ -64,13 +70,18 @@ const Input = styled.input`
   border: none;
 `;
 const Row = styled.div`
+  padding: 0 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  border-bottom: 1px solid ${colors.borderColor};
+`;
+const Box = styled.div`
+  display: flex;
+  padding: 0 20px;
 `;
 const Cell = styled.div`
   padding: 20px;
   text-align: center;
-  border: 1px solid red;
 `;
 const FlagIcon = styled.label`
   width: 35px;
@@ -118,6 +129,12 @@ const CurrencyPresentation = ({
                                   handleTabMenu,
                                   currency,
                                   onCurrencyChange,
+
+                                  updateOpen,
+                                  handleUpdateOpen,
+                                  handleUpdateClose,
+
+                                  onDeleteCurrency,
                               }) => {
     return (
         <ContentBox>
@@ -191,33 +208,43 @@ const CurrencyPresentation = ({
 
                     <Row>
                         <Cell>
-                            <Row>
+                            <Box>
                                 <ImageBox>
                                     <AppImage src={krFlag} />
                                 </ImageBox>
-                                <Text>
+                                <Text width="250px">
                                     South Korea Won
                                 </Text>
-                            </Row>
+                                <Text fontColor={colors.blackColor} fontWeight={600} margin="0 40px" width="80px">KRW</Text>
+
+                                <Text fontColor={colors.blackColor} fontWeight={600} width="40px">￦</Text>
+
+                                <Text fontColor={colors.deepNavyColor} margin="0 50px" cursor="pointer" onClick={handleUpdateOpen}>
+                                    수정<EditIcon />
+                                </Text>
+                            </Box>
                         </Cell>
                         <Cell>
-                            <Text>KRW</Text>
-                        </Cell>
-                        <Cell>
-                            <Text>￦</Text>
-                        </Cell>
-                        <Cell>
-                            <Text>
-                                수정<EditIcon />
-                            </Text>
-                        </Cell>
-                        <Cell>
-                            <Text>
+                            <Text fontColor={colors.activeRed} cursor="pointer" onClick={onDeleteCurrency}>
                                 삭제
                                 <HighlightOffIcon />
                             </Text>
                         </Cell>
                     </Row>
+
+                    <Modal
+                        open={updateOpen}
+                        onClose={handleUpdateClose}
+                        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+                    >
+                        <>
+                            <UpdateModal
+                                title="화폐"
+                                height={370}
+                                onClose={handleUpdateClose}
+                            />
+                        </>
+                    </Modal>
                 </CurrencyBox>
             </Wrapper>
         </ContentBox>
