@@ -34,11 +34,12 @@ import QnaDetail from "./pages/InquiryReport/QnaDetail";
 import ErrorReport from "./pages/InquiryReport/ErrorReport";
 import IcoSubmit from "./pages/InquiryReport/IcoSubmit";
 import IcoSubmitDetail from "./pages/InquiryReport/IcoSubmitDetail";
-import Language from "./pages/setting/Language/LanguageContainer";
-import Currency from "./pages/setting/Currency/CurrencyContainer";
-import PriceNotice from "./pages/setting/PriceNotice/PriceNoticeContainer";
-import NewsLetter from "./pages/mailing/NewsLetter/NewsLetterContainer";
-import Subscriber from "./pages/mailing/Subscriber/SubscriberContainer";
+import Language from "./pages/setting/Language";
+import Currency from "./pages/setting/Currency";
+import PriceNotice from "./pages/setting/PriceNotice";
+import NewsLetter from "./pages/mailing/NewsLetter";
+import NewsLetterDetail from "./pages/mailing/NewsLetterDetail";
+import Subscriber from "./pages/mailing/Subscriber";
 import Mailing from "./pages/mailing/Mail";
 import Member from "./pages/member";
 import MemberUpdate from "./pages/memberUpdate";
@@ -93,6 +94,7 @@ const LoggedInRoutes = () => (
         <Route path="/currency" component={Currency}/>
         <Route path="/priceNotice" component={PriceNotice}/>
         <Route path="/newsLetter" component={NewsLetter}/>
+        <Route path="/newsLetterDetail/:newsLetterId" component={NewsLetterDetail}/>
         <Route path="/subscriber" component={Subscriber}/>
         <Route path="/mailing" component={Mailing}/>
     </Switch>

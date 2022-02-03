@@ -40,16 +40,6 @@ const Td = styled.td`
     border-left: 1px solid ${colors.borderColor};
   }
 
-  // DatePicker Style
-  .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
-    height: 35px;
-    padding: 0 10px;
-  }
-
-  .css-bkqowc-MuiInputBase-root-MuiOutlinedInput-root {
-    border-radius: 5px;
-  }
-
   // ToggleButton Style
   .css-fhsron-MuiButtonBase-root-MuiToggleButton-root {
     padding: 5px 11px;

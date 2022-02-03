@@ -72,4 +72,14 @@ export default createGlobalStyle`
     margin-inline-start: 0;
     margin-inline-end: 0;
   }
+
+  // DatePicker Style
+  .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+    height: 35px !important;
+    padding: 0 10px !important;
+  }
+
+  .css-bkqowc-MuiInputBase-root-MuiOutlinedInput-root {
+    border-radius: 4px !important;
+  }
 `;

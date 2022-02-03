@@ -23,6 +23,7 @@ export default {
     backgroundColor: "#EAEFF1",
     darkBlueColor: "#1b3a6a",
     ultraLightGray: "#EEEEEE",
+    placeholderColor: "#9197A3",
 
     // Text
     lightBlack: "#333333",

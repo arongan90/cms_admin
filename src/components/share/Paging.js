@@ -59,10 +59,10 @@ const Wrapper = styled.div`
 `;
 
 const Paging = ({
-                    currentPage,
-                    totalItemsCount,
-                    onChange,
-                    rowsPerPage,
+                    currentPage = 1,
+                    totalItemsCount = 10,
+                    onChange = () => null,
+                    rowsPerPage = 10,
                 }) => {
     return (
         <Wrapper>
