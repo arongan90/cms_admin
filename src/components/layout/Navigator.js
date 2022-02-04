@@ -278,12 +278,12 @@ export default function Navigator(props) {
                         onClick={() => onRouteClick("/newsLetter")}
                     />
                     <VisibleWrapper
-                        active={currentPath === "/newsLetter" || currentPath === "/subscriber" || currentPath === "/mailing"}
+                        active={currentPath === "/newsLetter" || currentPath === "/subscriber" || currentPath === "/mailing" || currentPath.split('/')[1] === "newsLetterDetail"}
                         length={3}
                     >
                         <SideTabMenu
                             title="뉴스레터"
-                            active={currentPath === "/newsLetter"}
+                            active={currentPath === "/newsLetter" || currentPath.split('/')[1] === "newsLetterDetail"}
                             onClick={() => onRouteClick("/newsLetter")}
                         />
                         <SideTabMenu

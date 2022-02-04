@@ -159,7 +159,7 @@ const NewsLetterPresentation = ({
                             <Table>
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell>
+                                        <TableCell sx={{ backgroundColor: colors.ultraLightGray }}>
                                             제목
                                         </TableCell>
                                         <TableCell>
@@ -173,7 +173,7 @@ const NewsLetterPresentation = ({
                                         </TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell>
+                                        <TableCell sx={{ backgroundColor: colors.ultraLightGray }}>
                                             내용
                                         </TableCell>
                                         <TableCell>
@@ -185,7 +185,7 @@ const NewsLetterPresentation = ({
                                         </TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell>
+                                        <TableCell sx={{ backgroundColor: colors.ultraLightGray }}>
                                             메일 발송 예정
                                         </TableCell>
                                         <TableCell>

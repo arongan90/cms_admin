@@ -4,13 +4,9 @@ import colors from "../../../styles/colors";
 import Button from "../../../components/share/Button";
 import WysiwygEditor from "../../../components/share/WysiwygEditor";
 import HeaderContent from "../../../components/share/HeaderContent";
-import Table from "@mui/material/Table";
-import {TableBody, TableCell, TableRow} from "@mui/material";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import {ko} from "date-fns/locale";
-import DatePicker from "@mui/lab/DatePicker";
-import TextField from "@mui/material/TextField";
+import {Table, TableBody, TableCell, TableRow} from "@mui/material";
+import {Modal} from "@material-ui/core";
+import SendMailStatus from "../../../components/feature/Mailing/SendMailStatus";
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -19,20 +15,46 @@ const Wrapper = styled.div`
 `;
 const ButtonGroup = styled.div`
   min-height: 38px;
-  margin: ${({ margin }) => margin ? margin : "0 20px 15px"};
+  margin: ${({margin}) => margin ? margin : "0 20px 15px"};
   display: flex;
   align-items: center;
-  justify-content: ${({ justifyContent }) => justifyContent ? justifyContent : "space-between"};
+  justify-content: ${({justifyContent}) => justifyContent ? justifyContent : "space-between"};
 `;
 const TableBox = styled.div`
   border-top: 2px solid ${colors.grayColor};
   border-bottom: 1px solid ${colors.grayColor};
+  background-color: ${colors.whiteColor};
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
+
+  th {
+    text-align: center;
+    background-color: ${colors.ultraLightGray};
+  }
+
+  th:nth-child(1) {
+    width: 50%;
+    text-align: left;
+  }
+
+  td {
+    padding: 10px !important;
+  }
+
+  td:nth-child(1) {
+    width: 100px;
+    border-right: 1px solid ${colors.theadBgColor};
+    background-color: ${colors.ultraLightGray};
+  }
+
+  tr:nth-child(2) td {
+    vertical-align: top;
+  }
 `;
 const InputBox = styled.div`
-  width: ${({ width }) => width ? width : '100%'};
+  width: ${({width}) => width ? width : '100%'};
   height: 35px;
   padding: 0 10px;
-  margin: ${({ margin }) => margin ? margin : 0};
+  margin: ${({margin}) => margin ? margin : 0};
   border: 1px solid ${colors.borderColor};
   border-radius: 4px;
 `;
@@ -40,48 +62,43 @@ const Input = styled.input`
   width: 100%;
   height: 100%;
   border: none;
+
   &::placeholder {
     color: ${colors.placeholderColor};
   }
 `;
-
-
-
-
-const Header = styled.div`
-  height: 56px;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  
-`;
-const Content = styled.div`
-  padding: 10px;
-`;
-const Text = styled.div`
-  font-size: 14px;
-  color: ${colors.deepDarkGrayColor};
-  margin: ${({margin}) => margin ? margin : 0};
-`;
 const IntroduceContent = styled.div`
-  min-height: 500px;
+  height: 390px;
   position: relative;
   overflow: hidden;
-  padding: 1.5rem;
+  padding: 10px;
+  border: 1px solid ${colors.borderColor};
+  border-radius: 4px;
 `;
-const Box = styled.div``;
+const Text = styled.span`
+  color: ${({fontColor}) => fontColor ? fontColor : colors.lightBlack};
+  font-weight: ${({fontWeight}) => fontWeight ? fontWeight : 500};
+  font-size: ${({fontSize}) => fontSize ? fontSize : 16}px;
+  margin: ${({margin}) => margin ? margin : 0};
+`;
 
 const NewsLetterDetailPresenter = ({
                                        tabMenu,
                                        handleTabMenu,
-                                       newsData,
+                                       // newsData,
                                        update,
+                                       mailStatusOpen,
+                                       handleImmediatelySend,
+                                       handleCloseModal,
                                        setUpdate,
                                        editorState,
                                        onEditorStateChange,
                                        editorToHtml,
-                                       onDeleteNews,
-                                       onSaveNews
+
+                                       handleGoBack,
+                                       handleCancel,
+                                       handleSave,
+                                       title = "Alternative of Cryptocurrencies to Bitcoin"
                                    }) => {
     return (
         <>
@@ -104,6 +121,7 @@ const NewsLetterDetailPresenter = ({
                                 fontColor={colors.deepNavyColor}
                                 fontSize={16}
                                 fontWeight={600}
+                                onClick={handleGoBack}
                             />
                             <Button
                                 width={120}
@@ -129,8 +147,9 @@ const NewsLetterDetailPresenter = ({
                                 <TableCell>
                                     <InputBox>
                                         <Input
-                                            // value={title}
-                                            // onChange={e => onInputChange(e, "title")}
+                                            value={title}
+                                            // onChange={}
+                                            readOnly={!update}
                                             placeholder="제목을 입력해주세요."
                                         />
                                     </InputBox>
@@ -141,90 +160,105 @@ const NewsLetterDetailPresenter = ({
                                     내용
                                 </TableCell>
                                 <TableCell>
-                                    <WysiwygEditor
-                                        height={400}
-                                        editorState={editorState}
-                                        onEditorStateChange={onEditorStateChange}
-                                    />
+                                    {update
+                                        ?
+                                        <WysiwygEditor
+                                            height={300}
+                                            editorState={editorState}
+                                            onEditorStateChange={onEditorStateChange}
+                                        />
+                                        :
+                                        <IntroduceContent
+                                            dangerouslySetInnerHTML={{__html: editorToHtml}}
+                                        />
+                                    }
                                 </TableCell>
                             </TableRow>
 
                         </TableBody>
                     </Table>
                 </TableBox>
-                <ButtonGroup justifyContent="flex-end" margin="40px 20px 20px">
-                    <Button
-                        width={120}
-                        height={38}
-                        title="즉시 발송"
-                        bgColor={colors.deepNavyColor}
-                        fontColor={colors.whiteColor}
-                        fontSize={16}
-                        fontWeight={600}
-                        margin="0 0 0 15px"
-                        // onClick={onSaveNews}
-                    />
-                </ButtonGroup>
-
-                {/*<Header>
-                    <Text>등록일 : </Text>
-                    <Text margin="0 0 0 50px">페이지 뷰 : </Text>
-                </Header>
-                <Content>
-                    {update ? (
-                            <>
-                                <WysiwygEditor
-                                    editorState={editorState}
-                                    onEditorStateChange={onEditorStateChange}
-                                />
-                                <ButtonGroup>
-                                    <Box>
-                                        <Button
-                                            width={120}
-                                            height={38}
-                                            title="삭제"
-                                            border={`1px solid ${colors.activeRed}`}
-                                            bgColor={colors.whiteColor}
-                                            fontColor={colors.activeRed}
-                                            fontSize={16}
-                                            fontWeight={600}
-                                            onClick={onDeleteNews}
-                                        />
-                                    </Box>
-                                    <Box>
-                                        <Button
-                                            width={120}
-                                            height={38}
-                                            title="취소"
-                                            border={`1px solid ${colors.deepNavyColor}`}
-                                            bgColor={colors.whiteColor}
-                                            fontColor={colors.deepNavyColor}
-                                            fontSize={16}
-                                            fontWeight={600}
-                                            onClick={() => setUpdate(false)}
-                                        />
-                                        <Button
-                                            width={120}
-                                            height={38}
-                                            title="저장"
-                                            bgColor={colors.deepNavyColor}
-                                            fontColor={colors.whiteColor}
-                                            fontSize={16}
-                                            fontWeight={600}
-                                            margin="0 0 0 15px"
-                                            onClick={onSaveNews}
-                                        />
-                                    </Box>
-                                </ButtonGroup>
-                            </>
-                        )
+                <ButtonGroup justifyContent="flex-end" margin="40px 20px">
+                    {update
+                        ?
+                        <>
+                            <Button
+                                width={120}
+                                height={38}
+                                title="취소"
+                                border={`1px solid ${colors.deepNavyColor}`}
+                                bgColor={colors.whiteColor}
+                                fontColor={colors.deepNavyColor}
+                                fontSize={16}
+                                fontWeight={600}
+                                onClick={handleCancel}
+                            />
+                            <Button
+                                width={120}
+                                height={38}
+                                title="저장"
+                                bgColor={colors.deepNavyColor}
+                                fontColor={colors.whiteColor}
+                                fontSize={16}
+                                fontWeight={600}
+                                margin="0 0 0 15px"
+                                onClick={handleSave}
+                            />
+                        </>
                         :
-                        <IntroduceContent
-                            dangerouslySetInnerHTML={{__html: editorToHtml}}
+                        <Button
+                            width={120}
+                            height={38}
+                            ICON
+                            title="즉시 발송"
+                            bgColor={colors.deepNavyColor}
+                            fontColor={colors.whiteColor}
+                            fontSize={16}
+                            fontWeight={600}
+                            margin="0 0 0 15px"
+                            onClick={handleImmediatelySend}
                         />
                     }
-                </Content>*/}
+                </ButtonGroup>
+
+                {!update && (
+                    <TableBox>
+                        <Table>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell colSpan={2}>
+                                        <Text fontWeight={600} fontColor={colors.blackColor}>수신 대상자</Text>
+                                        <Text fontSize={14} margin="0 0 0 10px">
+                                           (200)
+                                        </Text>
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell colSpan={2}>
+                                        <Text fontWeight={600}>홍길동</Text>
+                                        <Text margin="0 0 0 44px">
+                                            kildong@gmail.com
+                                        </Text>
+                                    </TableCell>
+                                </TableRow>
+
+                            </TableBody>
+                        </Table>
+                    </TableBox>
+                )}
             </Wrapper>
+
+            <Modal
+                open={mailStatusOpen}
+                onClose={handleCloseModal}
+                style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+            >
+                <>
+                    <SendMailStatus
+                        onClose={handleCloseModal}
+                    />
+                </>
+            </Modal>
         </>
     )
 }

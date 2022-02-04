@@ -1,6 +1,7 @@
 import React from 'react';
 import { darken, lighten } from 'polished';
 import styled, { css } from 'styled-components';
+import SendIcon from '@mui/icons-material/Send';
 
 const CostumeButton = styled.button`
   width: ${({ width }) => width}px;
@@ -10,6 +11,9 @@ const CostumeButton = styled.button`
   border: ${({ border }) => border ? border : 'none'};
   color: ${({ fontColor }) => fontColor};
   margin: ${({ margin }) => margin};
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   border-radius: ${({ borderRadius }) => borderRadius ? borderRadius : '4px'};
   outline: none;
   
@@ -27,8 +31,14 @@ const CostumeButton = styled.button`
     }
   `}
 `;
+const Text = styled.div`
+  margin-right: 5px;
+  transform: rotate(-40deg);
+  margin-bottom: 5px;
+`;
 
 const Button = ({
+                    ICON,
                     width,
                     height,
                     fontSize,
@@ -57,6 +67,7 @@ const Button = ({
             // onClick={() => onClick((type && type), (service && service))}
             onClick={onClick}
         >
+            {ICON && <Text><SendIcon /></Text>}
             {title}
         </CostumeButton>
     )
