@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   border: 1px solid ${colors.borderColor};
-  border-radius: 8px;
+  border-radius: 4px;
   margin: 0 0 30px;
   background: ${colors.whiteColor};
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
@@ -20,9 +20,9 @@ const Title = styled.div`
 `;
 const InputBox = styled.input`
   width: 35%;
-  height: 45px;
+  height: 38px;
   padding: 0 10px;
-  border-radius: 5px;
+  border-radius: 4px;    
   border: 1px solid ${colors.borderColor};
   margin-right: 10px;
 `;
@@ -41,10 +41,10 @@ const SearchForm = ({
                 placeholder="검색할 코인명을 입력해주세요."
             />
             <Button
-                width={100}
-                height={45}
+                width={120}
+                height={38}
                 title="찾기"
-                bgColor={colors.activeBlue}
+                bgColor={colors.deepNavyColor}
                 fontColor={colors.whiteColor}
                 fontSize={18}
                 fontWeight={600}

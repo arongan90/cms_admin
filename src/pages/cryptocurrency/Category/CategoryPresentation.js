@@ -15,12 +15,12 @@ const Wrapper = styled.div`
 const CategoryListBox = styled.div`
   margin: 0 auto;
   padding: 0 0 50px;
-  border-radius: 8px;
+  border-radius: 4px;
   background-color: ${colors.whiteColor};
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 `;
 const ButtonGroup = styled.div`
-  margin: 20px 20px 40px;
+  margin: 0 20px 40px;
   text-align: right;
 `;
 const PagingBox = styled.div`
@@ -56,12 +56,12 @@ const CategoryPresentation = ({
             <Wrapper>
                 <ButtonGroup>
                     <Button
-                        width={150}
-                        height={52}
+                        width={120}
+                        height={38}
                         title="카테고리 추가"
-                        bgColor={colors.activeBlue}
+                        bgColor={colors.deepNavyColor}
                         fontColor={colors.whiteColor}
-                        fontSize={18}
+                        fontSize={16}
                         fontWeight={600}
                         onClick={handleCategoryModalOpen}
                     />

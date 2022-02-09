@@ -59,6 +59,7 @@ const AppVideo = styled.iframe`
 const IcoSubmitDetailPresenter = ({
                                       tabMenu,
                                       handleTabMenu,
+                                      goBack,
                                       onRegisterIco,
 
                                       코인명 = "Fanadise",
@@ -115,7 +116,7 @@ const IcoSubmitDetailPresenter = ({
                         bgColor={colors.whiteColor}
                         fontSize={16}
                         fontWeight={600}
-                        // onClick={onCancel}
+                        onClick={goBack}
                     />
                     <Button
                         title="ICO 등록"

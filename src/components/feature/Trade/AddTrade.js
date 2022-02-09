@@ -192,19 +192,21 @@ const AddTrade = ({
             <ButtonGroup>
                 <Button
                     title="취소"
-                    width={100}
-                    height={40}
+                    width={120}
+                    height={38}
+                    fontSize={16}
                     bgColor={colors.whiteColor}
-                    border={`1px solid ${colors.activeBlue}`}
-                    fontColor={colors.activeBlue}
+                    border={`1px solid ${colors.deepNavyColor}`}
+                    fontColor={colors.deepNavyColor}
                     onClick={onCancel}
                 />
                 <Button
                     title="추가"
                     margin="0 0 0 15px"
-                    width={100}
-                    height={40}
-                    bgColor={colors.activeBlue}
+                    width={120}
+                    height={38}
+                    fontSize={16}
+                    bgColor={colors.deepNavyColor}
                     fontColor={colors.whiteColor}
                     onClick={onAddTrade}
                 />

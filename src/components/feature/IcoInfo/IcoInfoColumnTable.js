@@ -12,34 +12,34 @@ import {ko} from 'date-fns/locale';
 import chipDelete from "../../../images/chipDelete.svg";
 import uploadImage from "../../../images/UploadImage.svg";
 import CustomChip from "../../share/CustomChip";
+import Autocomplete from '@mui/material/Autocomplete';
 
 const TableBox = styled.div`
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 0 8px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 `;
 const Table = styled.table`
   width: 100%;
   background-color: ${colors.whiteColor};
-`;
-const Td = styled.td`
-  width: 40%;
-  min-height: 55px;
-  padding: 10px 16px;
-  vertical-align: ${({verticalAlign}) => verticalAlign ? verticalAlign : 'middle'};
-  border-bottom: 1px solid ${colors.borderColor};
+  td {
+    min-height: 55px;
+    padding: 10px 16px;
+    vertical-align: top;
+    border-bottom: 1px solid ${colors.borderColor};
+    
+    &:first-child,
+    &:nth-child(3) {
+      padding-top: 14px;
+      width: 120px !important;
+      border-right: 1px solid ${colors.borderColor};
+      background-color: ${colors.ultraLightGray};
+    }
 
-  &:first-child,
-  &:nth-child(3) {
-    width: 10%;
-    border-right: 1px solid ${colors.borderColor};
-    background-color: ${colors.ultraLightGray};
+    &:nth-child(3) {
+      border-left: 1px solid ${colors.borderColor};
+    }
   }
-
-  &:nth-child(3) {
-    border-left: 1px solid ${colors.borderColor};
-  }
-
   // ToggleButton Style
   .css-fhsron-MuiButtonBase-root-MuiToggleButton-root {
     padding: 5px 11px;
@@ -60,10 +60,10 @@ const Input = styled.input`
   border: none;
 `;
 const Textarea = styled.textarea`
-  width: 70%;
+  width: 100%;
+  height: 35px;
   min-height: 200px;
   padding: 10px;
-  height: 35px;
   border: 1px solid ${colors.borderColor};
   border-radius: 5px;
   resize: none;
@@ -73,6 +73,7 @@ const FileInputLabel = styled.label`
   width: 100px;
   height: 35px;
   padding: 10px;
+  margin-right: 5px;
   border-radius: 5px;
   position: relative;
   border: 1px solid ${colors.activeBlue};
@@ -132,12 +133,27 @@ const RowBox = styled.div`
     align-items: center;
     margin: 0;
   `}
+  // Chips style
   .css-c9qyo9-MuiButtonBase-root-MuiChip-root {
     background-color: ${colors.textFieldBlue};
     color: ${colors.whiteColor};
   }
-`;
+  // AutoComplete style
+  .css-dcxfjc-MuiAutocomplete-root .MuiOutlinedInput-root {
+    padding: 0 !important;
+    height: 35px !important;
+    border-radius: 4px;
 
+    input {
+      font-size: 14px;
+      color: ${colors.grayColor};
+    }
+  }
+  .css-aqhoke-MuiFormLabel-root-MuiInputLabel-root {
+    top: -8px !important;
+    font-size: 14px;
+  }
+`;
 const AppImage = styled.img`
   ${({width}) => width && css`
     width: ${width};
@@ -145,6 +161,10 @@ const AppImage = styled.img`
   ${({height}) => height && css`
     height: ${height};
   `};
+`;
+const SubText = styled.div`
+  font-size: 12px;
+  color: ${colors.grayColor};
 `;
 
 const IcoInfoColumnTable = ({
@@ -166,8 +186,8 @@ const IcoInfoColumnTable = ({
             <Table>
                 <tbody>
                 <tr>
-                    <Td>코인명</Td>
-                    <Td>
+                    <td>코인명</td>
+                    <td>
                         <RowBox flex>
                             <ImageInputLabel>
                                 <FileInput type="file" accept="image/*" onChange={e => onIcoChange(e, "COIN_IMAGE")}/>
@@ -188,9 +208,12 @@ const IcoInfoColumnTable = ({
                                 />
                             </InputBox>
                         </RowBox>
-                    </Td>
-                    <Td>화폐단위</Td>
-                    <Td>
+                        <RowBox>
+                            <SubText>※ 아이콘 이미지는 72px x 72px 사이즈의 png, jpeg, svg 확장자만 업로드 가능합니다.</SubText>
+                        </RowBox>
+                    </td>
+                    <td>화폐단위</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="monetaryUnit"
@@ -199,11 +222,11 @@ const IcoInfoColumnTable = ({
                                 placeholder="FAN"
                             />
                         </InputBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>카테고리</Td>
-                    <Td>
+                    <td>카테고리</td>
+                    <td>
                         <Select
                             name="category"
                             value={addIcoState.category}
@@ -214,9 +237,9 @@ const IcoInfoColumnTable = ({
                             <option value="DeFi">DeFi</option>
                             <option value="NFT">NFT</option>
                         </Select>
-                    </Td>
-                    <Td>구분</Td>
-                    <Td>
+                    </td>
+                    <td>구분</td>
+                    <td>
                         <Select
                             name="type"
                             value={addIcoState.type}
@@ -226,11 +249,11 @@ const IcoInfoColumnTable = ({
                             <option value="">DeFi</option>
                             <option value="">NFT</option>
                         </Select>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>초기 토큰가격</Td>
-                    <Td>
+                    <td>초기 토큰가격</td>
+                    <td>
                         <Select
                             name="initialPrice"
                             value={addIcoState.initialPrice}
@@ -240,9 +263,9 @@ const IcoInfoColumnTable = ({
                             <option value="0.11">0.11</option>
                             <option value="0.12">0.12</option>
                         </Select>
-                    </Td>
-                    <Td>분야</Td>
-                    <Td>
+                    </td>
+                    <td>분야</td>
+                    <td>
                         <Select
                             name="branch"
                             value={addIcoState.branch}
@@ -252,11 +275,11 @@ const IcoInfoColumnTable = ({
                             <option value="setting">설정 > 암호화폐 범주에 따라 선택하게끔...</option>
                             <option value="branch">설정</option>
                         </Select>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>플랫폼</Td>
-                    <Td>
+                    <td>플랫폼</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="platform"
@@ -265,9 +288,9 @@ const IcoInfoColumnTable = ({
                                 placeholder="ERC20"
                             />
                         </InputBox>
-                    </Td>
-                    <Td>상태</Td>
-                    <Td>
+                    </td>
+                    <td>상태</td>
+                    <td>
                         <Select
                             name="state"
                             value={addIcoState.state}
@@ -279,11 +302,11 @@ const IcoInfoColumnTable = ({
                             <option value="undetermined">미정</option>
                             <option value="delay">지연</option>
                         </Select>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>시작일</Td>
-                    <Td>
+                    <td>시작일</td>
+                    <td>
                         <LocalizationProvider dateAdapter={AdapterDateFns} locale={ko}>
                             <DatePicker
                                 label="시작일"
@@ -298,9 +321,9 @@ const IcoInfoColumnTable = ({
                                 }}
                             />
                         </LocalizationProvider>
-                    </Td>
-                    <Td>종료일</Td>
-                    <Td>
+                    </td>
+                    <td>종료일</td>
+                    <td>
                         <LocalizationProvider dateAdapter={AdapterDateFns} locale={ko}>
                             <DatePicker
                                 label="종료일"
@@ -315,11 +338,11 @@ const IcoInfoColumnTable = ({
                                 }}
                             />
                         </LocalizationProvider>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>하드캡</Td>
-                    <Td>
+                    <td>하드캡</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="hardCap"
@@ -339,9 +362,9 @@ const IcoInfoColumnTable = ({
                             <option value="BTC">BTC</option>
                             <option value="ETH">ETH</option>
                         </Select>
-                    </Td>
-                    <Td>소프트캡</Td>
-                    <Td>
+                    </td>
+                    <td>소프트캡</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="softCap"
@@ -361,11 +384,11 @@ const IcoInfoColumnTable = ({
                             <option value="BTC">BTC</option>
                             <option value="ETH">ETH</option>
                         </Select>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>목표</Td>
-                    <Td>
+                    <td>목표</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="goal"
@@ -386,9 +409,9 @@ const IcoInfoColumnTable = ({
                             <option value="USD">USD</option>
                             <option value="ETH">ETH</option>
                         </Select>
-                    </Td>
-                    <Td>판매용 토큰</Td>
-                    <Td>
+                    </td>
+                    <td>판매용 토큰</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="sellToken"
@@ -409,11 +432,11 @@ const IcoInfoColumnTable = ({
                             <option value="CRDN">CRDN</option>
                             ㄹ
                         </Select>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>웹사이트</Td>
-                    <Td>
+                    <td>웹사이트</td>
+                    <td>
                         <InputBox
                             width={300}
                         >
@@ -424,9 +447,9 @@ const IcoInfoColumnTable = ({
                                 placeholder="웹사이트의 URL 주소를 입력해주세요."
                             />
                         </InputBox>
-                    </Td>
-                    <Td>승인</Td>
-                    <Td>
+                    </td>
+                    <td>승인</td>
+                    <td>
                         <RowBox margin="0">
                             <Select
                                 width={120}
@@ -461,11 +484,11 @@ const IcoInfoColumnTable = ({
                                 />
                             ))}
                         </RowBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td verticalAlign="top">백서</Td>
-                    <Td>
+                    <td>백서</td>
+                    <td>
                         <ToggleButtonGroup
                             color="primary"
                             value={alignment}
@@ -485,21 +508,31 @@ const IcoInfoColumnTable = ({
                                 />
                             </InputBox>
                             }
-                            {alignment === 'file' &&
-                            <FileInputLabel>
-                                <FileInput
-                                    type="file"
-                                    accept="*"
-                                    name="whitePaper"
-                                    onChange={e => onIcoChange(e, "WHITE_PAPER_FILE")}
-                                />
-                                파일찾기
-                            </FileInputLabel>
-                            }
+                            {alignment === 'file' && (
+                                <RowBox flex>
+                                    <FileInputLabel>
+                                        <FileInput
+                                            type="file"
+                                            accept="*"
+                                            name="whitePaper"
+                                            onChange={e => onIcoChange(e, "WHITE_PAPER_FILE")}
+                                        />
+                                        파일찾기
+                                    </FileInputLabel>
+                                    {!!addIcoState.whitePaper.file && (
+                                        <InputBox width={200}>
+                                            <Input
+                                                value={!!addIcoState.whitePaper.file && addIcoState.whitePaper.file.name}
+                                                readOnly
+                                            />
+                                        </InputBox>
+                                    )}
+                                </RowBox>
+                            )}
                         </RowBox>
-                    </Td>
-                    <Td rowSpan={2} verticalAlign="top">커뮤니티</Td>
-                    <Td rowSpan={2} verticalAlign="top">
+                    </td>
+                    <td rowSpan={2}>커뮤니티</td>
+                    <td rowSpan={2}>
                         <RowBox>
                             <InputBox>
                                 <Input
@@ -540,14 +573,13 @@ const IcoInfoColumnTable = ({
                                         type="community"
                                     />
                                 )
-                            })
-                            }
+                            })}
                         </RowBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>태그</Td>
-                    <Td>
+                    <td>태그</td>
+                    <td>
                         <RowBox>
                             <InputBox>
                                 <Input
@@ -579,32 +611,39 @@ const IcoInfoColumnTable = ({
                                 />
                             ))}
                         </RowBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td verticalAlign="top">개요</Td>
-                    <Td colSpan={3}>
+                    <td>개요</td>
+                    <td colSpan={3}>
                         <Textarea
                             name="summary"
                             value={addIcoState.summary}
                             onChange={e => onIcoChange(e, "SUMMARY")}
                         />
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>관련 뉴스</Td>
-                    <Td colSpan={3}>
-                        <RowBox>
-                            <Select
-                                width={700}
-                                name="relatedNews"
-                                value={addIcoState.relatedNews}
-                                onChange={e => onIcoChange(e, "RELATED_NEWS")}
-                            >
-                                <option disabled hidden>관련 뉴스를 선택해주세요.</option>
-                                <option value="뉴스 1">뉴스 1</option>
-                                <option value="뉴스 2">뉴스 2</option>
-                            </Select>
+                    <td>관련 뉴스</td>
+                    <td colSpan={3}>
+                        <RowBox flex>
+                            <Autocomplete
+                                disablePortal
+                                // value={addIcoState.relatedNews && addIcoState.relatedNews.value}
+                                onChange={(e, value) => onIcoChange(value, "RELATED_NEWS")}
+                                options={[
+                                    {
+                                        label: "뉴스1",
+                                        value: "news1"
+                                    },
+                                    {
+                                        label: "뉴스2",
+                                        value: "news2"
+                                    }
+                                ]}
+                                sx={{ width: 500 }}
+                                renderInput={(params) => <TextField {...params} label="관련 뉴스" />}
+                            />
                             <Button
                                 width={35}
                                 height={35}
@@ -617,16 +656,16 @@ const IcoInfoColumnTable = ({
                             />
                         </RowBox>
                         <RowBox margin="5px 0 0 -5px">
-                            {!!chipState && chipState.relatedNews.map((item) => (
+                            {!!chipState && chipState.relatedNews.map((item, index) => (
                                 <CustomChip
-                                    key={item}
-                                    label={item}
+                                    key={index}
+                                    item={item}
                                     deleteIcon={<AppImage src={chipDelete}/>}
                                     onDelete={() => handleDeleteChips(item, "relatedNews")}
                                 />
                             ))}
                         </RowBox>
-                    </Td>
+                    </td>
                 </tr>
                 </tbody>
             </Table>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import styled, {css} from "styled-components";
 import HeaderContent from "../../components/share/HeaderContent";
@@ -20,30 +20,43 @@ import Paging from "../../components/share/Paging";
 import {useHistory} from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import ContentBox from "../../components/share/ContentBox";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const Wrapper = styled.div`
   padding: 20px;
 `;
 const SearchForm = styled.div`
-  margin: 30px auto 80px;
+  margin: 0 auto 20px;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
   background: ${colors.whiteColor};
   text-align: center;
 `;
 const MemberListBox = styled.div`
   margin: 0 auto;
-  border-radius: 8px;
+  border-radius: 4px;
+  position: relative;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
-
+  
   a {
     color: inherit;
   }
 
+  // th, td style
   .MuiTableCell-head {
+    height: 42px;
     padding: 10px;
     background: ${colors.ultraLightGray};
+  }
+  .MuiTableCell-root {
+    height: 40px;
+  }
+  
+  .css-rorn0c-MuiTableContainer-root {
+    min-height: ${({ minHeight }) => minHeight}px;
   }
 
   .MuiTablePagination-selectLabel,
@@ -51,17 +64,17 @@ const MemberListBox = styled.div`
   .css-16c50h-MuiInputBase-root-MuiTablePagination-select {
     display: none;
   }
-
-  .css-jxl0bs-MuiToolbar-root-MuiTablePagination-toolbar {
-    width: 600px;
-    margin: 0 auto;
-  }
-
-  .css-jxl0bs-MuiToolbar-root-MuiTablePagination-toolbar .MuiTablePagination-actions {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
+  //
+  //.css-jxl0bs-MuiToolbar-root-MuiTablePagination-toolbar {
+  //  width: 600px;
+  //  margin: 0 auto;
+  //}
+  //
+  //.css-jxl0bs-MuiToolbar-root-MuiTablePagination-toolbar .MuiTablePagination-actions {
+  //  width: 100%;
+  //  display: flex;
+  //  justify-content: space-between;
+  //}
 `;
 const SearchTable = styled.table`
   width: 100%;
@@ -69,21 +82,22 @@ const SearchTable = styled.table`
   border-width: 2px 0 2px 0;
   border-color: ${colors.grayColor};
   text-align: start;
-`;
-const Td = styled.td`
-  width: 35%;
-  height: 60px;
-  padding: 0 10px;
-  border-bottom: 1px solid ${colors.borderColor};
+  
+  td {
+    width: 35%;
+    height: 60px;
+    padding: 0 10px;
+    border-bottom: 1px solid ${colors.borderColor};
 
-  &:nth-child(2n - 1) {
-    width: 150px !important;
-    border-right: 1px solid ${colors.borderColor};
-    background: ${colors.ultraLightGray};
-  }
+    &:nth-child(2n - 1) {
+      width: 150px !important;
+      border-right: 1px solid ${colors.borderColor};
+      background: ${colors.ultraLightGray};
+    }
 
-  &:nth-child(3) {
-    border-left: 1px solid ${colors.borderColor};
+    &:nth-child(3) {
+      border-left: 1px solid ${colors.borderColor};
+    }
   }
 
   // DatePicker Style
@@ -104,6 +118,9 @@ const Td = styled.td`
   .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
     width: 175px;
   }
+  .css-j204z7-MuiFormControlLabel-root {
+    color: ${colors.lightBlack};
+  }
 `;
 const Input = styled.input`
   width: ${({fullWidth}) => fullWidth ? 340 : 160}px;
@@ -113,7 +130,6 @@ const Input = styled.input`
 `;
 const Select = styled.select`
   width: ${({width}) => width ? width : 200}px;
-  height: 35px;
   padding: 5px 10px;
   border: 1px solid ${colors.borderColor};
   outline: none;
@@ -148,12 +164,11 @@ const NumberInput = styled.input`
 `;
 const ListLengthSelectBox = styled.div`
   text-align: right;
-  color: ${colors.blackColor};
+  color: ${colors.lightBlack};
   font-size: 16px;
   font-weight: bold;
 `;
 const PagingBox = styled.div`
-  width: 500px;
   margin: 80px auto 20px;
 `;
 
@@ -204,8 +219,8 @@ const MemberPresenter = ({
                     <SearchTable>
                         <tbody>
                         <tr>
-                            <Td>가입일</Td>
-                            <Td>
+                            <td>가입일</td>
+                            <td>
                                 <LocalizationProvider dateAdapter={AdapterDateFns} locale={ko}>
                                     <DatePicker
                                         label="시작일"
@@ -235,9 +250,9 @@ const MemberPresenter = ({
                                         }}
                                     />
                                 </LocalizationProvider>
-                            </Td>
-                            <Td>이메일 주소</Td>
-                            <Td>
+                            </td>
+                            <td>이메일 주소</td>
+                            <td>
                                 <Input
                                     name="email"
                                     fullWidth
@@ -245,11 +260,11 @@ const MemberPresenter = ({
                                     value={searchInput.email}
                                     onChange={onSearchChange}
                                 />
-                            </Td>
+                            </td>
                         </tr>
                         <tr>
-                            <Td>이름</Td>
-                            <Td>
+                            <td>이름</td>
+                            <td>
                                 <Input
                                     name="name"
                                     fullWidth
@@ -257,9 +272,9 @@ const MemberPresenter = ({
                                     value={searchInput.name}
                                     onChange={onSearchChange}
                                 />
-                            </Td>
-                            <Td>가입방식</Td>
-                            <Td>
+                            </td>
+                            <td>가입방식</td>
+                            <td>
                                 <Select
                                     name="joinType"
                                     onChange={onSearchChange}
@@ -268,14 +283,16 @@ const MemberPresenter = ({
                                     <option value="all">전체</option>
                                     <option value="email">이메일</option>
                                     <option value="kakao">카카오</option>
-                                    <option value="facebook">페이스북</option>
+                                    <option value="wechat">위챗</option>
+                                    <option value="line">라인</option>
                                     <option value="google">구글</option>
+                                    <option value="whatsapp">왓츠앱</option>
                                 </Select>
-                            </Td>
+                            </td>
                         </tr>
                         <tr>
-                            <Td>포트폴리오 자산</Td>
-                            <Td>
+                            <td>포트폴리오 자산</td>
+                            <td>
                                 <PortfolioBox>
                                     <NumberInputBox>
                                         <NumberInput
@@ -297,35 +314,31 @@ const MemberPresenter = ({
                                         만원
                                     </NumberInputBox>
                                 </PortfolioBox>
-                            </Td>
-                            <Td>14세 미만</Td>
-                            <Td>
-                                <Select
-                                    name="age14"
-                                    value={searchInput.age14}
-                                    onChange={onSearchChange}
-                                >
-                                    <option value="up">14 이상</option>
-                                    <option value="down">14 미만</option>
-                                </Select>
-                            </Td>
+                            </td>
+                            <td>14세 미만</td>
+                            <td>
+                                <RadioGroup row name="age14" value={searchInput.age14} onChange={onSearchChange}>
+                                    <FormControlLabel value="up" control={<Radio size="small" />} label="14세 이상" />
+                                    <FormControlLabel value="down" control={<Radio size="small" />} label="14세 미만" />
+                                </RadioGroup>
+                            </td>
                         </tr>
                         </tbody>
                     </SearchTable>
 
                     <Button
                         width={120}
-                        height={45}
+                        height={38}
                         fontSize={18}
-                        bgColor={colors.activeBlue}
+                        bgColor={colors.deepNavyColor}
                         fontColor={colors.whiteColor}
                         title="찾기"
                         margin="30px 0 10px"
                     />
                 </SearchForm>
 
-                <MemberListBox>
-                    <Paper sx={{width: '100%', paddingBottom: 5, border: `1px solid ${colors.borderColor}`}}>
+                <MemberListBox minHeight={rowsPerPage * 40 + 42}>
+                    <Paper sx={{width: '100%', minHeight: '470px', paddingBottom: 5 }}>
                         <ListLengthSelectBox>
                             페이지 당 :
                             <Select width={60} onChange={handleChangeRowsPerPage} margin="20px 10px">
@@ -374,7 +387,6 @@ const MemberPresenter = ({
                                                     })}
                                                 </TableRow>
                                             );
-
                                         })}
                                 </TableBody>
                             </Table>

@@ -50,6 +50,7 @@ const RecentNewsDetailPresenter = ({
                                        onEditorStateChange,
                                        editorToHtml,
                                        onDeleteNews,
+                                       goBack,
                                        onSaveNews
                                    }) => {
 
@@ -74,6 +75,7 @@ const RecentNewsDetailPresenter = ({
                                 fontColor={colors.deepNavyColor}
                                 fontSize={16}
                                 fontWeight={600}
+                                onClick={goBack}
                             />
                             <Button
                                 width={120}

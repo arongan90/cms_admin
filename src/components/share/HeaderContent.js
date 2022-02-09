@@ -20,7 +20,9 @@ import {useHistory} from "react-router-dom";
 // import PropTypes from 'prop-types';
 
 const Text = styled.span`
+  font-size: 14px;
   font-weight: 600;
+  margin-right: 6px;
   cursor: pointer;
   
   &:hover {
@@ -60,6 +62,9 @@ const HeaderContent = ({
                             onClick={handleInfoOpen}
                         >
                             <Text>관리자 정보</Text>
+                            <IconButton color="inherit" sx={{ p: 0.5 }}>
+                                <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
+                            </IconButton>
                         </Grid>
                         <Grid item>
                             <Button
@@ -89,7 +94,7 @@ const HeaderContent = ({
                                 {title}
                             </Typography>
                         </Grid>
-                        <Grid item>
+                        {/*<Grid item>
                             <Tooltip title="Alerts • No alerts">
                                 <IconButton color="inherit">
                                     <NotificationsIcon />
@@ -100,7 +105,7 @@ const HeaderContent = ({
                             <IconButton color="inherit" sx={{ p: 0.5 }}>
                                 <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
                             </IconButton>
-                        </Grid>
+                        </Grid>*/}
                     </Grid>
                 </Toolbar>
             </AppBar>

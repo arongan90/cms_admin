@@ -21,6 +21,8 @@ const RecentNewsContainer = () => {
         setNewsList(newsData.slice(indexOfFirst, indexOfLast));
     }, [newsData]);
 
+
+
     const fetchData = useCallback(async () => {
         try {
             const { data } = await SendRequest().get(`${serverProtocol}${serverURL}/recentNews`);
@@ -29,8 +31,7 @@ const RecentNewsContainer = () => {
         } catch (e) {
             throw new Error(e);
         }
-    }, []);
-
+    },[]);
 
 
     useEffect(() => {

@@ -4,11 +4,13 @@ import SendRequest from "../../../utils/SendRequest";
 import {convertToRaw, EditorState} from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import * as constants from "../../../utils/constants";
+import {useHistory} from "react-router-dom";
 
 const serverProtocol = constants.config.PROTOCOL;
 const serverURL = constants.config.URL;
 
 const RecentNewsDetailContainer = ({ match }) => {
+    const history = useHistory();
     const { newsId } = match.params;
     const [tabMenu, setTabMenu] = useState(0);
     const [newsData, setNewsData] = useState({});
@@ -22,6 +24,9 @@ const RecentNewsDetailContainer = ({ match }) => {
     const onEditorStateChange = useCallback(editorState => setEditorState(editorState), []);
     // 에디터 인코딩
     const editorToHtml = draftToHtml(convertToRaw(editorState && editorState.getCurrentContent()));
+
+    // 이전
+    const goBack = useCallback(() => history.goBack(), []);
 
     // 수정내용 저장
     const onSaveNews = useCallback(async() => {
@@ -71,6 +76,7 @@ const RecentNewsDetailContainer = ({ match }) => {
             onEditorStateChange={onEditorStateChange}
             editorToHtml={editorToHtml}
             onSaveNews={onSaveNews}
+            goBack={goBack}
             onDeleteNews={onDeleteNews}
         />
     )

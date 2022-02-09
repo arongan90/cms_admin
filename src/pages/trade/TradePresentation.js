@@ -22,15 +22,14 @@ const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  .css-1ufqgrx-MuiToggleButtonGroup-root,
-  .css-fhsron-MuiButtonBase-root-MuiToggleButton-root {
-    border-radius: 4px;
+  .css-1ufqgrx-MuiToggleButtonGroup-root {
+    background-color: ${colors.whiteColor} !important;
+    border-radius: 0 !important;
   }
-  .MuiButtonBase-root {
-    background-color: ${colors.whiteColor};
-    height: 38px;
-  }
+`;
+const StyledToggleButton = styled(ToggleButton)`
+  height: 35px;
+  border-radius: 0 !important;
 `;
 const TableBox = styled.div`
   min-height: calc(100vh - 300px);
@@ -83,9 +82,9 @@ const TradePresentation = ({
                                     exclusive
                                     onChange={handleChange}
                                 >
-                                    <ToggleButton value="spot">스팟</ToggleButton>
-                                    <ToggleButton value="dex">DEX</ToggleButton>
-                                    <ToggleButton value="derivative">파생상품</ToggleButton>
+                                    <StyledToggleButton value="spot">스팟</StyledToggleButton>
+                                    <StyledToggleButton value="dex">DEX</StyledToggleButton>
+                                    <StyledToggleButton value="derivative">파생상품</StyledToggleButton>
                                 </ToggleButtonGroup>
 
                                 <Button
@@ -145,15 +144,93 @@ const TradePresentation = ({
                                 </>
                             )}
 
-                            {alignment === "dex1" && (
+                            {alignment === "dex" && (
                                 <>
-
+                                    <TableBox>
+                                        <Table>
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell>순위</TableCell>
+                                                    <TableCell>거래소</TableCell>
+                                                    <TableCell>신뢰 점수</TableCell>
+                                                    <TableCell align="right">24시간 거래량 (₩)</TableCell>
+                                                    <TableCell>7일 방문</TableCell>
+                                                    <TableCell>마켓</TableCell>
+                                                    <TableCell>코인</TableCell>
+                                                    <TableCell>지원화폐</TableCell>
+                                                    <TableCell>최근 7일 거래량 </TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {/*  data.map  */}
+                                                <TradeTableRow
+                                                    // 순위
+                                                    // 거래소
+                                                    // 신뢰점수
+                                                    // _24시간거래량
+                                                    // 퍼센트
+                                                    // _7일방문
+                                                    // 마켓
+                                                    // 코인
+                                                    // 지원화폐
+                                                    // graph
+                                                />
+                                            </TableBody>
+                                        </Table>
+                                    </TableBox>
+                                    <PagingBox>
+                                        <Paging
+                                            // currentPage={currentPage}
+                                            // totalItemsCount={collectionList && collectionList.length}
+                                            // onChange={handleChangePage}
+                                            // rowsPerPage={10}
+                                        />
+                                    </PagingBox>
                                 </>
                             )}
 
                             {alignment === "derivative" && (
                                 <>
-
+                                    <TableBox>
+                                        <Table>
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell>순위</TableCell>
+                                                    <TableCell>거래소</TableCell>
+                                                    <TableCell>신뢰 점수</TableCell>
+                                                    <TableCell align="right">24시간 거래량 (₩)</TableCell>
+                                                    <TableCell>7일 방문</TableCell>
+                                                    <TableCell>마켓</TableCell>
+                                                    <TableCell>코인</TableCell>
+                                                    <TableCell>지원화폐</TableCell>
+                                                    <TableCell>최근 7일 거래량 </TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody>
+                                                {/*  data.map  */}
+                                                <TradeTableRow
+                                                    // 순위
+                                                    // 거래소
+                                                    // 신뢰점수
+                                                    // _24시간거래량
+                                                    // 퍼센트
+                                                    // _7일방문
+                                                    // 마켓
+                                                    // 코인
+                                                    // 지원화폐
+                                                    // graph
+                                                />
+                                            </TableBody>
+                                        </Table>
+                                    </TableBox>
+                                    <PagingBox>
+                                        <Paging
+                                            // currentPage={currentPage}
+                                            // totalItemsCount={collectionList && collectionList.length}
+                                            // onChange={handleChangePage}
+                                            // rowsPerPage={10}
+                                        />
+                                    </PagingBox>
                                 </>
                             )}
                         </>)

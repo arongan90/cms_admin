@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   padding: 20px;
 `;
 const ButtonGroup = styled.div`
-  margin: 40px 20px 20px;
+  margin: ${({ margin }) => margin ? margin : "20px 20px"};
   text-align: right;
 `;
 const NewsList = styled.div`
@@ -59,7 +59,6 @@ const Input = styled.input`
   height: 100%;
   border: none;
 `;
-
 
 const RecentNewsPresentation = ({
                                     tabMenu,
@@ -139,6 +138,29 @@ const RecentNewsPresentation = ({
                         </tr>
                         </tbody>
                     </AddNewsTable>
+
+                    <ButtonGroup margin="40px 20px 40px">
+                        <Button
+                            width={120}
+                            height={38}
+                            title="취소"
+                            border={`1px solid ${colors.deepNavyColor}`}
+                            bgColor={colors.whiteColor}
+                            fontColor={colors.deepNavyColor}
+                            fontSize={16}
+                            fontWeight={600}
+                        />
+                        <Button
+                            width={120}
+                            height={38}
+                            title="추가"
+                            margin="0 0 0 20px"
+                            bgColor={colors.deepNavyColor}
+                            fontColor={colors.whiteColor}
+                            fontSize={16}
+                            fontWeight={600}
+                        />
+                    </ButtonGroup>
                 </Wrapper>
             }
         </ContentBox>

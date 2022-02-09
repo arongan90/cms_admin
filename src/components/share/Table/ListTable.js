@@ -45,6 +45,7 @@ const Text = styled.div`
   color: ${({fontColor}) => fontColor ? fontColor : colors.lightBlack};
   text-align: ${({textAlign}) => textAlign ? textAlign : 'inherit'};
   margin: ${({margin}) => margin ? margin : '0 auto'};
+  white-space: nowrap;
 
   ${({width}) => width && css`
     width: ${({width}) => width};
@@ -156,7 +157,7 @@ const ListTable = ({
                                                         <Text>거래량</Text>
                                                     </RowBox>
 
-                                                    <RowBox textAlign="right" width="52%">
+                                                    <RowBox textAlign="right" width="170px">
                                                         <Text fontColor={colors.activeGreen}>
                                                             {numberAddComma(value.marketPrice)}
                                                         </Text>

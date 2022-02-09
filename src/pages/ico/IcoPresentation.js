@@ -22,14 +22,17 @@ const ListLengthSelectBox = styled.div`
   align-items: center;
   padding: 15px 20px 0 30px;
 `;
+const StyledToggleButton = styled(ToggleButton)`
+  height: 35px;
+  border-radius: 0 !important;
+`;
 const SelectBox = styled.div`
-  color: ${colors.blackColor};
+  color: ${colors.lightBlack};
   font-size: 16px;
   font-weight: bold;
 `;
 const Select = styled.select`
   width: ${({width}) => width ? width : 200}px;
-  height: 35px;
   padding: 5px 10px;
   border: 1px solid ${colors.borderColor};
   outline: none;
@@ -40,13 +43,6 @@ const Select = styled.select`
 `;
 const IcoListBox = styled.div`
   margin: 0 auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
-`;
-const ProgressBox = styled.div`
-  button {
-    padding: 11px 18px;
-  }
 `;
 const PagingBox = styled.div`
   width: 500px;
@@ -104,19 +100,17 @@ const IcoPresentation = ({
                     <IcoListBox>
                         <Paper sx={{width: '100%', paddingBottom: 5, border: `1px solid ${colors.borderColor}`}}>
                             <ListLengthSelectBox>
-                                <ProgressBox>
-                                    <ToggleButtonGroup
-                                        color="primary"
-                                        value={alignment}
-                                        exclusive
-                                        onChange={handleChange}
-                                    >
-                                        <ToggleButton value="ongoing">진행중</ToggleButton>
-                                        <ToggleButton value="planning">예정</ToggleButton>
-                                        <ToggleButton value="deadline">마감</ToggleButton>
-                                        <ToggleButton value="all">전체</ToggleButton>
-                                    </ToggleButtonGroup>
-                                </ProgressBox>
+                                <ToggleButtonGroup
+                                    color="primary"
+                                    value={alignment}
+                                    exclusive
+                                    onChange={handleChange}
+                                >
+                                    <StyledToggleButton value="ongoing">진행중</StyledToggleButton>
+                                    <StyledToggleButton value="planning">예정</StyledToggleButton>
+                                    <StyledToggleButton value="deadline">마감</StyledToggleButton>
+                                    <StyledToggleButton value="all">전체</StyledToggleButton>
+                                </ToggleButtonGroup>
                                 <SelectBox>
                                     페이지 당 :
                                     <Select width={70} onChange={handleChangeRowsPerPage} margin="20px 10px">

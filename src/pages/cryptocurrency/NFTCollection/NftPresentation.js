@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 const CategoryListBox = styled.div`
   margin: 0 auto;
   padding: 0 0 50px;
-  border-radius: 8px;
+  border-radius: 4px;
   background-color: ${colors.whiteColor};
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 `;
@@ -37,7 +37,7 @@ const Title = styled.div`
 const CollectionForm = styled.div`
   margin: 30px auto 80px;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
   background: ${colors.whiteColor};
   text-align: center;
@@ -238,21 +238,22 @@ const NftPresentation = ({
                             <Button
                                 title="취소"
                                 width={120}
-                                height={50}
-                                fontSize={18}
+                                height={38}
+                                fontSize={16}
                                 fontWeight={600}
-                                fontColor={colors.activeBlue}
-                                border={`1px solid ${colors.activeBlue}`}
+                                fontColor={colors.deepNavyColor}
+                                bgColor={colors.whiteColor}
+                                border={`1px solid ${colors.deepNavyColor}`}
                                 onClick={handleCancel}
                             />
                             <Button
                                 title="추가"
                                 width={120}
-                                height={50}
-                                fontSize={18}
+                                height={38}
+                                fontSize={16}
                                 fontWeight={600}
                                 fontColor={colors.whiteColor}
-                                bgColor={colors.activeBlue}
+                                bgColor={colors.deepNavyColor}
                                 margin="0 0 0 20px"
                                 onClick={handleAddCollection}
                             />

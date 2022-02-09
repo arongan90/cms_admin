@@ -18,7 +18,7 @@ const Content = styled.div`
   min-height: calc(100vh - 300px);
   margin: 0 auto;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow-y: scroll;
   background-color: ${colors.whiteColor};
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
@@ -26,7 +26,7 @@ const Content = styled.div`
 const EditorBox = styled.div`
   min-height: calc(100vh - 340px);
   margin: 0 auto;
-  border-radius: 8px;
+  border-radius: 4px;
   white-space: pre-wrap;
   background-color: ${colors.whiteColor};
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);

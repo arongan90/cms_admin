@@ -81,6 +81,7 @@ const MemberContainer = () => {
     const {memberData, loading, error} = fetchDataState;
 
     const handleTabMenu = value => setTabMenu(value);
+
     const handleChangePage = page => {
         let indexOfLast = page * rowsPerPage;
         let indexOfFirst = indexOfLast - rowsPerPage;
@@ -90,7 +91,7 @@ const MemberContainer = () => {
     }
 
     const handleChangeRowsPerPage = e => {
-        setRowsPerPage(+e.target.value);
+        setRowsPerPage(e.target.value);
         setMemberList(memberList.slice(0, e.target.value));
     };
     const onSearchChange = e => {
@@ -128,8 +129,8 @@ const MemberContainer = () => {
     }, []);
 
     useEffect(() => {
-        console.info('memberList', memberList)
-    }, [memberList]);
+        console.info('searchInput', searchInput.age14)
+    }, [searchInput.age14]);
 
     return (
         <MemberPresenter

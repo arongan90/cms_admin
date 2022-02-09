@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 `;
 const IcoListBox = styled.div`
   margin: 0 auto;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 `;
 const ListLengthSelectBox = styled.div`
@@ -26,13 +26,12 @@ const ListLengthSelectBox = styled.div`
   padding: 15px 20px 0 30px;
 `;
 const SelectBox = styled.div`
-  color: ${colors.blackColor};
+  color: ${colors.lightBlack};
   font-size: 16px;
   font-weight: bold;
 `;
 const Select = styled.select`
   width: ${({width}) => width ? width : 200}px;
-  height: 35px;
   padding: 5px 10px;
   border: 1px solid ${colors.borderColor};
   outline: none;
@@ -47,7 +46,7 @@ const PagingBox = styled.div`
 `;
 const ButtonGroup = styled.div`
   text-align: right;
-  margin: 50px 0 200px;
+  margin: 50px 0 100px;
 `;
 
 const CoinInfoPresentation = ({
@@ -88,7 +87,7 @@ const CoinInfoPresentation = ({
                     />
 
                     <IcoListBox>
-                        <Paper sx={{width: '100%', paddingBottom: 5, border: `1px solid ${colors.borderColor}`}}>
+                        <Paper sx={{width: '100%', paddingBottom: 5, border: `1px solid ${colors.borderColor}`, borderRadius: '4px'}}>
                             <ListLengthSelectBox>
                                 <SelectBox>
                                     <Select width={150} margin="20px 10px">
@@ -108,6 +107,7 @@ const CoinInfoPresentation = ({
                                 </SelectBox>
                             </ListLengthSelectBox>
 
+                            {/* 코인 목록 데이터 */}
                             <ListTable
                                 tableHeadColumns={coinInfoColumns}
                                 coinList={coinList}
@@ -137,17 +137,18 @@ const CoinInfoPresentation = ({
                     <ButtonGroup>
                         <Button
                             width={120}
-                            height={48}
-                            border={`1px solid ${colors.activeBlue}`}
-                            fontColor={colors.activeBlue}
+                            height={38}
+                            border={`1px solid ${colors.deepNavyColor}`}
+                            bgColor={colors.whiteColor}
+                            fontColor={colors.deepNavyColor}
                             fontSize={20}
                             title="취소"
                             onClick={onCancel}
                         />
                         <Button
                             width={120}
-                            height={50}
-                            bgColor={colors.activeBlue}
+                            height={38}
+                            bgColor={colors.deepNavyColor}
                             fontColor={colors.whiteColor}
                             fontSize={20}
                             margin="0 0 0 20px"

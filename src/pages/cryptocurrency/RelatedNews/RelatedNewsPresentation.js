@@ -11,13 +11,13 @@ const Wrapper = styled.div`
   padding: 20px;
 `;
 const ButtonGroup = styled.div`
-  margin: 20px 20px 40px;
+  margin: 0 20px 40px;
   text-align: right;
 `;
 const NewsListBox = styled.div`
   margin: 0 auto;
   padding: 0 0 50px;
-  border-radius: 8px;
+  border-radius: 4px;
   background-color: ${colors.whiteColor};
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 `;
@@ -43,11 +43,11 @@ const RelatedNewsPresentation = ({
                         <ButtonGroup>
                             <Button
                                 title="뉴스 추가"
-                                width={150}
-                                height={46}
+                                width={120}
+                                height={38}
                                 fontColor={colors.whiteColor}
-                                bgColor={colors.activeBlue}
-                                fontSize={18}
+                                bgColor={colors.deepNavyColor}
+                                fontSize={16}
                                 onClick={handleAddNews}
                             />
                         </ButtonGroup>
@@ -67,21 +67,21 @@ const RelatedNewsPresentation = ({
                             <Button
                                 title="취소"
                                 width={120}
-                                height={50}
-                                fontColor={colors.activeBlue}
+                                height={38}
+                                fontColor={colors.deepNavyColor}
                                 bgColor={colors.whiteColor}
-                                border={`1px solid ${colors.activeBlue}`}
-                                fontSize={18}
+                                border={`1px solid ${colors.deepNavyColor}`}
+                                fontSize={16}
                                 onClick={handleAddNews}
                             />
                             <Button
                                 title="등록"
                                 margin="0 0 0 20px"
                                 width={120}
-                                height={50}
+                                height={38}
                                 fontColor={colors.whiteColor}
-                                bgColor={colors.activeBlue}
-                                fontSize={18}
+                                bgColor={colors.deepNavyColor}
+                                fontSize={16}
                                 onClick={handleAddNews}
                             />
                         </ButtonGroup>

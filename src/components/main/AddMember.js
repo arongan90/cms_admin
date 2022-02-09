@@ -24,7 +24,7 @@ const InputBox = styled.div`
   max-width: 1200px;
   margin: 30px auto;
   position: relative;
-  border-radius: 8px;
+  border-radius: 4px;
   background: ${colors.whiteColor};
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 `;

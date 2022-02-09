@@ -86,7 +86,7 @@ const IcoContainer = () => {
         },
         tag: '',
         summary: '',
-        relatedNews: '관련 뉴스를 선택해주세요.',
+        relatedNews: [],
     });
 
     // DatePicker 달력 onChange
@@ -96,8 +96,7 @@ const IcoContainer = () => {
     });
     // ICO 추가 페이지 input 상태 onChange
     const onIcoChange = (e, type) => {
-        const { name, value } = e.target;
-
+        let name, value;
         let file;
         let reader = new FileReader();
         switch(type) {
@@ -129,10 +128,18 @@ const IcoContainer = () => {
             case "APPROVAL":
             case "TAG":
             case "SUMMARY":
-            case "RELATED_NEWS":
+                name = e.target.name;
+                value = e.target.value;
+
                 setAddIcoState({
                     ...addIcoState,
                     [name]: value,
+                });
+                break;
+            case "RELATED_NEWS":
+                setAddIcoState({
+                    ...addIcoState,
+                    relatedNews: e
                 });
                 break;
             case "WHITE_PAPER_LINK":
@@ -155,6 +162,8 @@ const IcoContainer = () => {
                 });
                 break;
             case "COMMUNITY":
+                name = e.target.name;
+                value = e.target.value;
                 setAddIcoState({
                     ...addIcoState,
                    community: {
@@ -168,54 +177,73 @@ const IcoContainer = () => {
 
     // Chip 추가
     const handleAddChips = type => {
-        if (type === "community") {
-            if (addIcoState[type].title === "" || addIcoState[type].title === "") {
-                alert('커뮤니티 명칭 및 URL을 입력해주세요.');
-                return;
-            }
-            if (!!chipState[type].find(chip => chip === addIcoState[type].url)) {
-                alert(`이미 ${addIcoState[type].url} 을/를 추가하셨습니다.`);
-                return;
-            }
-            setChipState({
-                ...chipState,
-                [type]: [...chipState[type], addIcoState[type].url]
-            });
-            setAddIcoState({
-                ...addIcoState,
-                community: {
-                    title: '',
-                    url: '',
+        switch (type) {
+            case "community":
+                if (addIcoState[type].title === "" || addIcoState[type].title === "") {
+                    alert('커뮤니티 명칭 및 URL을 입력해주세요.');
+                    return;
+                } else if (!!chipState[type].find(chip => chip === addIcoState[type].url)) {
+                    alert(`이미 ${addIcoState[type].url} 을/를 추가하셨습니다.`);
+                    return;
                 }
-            });
-        } else if (type === "approval" || type === "relatedNews") {
-            if (addIcoState[type] === "관련 뉴스를 선택해주세요.") {
-                alert('관련 뉴스를 선택 후 추가버튼을 눌러주세요.');
-                return;
-            }
-            if (!!chipState[type].find(chip => chip === addIcoState[type])) {
-                alert(`이미 ${addIcoState[type]} 을/를 추가하셨습니다.`);
-                return;
-            }
-            setChipState({
-                ...chipState,
-                [type]: [...chipState[type], addIcoState[type]]
-            });
-        } else {
-            if (!!chipState[type].find(chip => chip === addIcoState[type])) {
-                alert(`이미 ${addIcoState[type]} 을/를 추가하셨습니다.`);
-                return;
-            }
-            setChipState({
-                ...chipState,
-                [type]: [...chipState[type], addIcoState[type]]
-            });
-            setAddIcoState({
-                ...addIcoState,
-                [type]: '',
-            });
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], addIcoState[type].url]
+                });
+                setAddIcoState({
+                    ...addIcoState,
+                    community: {
+                        title: '',
+                        url: '',
+                    }
+                });
+                break;
+            case "approval":
+                if (addIcoState[type] === "관련 뉴스를 선택해주세요.") {
+                    alert('관련 뉴스를 선택 후 추가버튼을 눌러주세요.');
+                    return;
+                } else if (!!chipState[type].find(chip => chip === addIcoState[type])) {
+                    alert(`이미 ${addIcoState[type]} 을/를 추가하셨습니다.`);
+                    return;
+                }
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], addIcoState[type]]
+                });
+                break;
+            case "relatedNews":
+                if (addIcoState[type].length === 0 && "관련 뉴스를 선택해주세요.") {
+                    alert('관련 뉴스를 선택 후 추가버튼을 눌러주세요.');
+                    return;
+                } else if (!!chipState[type].find(chip => chip === addIcoState[type])) {
+                    alert(`이미 ${addIcoState[type]} 을/를 추가하셨습니다.`);
+                    return;
+                }
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], addIcoState[type].label]
+                });
+                break;
+            case "tag":
+                if (!!chipState[type].find(chip => chip === addIcoState[type])) {
+                    alert(`이미 ${addIcoState[type]} 을/를 추가하셨습니다.`);
+                    return;
+                }
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], addIcoState[type]]
+                });
+                setAddIcoState({
+                    ...addIcoState,
+                    [type]: '',
+                });
+                break;
         }
     }
+    useEffect(() => {
+        console.info('chipState', chipState);
+    }, [chipState]);
+
     // Chip 제거
     const handleDeleteChips = (item, type) => {
         setChipState({
