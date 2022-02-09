@@ -24,6 +24,7 @@ const IcoContainer = () => {
     const [rowsPerPage, setRowsPerPage] = useState(5);
     const [searchCoinName, setSearchCoinName] = useState('');
     const [chipState, setChipState] = useState({
+        category: [],
         approval: [],
         community: [],
         tag: [],
@@ -60,7 +61,7 @@ const IcoContainer = () => {
         coinImage: null,
         coinName: '',
         monetaryUnit: '',
-        category: 'Stablecoins',
+        category: '카테고리 선택',
         type: 'general',
         initialPrice: 0.10,
         branch: 'Platform',
@@ -178,8 +179,21 @@ const IcoContainer = () => {
     // Chip 추가
     const handleAddChips = type => {
         switch (type) {
+            case "category":
+                if (addIcoState[type] === "카테고리 선택") {
+                    alert('카테고리를 선택해주세요.');
+                    return;
+                } else if (!!chipState[type].find(chip => chip === addIcoState[type])) {
+                    alert(`이미 ${addIcoState[type]} 을/를 추가하셨습니다.`);
+                    return;
+                }
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], addIcoState[type]]
+                });
+                break;
             case "community":
-                if (addIcoState[type].title === "" || addIcoState[type].title === "") {
+                if (addIcoState[type].title === "") {
                     alert('커뮤니티 명칭 및 URL을 입력해주세요.');
                     return;
                 } else if (!!chipState[type].find(chip => chip === addIcoState[type].url)) {
@@ -199,10 +213,7 @@ const IcoContainer = () => {
                 });
                 break;
             case "approval":
-                if (addIcoState[type] === "관련 뉴스를 선택해주세요.") {
-                    alert('관련 뉴스를 선택 후 추가버튼을 눌러주세요.');
-                    return;
-                } else if (!!chipState[type].find(chip => chip === addIcoState[type])) {
+                if (!!chipState[type].find(chip => chip === addIcoState[type])) {
                     alert(`이미 ${addIcoState[type]} 을/를 추가하셨습니다.`);
                     return;
                 }

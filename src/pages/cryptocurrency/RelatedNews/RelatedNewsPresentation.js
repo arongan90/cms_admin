@@ -27,7 +27,11 @@ const RelatedNewsPresentation = ({
                                      handleTabMenu,
                                      handleAddNews,
                                      newsTableColumns,
-                                     newsList
+                                     newsList,
+
+                                     addNewsInfo,
+                                     onNewsInfoChange,
+                                     thumbnailUpload,
                                  }) => {
     return (
         <ContentBox>
@@ -61,7 +65,9 @@ const RelatedNewsPresentation = ({
                    :
                     <>
                         <NewsInfoTable
-
+                            addNewsInfo={addNewsInfo}
+                            onNewsInfoChange={onNewsInfoChange}
+                            thumbnailUpload={thumbnailUpload}
                         />
                         <ButtonGroup>
                             <Button

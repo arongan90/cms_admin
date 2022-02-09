@@ -17,40 +17,40 @@ const TableBox = styled.div`
 const Table = styled.table`
   width: 100%;
   background-color: ${colors.whiteColor};
-`;
-const Td = styled.td`
-  width: 40%;
-  min-height: 55px;
-  padding: 10px 16px;
-  vertical-align: ${({verticalAlign}) => verticalAlign ? verticalAlign : 'middle'};
-  border-bottom: 1px solid ${colors.borderColor};
 
-  &:first-child,
-  &:nth-child(3) {
-    width: 10%;
-    border-right: 1px solid ${colors.borderColor};
-    background-color: ${colors.ultraLightGray};
-  }
+  td {
+    min-height: 55px;
+    padding: 10px 16px;
+    vertical-align: top;
+    border-bottom: 1px solid ${colors.borderColor};
 
-  &:nth-child(3) {
-    border-left: 1px solid ${colors.borderColor};
-  }
+    &:first-child,
+    &:nth-child(3) {
+      padding-top: 14px;
+      width: 120px !important;
+      border-right: 1px solid ${colors.borderColor};
+      background-color: ${colors.ultraLightGray};
+    }
 
-  // DatePicker Style
-  .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
-    height: 35px;
-    padding: 0 10px;
-  }
+    &:nth-child(3) {
+      border-left: 1px solid ${colors.borderColor};
+    }
 
-  .css-bkqowc-MuiInputBase-root-MuiOutlinedInput-root {
-    border-radius: 5px;
-  }
+    // DatePicker Style
+    .css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+      height: 35px;
+      padding: 0 10px;
+    }
 
-  // ToggleButton Style
-  .css-fhsron-MuiButtonBase-root-MuiToggleButton-root {
-    padding: 5px 11px;
-    border-radius: 5px;
-  }
+    .css-bkqowc-MuiInputBase-root-MuiOutlinedInput-root {
+      border-radius: 5px;
+    }
+
+    // ToggleButton Style
+    .css-fhsron-MuiButtonBase-root-MuiToggleButton-root {
+      padding: 5px 11px;
+      border-radius: 5px;
+    }
 `;
 const InputBox = styled.div`
   width: ${({width}) => width ? width : 250}px;
@@ -68,7 +68,7 @@ const Input = styled.input`
   border: none;
 `;
 const Textarea = styled.textarea`
-  width: 70%;
+  width: 100%;
   min-height: 200px;
   padding: 10px;
   height: 35px;
@@ -81,6 +81,7 @@ const FileInputLabel = styled.label`
   width: 100px;
   height: 35px;
   padding: 10px;
+  margin-right: 5px;
   border-radius: 5px;
   position: relative;
   border: 1px solid ${colors.activeBlue};
@@ -111,7 +112,7 @@ const RowBox = styled.div`
   max-width: 500px;
   margin: ${({margin}) => margin ? margin : '5px 0 0'};
   white-space: initial;
-  
+
   ${({flex}) => flex && css`
     display: flex;
     flex-wrap: wrap;
@@ -123,7 +124,6 @@ const RowBox = styled.div`
     color: ${colors.whiteColor};
   }
 `;
-
 const AppImage = styled.img`
   ${({width}) => width && css`
     width: ${width};
@@ -131,6 +131,10 @@ const AppImage = styled.img`
   ${({height}) => height && css`
     height: ${height};
   `};
+`;
+const SubText = styled.div`
+  font-size: 12px;
+  color: ${colors.grayColor};
 `;
 
 const CryptocurrencyColumnTable = ({
@@ -151,8 +155,8 @@ const CryptocurrencyColumnTable = ({
             <Table>
                 <tbody>
                 <tr>
-                    <Td>코인명</Td>
-                    <Td>
+                    <td>코인명</td>
+                    <td>
                         <RowBox flex>
                             <IconImageUpload
                                 onChange={e => onCoinChange(e, "COIN_IMAGE")}
@@ -167,9 +171,12 @@ const CryptocurrencyColumnTable = ({
                                 />
                             </InputBox>
                         </RowBox>
-                    </Td>
-                    <Td>화폐단위</Td>
-                    <Td>
+                        <RowBox>
+                            <SubText>※ 아이콘 이미지는 72px x 72px 사이즈의 png, jpeg, svg 확장자만 업로드 가능합니다.</SubText>
+                        </RowBox>
+                    </td>
+                    <td>화폐단위</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="monetaryUnit"
@@ -178,24 +185,47 @@ const CryptocurrencyColumnTable = ({
                                 placeholder="BTC"
                             />
                         </InputBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>카테고리</Td>
-                    <Td>
-                        <Select
-                            name="category"
-                            value={coinState.category}
-                            onChange={e => onCoinChange(e, "CATEGORY")}
-                        >
-                            <option disabled hidden>Stablecoins</option>
-                            <option value="general">일반</option>
-                            <option value="DeFi">DeFi</option>
-                            <option value="NFT">NFT</option>
-                        </Select>
-                    </Td>
-                    <Td>구분</Td>
-                    <Td>
+                    <td>카테고리</td>
+                    <td>
+                        <RowBox margin="0">
+                            <Select
+                                name="category"
+                                value={coinState.category}
+                                onChange={e => onCoinChange(e, "CATEGORY")}
+                            >
+                                <option disabled hidden>Stablecoins</option>
+                                <option value="general">일반</option>
+                                <option value="DeFi">DeFi</option>
+                                <option value="NFT">NFT</option>
+                            </Select>
+                            <Button
+                                width={35}
+                                height={35}
+                                border={`1px solid ${colors.activeBlue}`}
+                                bgColor={colors.whiteColor}
+                                fontColor={colors.activeBlue}
+                                margin="0 0 0 10px"
+                                title="+"
+                                onClick={() => handleAddChips("category")}
+                            />
+                        </RowBox>
+                        <RowBox margin="5px 0 0 -5px">
+                            {!!chipState && chipState.category.map((item, index) => (
+                                <CustomChip
+                                    key={index}
+                                    item={item}
+                                    deleteIcon={<AppImage src={chipDelete}/>}
+                                    onDelete={handleDeleteChips}
+                                    type="approval"
+                                />
+                            ))}
+                        </RowBox>
+                    </td>
+                    <td>구분</td>
+                    <td>
                         <Select
                             name="type"
                             value={coinState.type}
@@ -205,11 +235,11 @@ const CryptocurrencyColumnTable = ({
                             <option value="">DeFi</option>
                             <option value="">NFT</option>
                         </Select>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>가격</Td>
-                    <Td>
+                    <td>가격</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="price"
@@ -229,9 +259,9 @@ const CryptocurrencyColumnTable = ({
                             <option value="BTN">BTN</option>
                             <option value="ETH">ETH</option>
                         </Select>
-                    </Td>
-                    <Td>분야</Td>
-                    <Td>
+                    </td>
+                    <td>분야</td>
+                    <td>
                         <Select
                             name="branch"
                             value={coinState.branch}
@@ -241,11 +271,11 @@ const CryptocurrencyColumnTable = ({
                             <option value="setting">설정 > 암호화폐 범주에 따라 선택하게끔...</option>
                             <option value="branch">설정</option>
                         </Select>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>플랫폼</Td>
-                    <Td>
+                    <td>플랫폼</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="platform"
@@ -254,9 +284,9 @@ const CryptocurrencyColumnTable = ({
                                 placeholder="ERC20"
                             />
                         </InputBox>
-                    </Td>
-                    <Td>발행량</Td>
-                    <Td>
+                    </td>
+                    <td>발행량</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="issueVolume"
@@ -265,11 +295,11 @@ const CryptocurrencyColumnTable = ({
                             />
                             %
                         </InputBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>시가 총액</Td>
-                    <Td>
+                    <td>시가 총액</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="marketCap"
@@ -288,9 +318,9 @@ const CryptocurrencyColumnTable = ({
                             <option value="BTN">BTN</option>
                             <option value="ETH">ETH</option>
                         </Select>
-                    </Td>
-                    <Td>유통량</Td>
-                    <Td>
+                    </td>
+                    <td>유통량</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="distribution"
@@ -298,11 +328,11 @@ const CryptocurrencyColumnTable = ({
                                 onChange={e => onCoinChange(e, "DISTRIBUTION")}
                             />
                         </InputBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>24시간 거래대금</Td>
-                    <Td>
+                    <td>24시간 거래대금</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="transactionPrice_24"
@@ -320,9 +350,9 @@ const CryptocurrencyColumnTable = ({
                             <option value="BTN">BTN</option>
                             <option value="ETH">ETH</option>
                         </Select>
-                    </Td>
-                    <Td>총 공급량</Td>
-                    <Td>
+                    </td>
+                    <td>총 공급량</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="totalSupply"
@@ -330,11 +360,11 @@ const CryptocurrencyColumnTable = ({
                                 onChange={e => onCoinChange(e, "TOTAL_SUPPLY")}
                             />
                         </InputBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>가치 완전 희석</Td>
-                    <Td>
+                    <td>가치 완전 희석</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="fullyDilutedShares"
@@ -353,9 +383,9 @@ const CryptocurrencyColumnTable = ({
                             <option value="BTN">BTN</option>
                             <option value="ETH">ETH</option>
                         </Select>
-                    </Td>
-                    <Td>최대 공급량</Td>
-                    <Td>
+                    </td>
+                    <td>최대 공급량</td>
+                    <td>
                         <InputBox>
                             <Input
                                 name="maxSupply"
@@ -363,11 +393,11 @@ const CryptocurrencyColumnTable = ({
                                 onChange={e => onCoinChange(e, "MAX_SUPPLY")}
                             />
                         </InputBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td verticalAlign="top">익스플로러</Td>
-                    <Td>
+                    <td>익스플로러</td>
+                    <td>
                         <RowBox margin="0">
                             <InputBox>
                                 <Input
@@ -397,9 +427,9 @@ const CryptocurrencyColumnTable = ({
                                 />
                             ))}
                         </RowBox>
-                    </Td>
-                    <Td verticalAlign="top">지갑</Td>
-                    <Td>
+                    </td>
+                    <td>지갑</td>
+                    <td>
                         <RowBox>
                             <InputBox>
                                 <Input
@@ -430,37 +460,35 @@ const CryptocurrencyColumnTable = ({
                                 />
                             ))}
                         </RowBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>웹사이트</Td>
-                    <Td>
-                        <InputBox>
+                    <td>웹사이트</td>
+                    <td>
+                        <InputBox width={300}>
                             <Input
-                                width={285}
                                 name="webSite"
                                 value={coinState.webSite}
                                 onChange={e => onCoinChange(e, "WEB_SITE")}
                                 placeholder="웹사이트의 URL 주소를 입력해주세요."
                             />
                         </InputBox>
-                    </Td>
-                    <Td>소스코드</Td>
-                    <Td>
-                        <InputBox>
+                    </td>
+                    <td>소스코드</td>
+                    <td>
+                        <InputBox width={300}>
                             <Input
-                                width={285}
                                 name="sourceCode"
                                 value={coinState.sourceCode}
                                 onChange={e => onCoinChange(e, "SOURCE_CODE")}
                                 placeholder="https://github.com/bitcoin"
                             />
                         </InputBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td verticalAlign="top">백서</Td>
-                    <Td>
+                    <td>백서</td>
+                    <td>
                         <ToggleButtonGroup
                             color="primary"
                             value={alignment}
@@ -471,32 +499,42 @@ const CryptocurrencyColumnTable = ({
                             <ToggleButton value="file">파일</ToggleButton>
                         </ToggleButtonGroup>
                         <RowBox margin="15px 0 0 0 ">
-                            {alignment === 'link' &&
-                            <InputBox>
-                                <Input
-                                    value={coinState.whitePaper.link}
-                                    onChange={e => onCoinChange(e, "WHITE_PAPER_LINK")}
-                                    placeholder="링크를 입력해주세요."
-                                />
-                            </InputBox>
-                            }
-                            {alignment === 'file' &&
-                            <FileInputLabel>
-                                <FileInput
-                                    type="file"
-                                    accept="*"
-                                    name="whitePaper"
-                                    onChange={e => onCoinChange(e, "WHITE_PAPER_FILE")}
-                                />
-                                파일찾기
-                            </FileInputLabel>
-                            }
+                            {alignment === 'link' && (
+                                <InputBox width={300}>
+                                    <Input
+                                        value={coinState.whitePaper.link}
+                                        onChange={e => onCoinChange(e, "WHITE_PAPER_LINK")}
+                                        placeholder="링크를 입력해주세요."
+                                    />
+                                </InputBox>
+                            )}
+                            {alignment === 'file' && (
+                                <RowBox flex>
+                                    <FileInputLabel>
+                                        <FileInput
+                                            type="file"
+                                            accept="*"
+                                            name="whitePaper"
+                                            onChange={e => onCoinChange(e, "WHITE_PAPER_FILE")}
+                                        />
+                                        파일찾기
+                                    </FileInputLabel>
+                                    {!!coinState.whitePaper.file && (
+                                        <InputBox width={200}>
+                                            <Input
+                                                value={!!coinState.whitePaper.file && coinState.whitePaper.file.name}
+                                                readOnly
+                                            />
+                                        </InputBox>
+                                    )}
+                                </RowBox>
+                            )}
                         </RowBox>
-                    </Td>
-                    <Td rowSpan={2} verticalAlign="top">커뮤니티</Td>
-                    <Td rowSpan={2} verticalAlign="top">
+                    </td>
+                    <td rowSpan={2}>커뮤니티</td>
+                    <td rowSpan={2}>
                         <RowBox>
-                            <InputBox>
+                            <InputBox width={300}>
                                 <Input
                                     name="title"
                                     value={coinState.community.title}
@@ -506,7 +544,7 @@ const CryptocurrencyColumnTable = ({
                             </InputBox>
                         </RowBox>
                         <RowBox>
-                            <InputBox>
+                            <InputBox width={300}>
                                 <Input
                                     name="url"
                                     value={coinState.community.url}
@@ -536,11 +574,11 @@ const CryptocurrencyColumnTable = ({
                                 />
                             ))}
                         </RowBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td>태그</Td>
-                    <Td>
+                    <td>태그</td>
+                    <td>
                         <RowBox>
                             <InputBox>
                                 <Input
@@ -571,17 +609,17 @@ const CryptocurrencyColumnTable = ({
                                 />
                             ))}
                         </RowBox>
-                    </Td>
+                    </td>
                 </tr>
                 <tr>
-                    <Td verticalAlign="top">개요</Td>
-                    <Td colSpan={3}>
+                    <td>개요</td>
+                    <td colSpan={3}>
                         <Textarea
                             name="summary"
                             value={coinState.summary}
                             onChange={e => onCoinChange(e, "SUMMARY")}
                         />
-                    </Td>
+                    </td>
                 </tr>
 
                 </tbody>

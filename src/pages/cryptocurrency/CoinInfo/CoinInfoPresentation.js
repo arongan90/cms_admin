@@ -62,15 +62,19 @@ const CoinInfoPresentation = ({
                                   rowsPerPage,
                                   handleChangePage,
                                   handleChangeRowsPerPage,
-                                  onCancel,
-                                  onSave,
 
                                   addCoinState,
                                   onCoinChange,
                                   chipState,
                                   handleAddChips,
                                   handleDeleteChips,
+
+                                  onCancel,
+                                  onSave,
                               }) => {
+
+    console.info('searchCoinName ::::: ', searchCoinName);
+
     return (
         <ContentBox>
             <HeaderContent
@@ -126,7 +130,6 @@ const CoinInfoPresentation = ({
                 </Wrapper>
                 :
                 <Wrapper>
-
                     <CryptocurrencyColumnTable
                         coinState={addCoinState}
                         onCoinChange={onCoinChange}

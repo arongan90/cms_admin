@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import CoinInfoPresentation from "./CoinInfoPresentation";
 import axios from "axios";
 import * as constants from "../../../utils/constants";
@@ -20,7 +20,9 @@ const CoinInfoContainer = () => {
     const [coinList, setCoinList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+    const [searchCoinName, setSeacrhCoinName] = useState("");
     const [chipState, setChipState] = useState({
+        category: [],
         explorer: [],
         wallet: [],
         community: [],
@@ -72,11 +74,15 @@ const CoinInfoContainer = () => {
         setCoinList(coinList.slice(indexOfFirst, indexOfLast));
     }
 
+    // 코인 검색 onChange
+    const onCoinNameChange = useCallback(e => setSeacrhCoinName(e.target.value), []);
+
     const handleChangeRowsPerPage = e => {
-        setRowsPerPage(+e.target.value);
+        setRowsPerPage(e.target.value);
         setCoinList(coinList.slice(0, e.target.value));
     };
 
+    // 코인 추가 onChange
     const onCoinChange = (e, type) => {
         const { name, value } = e.target;
 
@@ -153,45 +159,55 @@ const CoinInfoContainer = () => {
         }
     }
 
-    useEffect(() => {
-        console.info(addCoinState)
-    }, [addCoinState]);
-
     // Chip 추가
     const handleAddChips = type => {
-        if (type === "community") {
-            if (addCoinState[type].title === "" || addCoinState[type].title === "") {
-                alert('커뮤니티 명칭 및 URL을 입력해주세요.');
-                return;
-            }
-            if (!!chipState[type].find(chip => chip === addCoinState[type].url)) {
-                alert(`이미 ${addCoinState[type].url} 을/를 추가하셨습니다.`);
-                return;
-            }
-            setChipState({
-                ...chipState,
-                [type]: [...chipState[type], addCoinState[type].url]
-            });
-            setAddCoinState({
-                ...addCoinState,
-                community: {
-                    title: '',
-                    url: '',
+        switch (type) {
+            case 'community':
+                if (addCoinState[type].title === "" || addCoinState[type].title === "") {
+                    alert('커뮤니티 명칭 및 URL을 입력해주세요.');
+                    return;
+                } else if (!!chipState[type].find(chip => chip === addCoinState[type].url)) {
+                    alert(`이미 ${addCoinState[type].url} 을/를 추가하셨습니다.`);
+                    return;
                 }
-            });
-        } else {
-            if (!!chipState[type].find(chip => chip === addCoinState[type])) {
-                alert(`이미 ${addCoinState[type]} 을/를 추가하셨습니다.`);
-                return;
-            }
-            setChipState({
-                ...chipState,
-                [type]: [...chipState[type], addCoinState[type]]
-            });
-            setAddCoinState({
-                ...addCoinState,
-                [type]: '',
-            });
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], addCoinState[type].url]
+                });
+                setAddCoinState({
+                    ...addCoinState,
+                    community: {
+                        title: '',
+                        url: '',
+                    }
+                });
+                break;
+            case 'explorer':
+            case 'wallet':
+            case 'tag':
+                if (!!chipState[type].find(chip => chip === addCoinState[type])) {
+                    alert(`이미 ${addCoinState[type]} 을/를 추가하셨습니다.`);
+                    return;
+                }
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], addCoinState[type]]
+                });
+                setAddCoinState({
+                    ...addCoinState,
+                    [type]: '',
+                });
+                break;
+            case 'category':
+                if (!!chipState[type].find(chip => chip === addCoinState[type])) {
+                    alert(`이미 ${addCoinState[type]} 을/를 추가하셨습니다.`);
+                    return;
+                }
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], addCoinState[type]]
+                });
+                break;
         }
     }
 
@@ -213,6 +229,49 @@ const CoinInfoContainer = () => {
         }
     }
 
+    // 취소
+    const onCancel = useCallback(() => {
+        handleTabMenu(0);
+        setAddCoinState({
+            coinImage: null,
+            coinName: '',
+            monetaryUnit: '',
+            category: '카테고리 선택',
+            type: 'general',
+            price: '',
+            priceUnit: 'KRW',
+            branch: 'Platform',
+            platform: '',
+            issueVolume: '',
+            marketCap: '',
+            marketCapUnit: 'KRW',
+            distribution: '',
+            transactionPrice_24: '',
+            transactionPriceUnit: 'KRW',
+            totalSupply: '',
+            fullyDilutedShares: '',
+            fullyDilutedSharesUnit: 'KRW',
+            maxSupply: '',
+            explorer: '',
+            wallet: '',
+            webSite: '',
+            sourceCode: '',
+            whitePaper: {
+                link: '',
+                file: null,
+            },
+            community: {
+                title: '',
+                url: '',
+            },
+            tag: '',
+            summary: '',
+        });
+    }, []);
+
+    // 저장
+    const onSave = useCallback(() => {}, []);
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -221,18 +280,25 @@ const CoinInfoContainer = () => {
         <CoinInfoPresentation
             tabMenu={tabMenu}
             handleTabMenu={handleTabMenu}
+
             coinInfoColumns={coinInfoColumns}
             coinList={coinList}
+            searchCoinName={searchCoinName}
+            onCoinNameChange={onCoinNameChange}
+
             currentPage={currentPage}
+            rowsPerPage={rowsPerPage}
             handleChangePage={handleChangePage}
             handleChangeRowsPerPage={handleChangeRowsPerPage}
-            rowsPerPage={rowsPerPage}
 
             addCoinState={addCoinState}
             onCoinChange={onCoinChange}
             chipState={chipState}
             handleAddChips={handleAddChips}
             handleDeleteChips={handleDeleteChips}
+
+            onCancel={onCancel}
+            onSave={onSave}
         />
     )
 }

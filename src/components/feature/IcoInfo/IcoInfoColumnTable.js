@@ -191,11 +191,11 @@ const IcoInfoColumnTable = ({
                         <RowBox flex>
                             <ImageInputLabel>
                                 <FileInput type="file" accept="image/*" onChange={e => onIcoChange(e, "COIN_IMAGE")}/>
-                                {addIcoState.coinImage &&
-                                <PreviewBox>
-                                    <AppImage width="100%" height="100%" src={addIcoState.coinImage}/>
-                                </PreviewBox>
-                                }
+                                {addIcoState.coinImage && (
+                                    <PreviewBox>
+                                        <AppImage width="100%" height="100%" src={addIcoState.coinImage}/>
+                                    </PreviewBox>
+                                )}
                                 <AppImage width="60%" height="60%" src={uploadImage}/>
                                 ICON
                             </ImageInputLabel>
@@ -227,16 +227,39 @@ const IcoInfoColumnTable = ({
                 <tr>
                     <td>카테고리</td>
                     <td>
-                        <Select
-                            name="category"
-                            value={addIcoState.category}
-                            onChange={e => onIcoChange(e, "CATEGORY")}
-                        >
-                            <option disabled hidden>Stablecoins</option>
-                            <option value="general">일반</option>
-                            <option value="DeFi">DeFi</option>
-                            <option value="NFT">NFT</option>
-                        </Select>
+                        <RowBox margin="0 0 10px">
+                            <Select
+                                name="category"
+                                value={addIcoState.category}
+                                onChange={e => onIcoChange(e, "CATEGORY")}
+                            >
+                                <option disabled hidden value="카테고리 선택">카테고리 선택</option>
+                                <option value="general">일반</option>
+                                <option value="DeFi">DeFi</option>
+                                <option value="NFT">NFT</option>
+                            </Select>
+                            <Button
+                                width={35}
+                                height={35}
+                                border={`1px solid ${colors.activeBlue}`}
+                                bgColor={colors.whiteColor}
+                                fontColor={colors.activeBlue}
+                                margin="0 0 0 10px"
+                                title="+"
+                                onClick={() => handleAddChips("category")}
+                            />
+                        </RowBox>
+                        <RowBox>
+                            {!!chipState && chipState.category.map((item, index) => (
+                                <CustomChip
+                                    key={index}
+                                    item={item}
+                                    deleteIcon={<AppImage src={chipDelete}/>}
+                                    onDelete={handleDeleteChips}
+                                    type="approval"
+                                />
+                            ))}
+                        </RowBox>
                     </td>
                     <td>구분</td>
                     <td>
@@ -437,9 +460,7 @@ const IcoInfoColumnTable = ({
                 <tr>
                     <td>웹사이트</td>
                     <td>
-                        <InputBox
-                            width={300}
-                        >
+                        <InputBox width={300}>
                             <Input
                                 name="webSite"
                                 value={addIcoState.webSite}
@@ -500,7 +521,7 @@ const IcoInfoColumnTable = ({
                         </ToggleButtonGroup>
                         <RowBox margin="15px 0 0 0 ">
                             {alignment === 'link' &&
-                            <InputBox>
+                            <InputBox width={300}>
                                 <Input
                                     value={addIcoState.whitePaper.link}
                                     onChange={e => onIcoChange(e, "WHITE_PAPER_LINK")}
@@ -534,7 +555,7 @@ const IcoInfoColumnTable = ({
                     <td rowSpan={2}>커뮤니티</td>
                     <td rowSpan={2}>
                         <RowBox>
-                            <InputBox>
+                            <InputBox width={300}>
                                 <Input
                                     name="title"
                                     value={addIcoState.community.title}
@@ -544,7 +565,7 @@ const IcoInfoColumnTable = ({
                             </InputBox>
                         </RowBox>
                         <RowBox>
-                            <InputBox>
+                            <InputBox width={300}>
                                 <Input
                                     name="url"
                                     value={addIcoState.community.url}

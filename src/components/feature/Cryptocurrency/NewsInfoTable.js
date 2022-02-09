@@ -39,6 +39,7 @@ const InputBox = styled.div`
   align-items: center;
   ${({border}) => border && css`
     border: 1px solid ${colors.borderColor};
+    border-radius: 4px;
   `}
 `;
 const Input = styled.input`
@@ -47,14 +48,14 @@ const Input = styled.input`
 `;
 const Textarea = styled.textarea`
   min-width: 300px;
-  width: 70%;
+  width: 100%;
   height: 200px;
-  padding: 0 10px;
   resize: none;
   border: none;
   outline: none;
   ${({border}) => border && css`
     border: 1px solid ${colors.borderColor};
+    border-radius: 4px;
   `}
 `;
 const Select = styled.select`
@@ -67,8 +68,8 @@ const Select = styled.select`
   cursor: pointer;
 `;
 const ImageInputLabel = styled.label`
-  width: 35px;
-  height: 35px;
+  width: 120px;
+  height: 80px;
   margin-right: 10px;
   border-radius: 5px;
   position: relative;
@@ -77,8 +78,6 @@ const ImageInputLabel = styled.label`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 10px;
-  padding-top: 2px;
   color: ${colors.grayColor};
   cursor: pointer;
 `;
@@ -87,6 +86,15 @@ const FileInput = styled.input`
   height: 100%;
   position: absolute;
   display: none;
+`;
+const PreviewBox = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+  top: -1px;
 `;
 const AppImage = styled.img`
   ${({width}) => width && css`
@@ -101,7 +109,11 @@ const RowBox = styled.div`
   align-items: center;
 `;
 
-const NewsInfoTable = () => {
+const NewsInfoTable = ({
+                           addNewsInfo,
+                           onNewsInfoChange,
+                           thumbnailUpload,
+                       }) => {
     return (
         <NewsForm>
             <NewsTable>
@@ -112,17 +124,22 @@ const NewsInfoTable = () => {
                             {/* 수정 누르면 border 생김 */}
                             <RowBox>
                                 <ImageInputLabel>
-                                    <FileInput type="file" accept="image/*" />
-                                    {/*{addIcoState.coinImage &&
-                                    <PreviewBox>
-                                        <AppImage width="100%" height="100%" src={addIcoState.coinImage}/>
-                                    </PreviewBox>
-                                    }*/}
-                                    <AppImage width="60%" height="60%" src={uploadImage}/>
-                                    ICON
+                                    <FileInput type="file" accept="image/*" onChange={thumbnailUpload} />
+                                    {addNewsInfo.thumbnailImage !== {} && (
+                                        <PreviewBox>
+                                            <AppImage width="100%" height="100%" src={addNewsInfo.thumbnailImage}/>
+                                        </PreviewBox>
+                                    )}
+                                    <AppImage width="50%" height="50%" src={uploadImage}/>
+                                    썸네일
                                 </ImageInputLabel>
-                                <InputBox>
-                                    <Input />
+                                <InputBox border>
+                                    <Input
+                                        name="thumbnail"
+                                        value={addNewsInfo.thumbnail}
+                                        onChange={onNewsInfoChange}
+                                        placeholder="썸네일의 제목을 입력해주세요."
+                                    />
                                 </InputBox>
                             </RowBox>
                         </Td>
@@ -130,7 +147,9 @@ const NewsInfoTable = () => {
                     <tr>
                         <Td>요약 내용</Td>
                         <Td>
-                            <Textarea />
+                            <Textarea
+                                border
+                            />
                         </Td>
                     </tr>
                     <tr>

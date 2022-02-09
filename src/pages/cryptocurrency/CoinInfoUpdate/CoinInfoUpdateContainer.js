@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {useHistory} from "react-router-dom";
 import CoinInfoUpdatePresentation from "./CoinInfoUpdatePresentation";
 import axios from "axios";
@@ -59,9 +59,9 @@ const CoinInfoUpdateContainer = ({ match }) => {
     const onDelete = () => {
 
     }
-    const goBack = () => {
+    const goBack = useCallback(() => {
 
-    }
+    }, []);
     const onSave = () => {
 
     }
