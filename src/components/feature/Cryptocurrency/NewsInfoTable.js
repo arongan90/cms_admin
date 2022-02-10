@@ -4,7 +4,7 @@ import colors from "../../../styles/colors";
 import uploadImage from "../../../images/UploadImage.svg";
 
 const NewsForm = styled.div`
-  margin: 30px auto 80px;
+  margin: 20px auto 40px;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
@@ -37,6 +37,7 @@ const InputBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
   ${({border}) => border && css`
     border: 1px solid ${colors.borderColor};
     border-radius: 4px;
@@ -50,13 +51,11 @@ const Textarea = styled.textarea`
   min-width: 300px;
   width: 100%;
   height: 200px;
+  padding: 10px;
   resize: none;
   border: none;
   outline: none;
-  ${({border}) => border && css`
-    border: 1px solid ${colors.borderColor};
-    border-radius: 4px;
-  `}
+  border: ${({ update }) => update ? `1px solid ${colors.borderColor}` : `1px solid ${colors.whiteColor}`};
 `;
 const Select = styled.select`
   width: 100px;
@@ -110,10 +109,13 @@ const RowBox = styled.div`
 `;
 
 const NewsInfoTable = ({
+                           update = true,
                            addNewsInfo,
                            onNewsInfoChange,
                            thumbnailUpload,
                        }) => {
+    const { thumbnailImage, thumbnail, content, source, date, url, currency } = addNewsInfo;
+
     return (
         <NewsForm>
             <NewsTable>
@@ -125,19 +127,20 @@ const NewsInfoTable = ({
                             <RowBox>
                                 <ImageInputLabel>
                                     <FileInput type="file" accept="image/*" onChange={thumbnailUpload} />
-                                    {addNewsInfo.thumbnailImage !== {} && (
+                                    {Object.keys(thumbnailImage).length !== 0 && (
                                         <PreviewBox>
-                                            <AppImage width="100%" height="100%" src={addNewsInfo.thumbnailImage}/>
+                                            <AppImage width="100%" height="100%" src={thumbnailImage}/>
                                         </PreviewBox>
                                     )}
                                     <AppImage width="50%" height="50%" src={uploadImage}/>
                                     썸네일
                                 </ImageInputLabel>
-                                <InputBox border>
+                                <InputBox border={update}>
                                     <Input
                                         name="thumbnail"
-                                        value={addNewsInfo.thumbnail}
+                                        value={thumbnail}
                                         onChange={onNewsInfoChange}
+                                        readOnly={!update}
                                         placeholder="썸네일의 제목을 입력해주세요."
                                     />
                                 </InputBox>
@@ -148,38 +151,65 @@ const NewsInfoTable = ({
                         <Td>요약 내용</Td>
                         <Td>
                             <Textarea
-                                border
+                                update={update}
+                                name="content"
+                                value={content}
+                                onChange={onNewsInfoChange}
+                                readOnly={!update}
+                                placeholder="요약 내용을 입력해주세요."
                             />
                         </Td>
                     </tr>
                     <tr>
                         <Td>출처</Td>
                         <Td>
-                            <InputBox>
-                                <Input />
+                            <InputBox border={update}>
+                                <Input
+                                    name="source"
+                                    value={source}
+                                    onChange={onNewsInfoChange}
+                                    readOnly={!update}
+                                    placeholder="출처를 입력해주세요."
+                                />
                             </InputBox>
                         </Td>
                     </tr>
                     <tr>
                         <Td>기사일</Td>
                         <Td>
-                            <InputBox>
-                                <Input />
+                            <InputBox border={update}>
+                                <Input
+                                    name="date"
+                                    value={date}
+                                    onChange={onNewsInfoChange}
+                                    placeholder="기사일을 입력해주세요."
+                                />
                             </InputBox>
                         </Td>
                     </tr>
                     <tr>
                         <Td>링크 URL</Td>
                         <Td>
-                            <InputBox>
-                                <Input />
+                            <InputBox border={update}>
+                                <Input
+                                    name="url"
+                                    value={url}
+                                    onChange={onNewsInfoChange}
+                                    readOnly={!update}
+                                    placeholder="링크 URL을 입력해주세요."
+                                />
                             </InputBox>
                         </Td>
                     </tr>
                     <tr>
                         <Td>연관 암호화폐</Td>
                         <Td>
-                            <Select>
+                            <Select
+                                name="currency"
+                                value={currency}
+                                onChange={onNewsInfoChange}
+                                disabled={!update}
+                            >
                                 <option value="BTN">Bitcoin</option>
                                 <option value="ETH">Ethereum</option>
                             </Select>

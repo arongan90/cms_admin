@@ -15,6 +15,7 @@ import Tag from "./pages/cryptocurrency/Tag";
 import Nft from "./pages/cryptocurrency/NFTCollection";
 import NftDetail from "./pages/cryptocurrency/NFTCollectionDetail";
 import RelatedNews from "./pages/cryptocurrency/RelatedNews";
+import RelatedNewsDetail from "./pages/cryptocurrency/RelatedNewsDetail";
 import Trade from "./pages/trade";
 import TradeDetail from "./pages/tradeDetail";
 import CryptocurrencyAPI from "./pages/goods/CryptocurrencyAPI";
@@ -71,6 +72,7 @@ const LoggedInRoutes = () => (
         <Route path="/nft" component={Nft}/>
         <Route path="/nftDetail/:nftId" component={NftDetail}/>
         <Route path="/relatedNews" component={RelatedNews}/>
+        <Route path="/relatedNewsDetail/:newsId" component={RelatedNewsDetail}/>
         <Route path="/trade" component={Trade}/>
         <Route path="/tradeDetail/:tradeId" component={TradeDetail}/>
         <Route path="/api" component={CryptocurrencyAPI}/>

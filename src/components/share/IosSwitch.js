@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 // import Stack from '@mui/material/Stack';
@@ -7,10 +7,13 @@ import Switch from '@mui/material/Switch';
 
 const IOSSwitch = styled((props) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-))(({ theme }) => ({
+))(({theme}) => ({
     width: 42,
     height: 26,
     padding: 0,
+    '& .MuiFormControlLabel-root': {
+      border: '10px solid red'
+    },
     '& .MuiSwitch-switchBase': {
         padding: 0,
         margin: 2,
@@ -56,16 +59,16 @@ const IOSSwitch = styled((props) => (
     },
 }));
 
-export default function IosSwitch({ login }) {
+export default function IosSwitch({login,}) {
 
     const onChange = e => {
         console.info(e.target.checked);
     }
 
     return (
-            <FormControlLabel
-                control={<IOSSwitch sx={{ m: 1 }} onChange={onChange} />}
-                label=""
-            />
+        <FormControlLabel
+            control={<IOSSwitch sx={{m: 1}} onChange={onChange}/>}
+            label=""
+        />
     );
 }

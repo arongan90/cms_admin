@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import TradeDetailPresenter from "./TradeDetailPresenter";
 import {useHistory} from "react-router-dom";
+import {toast} from "react-toastify";
 
 const TradeDetailContainer = () => {
     const history = useHistory();
@@ -12,7 +13,10 @@ const TradeDetailContainer = () => {
         visit: '',
         coin: 'bitcoin',
         currency: 'KRW',
+        excel: null,
+        visible: false
     });
+
 
     // 이전
     const goBack = useCallback(() => {
@@ -29,6 +33,12 @@ const TradeDetailContainer = () => {
             setTradeVisit({
                 ...tradeVisit,
                 [type]: value
+            });
+        } else if (type === "excel") {
+            console.info('파일 업로드 : ', value.target.files[0]);
+            setTradeVisit({
+                ...tradeVisit,
+                [type]: value.target.files[0]
             });
         } else {
             setTradeVisit({
@@ -49,41 +59,35 @@ const TradeDetailContainer = () => {
 
     // 거래량 삭제
     const handleDeleteTradeVisit = useCallback(async id => {
-        if (window.confirm("정말 삭제하시겠습니까?")) {
-            try {
+        try {
+            toast.info("상태를 변경하였습니다.");
+        } catch (e) {
 
-            } catch (e) {
-
-            }
         }
     }, []);
 
     // 코인 삭제
     const handleDeleteCoin = useCallback(async id => {
-        if (window.confirm("정말 삭제하시겠습니까?")) {
-            try {
+        try {
+            toast.info("상태를 변경하였습니다.");
+        } catch (e) {
 
-            } catch (e) {
-
-            }
         }
     }, []);
 
     // 지원화폐 삭제
     const handleDeleteCurrency = useCallback(async id => {
-        if (window.confirm("정말 삭제하시겠습니까?")) {
-            try {
+        try {
+            toast.info(`상태를 변경하였습니다.`)
+        } catch (e) {
 
-            } catch (e) {
-
-            }
         }
     }, []);
 
 
     useEffect(() => {
-        console.info('tradeVisit', tradeVisit);
-    }, [tradeVisit]);
+
+    }, []);
 
     return (
         <TradeDetailPresenter

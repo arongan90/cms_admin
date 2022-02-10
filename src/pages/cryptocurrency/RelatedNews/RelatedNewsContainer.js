@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import RelatedNewsPresentation from "./RelatedNewsPresentation";
-import * as constants from "../../../utils/constants";
 import axios from "axios";
+import * as constants from "../../../utils/constants";
 
 const serverProtocol = constants.config.PROTOCOL;
 const serverURL = constants.config.URL;
@@ -59,6 +59,36 @@ const RelatedNewsContainer = () => {
         });
     }, [addNewsInfo]);
 
+    // 뉴스 등록 취소
+    const onCancel = useCallback(() => {
+        setTabMenu(0);
+        setAddNewsInfo({
+            thumbnail: '',
+            thumbnailImage: {},
+            content: '',
+            source: '',
+            date: '',
+            url: '',
+            currency: '',
+        });
+    }, []);
+
+    // 뉴스 등록
+    const onRegister = useCallback(() => {
+        const { thumbnail, content, source, date, url, currency } = addNewsInfo;
+
+        if (thumbnail === '' || content === '' || source === '' || date === '' || url === '' || currency === '') {
+            alert('등록하실 뉴스의 정보를 모두 입력해주세요.');
+            return;
+        }
+        try {
+            console.info('등록')
+        } catch(e) {
+
+        }
+    }, []);
+
+
 
     useEffect(() => {
         fetchData();
@@ -75,6 +105,9 @@ const RelatedNewsContainer = () => {
             addNewsInfo={addNewsInfo}
             onNewsInfoChange={onNewsInfoChange}
             thumbnailUpload={thumbnailUpload}
+
+            onCancel={onCancel}
+            onRegister={onRegister}
         />
     )
 }

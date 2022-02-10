@@ -270,7 +270,7 @@ const ListTable = ({
                                     hover
                                     tabIndex={-1}
                                     key={list.id}
-                                    // onClick={() => history.push(`/nftDetail/${list.id}`)}
+                                    onClick={() => history.push(`/relatedNewsDetail/${list.id}`)}
                                     style={{cursor: 'pointer'}}
                                 >
                                     {tableHeadColumns.map((column) => {

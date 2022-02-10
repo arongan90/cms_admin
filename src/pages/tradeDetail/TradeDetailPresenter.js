@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HeaderContent from "../../components/share/HeaderContent";
 import Box from "@mui/material/Box";
 import styled, {css} from "styled-components";
@@ -17,6 +17,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import krFlag from "../../images/nationalFlag/kr.svg";
+import Switch from '@mui/material/Switch';
 
 const Wrapper = styled.div`
   max-width: 1550px;
@@ -83,6 +84,7 @@ const RowBox = styled.div`
   display: flex;
   align-items: ${({align}) => align ? align : "center"};
   justify-content: ${({justifyContent}) => justifyContent ? justifyContent : "center"};
+  margin: ${({ margin }) => margin ? margin : 0};
   ${({flexDirection}) => flexDirection && css`
     flex-direction: ${flexDirection};
   `}
@@ -158,10 +160,24 @@ const InputBox = styled.div`
   border: 1px solid ${colors.borderColor};
   border-radius: 5px;
 `;
+const FileLabel = styled.label`
+  width: 100px;
+  height: 35px;
+  margin-right: 10px;
+  padding: 6px 0;
+  text-align: center;
+  color: ${colors.activeBlue};
+  border: ${`1px solid ${colors.activeBlue}`};
+  border-radius: 4px;
+  
+`;
 const Input = styled.input`
   width: ${({width}) => width ? width : 100}%;
   height: 100%;
   border: none;
+  ${({ fileUpload }) => fileUpload && css`
+    display: none;
+  `}
 `;
 const StyledSelect = styled.select`
   width: 70px;
@@ -349,7 +365,7 @@ const TradeDetailPresenter = ({
                                             </StyledSelect>
                                         </InputBox>
                                     </RowBox>
-                                    <RowBox>
+                                    <RowBox margin="0 0 0 20px">
                                         <Text>방문</Text>
                                         <InputBox>
                                             <Input
@@ -366,19 +382,28 @@ const TradeDetailPresenter = ({
                                             fontColor={colors.activeBlue}
                                             border={`1px solid ${colors.activeBlue}`}
                                         />
-                                        <Button
-                                            title="엑셀 업로드"
-                                            margin="0 0 0 10px"
-                                            width={100}
-                                            height={35}
-                                            bgColor={colors.whiteColor}
-                                            fontColor={colors.activeBlue}
-                                            border={`1px solid ${colors.activeBlue}`}
-                                        />
                                     </RowBox>
                                 </RowBox>
                             </td>
-                            <td/>
+                            <td>
+                                <RowBox>
+                                    <FileLabel>
+                                        엑셀 업로드
+                                        <Input
+                                            fileUpload
+                                            type="file"
+                                            accept=".xls, .xlsx"
+                                            onChange={e => onTradeVisitChange(e, "excel")}
+                                        />
+                                    </FileLabel>
+                                    <InputBox width={150}>
+                                        <Input
+                                            value={tradeVisit.excel ? tradeVisit.excel.name : ''}
+                                            readOnly
+                                        />
+                                    </InputBox>
+                                </RowBox>
+                            </td>
                         </tr>
                         </thead>
 
@@ -392,8 +417,16 @@ const TradeDetailPresenter = ({
                                 </RowBox>
                             </td>
                             <td>
-                                <Text cursor="pointer" onClick={() => handleDeleteTradeVisit()}>
-                                    <HighlightOffIcon/>
+                                <Text
+                                    fontColor={colors.lightBlack}
+                                    cursor="pointer"
+                                    onClick={() => handleDeleteTradeVisit()}
+                                >
+                                    비노출
+                                    <Switch
+
+                                    />
+                                    노출
                                 </Text>
                             </td>
                         </tr>
@@ -433,7 +466,6 @@ const TradeDetailPresenter = ({
                                         <MenuItem value="ethereum">Ethereum</MenuItem>
                                         <MenuItem value="tether">Tether</MenuItem>
                                         <MenuItem value="BNB">BNB</MenuItem>
-
                                     </Select>
                                 </FormControl>
                             </td>
@@ -454,8 +486,16 @@ const TradeDetailPresenter = ({
                                 </RowBox>
                             </td>
                             <td>
-                                <Text cursor="pointer" onClick={() => handleDeleteCoin()}>
-                                    <HighlightOffIcon/>
+                                <Text
+                                    fontColor={colors.lightBlack}
+                                    cursor="pointer"
+                                    onClick={() => handleDeleteCoin()}
+                                >
+                                    비노출
+                                    <Switch
+
+                                    />
+                                    노출
                                 </Text>
                             </td>
                         </tr>
@@ -517,8 +557,19 @@ const TradeDetailPresenter = ({
                                 </RowBox>
                             </td>
                             <td>
-                                <Text cursor="pointer" onClick={() => handleDeleteCurrency()}>
-                                    <HighlightOffIcon/>
+                                <Text
+                                    fontColor={colors.lightBlack}
+                                    cursor="pointer"
+                                    onClick={() => handleDeleteCurrency()}
+                                >
+                                    비노출
+                                    <Switch
+
+                                        onChange={e => {
+                                            console.info(e.target.checked)
+                                        }}
+                                    />
+                                    노출
                                 </Text>
                             </td>
                         </tr>

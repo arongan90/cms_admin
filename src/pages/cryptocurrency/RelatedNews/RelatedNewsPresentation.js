@@ -8,11 +8,12 @@ import ListTable from "../../../components/share/Table/ListTable";
 import NewsInfoTable from "../../../components/feature/Cryptocurrency/NewsInfoTable";
 
 const Wrapper = styled.div`
-  padding: 20px;
+  padding: 0 20px;
 `;
 const ButtonGroup = styled.div`
-  margin: 0 20px 40px;
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 20px 40px;
 `;
 const NewsListBox = styled.div`
   margin: 0 auto;
@@ -32,6 +33,9 @@ const RelatedNewsPresentation = ({
                                      addNewsInfo,
                                      onNewsInfoChange,
                                      thumbnailUpload,
+
+                                     onCancel,
+                                     onRegister
                                  }) => {
     return (
         <ContentBox>
@@ -78,7 +82,7 @@ const RelatedNewsPresentation = ({
                                 bgColor={colors.whiteColor}
                                 border={`1px solid ${colors.deepNavyColor}`}
                                 fontSize={16}
-                                onClick={handleAddNews}
+                                onClick={onCancel}
                             />
                             <Button
                                 title="등록"
@@ -88,7 +92,7 @@ const RelatedNewsPresentation = ({
                                 fontColor={colors.whiteColor}
                                 bgColor={colors.deepNavyColor}
                                 fontSize={16}
-                                onClick={handleAddNews}
+                                onClick={onRegister}
                             />
                         </ButtonGroup>
                     </>
