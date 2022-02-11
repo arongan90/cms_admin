@@ -16,7 +16,7 @@ const IcoUpdateContainer = ({ match }) => {
         coinImage: '',
         coinName: '',
         monetaryUnit: '',
-        category: 'Stablecoins',
+        category: '카테고리 선택',
         type: 'general',
         initialPrice: 0.10,
         branch: 'Platform',
@@ -42,9 +42,10 @@ const IcoUpdateContainer = ({ match }) => {
         },
         tag: '',
         summary: '',
-        relatedNews: '관련 뉴스를 선택해주세요.',
+        relatedNews: [],
     });
     const [chipState, setChipState] = useState({
+        category: [],
         approval: [],
         community: [],
         tag: [],
@@ -62,8 +63,7 @@ const IcoUpdateContainer = ({ match }) => {
     });
     // ICO 수정 페이지 input 상태 onChange
     const onIcoChange = (e, type) => {
-        const { name, value } = e.target;
-
+        let name, value;
         let file;
         let reader = new FileReader();
         switch(type) {
@@ -98,10 +98,12 @@ const IcoUpdateContainer = ({ match }) => {
             case "RELATED_NEWS":
                 setUpdateIcoState({
                     ...updateIcoState,
-                    [name]: value,
+                    relatedNews: e
                 });
                 break;
             case "WHITE_PAPER_LINK":
+                name = e.target.name;
+                value = e.target.value;
                 setUpdateIcoState({
                     ...updateIcoState,
                     whitePaper: {
@@ -121,6 +123,8 @@ const IcoUpdateContainer = ({ match }) => {
                 });
                 break;
             case "COMMUNITY":
+                name = e.target.name;
+                value = e.target.value;
                 setUpdateIcoState({
                     ...updateIcoState,
                     community: {
@@ -134,52 +138,83 @@ const IcoUpdateContainer = ({ match }) => {
 
     // Chip 추가
     const handleAddChips = type => {
-        if (type === "community") {
-            if (updateIcoState[type].title === "" || updateIcoState[type].title === "") {
-                alert('커뮤니티 명칭 및 URL을 입력해주세요.');
-                return;
-            }
-            if (!!chipState[type].find(chip => chip === updateIcoState[type].url)) {
-                alert(`이미 ${updateIcoState[type].url} 을/를 추가하셨습니다.`);
-                return;
-            }
-            setChipState({
-                ...chipState,
-                [type]: [...chipState[type], updateIcoState[type].url]
-            });
-            setUpdateIcoState({
-                ...updateIcoState,
-                community: {
-                    title: '',
-                    url: '',
+        switch(type) {
+            case "category":
+                console.info('1', chipState.category);
+                console.info('2', updateIcoState.category);
+                console.info('3', chipState[type].find(chip => chip === updateIcoState[type]));
+
+                if (updateIcoState[type] === "카테고리 선택") {
+                    alert('카테고리를 선택해주세요.');
+                    return;
+                } else if (!!chipState[type].find(chip => chip === updateIcoState[type])) {
+                    alert(`이미 ${updateIcoState[type]} 을/를 추가하셨습니다.`);
+                    return;
                 }
-            });
-        } else if (type === "approval" || type === "relatedNews") {
-            if (updateIcoState[type] === "관련 뉴스를 선택해주세요.") {
-                alert('관련 뉴스를 선택 후 추가버튼을 눌러주세요.');
-                return;
-            }
-            if (!!chipState[type].find(chip => chip === updateIcoState[type])) {
-                alert(`이미 ${updateIcoState[type]} 을/를 추가하셨습니다.`);
-                return;
-            }
-            setChipState({
-                ...chipState,
-                [type]: [...chipState[type], updateIcoState[type]]
-            });
-        } else {
-            if (!!chipState[type].find(chip => chip === updateIcoState[type])) {
-                alert(`이미 ${updateIcoState[type]} 을/를 추가하셨습니다.`);
-                return;
-            }
-            setChipState({
-                ...chipState,
-                [type]: [...chipState[type], updateIcoState[type]]
-            });
-            setUpdateIcoState({
-                ...updateIcoState,
-                [type]: '',
-            });
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], ...updateIcoState[type]]
+                });
+                break;
+            case "community":
+                if (updateIcoState[type].title === "" || updateIcoState[type].title === "") {
+                    alert('커뮤니티 명칭 및 URL을 입력해주세요.');
+                    return;
+                }
+                if (!!chipState[type].find(chip => chip === updateIcoState[type].url)) {
+                    alert(`이미 ${updateIcoState[type].url} 을/를 추가하셨습니다.`);
+                    return;
+                }
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], updateIcoState[type].url]
+                });
+                setUpdateIcoState({
+                    ...updateIcoState,
+                    community: {
+                        title: '',
+                        url: '',
+                    }
+                });
+                break;
+            case "approval":
+                if (!!chipState[type].find(chip => chip === updateIcoState[type])) {
+                    alert(`이미 ${updateIcoState[type]} 을/를 추가하셨습니다.`);
+                    return;
+                }
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], updateIcoState[type]]
+                });
+                break;
+            case "relatedNews":
+                if (updateIcoState[type].length === 0 && "관련 뉴스를 선택해주세요.") {
+                    alert('관련 뉴스를 선택 후 추가버튼을 눌러주세요.');
+                    return;
+                }
+                if (!!chipState[type].find(chip => chip === updateIcoState[type])) {
+                    alert(`이미 ${updateIcoState[type]} 을/를 추가하셨습니다.`);
+                    return;
+                }
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], updateIcoState[type]]
+                });
+                break;
+            case "tag":
+                if (!!chipState[type].find(chip => chip === updateIcoState[type])) {
+                    alert(`이미 ${updateIcoState[type]} 을/를 추가하셨습니다.`);
+                    return;
+                }
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], updateIcoState[type]]
+                });
+                setUpdateIcoState({
+                    ...updateIcoState,
+                    [type]: '',
+                });
+                break;
         }
     }
     // Chip 제거
@@ -234,10 +269,11 @@ const IcoUpdateContainer = ({ match }) => {
                 },
                 tag: '',
                 summary: data.summary,
-                relatedNews: '관련 뉴스를 선택해주세요.',
+                relatedNews: [],
             });
 
             setChipState({
+                category: data.category,
                 approval: data.approval,
                 community: data.community.map(list => list.url),
                 tag: data.tag,
@@ -253,7 +289,7 @@ const IcoUpdateContainer = ({ match }) => {
     }, []);
 
     useEffect(() => {
-        console.info('아씨오인포 : ', chipState.community);
+        console.info('아씨오인포 : ', chipState);
     }, [chipState]);
 
 

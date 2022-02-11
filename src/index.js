@@ -12,12 +12,10 @@ import App from './App';
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(ReduxThunk)));
 
 ReactDOM.render(
-  <React.StrictMode>
       <Provider store={store}>
           <BrowserRouter>
             <App />
           </BrowserRouter>
-      </Provider>
-  </React.StrictMode>,
+      </Provider>,
   document.getElementById('root')
 );

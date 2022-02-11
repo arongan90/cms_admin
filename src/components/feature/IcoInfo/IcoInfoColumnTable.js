@@ -132,6 +132,7 @@ const RowBox = styled.div`
     display: flex;
     align-items: center;
     margin: 0;
+    flex-wrap: wrap;
   `}
   // Chips style
   .css-c9qyo9-MuiButtonBase-root-MuiChip-root {
@@ -249,8 +250,8 @@ const IcoInfoColumnTable = ({
                                 onClick={() => handleAddChips("category")}
                             />
                         </RowBox>
-                        <RowBox>
-                            {!!chipState && chipState.category.map((item, index) => (
+                        <RowBox flex>
+                            {!!chipState && chipState.category && chipState.category.map((item, index) => (
                                 <CustomChip
                                     key={index}
                                     item={item}

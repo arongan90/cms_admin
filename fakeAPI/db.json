@@ -674,7 +674,6 @@
       "finish_date": "2021-08-04",
       "goal": 34332400,
       "monetaryUnit": "FAN",
-      "category": "DeFi",
       "initialPrice": 1.10,
       "branch": "Platform",
       "platform": "ERC20",
@@ -683,6 +682,7 @@
       "softCap": 35240000,
       "sellToken": 970000,
       "webSite": "www.bitcoin.com",
+      "category": ["DeFi"],
       "approval": [
         "ETH",
         "USDT"
@@ -759,7 +759,6 @@
       "finish_date": "2021-08-20",
       "goal": 34332400,
       "monetaryUnit": "FAN",
-      "category": "NFT",
       "initialPrice": 1.10,
       "branch": "Platform",
       "platform": "ERC20",
@@ -768,6 +767,7 @@
       "softCap": 35240000,
       "sellToken": 970000,
       "webSite": "www.bitcoin.com",
+      "category": [],
       "approval": [
         "ETH",
         "USDT"
@@ -842,7 +842,6 @@
       "finish_date": "2021-08-20",
       "goal": 115200000,
       "monetaryUnit": "FAN",
-      "category": "NFT",
       "initialPrice": 1.10,
       "branch": "Platform",
       "platform": "ERC20",
@@ -851,6 +850,7 @@
       "softCap": 35240000,
       "sellToken": 970000,
       "webSite": "www.bitcoin.com",
+      "category": [],
       "approval": [
         "ETH"
       ],
@@ -933,7 +933,6 @@
       "finish_date": "2021-08-04",
       "goal": 456720000,
       "monetaryUnit": "FAN",
-      "category": "NFT",
       "initialPrice": 1.10,
       "branch": "Platform",
       "platform": "ERC20",
@@ -942,6 +941,7 @@
       "softCap": 35240000,
       "sellToken": 970000,
       "webSite": "www.bitcoin.com",
+      "category": ["DeFi"],
       "approval": [
         "ETH",
         "USDT",
@@ -1021,7 +1021,6 @@
       "ranking": 1,
       "coinName": "Bitcoin",
       "monetaryUnit": "BTC",
-      "category": "Stablecoins",
       "type": "DeFi",
       "price": 48256333.23,
       "branch": "Platform",
@@ -1048,6 +1047,7 @@
         "Electrum"
       ],
       "webSite": "bitcoin.org",
+      "category": ["Stablecoins"],
       "community": [
         "https://www.reddit.com/r/Bitcoin/",
         "https://twitter.com/bitcoin",
@@ -1265,8 +1265,8 @@
       "id": 2,
       "ranking": 2,
       "coinName": "Ethereum",
+      "category": ["Exchange-based Tokens"],
       "monetaryUnit": "ETH",
-      "category": "Exchange-based Tokens",
       "type": "DeFi",
       "price": 48256333.23,
       "branch": "Platform",
@@ -1513,7 +1513,7 @@
       "ranking": 3,
       "coinName": "Binance Coin",
       "monetaryUnit": "BNB",
-      "category": "Decentralized Finance",
+      "category": ["Decentralized Finance"],
       "type": "DeFi",
       "price": 48256333.23,
       "branch": "Platform",
@@ -1757,7 +1757,7 @@
       "ranking": 4,
       "coinName": "Tether",
       "monetaryUnit": "USDT",
-      "category": "Stablecoins",
+      "category": ["Stablecoins"],
       "type": "DeFi",
       "price": 48256333.23,
       "branch": "Platform",
@@ -2001,7 +2001,7 @@
       "ranking": 5,
       "coinName": "Solana",
       "monetaryUnit": "SOL",
-      "category": "Stablecoins",
+      "category": ["Stablecoins"],
       "type": "DeFi",
       "price": 48256333.23,
       "branch": "Platform",
