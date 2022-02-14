@@ -250,14 +250,14 @@ const IcoInfoColumnTable = ({
                                 onClick={() => handleAddChips("category")}
                             />
                         </RowBox>
-                        <RowBox flex>
+                        <RowBox margin="5px 0 0 -5px">
                             {!!chipState && chipState.category && chipState.category.map((item, index) => (
                                 <CustomChip
                                     key={index}
                                     item={item}
                                     deleteIcon={<AppImage src={chipDelete}/>}
                                     onDelete={handleDeleteChips}
-                                    type="approval"
+                                    type="category"
                                 />
                             ))}
                         </RowBox>

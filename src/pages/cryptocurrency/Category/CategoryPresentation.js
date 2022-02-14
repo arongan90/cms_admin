@@ -20,7 +20,7 @@ const CategoryListBox = styled.div`
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 `;
 const ButtonGroup = styled.div`
-  margin: 0 20px 40px;
+  margin: 0 20px 20px;
   text-align: right;
 `;
 const PagingBox = styled.div`
@@ -59,10 +59,8 @@ const CategoryPresentation = ({
                         width={120}
                         height={38}
                         title="카테고리 추가"
-                        bgColor={colors.deepNavyColor}
+                        bgColor={colors.darkBlueColor}
                         fontColor={colors.whiteColor}
-                        fontSize={16}
-                        fontWeight={600}
                         onClick={handleCategoryModalOpen}
                     />
                 </ButtonGroup>

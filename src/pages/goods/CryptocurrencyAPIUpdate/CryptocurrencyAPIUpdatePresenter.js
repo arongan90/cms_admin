@@ -51,23 +51,19 @@ const CryptocurrencyAPIUpdatePresenter = ({
             <ButtonGroup>
                 <Button
                     width={120}
-                    height={46}
+                    height={38}
                     title="취소"
                     fontColor={colors.darkBlueColor}
                     bgColor={colors.whiteColor}
                     border={`1px solid ${colors.darkBlueColor}`}
-                    fontSize={18}
-                    fontWeight={600}
 
                 />
                 <Button
                     width={120}
-                    height={46}
+                    height={38}
                     title="저장"
                     fontColor={colors.whiteColor}
                     bgColor={colors.darkBlueColor}
-                    fontSize={18}
-                    fontWeight={600}
                     margin="0 0 0 20px"
                 />
             </ButtonGroup>

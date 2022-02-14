@@ -46,7 +46,7 @@ const Input = styled.input`
 const ButtonGroup = styled.div`
   padding: 20px;
   margin: 30px 0;
-  text-align: right;
+  text-align: center;
 `;
 
 const AddAdmin = ({gilad, jason, antoine, handleChange}) => {
@@ -198,23 +198,19 @@ const AddAdmin = ({gilad, jason, antoine, handleChange}) => {
             <ButtonGroup>
                 <Button
                     width={120}
-                    height={40}
-                    title="취 소"
-                    fontSize={16}
-                    fontWeight={600}
-                    fontColor={colors.textFieldBlue}
+                    height={38}
+                    title="취소"
+                    fontColor={colors.darkBlueColor}
                     bgColor={colors.whiteColor}
-                    border={`1px solid ${colors.textFieldBlue}`}
+                    border={`1px solid ${colors.darkBlueColor}`}
                 />
                 <Button
                     width={120}
-                    height={40}
-                    fontSize={16}
-                    fontWeight={600}
-                    title="추 가"
+                    height={38}
+                    title="추가"
                     margin="0 0 0 20px"
                     fontColor={colors.whiteColor}
-                    bgColor={colors.activeBlue}
+                    bgColor={colors.darkBlueColor}
                 />
             </ButtonGroup>
         </Wrapper>

@@ -2,6 +2,7 @@ import React from 'react';
 import {Editor} from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import styled from 'styled-components';
+import colors from "../../styles/colors";
 
 const MyBlock = styled.div`
   .editor {

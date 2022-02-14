@@ -8,12 +8,12 @@ import ListTable from "../../../components/share/Table/ListTable";
 import NewsInfoTable from "../../../components/feature/Cryptocurrency/NewsInfoTable";
 
 const Wrapper = styled.div`
-  padding: 0 20px;
+  padding: 20px;
 `;
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin: 20px 20px 40px;
+  margin: 20px;
 `;
 const NewsListBox = styled.div`
   margin: 0 auto;
@@ -43,29 +43,16 @@ const RelatedNewsPresentation = ({
                 tabMenu={tabMenu}
                 handleTabMenu={handleTabMenu}
                 title="관련 뉴스"
-                tabList={["관련 뉴스", "관련 뉴스 등록"]}
+                tabList={["관련 뉴스", "관련 뉴스 추가"]}
             />
             <Wrapper>
                 {tabMenu === 0 ?
-                    <>
-                        <ButtonGroup>
-                            <Button
-                                title="뉴스 추가"
-                                width={120}
-                                height={38}
-                                fontColor={colors.whiteColor}
-                                bgColor={colors.deepNavyColor}
-                                fontSize={16}
-                                onClick={handleAddNews}
-                            />
-                        </ButtonGroup>
-                        <NewsListBox>
-                            <ListTable
-                                tableHeadColumns={newsTableColumns}
-                                newsList={newsList}
-                            />
-                        </NewsListBox>
-                    </>
+                    <NewsListBox>
+                        <ListTable
+                            tableHeadColumns={newsTableColumns}
+                            newsList={newsList}
+                        />
+                    </NewsListBox>
                    :
                     <>
                         <NewsInfoTable

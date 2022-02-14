@@ -13,6 +13,7 @@ import Chart from "../Chart";
 import colors from "../../../styles/colors";
 
 const TableWrapper = styled(TableContainer)`
+  min-height: 500px;
   // TableCell style
   .css-dwuj3p-MuiTableCell-root,
   .css-i02g0k-MuiTableCell-root,

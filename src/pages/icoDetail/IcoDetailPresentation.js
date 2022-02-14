@@ -16,10 +16,8 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 const ButtonGroup = styled.div`
-  padding: 0 10px;
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 20px 40px;
+  text-align: center;
+  margin: 50px 20px 100px;
 `;
 const TableBox = styled.div`
   border-radius: 4px;
@@ -171,28 +169,6 @@ const IcoDetailPresentation = ({
                 tabList={["ICO 정보"]}
             />
             <Wrapper>
-                <ButtonGroup>
-                    <Button
-                        title="이전"
-                        width={70}
-                        height={46}
-                        border={`1px solid ${colors.activeBlue}`}
-                        fontColor={colors.activeBlue}
-                        bgColor={colors.whiteColor}
-                        fontSize={18}
-                        onClick={goBack}
-                    />
-                    <Button
-                        title="ICO 수정"
-                        width={150}
-                        height={46}
-                        fontColor={colors.whiteColor}
-                        bgColor={colors.activeBlue}
-                        fontSize={18}
-                        onClick={goIcoUpdate}
-                    />
-                </ButtonGroup>
-
                 <TableBox>
                     <Table>
                         <tbody>
@@ -456,7 +432,26 @@ const IcoDetailPresentation = ({
                         </tbody>
                     </Table>
                 </TableBox>
-
+                <ButtonGroup>
+                    <Button
+                        title="이전"
+                        width={120}
+                        height={38}
+                        border={`1px solid ${colors.darkBlueColor}`}
+                        fontColor={colors.darkBlueColor}
+                        bgColor={colors.whiteColor}
+                        onClick={goBack}
+                    />
+                    <Button
+                        title="ICO 수정"
+                        width={120}
+                        height={38}
+                        margin="0 0 0 20px"
+                        fontColor={colors.whiteColor}
+                        bgColor={colors.darkBlueColor}
+                        onClick={goIcoUpdate}
+                    />
+                </ButtonGroup>
             </Wrapper>
         </Box>
     )

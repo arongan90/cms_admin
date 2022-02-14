@@ -13,7 +13,10 @@ const RecentNewsDetailContainer = ({ match }) => {
     const history = useHistory();
     const { newsId } = match.params;
     const [tabMenu, setTabMenu] = useState(0);
-    const [newsData, setNewsData] = useState({});
+    const [newsData, setNewsData] = useState({
+        title: "",
+
+    });
     const [update, setUpdate] = useState(false);
     const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
@@ -53,7 +56,10 @@ const RecentNewsDetailContainer = ({ match }) => {
     const fetchNewsDetail = useCallback(async () => {
         try {
             const { data } = await SendRequest().get(`${serverProtocol}${serverURL}/recentNews/${newsId}`);
-            setNewsData(data);
+            setNewsData({
+                ...newsData,
+                title: data.title,
+            });
         } catch(e) {
             throw new Error(e);
         }

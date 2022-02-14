@@ -45,7 +45,7 @@ const PagingBox = styled.div`
   margin: 80px auto 20px;
 `;
 const ButtonGroup = styled.div`
-  text-align: right;
+  text-align: center;
   margin: 50px 0 100px;
 `;
 
@@ -72,8 +72,6 @@ const CoinInfoPresentation = ({
                                   onCancel,
                                   onSave,
                               }) => {
-
-    console.info('searchCoinName ::::: ', searchCoinName);
 
     return (
         <ContentBox>
@@ -144,7 +142,6 @@ const CoinInfoPresentation = ({
                             border={`1px solid ${colors.deepNavyColor}`}
                             bgColor={colors.whiteColor}
                             fontColor={colors.deepNavyColor}
-                            fontSize={20}
                             title="취소"
                             onClick={onCancel}
                         />
@@ -153,7 +150,6 @@ const CoinInfoPresentation = ({
                             height={38}
                             bgColor={colors.deepNavyColor}
                             fontColor={colors.whiteColor}
-                            fontSize={20}
                             margin="0 0 0 20px"
                             title="저장"
                             onClick={onSave}

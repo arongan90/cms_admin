@@ -117,8 +117,12 @@ const UseStatusTable = ({
     // 테이블의 행이 비어있을 때 테이블 height 유지하도록 행의 높이 구하기
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - interestICO.length) : 0;
 
+    React.useEffect(() => {
+        console.info('emptyRows', emptyRows);
+    }, [emptyRows]);
+
     return (
-        <Box sx={{width: '100%'}}>
+        <Box sx={{width: '100%', minHeight: 300}}>
             <Paper sx={{width: '100%', mb: 2, border: `1px solid ${colors.borderColor}`}}>
                 {!!interestICO &&
                 <>
@@ -216,7 +220,7 @@ const UseStatusTable = ({
                                 {emptyRows > 0 && (
                                     <TableRow
                                         style={{
-                                            height: (53) * emptyRows,
+                                            height: 40 * emptyRows,
                                         }}
                                     >
                                         <TableCell colSpan={6}/>

@@ -121,7 +121,10 @@ const AdminPresentation = ({
                         </TableContainer>
                     </AdminTableBox>
                     :
-                    <AddAdmin/>
+                    // 관리자 추가
+                    <AddAdmin
+
+                    />
                 }
             </Wrapper>
                 <Modal

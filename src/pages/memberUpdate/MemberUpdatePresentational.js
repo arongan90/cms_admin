@@ -46,7 +46,7 @@ const SubText = styled.div`
 const ButtonGroup = styled.div`
   padding: 20px;
   margin: 20px;
-  text-align: right;
+  text-align: center;
 `;
 
 const MemberUpdatePresentational = ({
@@ -128,22 +128,18 @@ const MemberUpdatePresentational = ({
                 <ButtonGroup>
                     <Button
                         width={120}
-                        height={45}
-                        fontSize={18}
-                        fontWeight={600}
+                        height={38}
                         bgColor={colors.whiteColor}
-                        border={`1px solid ${colors.activeBlue}`}
-                        fontColor={colors.activeBlue}
+                        border={`1px solid ${colors.deepNavyColor}`}
+                        fontColor={colors.deepNavyColor}
                         margin="0 20px 0 0"
                         title="취소"
                         onClick={onCancel}
                     />
                     <Button
                         width={120}
-                        height={45}
-                        fontSize={18}
-                        fontWeight={600}
-                        bgColor={colors.activeBlue}
+                        height={38}
+                        bgColor={colors.deepNavyColor}
                         fontColor={colors.whiteColor}
                         title="수정"
                         onClick={onUpdate}

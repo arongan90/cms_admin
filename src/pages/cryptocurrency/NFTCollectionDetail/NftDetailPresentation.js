@@ -6,20 +6,17 @@ import ContentBox from "../../../components/share/ContentBox";
 import HeaderContent from "../../../components/share/HeaderContent";
 
 const Wrapper = styled.div`
-  padding: 20px;
+  padding: 0 20px;
 `;
 const ButtonGroup = styled.div`
-  margin: 20px 20px 40px;
-  text-align: right;
-  ${({display}) => display && css`
-    display: ${display};
-    justify-content: space-between;
-    align-items: center;
-  `}
+  margin: 0 20px 40px;
+  display: flex;
+  justify-content: ${({ justifyContent }) => justifyContent};
+  align-items: center;
 `;
 const ButtonBox = styled.div``;
 const CollectionForm = styled.div`
-  margin: 30px auto 80px;
+  margin: 20px auto 50px;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
@@ -96,27 +93,6 @@ const NftDetailPresentation = ({
                 tabList={["NFT 콜렉션"]}
             />
             <Wrapper>
-                <ButtonGroup display="flex">
-                    <Button
-                        title="이전"
-                        width={70}
-                        height={46}
-                        border={`1px solid ${colors.activeBlue}`}
-                        fontColor={colors.activeBlue}
-                        bgColor={colors.whiteColor}
-                        fontSize={18}
-                        onClick={goBack}
-                    />
-                    <Button
-                        title="콜렉션 수정"
-                        width={150}
-                        height={46}
-                        fontColor={colors.whiteColor}
-                        bgColor={colors.activeBlue}
-                        fontSize={18}
-                        onClick={handleNftUpdate}
-                    />
-                </ButtonGroup>
                 <CollectionForm>
                     <CollectionTable>
                         <tbody>
@@ -210,49 +186,51 @@ const NftDetailPresentation = ({
                     </CollectionTable>
                 </CollectionForm>
 
-                {nftUpdate && (
-                    <>
-                        <ButtonGroup display="flex">
-                            <ButtonBox>
-                                <Button
-                                    title="삭제"
-                                    width={120}
-                                    height={50}
-                                    fontSize={18}
-                                    fontWeight={600}
-                                    fontColor={colors.activeRed}
-                                    bgColor={colors.whiteColor}
-                                    border={`1px solid ${colors.activeRed}`}
-                                    onClick={handleNftDelete}
-                                />
-                            </ButtonBox>
+                <ButtonGroup justifyContent={nftUpdate ? "space-between" : "center"}>
+                    <Button
+                        title={nftUpdate ? "삭제" : "이전"}
+                        width={120}
+                        height={38}
+                        border={`1px solid ${nftUpdate ? colors.activeRed : colors.deepNavyColor}`}
+                        bgColor={colors.whiteColor}
+                        fontColor={nftUpdate ? colors.activeRed : colors.deepNavyColor}
+                        onClick={nftUpdate ? handleNftDelete : goBack}
+                    />
+                    {!nftUpdate
+                        ?
+                        <Button
+                            title="콜렉션 수정"
+                            width={120}
+                            height={38}
+                            bgColor={colors.deepNavyColor}
+                            fontColor={colors.whiteColor}
+                            margin="0 0 0 20px"
+                            onClick={handleNftUpdate}
+                        />
+                        : <div>
                             <ButtonBox>
                                 <Button
                                     title="취소"
                                     width={120}
-                                    height={50}
-                                    fontSize={18}
-                                    fontWeight={600}
-                                    fontColor={colors.activeBlue}
+                                    height={38}
+                                    fontColor={colors.deepNavyColor}
                                     bgColor={colors.whiteColor}
-                                    border={`1px solid ${colors.activeBlue}`}
+                                    border={`1px solid ${colors.deepNavyColor}`}
                                     onClick={handleCancel}
                                 />
                                 <Button
                                     title="수정"
                                     width={120}
-                                    height={50}
-                                    fontSize={18}
-                                    fontWeight={600}
+                                    height={38}
                                     fontColor={colors.whiteColor}
-                                    bgColor={colors.activeBlue}
+                                    bgColor={colors.deepNavyColor}
                                     margin="0 0 0 20px"
                                     onClick={handleNftSave}
                                 />
                             </ButtonBox>
-                        </ButtonGroup>
-                    </>
-                )}
+                        </div>
+                    }
+                </ButtonGroup>
             </Wrapper>
         </ContentBox>
     )

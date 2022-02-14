@@ -5,22 +5,21 @@ import IconImageUpload from "../../share/IconImageUpload";
 import Button from "../../share/Button";
 
 const Wrapper = styled.div`
-  width: 100%;
   max-width: 1200px;
+  padding: 20px;
+  background-color: ${colors.whiteColor};
+  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 `;
 const Title = styled.div`
   font-size: 24px;
   font-weight: 600;
   color: ${colors.deepNavyColor};
-  margin: 10px 0 30px;
+  margin: 0 0 20px;
 `;
 const AddTable = styled.table`
   width: 100%;
-  border-top: 2px solid ${colors.deepDarkGrayColor};
-  border-bottom: 1px solid ${colors.deepDarkGrayColor};
-  background-color: ${colors.whiteColor};
-  box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
-
+  border-top: 2px solid ${colors.grayColor};
+  border-bottom: 2px solid ${colors.grayColor};
   td {
     width: calc((100% - 300px) / 2);
     padding: 10px 16px;
@@ -29,6 +28,7 @@ const AddTable = styled.table`
 
   td:nth-child(2n + 1) {
     width: 150px;
+    background-color: ${colors.ultraLightGray};
   }
 `;
 const RowBox = styled.div`

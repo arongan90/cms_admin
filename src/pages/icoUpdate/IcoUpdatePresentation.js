@@ -95,33 +95,30 @@ const IcoUpdatePresentation = ({
                 <ButtonGroup>
                     <Button
                         width={120}
-                        height={48}
+                        height={38}
                         border={`1px solid ${colors.activeRed}`}
                         bgColor={colors.whiteColor}
                         fontColor={colors.activeRed}
-                        fontSize={20}
                         title="삭제"
                         onClick={onDelete}
                     />
                     <div>
                         <Button
-                            width={120}
-                            height={48}
-                            border={`1px solid ${colors.activeBlue}`}
-                            bgColor={colors.whiteColor}
-                            fontColor={colors.activeBlue}
-                            fontSize={20}
                             title="취소"
+                            width={120}
+                            height={38}
+                            border={`1px solid ${colors.darkBlueColor}`}
+                            bgColor={colors.whiteColor}
+                            fontColor={colors.darkBlueColor}
                             onClick={goBack}
                         />
                         <Button
-                            width={120}
-                            height={50}
-                            bgColor={colors.activeBlue}
-                            fontColor={colors.whiteColor}
-                            fontSize={20}
-                            margin="0 0 0 20px"
                             title="저장"
+                            width={120}
+                            height={38}
+                            margin="0 0 0 20px"
+                            bgColor={colors.darkBlueColor}
+                            fontColor={colors.whiteColor}
                             onClick={onSave}
                         />
                     </div>

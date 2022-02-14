@@ -38,9 +38,7 @@ const AddCategoryModal = ({
                           }) => {
     const ref = useRef();
 
-    useEffect(() => {
-        ref.current.focus();
-    }, []);
+    useEffect(() => ref.current.focus(), []);
     return (
         <Wrapper>
             <Title>카테고리 {type === "update" ? "수정" : "추가"}</Title>
@@ -55,22 +53,18 @@ const AddCategoryModal = ({
                 <Button
                     title="취소"
                     width={70}
-                    height={40}
-                    border={`1px solid ${colors.activeBlue}`}
+                    height={38}
+                    border={`1px solid ${colors.darkBlueColor}`}
                     bgColor={colors.whiteColor}
-                    fontColor={colors.activeBlue}
-                    fontSize={18}
-                    fontWeight={600}
+                    fontColor={colors.darkBlueColor}
                     onClick={handleCategoryModalClose}
                 />
                 <Button
                     title={type === "update" ? "수정" : "추가"}
                     width={70}
-                    height={40}
-                    bgColor={colors.activeBlue}
+                    height={38}
+                    bgColor={colors.darkBlueColor}
                     fontColor={colors.whiteColor}
-                    fontSize={18}
-                    fontWeight={600}
                     margin="0 0 0 20px"
                     onClick={type === "update" ? onUpdateCategory : onAddCategory}
                 />

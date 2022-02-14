@@ -63,19 +63,16 @@ const IcoUpdateContainer = ({ match }) => {
     });
     // ICO 수정 페이지 input 상태 onChange
     const onIcoChange = (e, type) => {
-        let name, value;
-        let file;
         let reader = new FileReader();
         switch(type) {
             case "COIN_IMAGE":
-                file = e.target.files[0];
                 reader.onload = () => {
                     setUpdateIcoState({
                         ...updateIcoState,
                         coinImage: reader.result
                     });
                 }
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(e.target.files[0]);
                 break;
             case "COIN_NAME":
             case "MONETARY_UNIT":
@@ -95,6 +92,11 @@ const IcoUpdateContainer = ({ match }) => {
             case "APPROVAL":
             case "TAG":
             case "SUMMARY":
+                setUpdateIcoState({
+                    ...updateIcoState,
+                    [e.target.name]: e.target.value,
+                });
+                break;
             case "RELATED_NEWS":
                 setUpdateIcoState({
                     ...updateIcoState,
@@ -102,34 +104,29 @@ const IcoUpdateContainer = ({ match }) => {
                 });
                 break;
             case "WHITE_PAPER_LINK":
-                name = e.target.name;
-                value = e.target.value;
                 setUpdateIcoState({
                     ...updateIcoState,
                     whitePaper: {
                         ...updateIcoState.whitePaper,
-                        link: value,
+                        link: e.target.value,
                     }
                 });
                 break;
             case "WHITE_PAPER_FILE":
-                file = e.target.files[0];
                 setUpdateIcoState({
                     ...updateIcoState,
                     whitePaper: {
                         ...updateIcoState.whitePaper,
-                        file: file,
+                        file: e.target.files[0],
                     }
                 });
                 break;
             case "COMMUNITY":
-                name = e.target.name;
-                value = e.target.value;
                 setUpdateIcoState({
                     ...updateIcoState,
                     community: {
                         ...updateIcoState.community,
-                        [name]: value,
+                        [e.target.name]: e.target.value,
                     }
                 });
                 break;
@@ -140,10 +137,6 @@ const IcoUpdateContainer = ({ match }) => {
     const handleAddChips = type => {
         switch(type) {
             case "category":
-                console.info('1', chipState.category);
-                console.info('2', updateIcoState.category);
-                console.info('3', chipState[type].find(chip => chip === updateIcoState[type]));
-
                 if (updateIcoState[type] === "카테고리 선택") {
                     alert('카테고리를 선택해주세요.');
                     return;
@@ -151,9 +144,11 @@ const IcoUpdateContainer = ({ match }) => {
                     alert(`이미 ${updateIcoState[type]} 을/를 추가하셨습니다.`);
                     return;
                 }
+                console.info('chipState', chipState);
+                console.info('updateIcoState', updateIcoState[type]);
                 setChipState({
                     ...chipState,
-                    [type]: [...chipState[type], ...updateIcoState[type]]
+                    [type]: [...chipState[type], updateIcoState[type]]
                 });
                 break;
             case "community":
@@ -225,6 +220,10 @@ const IcoUpdateContainer = ({ match }) => {
         });
     }
 
+    useEffect(() => {
+        console.info('updateIcoState', updateIcoState);
+    }, [updateIcoState]);
+
     const onDelete = () => {
         if (window.confirm('정말 삭제하시겠습니까?')) {
             console.info('삭제');
@@ -240,10 +239,10 @@ const IcoUpdateContainer = ({ match }) => {
             const { data } = await axios.get(`${serverProtocol}${serverUrl}/icoList/${icoId}`);
 
             setUpdateIcoState({
+                ...updateIcoState,
                 coinImage: '',
                 coinName: data.coinName,
                 monetaryUnit: '',
-                category: data.category,
                 type: data.type,
                 initialPrice: data.initialPrice,
                 branch: data.branch,
@@ -287,11 +286,6 @@ const IcoUpdateContainer = ({ match }) => {
     useEffect(() => {
         fetchData();
     }, []);
-
-    useEffect(() => {
-        console.info('아씨오인포 : ', chipState);
-    }, [chipState]);
-
 
     return (
         <IcoUpdatePresentation

@@ -13,6 +13,7 @@ const CoinInfoUpdateContainer = ({ match }) => {
 
     const [tabMenu, setTabMenu] = useState(0);
     const [chipState, setChipState] = useState({
+        category: [],
         explorer: [],
         wallet: [],
         community: [],
@@ -24,7 +25,7 @@ const CoinInfoUpdateContainer = ({ match }) => {
         coinImage: null,
         coinName: '',
         monetaryUnit: '',
-        category: 'Stablecoins',
+        category: '카테고리 선택',
         type: 'general',
         price: '',
         priceUnit: 'KRW',
@@ -56,16 +57,24 @@ const CoinInfoUpdateContainer = ({ match }) => {
         summary: '',
     });
     const handleTabMenu = value => setTabMenu(value);
-    const onDelete = () => {
-
+    const onDelete = async () => {
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+            try {
+                 console.info("삭제 진행 ");
+            } catch(e) {
+                throw new Error(e);
+            }
+        }
     }
-    const goBack = useCallback(() => {
+    const goBack = useCallback(() => history.push('/coinInfo'), [history]);
+    const onSave = useCallback(() => {
 
     }, []);
-    const onSave = () => {
 
-    }
-
+    useEffect(() => {
+        const unblock = history.block("정말 이동하시겠습니까?");
+        return () => unblock();
+    }, [history]);
 
     const onCoinChange = (e, type) => {
         const { name, value } = e.target;
@@ -148,10 +157,10 @@ const CoinInfoUpdateContainer = ({ match }) => {
             const { data } = await axios.get(`${serverProtocol}${serverUrl}/coinList/${coinId}`);
 
             setUpdateCoinState({
+                ...updateCoinState,
                 coinImage: null,
                 coinName: data.coinName,
                 monetaryUnit: data.monetaryUnit,
-                category: 'Stablecoins',
                 type: 'general',
                 price: data.price,
                 priceUnit: 'KRW',
@@ -183,6 +192,7 @@ const CoinInfoUpdateContainer = ({ match }) => {
                 summary: data.summary,
             });
             setChipState({
+                category: data.category,
                 explorer: data.explorer,
                 wallet: data.wallet,
                 community: data.community,
@@ -196,39 +206,57 @@ const CoinInfoUpdateContainer = ({ match }) => {
 
     // Chip 추가
     const handleAddChips = type => {
-        if (type === "community") {
-            if (updateCoinState[type].title === "" || updateCoinState[type].title === "") {
-                alert('커뮤니티 명칭 및 URL을 입력해주세요.');
-                return;
-            }
-            if (!!chipState[type].find(chip => chip === updateCoinState[type].url)) {
-                alert(`이미 ${updateCoinState[type].url} 을/를 추가하셨습니다.`);
-                return;
-            }
-            setUpdateCoinState({
-                ...chipState,
-                [type]: [...chipState[type], updateCoinState[type].url]
-            });
-            setUpdateCoinState({
-                ...updateCoinState,
-                community: {
-                    title: '',
-                    url: '',
+        switch (type) {
+            case "category":
+                if (updateCoinState[type] === "카테고리 선택") {
+                    alert('카테고리를 선택해주세요.');
+                    return;
+                } else if (!!chipState[type].find(chip => chip === updateCoinState[type])) {
+                    alert(`이미 ${updateCoinState[type]} 을/를 추가하셨습니다.`);
+                    return;
                 }
-            });
-        } else {
-            if (!!chipState[type].find(chip => chip === updateCoinState[type])) {
-                alert(`이미 ${updateCoinState[type]} 을/를 추가하셨습니다.`);
-                return;
-            }
-            setChipState({
-                ...chipState,
-                [type]: [...chipState[type], updateCoinState[type]]
-            });
-            setUpdateCoinState({
-                ...updateCoinState,
-                [type]: '',
-            });
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], updateCoinState[type]]
+                });
+                break;
+            case "community":
+                if (updateCoinState[type].title === "" || updateCoinState[type].title === "") {
+                    alert('커뮤니티 명칭 및 URL을 입력해주세요.');
+                    return;
+                }
+                if (!!chipState[type].find(chip => chip === updateCoinState[type].url)) {
+                    alert(`이미 ${updateCoinState[type].url} 을/를 추가하셨습니다.`);
+                    return;
+                }
+                setUpdateCoinState({
+                    ...updateCoinState,
+                    [type]: [...chipState[type], updateCoinState[type].url]
+                });
+                setUpdateCoinState({
+                    ...updateCoinState,
+                    community: {
+                        title: '',
+                        url: '',
+                    }
+                });
+                break;
+            case "explorer":
+            case "wallet":
+            case "tag":
+                if (!!chipState[type].find(chip => chip === updateCoinState[type])) {
+                    alert(`이미 ${updateCoinState[type]} 을/를 추가하셨습니다.`);
+                    return;
+                }
+                setChipState({
+                    ...chipState,
+                    [type]: [...chipState[type], updateCoinState[type]]
+                });
+                setUpdateCoinState({
+                    ...updateCoinState,
+                    [type]: '',
+                });
+                break;
         }
     }
 
@@ -243,6 +271,10 @@ const CoinInfoUpdateContainer = ({ match }) => {
     // useEffect(() => {
     //     console.info('chipState', chipState);
     // }, [chipState]);
+    //
+    // useEffect(() => {
+    //     console.info('updateCoinState', updateCoinState);
+    // }, [updateCoinState]);
 
     useEffect(() => {
         fetchData();

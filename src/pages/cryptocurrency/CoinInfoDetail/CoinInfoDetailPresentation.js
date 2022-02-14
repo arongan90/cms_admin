@@ -18,10 +18,8 @@ const Wrapper = styled.div`
   min-height: 100vh;
 `;
 const ButtonGroup = styled.div`
-  padding: 0 10px;
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 20px 40px;
+  text-align: center;
+  margin: 50px 0 100px;
 `;
 const TableBox = styled.div`
   border-radius: 4px;
@@ -50,7 +48,6 @@ const Td = styled.td`
   `}
   &:first-child,
   &:nth-child(3) {
-    font-size: 18px;
     font-weight: bold;
     width: 10%;
     border-right: 1px solid ${colors.borderColor};
@@ -175,28 +172,6 @@ const CoinInfoDetailPresentation = ({
                 tabList={["코인 정보"]}
             />
             <Wrapper>
-                <ButtonGroup>
-                    <Button
-                        title="이전"
-                        width={70}
-                        height={46}
-                        border={`1px solid ${colors.activeBlue}`}
-                        fontColor={colors.activeBlue}
-                        bgColor={colors.whiteColor}
-                        fontSize={18}
-                        onClick={goBack}
-                    />
-                    <Button
-                        title="코인 수정"
-                        width={150}
-                        height={46}
-                        fontColor={colors.whiteColor}
-                        bgColor={colors.activeBlue}
-                        fontSize={18}
-                        onClick={goCoinUpdate}
-                    />
-                </ButtonGroup>
-
                 <TableBox>
                     <Table>
                         <tbody>
@@ -405,7 +380,26 @@ const CoinInfoDetailPresentation = ({
                         </tbody>
                     </Table>
                 </TableBox>
-
+                <ButtonGroup>
+                    <Button
+                        title="이전"
+                        width={120}
+                        height={38}
+                        border={`1px solid ${colors.deepNavyColor}`}
+                        fontColor={colors.deepNavyColor}
+                        bgColor={colors.whiteColor}
+                        onClick={goBack}
+                    />
+                    <Button
+                        title="코인 수정"
+                        width={120}
+                        height={38}
+                        bgColor={colors.deepNavyColor}
+                        fontColor={colors.whiteColor}
+                        margin="0 0 0 20px"
+                        onClick={goCoinUpdate}
+                    />
+                </ButtonGroup>
             </Wrapper>
         </Box>
     )

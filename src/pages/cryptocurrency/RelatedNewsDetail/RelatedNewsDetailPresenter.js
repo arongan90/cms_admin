@@ -44,7 +44,7 @@ const RelatedNewsDetailPresenter = ({
                 />
                 <ButtonGroup>
                     <Button
-                        title={update ? "취소" : "목록"}
+                        title={update ? "취소" : "이전"}
                         width={120}
                         height={38}
                         border={`1px solid ${colors.deepNavyColor}`}

@@ -17,12 +17,11 @@ const Wrapper = styled.div`
   padding: 20px;
 `;
 const CategoryInfoBox = styled.div`
-  margin: 30px auto;
+  margin: 0 auto 20px;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
   background: ${colors.whiteColor};
-  text-align: center;
 `;
 const CategoryTable = styled.table`
   width: 100%;
@@ -30,35 +29,39 @@ const CategoryTable = styled.table`
   border-width: 2px 0 2px 0;
   border-color: ${colors.grayColor};
   text-align: start;
-`;
-const Td = styled.td`
-  width: 35%;
-  height: 60px;
-  padding: 0 10px;
-  border-bottom: 1px solid ${colors.borderColor};
-  color: ${({ fontColor }) => fontColor};
-  font-weight: ${({ fontWeight }) => fontWeight};
-  &:nth-child(2n - 1) {
-    width: 150px !important;
-    border-right: 1px solid ${colors.borderColor};
-    background: ${colors.ultraLightGray};
-  }
+  
+  td {
+    width: 35%;
+    height: 60px;
+    padding: 0 10px;
+    border-bottom: 1px solid ${colors.borderColor};
+    color: ${({ fontColor }) => fontColor};
+    font-weight: ${({ fontWeight }) => fontWeight};
 
-  &:nth-child(3) {
-    border-left: 1px solid ${colors.borderColor};
+    &:nth-child(2n - 1) {
+      width: 150px !important;
+      border-right: 1px solid ${colors.borderColor};
+      background: ${colors.ultraLightGray};
+    }
+
+    &:nth-child(3) {
+      border-left: 1px solid ${colors.borderColor};
+    }
   }
 `;
-const Text = styled.span`
+const Text = styled.div`
+  font-size: ${({ fontSize }) => fontSize ? fontSize : 16}px;
+  font-weight: ${({ fontWeight }) => fontWeight ? fontWeight : 500};
   color: ${({ fontColor }) => fontColor};
+  margin: ${({ margin }) => margin ? margin : 0};
 `;
 const PagingBox = styled.div`
   width: 500px;
   margin: 80px auto 20px;
 `;
 const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 20px 0;
+  text-align: center;
+  margin: 50px 0 100px;
 `;
 
 const CategoryDetailPresentation = ({
@@ -85,60 +88,61 @@ const CategoryDetailPresentation = ({
             />
 
             <Wrapper>
-                <ButtonGroup>
-                    <Button
-                        title="이전"
-                        width={70}
-                        height={46}
-                        border={`1px solid ${colors.activeBlue}`}
-                        fontColor={colors.activeBlue}
-                        bgColor={colors.whiteColor}
-                        fontSize={18}
-                        onClick={goBack}
-                    />
-                    <Button
-                        title="카테고리 수정"
-                        width={150}
-                        height={46}
-                        fontColor={colors.whiteColor}
-                        bgColor={colors.activeBlue}
-                        fontSize={18}
-                        onClick={handleUpdateModalOpen}
-                    />
-                </ButtonGroup>
                 <CategoryInfoBox>
                     <CategoryTable>
                         <tbody>
                             <tr>
-                                <Td>카테고리</Td>
-                                <Td>
+                                <td>카테고리</td>
+                                <td>
                                     {categoryInfo.category}
-                                </Td>
-                                <Td>점유율</Td>
-                                <Td>
+                                </td>
+                                <td>점유율</td>
+                                <td>
                                     {categoryInfo.marketShare}
-                                </Td>
+                                </td>
                             </tr>
                             <tr>
-                                <Td>시가총액</Td>
-                                <Td>
+                                <td>시가총액</td>
+                                <td>
                                     {numberAddComma(categoryInfo.marketCap)}
-                                </Td>
-                                <Td>24시간 거래량</Td>
-                                <Td>
+                                </td>
+                                <td>24시간 거래량</td>
+                                <td>
                                     {categoryInfo.transactionPrice_24 && numberAddComma(categoryInfo.transactionPrice_24.total_price)}
-                                </Td>
+                                </td>
                             </tr>
                         </tbody>
                     </CategoryTable>
                 </CategoryInfoBox>
 
                 <CategoryInfoBox>
+                    <Text margin="0 0 20px" fontSize={18} fontWeight={600}>코인</Text>
                     <ListTable
                         tableHeadColumns={categoryColumns}
                         categoryLists={categoryLists}
                     />
                 </CategoryInfoBox>
+
+                <ButtonGroup>
+                    <Button
+                        title="이전"
+                        width={120}
+                        height={38}
+                        border={`1px solid ${colors.darkBlueColor}`}
+                        bgColor={colors.whiteColor}
+                        fontColor={colors.darkBlueColor}
+                        onClick={goBack}
+                    />
+                    <Button
+                        title="카테고리 수정"
+                        width={120}
+                        height={38}
+                        bgColor={colors.darkBlueColor}
+                        fontColor={colors.whiteColor}
+                        margin="0 0 0 20px"
+                        onClick={handleUpdateModalOpen}
+                    />
+                </ButtonGroup>
             </Wrapper>
 
             <Modal

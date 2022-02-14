@@ -18,7 +18,7 @@ const CategoryListBox = styled.div`
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
 `;
 const ButtonGroup = styled.div`
-  margin: 20px 20px 40px;
+  margin: 0 20px 20px;
   text-align: right;
 `;
 const PagingBox = styled.div`
@@ -32,15 +32,14 @@ const Title = styled.div`
   font-size: 24px;
   font-weight: 600;
   color: ${colors.deepNavyColor};
-  margin: 10px 20px;
+  margin-bottom: 20px;
 `;
 const CollectionForm = styled.div`
-  margin: 30px auto 80px;
+  margin: 0 0 50px;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
   background: ${colors.whiteColor};
-  text-align: center;
 `;
 const CollectionTable = styled.table`
   width: 100%;
@@ -102,6 +101,7 @@ const NftPresentation = ({
                              handleCancel,
                              handleAddCollection
                          }) => {
+
     return (
         <ContentBox>
             <HeaderContent
@@ -112,19 +112,6 @@ const NftPresentation = ({
             />
             <Wrapper>
                 {tabMenu === 0 ?
-                    <>
-                        <ButtonGroup>
-                            <Button
-                                width={120}
-                                height={38}
-                                title="콜렉션 추가"
-                                bgColor={colors.deepNavyColor}
-                                fontColor={colors.whiteColor}
-                                fontSize={16}
-                                fontWeight={600}
-                                onClick={() => handleTabMenu(1)}
-                            />
-                        </ButtonGroup>
                         <CategoryListBox>
                             <ListTable
                                 tableHeadColumns={collectionTableColumns}
@@ -139,11 +126,10 @@ const NftPresentation = ({
                                 />
                             </PagingBox>
                         </CategoryListBox>
-                    </>
                     :
                     <>
-                        <Title>NFT콜렉션 추가</Title>
                         <CollectionForm>
+                            <Title>NFT콜렉션 추가</Title>
                             <CollectionTable>
                                 <tbody>
                                     <tr>
@@ -239,21 +225,17 @@ const NftPresentation = ({
                                 title="취소"
                                 width={120}
                                 height={38}
-                                fontSize={16}
-                                fontWeight={600}
-                                fontColor={colors.deepNavyColor}
+                                fontColor={colors.darkBlueColor}
                                 bgColor={colors.whiteColor}
-                                border={`1px solid ${colors.deepNavyColor}`}
+                                border={`1px solid ${colors.darkBlueColor}`}
                                 onClick={handleCancel}
                             />
                             <Button
                                 title="추가"
                                 width={120}
                                 height={38}
-                                fontSize={16}
-                                fontWeight={600}
                                 fontColor={colors.whiteColor}
-                                bgColor={colors.deepNavyColor}
+                                bgColor={colors.darkBlueColor}
                                 margin="0 0 0 20px"
                                 onClick={handleAddCollection}
                             />

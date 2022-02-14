@@ -196,7 +196,7 @@ const CryptocurrencyColumnTable = ({
                                 value={coinState.category}
                                 onChange={e => onCoinChange(e, "CATEGORY")}
                             >
-                                <option disabled hidden>Stablecoins</option>
+                                <option disabled hidden value="카테고리 선택">카테고리 선택</option>
                                 <option value="general">일반</option>
                                 <option value="DeFi">DeFi</option>
                                 <option value="NFT">NFT</option>

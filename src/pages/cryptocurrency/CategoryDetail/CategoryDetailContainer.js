@@ -59,9 +59,9 @@ const CategoryDetailContainer = ({match}) => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.info('categoryInfo', categoryInfo)
-    }, [categoryInfo]);
+    // useEffect(() => {
+    //     console.info('categoryInfo', categoryInfo)
+    // }, [categoryInfo]);
 
     return (
         <>

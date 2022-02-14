@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 const ButtonGroup = styled.div`
   height: 38px;
   margin: 20px 20px;
-  text-align: right;
+  text-align: center;
 `;
 const Content = styled.div`
   min-height: calc(100vh - 300px);
@@ -51,20 +51,6 @@ const ServicePresentation = ({
                 title="서비스 소개"
                 tabList={["서비스 소개"]}
             />
-            <ButtonGroup>
-                {!update &&
-                    <Button
-                        width={120}
-                        height={38}
-                        title="수정"
-                        bgColor={colors.deepNavyColor}
-                        fontColor={colors.whiteColor}
-                        fontSize={16}
-                        fontWeight={600}
-                        onClick={onUpdate}
-                    />
-                }
-            </ButtonGroup>
             <Wrapper>
                 {update ?
                     <>
@@ -100,11 +86,28 @@ const ServicePresentation = ({
                         </ButtonGroup>
                     </>
                     :
-                    <Content
-                        dangerouslySetInnerHTML={{__html: editorToHtml}}
-                    />
+                    <>
+                        <Content
+                            dangerouslySetInnerHTML={{__html: editorToHtml}}
+                        />
+                        <ButtonGroup>
+                            {!update &&
+                            <Button
+                                width={120}
+                                height={38}
+                                title="수정"
+                                bgColor={colors.deepNavyColor}
+                                fontColor={colors.whiteColor}
+                                fontSize={16}
+                                fontWeight={600}
+                                onClick={onUpdate}
+                            />
+                            }
+                        </ButtonGroup>
+                    </>
                 }
             </Wrapper>
+
         </ContentBox>
     )
 }

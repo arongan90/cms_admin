@@ -10,7 +10,6 @@ import {useTheme} from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
 import UseStatusTable from "../../components/feature/Member/UseStatusTable";
 
 const Wrapper = styled.div`
@@ -19,7 +18,7 @@ const Wrapper = styled.div`
 const ButtonGroup = styled.div`
   padding: 0 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin: 20px 0 50px;
 `;
 const InfoTable = styled.table`
@@ -30,25 +29,26 @@ const InfoTable = styled.table`
   text-align: start;
   margin-bottom: 50px;
   background-color: ${colors.whiteColor};
-`;
-const Td = styled.td`
-  width: calc(100% - 320px);
-  height: 50px;
-  padding: 10px;
-  color: ${colors.deepDarkGrayColor};
-  font-weight: bold;
-  font-size: 18px;
-  border-bottom: 1px solid ${colors.borderColor};
+  
+  td {
+    width: calc(100% - 320px);
+    height: 50px;
+    padding: 10px;
+    color: ${colors.deepDarkGrayColor};
+    font-weight: bold;
+    border-bottom: 1px solid ${colors.borderColor};
+    
+    &:nth-child(2n + 1) {
+      width: 180px;
+      border-right: 1px solid ${colors.borderColor};
+    }
 
-  &:nth-child(2n + 1) {
-    width: 180px;
-    border-right: 1px solid ${colors.borderColor};
-  }
-
-  &:nth-child(3) {
-    border-left: 1px solid ${colors.borderColor};
+    &:nth-child(3) {
+      border-left: 1px solid ${colors.borderColor};
+    }
   }
 `;
+
 const InfoText = styled.span`
   color: ${colors.darkGrayColor};
 `;
@@ -65,7 +65,7 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box sx={{p: 3}}>
-                    <Typography>{children}</Typography>
+                    {children}
                 </Box>
             )}
         </div>
@@ -118,54 +118,33 @@ const MemberDetailPresentational = ({
                 tabList={["회원 정보"]}
             />
             <Wrapper>
-                <ButtonGroup>
-                    <Button
-                        title="이전"
-                        width={70}
-                        height={46}
-                        border={`1px solid ${colors.activeBlue}`}
-                        fontColor={colors.activeBlue}
-                        bgColor={colors.whiteColor}
-                        fontSize={18}
-                        onClick={goBack}
-                    />
-                    <Button
-                        title="회원정보 수정"
-                        width={150}
-                        height={46}
-                        fontColor={colors.whiteColor}
-                        bgColor={colors.activeBlue}
-                        fontSize={18}
-                        onClick={goMemberUpdate}
-                    />
-                </ButtonGroup>
                 <InfoTable>
                     <tbody>
                     <tr>
-                        <Td>이름</Td>
-                        <Td>
+                        <td>이름</td>
+                        <td>
                             <InfoText>{memberInfo.name}</InfoText>
-                        </Td>
-                        <Td>가입방식</Td>
-                        <Td>
+                        </td>
+                        <td>가입방식</td>
+                        <td>
                             <InfoText>{memberInfo.register_type}</InfoText>
-                        </Td>
+                        </td>
                     </tr>
                     <tr>
-                        <Td>이메일 주소</Td>
-                        <Td>
+                        <td>이메일 주소</td>
+                        <td>
                             <InfoText>{memberInfo.email}</InfoText>
-                        </Td>
-                        <Td>보호자</Td>
-                        <Td>
+                        </td>
+                        <td>보호자</td>
+                        <td>
                             <InfoText>{memberInfo.guardian} ( {memberInfo.guardian_phone} )</InfoText>
-                        </Td>
+                        </td>
                     </tr>
                     <tr>
-                        <Td>가입일</Td>
-                        <Td>{memberInfo.register_date.toLocaleString("ko-KR")}</Td>
-                        <Td>마지막 접속</Td>
-                        <Td>{memberInfo.last_login}</Td>
+                        <td>가입일</td>
+                        <td>{memberInfo.register_date.toLocaleString("ko-KR")}</td>
+                        <td>마지막 접속</td>
+                        <td>{memberInfo.last_login}</td>
                     </tr>
                     </tbody>
                 </InfoTable>
@@ -229,6 +208,26 @@ const MemberDetailPresentational = ({
                     </SwipeableViews>
                 </Box>
             </Wrapper>
+            <ButtonGroup>
+                <Button
+                    title="이전"
+                    width={120}
+                    height={38}
+                    border={`1px solid ${colors.darkBlueColor}`}
+                    fontColor={colors.darkBlueColor}
+                    bgColor={colors.whiteColor}
+                    onClick={goBack}
+                />
+                <Button
+                    title="회원정보 수정"
+                    width={120}
+                    height={38}
+                    margin="0 0 0 15px"
+                    fontColor={colors.whiteColor}
+                    bgColor={colors.darkBlueColor}
+                    onClick={goMemberUpdate}
+                />
+            </ButtonGroup>
         </Box>
 
     )

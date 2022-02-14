@@ -96,8 +96,6 @@ export default function Navigator(props) {
         setCurrentPath(history.location.pathname);
     }, [history, history.location.pathname, isClicked]);
 
-    console.info(currentPath.split('/')[1]);
-
     return (
         <Drawer variant="permanent" {...other}>
             <List disablePadding>
@@ -120,7 +118,7 @@ export default function Navigator(props) {
                     />
                     <SideTitle
                         title="ICO 정보"
-                        active={currentPath === "/ico" || currentPath.split('/')[1] === "icoDetail"}
+                        active={currentPath === "/ico" || currentPath.split('/')[1] === "icoDetail" || currentPath.split('/')[1] === "icoUpdate"}
                         onClick={() => onRouteClick("/ico")}
                     />
                     <SideTitle

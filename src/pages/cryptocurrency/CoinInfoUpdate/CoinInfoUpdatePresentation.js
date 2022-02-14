@@ -59,31 +59,28 @@ const CoinInfoUpdatePresentation = ({
                 <ButtonGroup>
                     <Button
                         width={120}
-                        height={48}
+                        height={38}
                         border={`1px solid ${colors.activeRed}`}
                         bgColor={colors.whiteColor}
                         fontColor={colors.activeRed}
-                        fontSize={20}
                         title="삭제"
                         onClick={onDelete}
                     />
                     <div>
                         <Button
                             width={120}
-                            height={48}
-                            border={`1px solid ${colors.activeBlue}`}
+                            height={38}
+                            border={`1px solid ${colors.deepNavyColor}`}
                             bgColor={colors.whiteColor}
-                            fontColor={colors.activeBlue}
-                            fontSize={20}
+                            fontColor={colors.deepNavyColor}
                             title="취소"
                             onClick={goBack}
                         />
                         <Button
                             width={120}
-                            height={50}
-                            bgColor={colors.activeBlue}
+                            height={38}
+                            bgColor={colors.deepNavyColor}
                             fontColor={colors.whiteColor}
-                            fontSize={20}
                             margin="0 0 0 20px"
                             title="저장"
                             onClick={onSave}

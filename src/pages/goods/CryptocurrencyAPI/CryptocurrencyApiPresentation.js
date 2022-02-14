@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 `;
 const ButtonGroup = styled.div`
   margin: 0 20px 20px;
-  text-align: right;
+  text-align: center;
 `;
 const ContentTable = styled.div`
   width: 100%;
@@ -58,20 +58,6 @@ const CryptocurrencyApiPresentation = ({
                 tabList={["암호화폐 API 목록"]}
             />
             <Wrapper>
-                <ButtonGroup>
-                    {!apiUpdate && (
-                        <Button
-                            width={120}
-                            height={38}
-                            title="수정"
-                            fontColor={colors.whiteColor}
-                            bgColor={colors.darkBlueColor}
-                            fontSize={18}
-                            fontWeight={600}
-                            onClick={onApiUpdate}
-                        />
-                    )}
-                </ButtonGroup>
                 <ContentTable>
                     <Title>
                         내용
@@ -89,32 +75,42 @@ const CryptocurrencyApiPresentation = ({
                     }
                 </ContentTable>
             </Wrapper>
-            {apiUpdate && (
-                <ButtonGroup>
+
+            <ButtonGroup>
+                {apiUpdate
+                    ?
+                    <>
+                        <Button
+                            width={120}
+                            height={38}
+                            title="취소"
+                            fontColor={colors.darkBlueColor}
+                            bgColor={colors.whiteColor}
+                            border={`1px solid ${colors.darkBlueColor}`}
+                            onClick={onCancel}
+                        />
+                        <Button
+                            width={120}
+                            height={38}
+                            title="저장"
+                            fontColor={colors.whiteColor}
+                            bgColor={colors.darkBlueColor}
+                            margin="0 0 0 20px"
+                            onClick={onSave}
+                        />
+                    </>
+                    :
                     <Button
                         width={120}
-                        height={46}
-                        title="취소"
-                        fontColor={colors.darkBlueColor}
-                        bgColor={colors.whiteColor}
-                        border={`1px solid ${colors.darkBlueColor}`}
-                        fontSize={18}
-                        fontWeight={600}
-                        onClick={onCancel}
-                    />
-                    <Button
-                        width={120}
-                        height={46}
-                        title="저장"
+                        height={38}
+                        title="수정"
                         fontColor={colors.whiteColor}
                         bgColor={colors.darkBlueColor}
-                        fontSize={18}
                         fontWeight={600}
-                        margin="0 0 0 20px"
-                        onClick={onSave}
+                        onClick={onApiUpdate}
                     />
-                </ButtonGroup>
-            )}
+                }
+            </ButtonGroup>
         </ContentBox>
     )
 }

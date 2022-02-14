@@ -4,7 +4,7 @@ import colors from "../../../styles/colors";
 import uploadImage from "../../../images/UploadImage.svg";
 
 const NewsForm = styled.div`
-  margin: 20px auto 40px;
+  margin: 0 0 40px;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);

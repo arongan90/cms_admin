@@ -49,7 +49,7 @@ const PagingBox = styled.div`
   margin: 80px auto 20px;
 `;
 const ButtonGroup = styled.div`
-  text-align: right;
+  text-align: center;
   margin: 50px 0 200px;
 `;
 
@@ -148,19 +148,18 @@ const IcoPresentation = ({
                     <ButtonGroup>
                         <Button
                             width={120}
-                            height={48}
-                            border={`1px solid ${colors.activeBlue}`}
-                            fontColor={colors.activeBlue}
-                            fontSize={20}
+                            height={38}
+                            border={`1px solid ${colors.darkBlueColor}`}
+                            fontColor={colors.darkBlueColor}
+                            bgColor={colors.whiteColor}
                             title="취소"
                             onClick={onCancel}
                         />
                         <Button
                             width={120}
-                            height={50}
-                            bgColor={colors.activeBlue}
+                            height={38}
+                            bgColor={colors.darkBlueColor}
                             fontColor={colors.whiteColor}
-                            fontSize={20}
                             margin="0 0 0 20px"
                             title="저장"
                             onClick={onSave}
