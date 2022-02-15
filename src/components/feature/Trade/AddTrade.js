@@ -65,9 +65,9 @@ const Select = styled.select`
   cursor: pointer;
 `;
 const ButtonGroup = styled.div`
-  margin: 30px 0;
+  margin: 40px 0;
   padding-right: 20px;
-  text-align: right;
+  text-align: center;
 `;
 
 const AddTrade = ({
@@ -196,8 +196,8 @@ const AddTrade = ({
                     height={38}
                     fontSize={16}
                     bgColor={colors.whiteColor}
-                    border={`1px solid ${colors.deepNavyColor}`}
-                    fontColor={colors.deepNavyColor}
+                    border={`1px solid ${colors.darkBlueColor}`}
+                    fontColor={colors.darkBlueColor}
                     onClick={onCancel}
                 />
                 <Button
@@ -206,7 +206,7 @@ const AddTrade = ({
                     width={120}
                     height={38}
                     fontSize={16}
-                    bgColor={colors.deepNavyColor}
+                    bgColor={colors.darkBlueColor}
                     fontColor={colors.whiteColor}
                     onClick={onAddTrade}
                 />

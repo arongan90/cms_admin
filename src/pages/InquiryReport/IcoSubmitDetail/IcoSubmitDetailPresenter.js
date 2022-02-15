@@ -11,10 +11,9 @@ const Wrapper = styled.div`
   max-width: 1550px;
 `;
 const ButtonGroup = styled.div`
-  margin: 20px 0;
+  margin: 40px 20px 100px;
   display: flex;
-  justify-content: ${({ justifyContent }) => justifyContent ? justifyContent : 'space-between'};
-  align-items: center;
+  justify-content: space-between;
 `;
 const TableBox = styled.div`
   background-color: ${colors.whiteColor};
@@ -59,6 +58,7 @@ const AppVideo = styled.iframe`
 const IcoSubmitDetailPresenter = ({
                                       tabMenu,
                                       handleTabMenu,
+                                      onDelete,
                                       goBack,
                                       onRegisterIco,
 
@@ -106,30 +106,6 @@ const IcoSubmitDetailPresenter = ({
                 tabList={["ICO 제출"]}
             />
             <Wrapper>
-                <ButtonGroup>
-                    <Button
-                        title="이전"
-                        width={120}
-                        height={38}
-                        fontColor={colors.darkBlueColor}
-                        border={`1px solid ${colors.darkBlueColor}`}
-                        bgColor={colors.whiteColor}
-                        fontSize={16}
-                        fontWeight={600}
-                        onClick={goBack}
-                    />
-                    <Button
-                        title="ICO 등록"
-                        margin="0 0 0 15px"
-                        width={120}
-                        height={38}
-                        fontColor={colors.whiteColor}
-                        bgColor={colors.darkBlueColor}
-                        fontSize={16}
-                        fontWeight={500}
-                        onClick={onRegisterIco}
-                    />
-                </ButtonGroup>
                 <TableBox>
                     <table>
                         <tbody>
@@ -309,7 +285,7 @@ const IcoSubmitDetailPresenter = ({
                         </tbody>
                     </table>
                 </TableBox>
-                <ButtonGroup justifyContent="flex-end">
+                <ButtonGroup>
                     <Button
                         title="삭제"
                         width={120}
@@ -319,8 +295,32 @@ const IcoSubmitDetailPresenter = ({
                         bgColor={colors.whiteColor}
                         fontSize={16}
                         fontWeight={600}
-                        // onClick={onCancel}
+                        onClick={onDelete}
                     />
+                    <div>
+                        <Button
+                            title="이전"
+                            width={120}
+                            height={38}
+                            fontColor={colors.darkBlueColor}
+                            border={`1px solid ${colors.darkBlueColor}`}
+                            bgColor={colors.whiteColor}
+                            fontSize={16}
+                            fontWeight={600}
+                            onClick={goBack}
+                        />
+                        <Button
+                            title="ICO 등록"
+                            margin="0 0 0 15px"
+                            width={120}
+                            height={38}
+                            fontColor={colors.whiteColor}
+                            bgColor={colors.darkBlueColor}
+                            fontSize={16}
+                            fontWeight={500}
+                            onClick={onRegisterIco}
+                        />
+                    </div>
                 </ButtonGroup>
             </Wrapper>
         </ContentBox>

@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 `;
 const ButtonGroup = styled.div`
   margin: ${({ margin }) => margin ? margin : "0 20px 20px"};
-  text-align: right;
+  text-align: center;
 `;
 const TableBox = styled.div`
   min-height: calc(100vh - 350px);
@@ -112,18 +112,6 @@ const NewsLetterPresentation = ({
                 {tabMenu === 0
                     ?
                     <>
-                        <ButtonGroup>
-                            <Button
-                                width={120}
-                                height={38}
-                                title="메일 작성"
-                                bgColor={colors.deepNavyColor}
-                                fontColor={colors.whiteColor}
-                                fontSize={16}
-                                fontWeight={600}
-                                onClick={() => handleTabMenu(1)}
-                            />
-                        </ButtonGroup>
                         <TableBox>
                             <Table>
                                 <TableHead>
@@ -237,7 +225,7 @@ const NewsLetterPresentation = ({
                             </Table>
                         </TableBox>
 
-                        <ButtonGroup margin="40px 20px 20px">
+                        <ButtonGroup margin="20px 20px 40px">
                             <Button
                                 width={120}
                                 height={38}

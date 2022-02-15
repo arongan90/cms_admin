@@ -9,16 +9,14 @@ import {Modal} from "@material-ui/core";
 import SendMailStatus from "../../../components/feature/Mailing/SendMailStatus";
 
 const Wrapper = styled.div`
-  padding: 20px;
+  padding: 20px 20px 40px;
   max-width: 1550px;
   min-height: calc(100vh - 144px);
 `;
 const ButtonGroup = styled.div`
   min-height: 38px;
-  margin: ${({margin}) => margin ? margin : "0 20px 15px"};
-  display: flex;
-  align-items: center;
-  justify-content: ${({justifyContent}) => justifyContent ? justifyContent : "space-between"};
+  margin: ${({margin}) => margin ? margin : "0 20px"};
+  text-align: ${({ textAlign }) => textAlign ? textAlign : "center"};
 `;
 const TableBox = styled.div`
   border-top: 2px solid ${colors.grayColor};
@@ -109,34 +107,6 @@ const NewsLetterDetailPresenter = ({
                 tabList={["뉴스 레터 보기"]}
             />
             <Wrapper>
-                <ButtonGroup>
-                    {!update && (
-                        <>
-                            <Button
-                                width={120}
-                                height={38}
-                                title="이전"
-                                border={`1px solid ${colors.deepNavyColor}`}
-                                bgColor={colors.whiteColor}
-                                fontColor={colors.deepNavyColor}
-                                fontSize={16}
-                                fontWeight={600}
-                                onClick={handleGoBack}
-                            />
-                            <Button
-                                width={120}
-                                height={38}
-                                title="수정"
-                                bgColor={colors.deepNavyColor}
-                                fontColor={colors.whiteColor}
-                                fontSize={16}
-                                fontWeight={600}
-                                onClick={() => setUpdate(true)}
-                            />
-                        </>
-                    )}
-                </ButtonGroup>
-
                 <TableBox>
                     <Table>
                         <TableBody>
@@ -178,7 +148,13 @@ const NewsLetterDetailPresenter = ({
                         </TableBody>
                     </Table>
                 </TableBox>
-                <ButtonGroup justifyContent="flex-end" margin="40px 20px">
+
+                    {!update && (
+                        <>
+                        </>
+                    )}
+
+                <ButtonGroup margin="40px 20px">
                     {update
                         ?
                         <>
@@ -206,18 +182,46 @@ const NewsLetterDetailPresenter = ({
                             />
                         </>
                         :
-                        <Button
-                            width={120}
-                            height={38}
-                            ICON
-                            title="즉시 발송"
-                            bgColor={colors.deepNavyColor}
-                            fontColor={colors.whiteColor}
-                            fontSize={16}
-                            fontWeight={600}
-                            margin="0 0 0 15px"
-                            onClick={handleImmediatelySend}
-                        />
+                        <div>
+                            <ButtonGroup>
+                                <Button
+                                    width={120}
+                                    height={38}
+                                    title="이전"
+                                    border={`1px solid ${colors.darkBlueColor}`}
+                                    bgColor={colors.whiteColor}
+                                    fontColor={colors.darkBlueColor}
+                                    fontSize={16}
+                                    fontWeight={600}
+                                    onClick={handleGoBack}
+                                />
+                                <Button
+                                    title="수정"
+                                    width={120}
+                                    height={38}
+                                    margin="0 0 0 20px"
+                                    bgColor={colors.darkBlueColor}
+                                    fontColor={colors.whiteColor}
+                                    fontSize={16}
+                                    fontWeight={600}
+                                    onClick={() => setUpdate(true)}
+                                />
+                            </ButtonGroup>
+                            <ButtonGroup textAlign="right" margin="40px 0 20px">
+                                <Button
+                                    width={140}
+                                    height={40}
+                                    ICON
+                                    title="즉시 발송"
+                                    bgColor={colors.deepNavyColor}
+                                    fontColor={colors.whiteColor}
+                                    fontSize={16}
+                                    fontWeight={600}
+                                    margin="0 0 0 20px"
+                                    onClick={handleImmediatelySend}
+                                />
+                            </ButtonGroup>
+                        </div>
                     }
                 </ButtonGroup>
 

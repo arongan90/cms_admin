@@ -42,7 +42,7 @@ const Row = styled.div`
 `;
 const ButtonGroup = styled.div`
   margin: 40px 20px;
-  text-align: right;
+  text-align: center;
 `;
 
 const QnaDetailPresenter = ({

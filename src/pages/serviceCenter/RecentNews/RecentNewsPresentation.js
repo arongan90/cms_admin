@@ -18,7 +18,7 @@ const TableBox = styled.div`
 `;
 const ButtonGroup = styled.div`
   margin: ${({ margin }) => margin ? margin : "20px 20px"};
-  text-align: right;
+  text-align: center;
 `;
 const NewsList = styled.div`
   min-height: calc(100vh - 300px);
@@ -135,9 +135,9 @@ const RecentNewsPresentation = ({
                                 width={120}
                                 height={38}
                                 title="취소"
-                                border={`1px solid ${colors.deepNavyColor}`}
+                                border={`1px solid ${colors.darkBlueColor}`}
                                 bgColor={colors.whiteColor}
-                                fontColor={colors.deepNavyColor}
+                                fontColor={colors.darkBlueColor}
                                 fontSize={16}
                                 fontWeight={600}
                             />
@@ -146,7 +146,7 @@ const RecentNewsPresentation = ({
                                 height={38}
                                 title="추가"
                                 margin="0 0 0 20px"
-                                bgColor={colors.deepNavyColor}
+                                bgColor={colors.darkBlueColor}
                                 fontColor={colors.whiteColor}
                                 fontSize={16}
                                 fontWeight={600}

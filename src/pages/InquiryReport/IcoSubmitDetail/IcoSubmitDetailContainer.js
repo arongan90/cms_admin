@@ -30,11 +30,23 @@ const IcoSubmitDetailContainer = () => {
         // frmPop.submit();
     }, []);
 
+    // 삭제
+    const onDelete = useCallback(async() => {
+        if (window.confirm("정말 삭제하시겠습니까?")) {
+            try {
+
+            } catch(e) {
+
+            }
+        }
+    }, [window]);
+
 
     return (
         <IcoSubmitDetailPresenter
             tabMenu={tabMenu}
             handleTabMenu={handleTabMenu}
+            onDelete={onDelete}
             goBack={goBack}
             onRegisterIco={onRegisterIco}
         />

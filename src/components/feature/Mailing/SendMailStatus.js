@@ -51,21 +51,6 @@ const Text = styled.div`
   //padding: ${({padding}) => padding ? padding : 0};
   background-color: ${({bgColor}) => bgColor ? bgColor : colors.whiteColor};
 `;
-const Progress = styled.progress`
-    -webkit-appearance: none;
-    transition: 0.8s;
-
-  &::-webkit-progress-bar {
-    border-radius: 20px;
-    border: 1px solid ${colors.borderColor};
-    background-color: ${colors.ultraLightGray};
-  }
-
-  &::-webkit-progress-value {
-    border-radius: 20px;
-    background-color: ${colors.activeBlue};
-  }
-`;
 
 const SendMailStatus = ({
                             onClose,
@@ -89,9 +74,8 @@ const SendMailStatus = ({
             </TableBox>
             <MailProgress>
                 <Text fontWeight={600} fontColor={colors.blackColor}>발송</Text>
-                <Text margin="0 20px 0 4px">(2)</Text>
-                <Progress max={100} value={30} />
-                <Text fontSize={12} margin="0 0 0 20px">4명 중 1명 발송완료 (25%)</Text>
+                <Text margin="0 20px 0 4px">(22)</Text>
+                <Text fontSize={14}>반송된 메일 (3)</Text>
             </MailProgress>
 
             <TableBox height={380}>

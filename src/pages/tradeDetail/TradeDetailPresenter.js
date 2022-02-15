@@ -26,8 +26,9 @@ const Wrapper = styled.div`
 `;
 const ButtonGroup = styled.div`
   padding: 0 10px;
-  display: flex;
-  justify-content: space-between;
+  text-align: center;
+  //display: flex;
+  //justify-content: space-between;
   margin: 20px 20px 40px;
 `;
 const TableBox = styled.div`
@@ -215,28 +216,6 @@ const TradeDetailPresenter = ({
                 tabList={["거래소 정보"]}
             />
             <Wrapper>
-                <ButtonGroup>
-                    <Button
-                        title="이전"
-                        width={60}
-                        height={38}
-                        border={`1px solid ${colors.deepNavyColor}`}
-                        fontColor={colors.deepNavyColor}
-                        bgColor={colors.whiteColor}
-                        fontSize={16}
-                        onClick={goBack}
-                    />
-                    <Button
-                        title="ICO 수정"
-                        width={100}
-                        height={38}
-                        fontColor={colors.whiteColor}
-                        bgColor={colors.deepNavyColor}
-                        fontSize={16}
-                        onClick={goIcoUpdate}
-                    />
-                </ButtonGroup>
-
                 <TableBox>
                     <Table>
                         <tbody>
@@ -581,6 +560,29 @@ const TradeDetailPresenter = ({
                     <Paging/>
                 </PagingBox>
             </Wrapper>
+
+            <ButtonGroup>
+                <Button
+                    title="이전"
+                    width={120}
+                    height={38}
+                    border={`1px solid ${colors.deepNavyColor}`}
+                    fontColor={colors.deepNavyColor}
+                    bgColor={colors.whiteColor}
+                    fontSize={16}
+                    onClick={goBack}
+                />
+                <Button
+                    title="거래소 수정"
+                    width={120}
+                    height={38}
+                    margin="0 0 0 20px"
+                    fontColor={colors.whiteColor}
+                    bgColor={colors.deepNavyColor}
+                    fontSize={16}
+                    onClick={goIcoUpdate}
+                />
+            </ButtonGroup>
         </Box>
     )
 }

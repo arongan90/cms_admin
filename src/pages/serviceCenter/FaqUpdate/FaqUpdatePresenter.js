@@ -44,7 +44,7 @@ const Textarea = styled.textarea`
 `;
 const ButtonGroup = styled.div`
   padding: 20px;
-  text-align: right;
+  text-align: center;
 `;
 
 const FaqUpdatePresenter = ({
@@ -88,9 +88,9 @@ const FaqUpdatePresenter = ({
                         width={120}
                         height={38}
                         title="취소"
-                        border={`1px solid ${colors.deepNavyColor}`}
+                        border={`1px solid ${colors.darkBlueColor}`}
                         bgColor={colors.whiteColor}
-                        fontColor={colors.deepNavyColor}
+                        fontColor={colors.darkBlueColor}
                         fontSize={16}
                         fontWeight={600}
                         onClick={onCancel}
@@ -99,7 +99,7 @@ const FaqUpdatePresenter = ({
                         width={120}
                         height={38}
                         title="저장"
-                        bgColor={colors.deepNavyColor}
+                        bgColor={colors.darkBlueColor}
                         fontColor={colors.whiteColor}
                         fontSize={16}
                         fontWeight={600}
